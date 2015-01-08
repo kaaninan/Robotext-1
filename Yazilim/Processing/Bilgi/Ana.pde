@@ -133,10 +133,10 @@ void draw() {
                                   // ###### SIFIRLAMA YAPILABİLİR ######## ///
         if(osc_gonder)
           gonder_durum("Hareket Algilama Etkinlestirildi");
-        println("Hareket Algılama Etkinleştirildi");
-        ses("hareket_basla");
-        hareket_first = false;
-      }
+          println("Hareket Algılama Etkinleştirildi");
+          ses("hareket_basla");
+          hareket_first = false;
+        }
       
       if (arduino_mega_bagli){
         oku_hareket_sag();

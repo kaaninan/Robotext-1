@@ -6,8 +6,6 @@ import processing.video.*;
 
 import cc.arduino.*;
 
-import gab.opencv.*;
-
 import java.awt.*;
 import java.io.*;
 import java.util.Properties;

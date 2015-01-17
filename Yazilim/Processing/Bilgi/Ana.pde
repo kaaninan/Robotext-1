@@ -1,4 +1,4 @@
-String IP = "192.168.1.23";
+String IP = "192.168.1.21";
 int port = 7000;
 
 String s_arduino_uno = "/dev/ttyACM0";
@@ -7,7 +7,7 @@ String s_arduino_mega = "/dev/ttyUSB0";
 boolean arduino_uno_bagli = false;
 boolean arduino_mega_bagli = false;
 
-boolean osc_gonder = false;
+boolean osc_gonder = true;
 boolean giris_etkin = false;
 
 String cozunurluk = "800x480";

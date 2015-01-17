@@ -27,7 +27,6 @@ OscP5 oscP5;
 NetAddress remoteLocation;
 Capture video;
 Capture cam;
-OpenCV opencv;
 
 Arduino arduino_uno;
 Arduino arduino_mega;

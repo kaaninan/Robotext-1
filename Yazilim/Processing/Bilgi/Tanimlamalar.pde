@@ -33,57 +33,46 @@ Arduino arduino_mega;
 
 // ### ARDUINO PIN ### //
 
-  // ## UNO ## //
+  // ## MEGA 1 ## //
   
   // PWM
-  int a_motor_sol_on = 3;
-  int a_motor_sol_arka = 5;
-  int a_motor_sag_on = 6;
-  int a_motor_sag_arka = 9;
+  int a_motor_sol_on = 2;
+  int a_motor_sol_arka = 3;
+  int a_motor_sag_on = 4;
+  int a_motor_sag_arka = 5;
+  
+  int a_servo_1 = 6;
+  int a_servo_2 = 7;
   
   // DIGITAL
-  int a_motor_sol_on_d = 2;
-  int a_motor_sol_arka_d = 4;
-  int a_motor_sag_on_d = 7;
-  int a_motor_sag_arka_d = 8;
+  int a_motor_sol_on_d = 22;
+  int a_motor_sol_arka_d = 23;
+  int a_motor_sag_on_d = 24;
+  int a_motor_sag_arka_d = 25;
   
-  int a_led_k_1 = 10;
-  int a_led_k_2 = 11;
+  int a_led_k_1 = 26;
+  int a_led_k_2 = 27;
   
-  int a_led_y_1 = 12;
-  int a_led_y_2 = 13;
+  int a_led_y_1 = 28;
+  int a_led_y_2 = 29;
+  
+  int a_ses = 30;
+  int a_hareket_1 = 31;
+  int a_hareket_2 = 32;
+  int a_hoparlor = 33;
+  int a_buzzer = 34;
   
   // ANALOG
   int a_motor_sol_on_e = 0;
   int a_motor_sol_arka_e = 1;
   int a_motor_sag_on_e = 2;
   int a_motor_sag_arka_e = 3;
-
-
-
-
-// ## MEGA ## //
-
-  // PWM
-  int a_servo_1 = 4;
-  int a_servo_2 = 5;
   
-  // DIGITAL
-  int a_ses = 23;
-  int a_hareket_1 = 22;
-  int a_hareket_2 = 31;
-  int a_hoparlor = 30;
-  int a_buzzer = 24;
+  int a_uzaklik_sag_1 = 4;
+  int a_uzaklik_sag_2 = 5;
   
-  // ANALOG
-  int a_uzaklik_sag_1 = 0;
-  int a_uzaklik_sag_2 = 1;
-  
-  int a_uzaklik_sol_1 = 2;
-  int a_uzaklik_sol_2 = 3;
-
-
-
+  int a_uzaklik_sol_1 = 6;
+  int a_uzaklik_sol_2 = 7;
 
 
 // ### OPEN SOUND CONTROL ### //

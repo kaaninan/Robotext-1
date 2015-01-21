@@ -1,11 +1,9 @@
-String IP = "192.168.1.21";
-int port = 7000;
+String IP = "192.168.1.20";
+int port = 6000;
 
-String s_arduino_uno = "/dev/ttyACM0";
 String s_arduino_mega = "/dev/ttyUSB0";
 
-boolean arduino_uno_bagli = false;
-boolean arduino_mega_bagli = false;
+boolean arduino_mega_bagli = true;
 
 boolean osc_gonder = true;
 boolean giris_etkin = false;
@@ -21,9 +19,6 @@ void setup() {
 
   println(Arduino.list());
 
-  if (arduino_uno_bagli)
-    arduino_uno = new Arduino(this, s_arduino_uno, 57600);
-
   if (arduino_mega_bagli)
     arduino_mega = new Arduino(this, s_arduino_mega, 57600);
 
@@ -36,27 +31,24 @@ void setup() {
     gonder_durum("Pin Mode");
 
 
-  // ARDUINO UNO PIN MODE
-  if (arduino_uno_bagli == true) {
-    arduino_uno.pinMode(a_motor_sol_on, Arduino.OUTPUT);
-    arduino_uno.pinMode(a_motor_sol_arka, Arduino.OUTPUT);
-    arduino_uno.pinMode(a_motor_sag_on, Arduino.OUTPUT);
-    arduino_uno.pinMode(a_motor_sag_arka, Arduino.OUTPUT);
-
-    arduino_uno.pinMode(a_motor_sol_on_d, Arduino.OUTPUT);
-    arduino_uno.pinMode(a_motor_sol_arka_d, Arduino.OUTPUT);
-    arduino_uno.pinMode(a_motor_sag_on_d, Arduino.OUTPUT);
-    arduino_uno.pinMode(a_motor_sag_arka_d, Arduino.OUTPUT);
-
-    arduino_uno.pinMode(a_led_k_1, Arduino.OUTPUT);
-    arduino_uno.pinMode(a_led_k_2, Arduino.OUTPUT);
-    arduino_uno.pinMode(a_led_y_1, Arduino.OUTPUT);
-    arduino_uno.pinMode(a_led_y_2, Arduino.OUTPUT);
-  }
-
-
   // ARDUINO MEGA PIN MODE
   if (arduino_mega_bagli) {
+    
+    arduino_mega.pinMode(a_motor_sol_on, Arduino.OUTPUT);
+    arduino_mega.pinMode(a_motor_sol_arka, Arduino.OUTPUT);
+    arduino_mega.pinMode(a_motor_sag_on, Arduino.OUTPUT);
+    arduino_mega.pinMode(a_motor_sag_arka, Arduino.OUTPUT);
+
+    arduino_mega.pinMode(a_motor_sol_on_d, Arduino.OUTPUT);
+    arduino_mega.pinMode(a_motor_sol_arka_d, Arduino.OUTPUT);
+    arduino_mega.pinMode(a_motor_sag_on_d, Arduino.OUTPUT);
+    arduino_mega.pinMode(a_motor_sag_arka_d, Arduino.OUTPUT);
+
+    arduino_mega.pinMode(a_led_k_1, Arduino.OUTPUT);
+    arduino_mega.pinMode(a_led_k_2, Arduino.OUTPUT);
+    arduino_mega.pinMode(a_led_y_1, Arduino.OUTPUT);
+    arduino_mega.pinMode(a_led_y_2, Arduino.OUTPUT);
+    
     arduino_mega.pinMode(a_ses, Arduino.INPUT);
     arduino_mega.pinMode(a_hareket_1, Arduino.INPUT);
     arduino_mega.pinMode(a_hareket_2, Arduino.INPUT);
@@ -123,7 +115,7 @@ void draw() {
       
   } else {
 
-    if (arduino_uno_bagli){
+    if (arduino_mega_bagli){
       uno_motor_kontrol_manual();
     }
 

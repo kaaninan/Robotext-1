@@ -36,6 +36,7 @@ Arduino arduino_mega;
   // ## MEGA 1 ## //
   
   // PWM
+<<<<<<< Updated upstream
   int a_motor_sol_on = 2;
   int a_motor_sol_arka = 3;
   int a_motor_sag_on = 4;
@@ -43,6 +44,15 @@ Arduino arduino_mega;
   
   int a_servo_1 = 6;
   int a_servo_2 = 7;
+=======
+  int a_motor_sol_on = 1;
+  int a_motor_sol_arka = 2;
+  int a_motor_sag_on = 3;
+  int a_motor_sag_arka = 4;
+  
+  int a_servo_1 = 5;
+  int a_servo_2 = 6;
+>>>>>>> Stashed changes
   
   // DIGITAL
   int a_motor_sol_on_d = 22;

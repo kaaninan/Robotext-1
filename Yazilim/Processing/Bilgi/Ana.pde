@@ -1,7 +1,13 @@
 String IP = "192.168.1.20";
+<<<<<<< Updated upstream
 int port = 6000;
 
 String s_arduino_mega = "/dev/ttyUSB0";
+=======
+int port = 7000;
+
+//String s_arduino_mega = "/dev/ttyUSB0";
+>>>>>>> Stashed changes
 
 boolean arduino_mega_bagli = true;
 
@@ -12,7 +18,7 @@ String cozunurluk = "800x480";
 int wait = 6000;
 
 //String s_arduino_uno = "/dev/tty.usbmodem1421";
-//String s_arduino_mega = "/dev/tty.usbserial-A603JL3X";
+String s_arduino_mega = "/dev/tty.usbserial-A603JL3X";
 
 
 void setup() {
@@ -73,7 +79,7 @@ void setup() {
   if(osc_gonder)
     gonder_durum("Mail Atiliyor");
   
-  sendMailBasla();
+  //sendMailBasla();
   
   ses("merhaba");
   

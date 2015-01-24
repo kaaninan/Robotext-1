@@ -28,15 +28,14 @@ NetAddress remoteLocation;
 Capture video;
 Capture cam;
 
-Arduino arduino_uno;
-Arduino arduino_mega;
+Arduino arduino_mega; // Arduino Mega 1280
+Arduino arduino_mega_2; // Arduino Mega 2560
 
 // ### ARDUINO PIN ### //
 
   // ## MEGA 1 ## //
   
   // PWM
-<<<<<<< Updated upstream
   int a_motor_sol_on = 2;
   int a_motor_sol_arka = 3;
   int a_motor_sag_on = 4;
@@ -44,15 +43,6 @@ Arduino arduino_mega;
   
   int a_servo_1 = 6;
   int a_servo_2 = 7;
-=======
-  int a_motor_sol_on = 1;
-  int a_motor_sol_arka = 2;
-  int a_motor_sag_on = 3;
-  int a_motor_sag_arka = 4;
-  
-  int a_servo_1 = 5;
-  int a_servo_2 = 6;
->>>>>>> Stashed changes
   
   // DIGITAL
   int a_motor_sol_on_d = 22;
@@ -66,9 +56,9 @@ Arduino arduino_mega;
   int a_led_y_1 = 28;
   int a_led_y_2 = 29;
   
-  int a_ses = 30;
-  int a_hareket_1 = 31;
-  int a_hareket_2 = 32;
+  int a_hareket_1 = 30;
+  int a_hareket_2 = 31;
+  int a_ses = 32;
   int a_hoparlor = 33;
   int a_buzzer = 34;
   

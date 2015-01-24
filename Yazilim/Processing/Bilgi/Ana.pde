@@ -1,15 +1,11 @@
 String IP = "192.168.1.20";
-<<<<<<< Updated upstream
 int port = 6000;
 
 String s_arduino_mega = "/dev/ttyUSB0";
-=======
-int port = 7000;
-
 //String s_arduino_mega = "/dev/ttyUSB0";
->>>>>>> Stashed changes
 
 boolean arduino_mega_bagli = true;
+boolean arduino_mega2_bagli = true;
 
 boolean osc_gonder = true;
 boolean giris_etkin = false;
@@ -18,7 +14,7 @@ String cozunurluk = "800x480";
 int wait = 6000;
 
 //String s_arduino_uno = "/dev/tty.usbmodem1421";
-String s_arduino_mega = "/dev/tty.usbserial-A603JL3X";
+//String s_arduino_mega = "/dev/tty.usbserial-A603JL3X";
 
 
 void setup() {
@@ -59,6 +55,7 @@ void setup() {
     arduino_mega.pinMode(a_hareket_1, Arduino.INPUT);
     arduino_mega.pinMode(a_hareket_2, Arduino.INPUT);
 
+    arduino_mega.pinMode(a_hoparlor, Arduino.OUTPUT);
     arduino_mega.pinMode(a_buzzer, Arduino.OUTPUT);
 
     arduino_mega.pinMode(a_servo_1, Arduino.SERVO);
@@ -75,6 +72,7 @@ void setup() {
   
   if(arduino_mega_bagli)
     arduino_mega.servoWrite(a_servo_1, 90);
+    arduino_mega.servoWrite(a_servo_2, 90);
     
   if(osc_gonder)
     gonder_durum("Mail Atiliyor");
@@ -86,7 +84,7 @@ void setup() {
   time = millis();
   
   if(osc_gonder)
-    gonder_durum("Setup Finish");
+    gonder_durum("Setup Finished");
 }
 
 
@@ -122,7 +120,7 @@ void draw() {
   } else {
 
     if (arduino_mega_bagli){
-      uno_motor_kontrol_manual();
+      mega_motor_kontrol_manual();
     }
 
     if(hareket_etkin == 1){

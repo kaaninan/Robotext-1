@@ -3,7 +3,7 @@
 
 // MOTOR
 
-void uno_motor_kontrol_manual() {
+void mega_motor_kontrol_manual() {
 
   println("MOTOR:: SOL: "+int(motor_sol)+" SAG: "+int(motor_sag)+"    YON:: SOL: "+int(motor_sol_ters)+" SAG: "+int(motor_sag_ters)+"    ETKIN:: "+int(motor_etkin_sol_on)+","+int(motor_etkin_sol_arka)+","+int(motor_etkin_sag_on)+","+int(motor_etkin_sag_arka)+"     BUZZER:: "+int(buzzer));
 

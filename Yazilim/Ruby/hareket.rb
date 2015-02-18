@@ -11,7 +11,7 @@ class Hareket
 		puts '==> Hareket Algilama Baslatildi <=='
 
 		thread = Thread.new do
-			self::hareket_kontrol
+			hareket_kontrol
 		end
 
 	end

@@ -6,7 +6,7 @@ require 'log'
 class Arduino_Self
 
   #LOG
-  $konum = 'C:Arduino_Self'
+  $konum = 'Arduino_Self'
 
   @@arduino_mega = nil
   @@arduino_mega2= nil
@@ -47,7 +47,16 @@ class Arduino_Self
     if secili == true
 
       if komut == 'hareket_basla'
-        @hareket = Hareket.new secili_kart
+        #@hareket = Hareket.new secili_kart
+
+        def hareket_kontrol
+          pins = Pin.new
+
+          @@arduino_mega.on :digital_read do |pin, status|
+            puts '#{pin}, #{status}'
+          end
+        end
+
 
       elsif komut == 'hareket_durdur'
         @hareket.stop

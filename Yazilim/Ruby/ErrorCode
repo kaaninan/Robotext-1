@@ -1,8 +1,0 @@
-ErrorCode
-
-1- Bağlı Arduino bulunamadı
-2- Kart seçilmiş fakat bağlı değil
-3- Arduino'ya komut yollarken kart adı hatalı girilmiş (f)
-4- Komuttaki Arduino bağlı değil (f)
-5- Hangi kartları kullanılacak sorusuna eksik cevap
-6- BağlıMı fonksiyonuna gönderilen kart ismi tanınmadı

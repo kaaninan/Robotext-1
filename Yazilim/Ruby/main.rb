@@ -98,7 +98,7 @@ $board.f 'hareket_basla', nil, 'mega'
 
 
 loop do
-
+  
 end
 
 

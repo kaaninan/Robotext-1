@@ -23,6 +23,10 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.activation.*;
 
+import gab.opencv.*;
+import processing.video.*;
+import java.awt.*;
+
 OscP5 oscP5;
 NetAddress remoteLocation;
 Capture video;

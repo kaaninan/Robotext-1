@@ -1,11 +1,11 @@
 String IP = "192.168.1.20";
 int port = 6000;
 
-String s_arduino_mega = "/dev/ttyUSB0";
+//String s_arduino_mega = "/dev/ttyUSB0";
 //String s_arduino_mega = "/dev/ttyUSB0";
 
 boolean arduino_mega_bagli = true;
-boolean arduino_mega2_bagli = true;
+boolean arduino_mega2_bagli = false;
 
 boolean osc_gonder = true;
 boolean giris_etkin = false;
@@ -14,8 +14,11 @@ String cozunurluk = "800x480";
 int wait = 6000;
 
 //String s_arduino_uno = "/dev/tty.usbmodem1421";
-//String s_arduino_mega = "/dev/tty.usbserial-A603JL3X";
+String s_arduino_mega = "/dev/tty.usbserial-A603JL3X";
 
+
+//Capture video;
+OpenCV opencv;
 
 void setup() {
 
@@ -85,6 +88,19 @@ void setup() {
   
   if(osc_gonder)
     gonder_durum("Setup Finished");
+    
+    
+  size(640, 480);
+  video = new Capture(this, 640/2, 480/2);
+  opencv = new OpenCV(this, 640/2, 480/2);
+  opencv.loadCascade(OpenCV.CASCADE_FRONTALFACE);  
+
+  video.start();
+}
+
+
+void captureEvent(Capture c) {
+  c.read();
 }
 
 
@@ -95,7 +111,32 @@ void setup() {
 
 void draw() {
   
-  println(arduino_mega.analogRead(a_uzaklik_sag_1)+","+arduino_mega.analogRead(a_uzaklik_sag_2)+","+arduino_mega.analogRead(a_uzaklik_sol_1)+","+arduino_mega.analogRead(a_uzaklik_sol_2));
+  
+  scale(2);
+  opencv.loadImage(video);
+
+  image(video, 0, 0 );
+
+  noFill();
+  stroke(0, 255, 0);
+  strokeWeight(3);
+  Rectangle[] faces = opencv.detect();
+  //println(faces.length);
+
+  for (int i = 0; i < faces.length; i++) {
+    //println(faces[i].x + "," + faces[i].y);
+    
+    arduino_mega.servoWrite(a_servo_2, faces[i].x);
+    arduino_mega.servoWrite(a_servo_1, faces[i].y);
+    
+    //arduino_mega.servoWrite(a_servo_1, 90);
+    //arduino_mega.servoWrite(a_servo_2, 90);
+    
+    rect(faces[i].x, faces[i].y, faces[i].width, faces[i].height);
+  }
+  
+  
+  //println(arduino_mega.analogRead(a_uzaklik_sag_1)+","+arduino_mega.analogRead(a_uzaklik_sag_2)+","+arduino_mega.analogRead(a_uzaklik_sol_1)+","+arduino_mega.analogRead(a_uzaklik_sol_2));
 
   // GIRIS
   
@@ -146,8 +187,6 @@ void draw() {
     }
       
   }
-  
-  //arduino_mega.servoWrite(a_servo_1, int(servo_1));
   
   if(millis() - time >= wait){
     time = millis();

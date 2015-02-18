@@ -94,6 +94,8 @@ void setup() {
 
 
 void draw() {
+  
+  println(arduino_mega.analogRead(a_uzaklik_sag_1)+","+arduino_mega.analogRead(a_uzaklik_sag_2)+","+arduino_mega.analogRead(a_uzaklik_sol_1)+","+arduino_mega.analogRead(a_uzaklik_sol_2));
 
   // GIRIS
   

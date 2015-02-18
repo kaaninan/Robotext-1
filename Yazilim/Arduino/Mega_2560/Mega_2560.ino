@@ -22,12 +22,13 @@ void setup() {
   
   Serial.begin(115200);
   
+  pinMode(lcd_sag_isik, OUTPUT);
+  pinMode(lcd_sol_isik, OUTPUT);
+  
   komut_mesaj.reserve(200);
   
   lcd_sag.begin(16,2);
   lcd_sol.begin(16,2);
-  
-  pinMode(13, OUTPUT);
   
   establishContact();
 }
@@ -92,7 +93,7 @@ void serialEvent() {
     }
     
     else if(komut_no == 11){
-      Serial.print("10&");
+      Serial.print("11&");
       Serial.print(analogRead(a_gaz));
       Serial.println(":");
     }

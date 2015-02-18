@@ -1,31 +1,36 @@
 require 'arduino_firmata'
+$LOAD_PATH << '.'
+require 'hareket'
+require 'log'
 
 class Arduino_Self
 
-  @@arduino_uno = nil
+  #LOG
+  $konum = 'C:Arduino_Self'
+
   @@arduino_mega = nil
   @@arduino_mega2= nil
 
-  @@bagli_uno = false
   @@bagli_mega = false
   @@bagli_mega2 = false
 
-  def initialize uno_etkin, mega_etkin, mega2_etkin
+  def initialize mega_etkin, mega2_etkin
 
-    @uno_etkin = uno_etkin
+    $log = LOG.new
+
     @mega_etkin = mega_etkin
     @mega2_etkin = mega2_etkin
 
     baglan
   end
 
+
+
+
   def f komut, deger, board
 
     ## Kart Tanimlama
-    if board == 'uno'
-      secili = @@bagli_uno
-      secili_kart = @@arduino_uno
-    elsif board == 'mega'
+    if board == 'mega'
       secili = @@bagli_mega
       secili_kart = @@arduino_mega
     elsif board == 'mega2'
@@ -34,43 +39,78 @@ class Arduino_Self
     else
       secili = nil
       secili_kart = nil
-      puts "HATA: Komutta (f) secilen kart taninmadi! (Kart: #{board}) (ErrorCode: 3)"
+      $log.hata $konum, "Komutta (f) secilen kart taninmadi! (Kart: #{board})"
     end
 
-    if secili == true # Secilen kart bagliysa
 
-      if komut == 'led_yak'
-        led_yak secili_kart
-      end
-      if komut == 'led_sondur'
-        led_sondur secili_kart
+    # Secilen kart bagliysa
+    if secili == true
+
+      if komut == 'hareket_basla'
+        @hareket = Hareket.new secili_kart
+
+      elsif komut == 'hareket_durdur'
+        @hareket.stop
       end
 
     else
-      puts "HATA: Komutta belirtilen kart bagli degil! (Kart #{board}) (ErrorCode: 4)"
+      $log.hata $konum, "Komutta belirtilen kart bagli degil! (Kart: #{board}))"
     end
 
   end
 
+
+
+
+  def pinMode array, choose_board
+
+    @@tip = nil
+    @@pin = nil
+    @@aciklama = nil
+
+    if @mega_etkin and @boards['mega'] and choose_board == 'mega'
+
+      array.each do |a, b|
+
+        a.each do |x,y|
+          @@pin = x
+          @@aciklama = y
+        end
+
+        if b == 1
+          @@tip = ArduinoFirmata::OUTPUT
+        elsif b == 2
+          @@tip = ArduinoFirmata::INPUT
+        elsif b == 3
+          @@tip = ArduinoFirmata::SERVO
+        end
+
+        @@arduino_mega.pin_mode @@pin, @@tip
+
+        #LOG
+        $log.durum $konum, "pinMode -> Arduino Mega 1280 -> Pin=#{@@pin} -> Type=#{@@tip} OK"
+
+      end
+
+    else
+      $log.hata $konum, '(PinMode:Error) PinMode Yapilamadi, Arduino Mega Bagli Degil'
+    end
+
+  end
+
+
   private
 
-  def led_yak kart
-    kart.digital_write 12, 1
-  end
-
-  def led_sondur kart
-    kart.digital_write 12, 0
-  end
-
   def baglan
-    print 'Bagli Arduino(lar) -> '
+    print '==> Bagli Arduino(lar) -> '
     @arduino_serial = Array(ArduinoFirmata.list)
     print "#@arduino_serial - Toplam: "
     pp @arduino_serial.length
     puts
 
-    if @uno_etkin == false && @mega_etkin == false && @mega2_etkin == false
-      puts '-> Hicbir Arduino Secilmedi'
+    if @mega_etkin == false && @mega2_etkin == false
+      puts '-> '
+      $log.durum $konum, 'Hicbir Arduino Secilmedi'
 
     else
 
@@ -78,35 +118,26 @@ class Arduino_Self
 
         choose_board (@arduino_serial)
 
-        if @uno_etkin and @boards['uno']
-          puts "Arduino Uno'ya Baglaniliyor.."
-          @@arduino_uno = ArduinoFirmata.connect @boards['uno'], :nonblock_io => true
-          puts "Arduino Uno'ya Baglanildi"
-          @@bagli_uno = true
-        elsif @uno_etkin and !@boards['uno']
-          puts 'HATA: Baglanilmak istenen kart bulunamadi! (Kart: Arduino Uno) (ErrorCode: 2)'
-        end
-
         if @mega_etkin and @boards['mega']
-          puts "Arduino Mega'ya Baglaniliyor.."
+          $log.islem_basladi $konum, "Arduino Mega'ya Baglaniliyor"
           @@arduino_mega = ArduinoFirmata.connect @boards['mega'], :nonblock_io => true
-          puts "Arduino Mega'ya Baglanildi"
+          $log.islem_bitti $konum, "Arduino Mega'ya Baglanildi"
           @@bagli_mega = true
         elsif @mega_etkin and !@boards['mega']
           puts 'HATA: Baglanilmak istenen kart bulunamadi! (Kart: Arduino Mega) (ErrorCode: 2)'
         end
 
         if @mega2_etkin and @boards['mega2']
-          puts "Arduino Mega 2'ye Baglaniliyor.."
+          $log.islem_basladi $konum, "Arduino Mega 2'ye Baglaniliyor"
           @@arduino_mega2 = ArduinoFirmata.connect @boards['mega2'], :nonblock_io => true
-          puts "Arduino Mega 2'ye Baglanildi"
+          $log.islem_bitti $konum, "Arduino Mega 2'ye Baglanildi"
           @@bagli_mega2 = true
         elsif @mega2_etkin and !@boards['mega2']
-          puts 'HATA: Baglanilmak istenen kart bulunamadi! (Kart: Arduino Mega2) (ErrorCode: 2)'
+          $log.hata $konum, 'Baglanilmak istenen kart bulunamadi! (Kart: Arduino Mega 2)'
         end
 
       else
-        puts 'HATA: Arduino Bulunamadi (ErrorCode: 1)'
+        $log.hata $konum, 'Arduino Bulunamadi'
       end
     end
   end
@@ -124,19 +155,11 @@ class Arduino_Self
         end
       end
 
-      if i.match('USB1')
+      if i.match('ACM')
         print 'Mega 2 (Linux) -> '
         puts i
         if @mega2_etkin
           @boards = {'mega2' => i}
-        end
-      end
-
-      if i.match('ACM')
-        print 'Uno (Linux) -> '
-        puts i
-        if @uno_etkin
-          @boards = {'uno' => i}
         end
       end
 
@@ -149,10 +172,10 @@ class Arduino_Self
       end
 
       if i.match('usbmodem')
-        print 'Uno (Mac) -> '
+        print 'Mega 2 (Mac) -> '
         puts i
-        if @uno_etkin
-          @boards = {'uno' => i}
+        if @mega2_etkin
+          @boards = {'mega2' => i}
         end
       end
     end
@@ -161,21 +184,17 @@ class Arduino_Self
 
   public
   def bagli_mi board
-    if board == 'uno'
-      @@bagli_uno
-    elsif board == 'mega'
+    if board == 'mega'
       @@bagli_mega
     elsif board == 'mega2'
       @@bagli_mega2
     else
-      puts 'HATA: Bagli olup olmadigi sorulan kartin adi taninmadi! (ErrorCode: 6)'
+      $log.hata $konum, 'Bagli olup olmadigi sorulan kartin adi taninmadi!'
     end
   end
 
   def close
-    if @@bagli_uno
-      @@arduino_uno.close
-    elsif @@bagli_mega
+    if @@bagli_mega
       @@arduino_mega.close
     elsif @@bagli_mega2
       @@arduino_mega2.close

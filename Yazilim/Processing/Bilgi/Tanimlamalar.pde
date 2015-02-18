@@ -50,17 +50,17 @@ Arduino arduino_mega_2; // Arduino Mega 2560
   int a_motor_sag_on_d = 24;
   int a_motor_sag_arka_d = 25;
   
-  int a_led_k_1 = 26;
-  int a_led_k_2 = 27;
+  int a_led_k_1 = 40;
+  int a_led_k_2 = 41;
   
-  int a_led_y_1 = 28;
-  int a_led_y_2 = 29;
+  int a_led_y_1 = 42;
+  int a_led_y_2 = 43;
   
-  int a_hareket_1 = 30;
-  int a_hareket_2 = 31;
-  int a_ses = 32;
-  int a_hoparlor = 33;
-  int a_buzzer = 34;
+  int a_hareket_1 = 26;
+  int a_hareket_2 = 27;
+  int a_ses = 30;
+  int a_hoparlor = 42;
+  int a_buzzer = 31;
   
   // ANALOG
   int a_motor_sol_on_e = 0;

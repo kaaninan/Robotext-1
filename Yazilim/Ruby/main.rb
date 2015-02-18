@@ -6,25 +6,15 @@ require 'osc'
 $LOAD_PATH << '.'
 require 'arduino'
 require 'osc_class'
+require 'pin'
 
 
-## TEST
-thr = Thread.new do
-  osc = OpenS.new
-end
-
-
-
-sleep 0.2
-
-
-# GETS - CONNECT
+# SEÇİMLER VE ARDUINO BAĞLANMA #
 puts
 
-#print 'Isletim Sistemini Secin (Linux -> 1, Mac -> 2) > '
-#$system = gets
-#puts
 
+
+## Bağlı Kartlar
 print 'Bagli Kartlari Gormek Ister Misiniz? > '
 show = gets
 
@@ -35,53 +25,80 @@ puts
 puts
 
 
-print 'Kullanacaginiz Kartlari Secin (Uno, Mega, Mega 2) > '
+
+## Kullanılan Kartlar
+print 'Kullanacaginiz Kartlari Secin (Mega, Mega 2) > '
 gelen_bagli = gets
-if gelen_bagli.length > 3
+if gelen_bagli.length > 2
 
-  t_uno_bagli = gelen_bagli.slice(0)
-  if t_uno_bagli.match('e')
-    uno_etkin = true
-  else
-    uno_etkin = false
-  end
-
-  t_mega_bagli = gelen_bagli.slice(1)
+  t_mega_bagli = gelen_bagli.slice(0)
   if t_mega_bagli.match('e')
-    mega_etkin = true
+    @mega_etkin = true
   else
-    mega_etkin = false
+    @mega_etkin = false
   end
 
-  t_mega2_bagli = gelen_bagli.slice(2)
+  t_mega2_bagli = gelen_bagli.slice(1)
   if t_mega2_bagli.match('e')
-    mega2_etkin = true
+    @mega2_etkin = true
   else
-    mega2_etkin = false
+    @mega2_etkin = false
   end
 else
   puts 'HATA: Eksik Giris Yapildi (ErrorCode: 5)'
   exit 1
 end
 puts
+puts
+
+## Bağlı Kartlar
+print 'OSC Etkinlestirilsin Mi? > '
+show = gets
+
+if show.match('e')
+  @osc_etkin = true
+end
+puts
+puts
 
 
-#print 'Kamera'? > '
-#@kamera_bagli = gets
+
+## Arduino Connect
+
+$board = Arduino_Self.new @mega_etkin, @mega2_etkin
+puts
 
 
+# MAIN #
 
 
-# CONNECT - ARDUINO
+## SETUP
 
-board = Arduino_Self.new uno_etkin, mega_etkin, mega2_etkin
+def setup
+  ## LOG
+  puts '=> Running: Main -> Setup -> PinMode'
+  pins = Pin.new
+  $board.pinMode pins.megaPin, 'mega'
+  puts '=> Finished: Main -> Setup -> PinMode'
+  puts
+end
+
+setup
+
+
+thr = Thread.new do
+  if @osc_etkin
+    $osc = OpenS.new
+    $osc.start
+  end
+end
+
+
+$board.f 'hareket_basla', nil, 'mega'
 
 
 loop do
-  board.f 'led_yak', nil, 'uno'
-  sleep 0.5
-  board.f 'led_sondur', nil, 'uno'
-  sleep 0.5
+
 end
 
 

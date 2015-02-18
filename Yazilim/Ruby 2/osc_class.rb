@@ -5,17 +5,17 @@ class OpenS
 
   # OSC Input IDs
   $eski_liste = Array[
-      'sol',
-      'sag',
-      'sol_ters',
-      'sag_ters',
-      'etkin_multitoggle/1/1',
-      'etkin_multitoggle/1/2',
-      'etkin_multitoggle/2/1',
-      'etkin_multitoggle/2/2',
-      'buzzer',
-      'servo_1',
-      'servo_2'
+    'sol',
+    'sag',
+    'sol_ters',
+    'sag_ters',
+    'etkin_multitoggle/1/1',
+    'etkin_multitoggle/1/2',
+    'etkin_multitoggle/2/1',
+    'etkin_multitoggle/2/2',
+    'buzzer',
+    'servo_1',
+    'servo_2'
   ]
 
   $osc_liste = Hash.new

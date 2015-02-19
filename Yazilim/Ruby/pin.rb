@@ -12,20 +12,27 @@ class Pin
       {5 => 'motor_sag_arka'} => 1,
       {6 => 'servo_x'} => 3,
       {7 => 'servo_y'} => 3,
+      {8 => 'hareket_on_sag'} => 2,
+      {9 => 'hareket_on_sol'} => 2,
+      {10 => 'hareket_arka_sag'} => 2,
+      {11 => 'hareket_arka_sol'} => 2,
+      {12 => 'ses_sensoru'} => 2,
 
       {22 => 'motor_sol_on_yon'} => 1,
       {23 => 'motor_sol_arka_yon'} => 1,
       {24 => 'motor_sag_on_yon'} => 1,
       {25 => 'motor_sag_arka_yon'} => 1,
-      {26 => 'hareket_on_sag'} => 2,
-      {27 => 'hareket_on_sol'} => 2,
-      {28 => 'hareket_arka_sag'} => 2,
-      {29 => 'hareket_arka_sol'} => 2,
-      {30 => 'buzzer_1'} => 1,
-      {31 => 'buzzer_2'} => 1,
-      {32 => 'ses_sensoru'} => 2,
-      {33 => 'ekran_sag_isik'} => 1,
-      {34 => 'ekran_sol_isik'} => 1,
+      {26 => 'buzzer_1'} => 1,
+      {27 => 'buzzer_2'} => 1,
+      {28 => 'ekran_sag_isik'} => 1,
+      {29 => 'ekran_sol_isik'} => 1,
+
+      {42 => 'uzaklik_on_alt_1'} => 2,
+      {43 => 'uzaklik_on_alt_2'} => 2,
+      {44 => 'uzaklik_on_ust_1'} => 2,
+      {45 => 'uzaklik_on_ust_2'} => 2,
+      {46 => 'uzaklik_arka_1'} => 2,
+      {47 => 'uzaklik_arka_2'} => 2,
 
       {0 => 'motor_sol_on_hiz'} => 0,
       {1 => 'motor_sol_arka_hiz'} => 0,
@@ -37,12 +44,9 @@ class Pin
       {7 => 'uzaklik_sol_arka'} => 0,
       {8 => 'sicaklik_sensoru'} => 0,
       {9 => 'gaz_sensoru'} => 0,
-      {10 => 'uzaklik_on_alt_1'} => 0,
-      {11 => 'uzaklik_on_alt_2'} => 0,
-      {12 => 'uzaklik_on_ust_1'} => 0,
-      {13 => 'uzaklik_on_ust_2'} => 0,
-      {14 => 'uzaklik_arka_1'} => 0,
-      {15 => 'uzaklik_arka_2'} => 0,
+      {10 => 'ldr_on_sag'} => 0,
+      {11 => 'ldr_on_sol'} => 0,
+      {12 => 'ldr_arka'} => 0,
   }
 
 
@@ -50,44 +54,16 @@ class Pin
     return $arduino_mega
   end
 
-  def hareket_on_sag
+
+  def pin_ara pin_ismi
     $arduino_mega.each do |a,b|
       a.each do |x,y|
-        if y == 'hareket_on_sag'
+        if y == pin_ismi
           return x
         end
       end
     end
   end
 
-  def hareket_on_sol
-    $arduino_mega.each do |a,b|
-      a.each do |x,y|
-        if y == 'hareket_on_sol'
-          return x
-        end
-      end
-    end
-  end
-
-  def hareket_arka_sag
-    $arduino_mega.each do |a,b|
-      a.each do |x,y|
-        if y == 'hareket_arka_sag'
-          return x
-        end
-      end
-    end
-  end
-
-  def hareket_arka_sol
-    $arduino_mega.each do |a,b|
-      a.each do |x,y|
-        if y == 'hareket_arka_sol'
-          return x
-        end
-      end
-    end
-  end
 
 end

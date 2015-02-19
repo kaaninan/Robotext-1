@@ -1,20 +1,22 @@
+#!/usr/bin/env ruby
 require 'rubygems'
 require 'arduino_firmata'
 
+arduino = ArduinoFirmata.connect '/dev/tty.usbserial-A603JL3X', :nonblock_io => true
 
-@arduino = ArduinoFirmata.connect
+puts 'Bağlandı'
 
-puts 'Baglandi'
+arduino.pin_mode 2, ArduinoFirmata::INPUT
+#arduino.pin_mode 3, ArduinoFirmata::INPUT
+arduino.pin_mode 22, ArduinoFirmata::INPUT
 
-@arduino.pin_mode 6, ArduinoFirmata::SERVO
-@arduino.pin_mode 7, ArduinoFirmata::SERVO
 
-@arduino.pin_mode 26, ArduinoFirmata::INPUT
+
+arduino.on :digital_read do |pin, status|
+    puts "#{pin}, #{status}"
+end
+
 
 loop do
-  angle = rand 180
-  #@arduino.servo_write 6, angle
-  #@arduino.servo_write 7, angle
-  sleep 0.5
-  puts @arduino.digital_read 26
+  sleep 0.2
 end

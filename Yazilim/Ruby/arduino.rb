@@ -49,13 +49,9 @@ class Arduino_Self
       if komut == 'hareket_basla'
         #@hareket = Hareket.new secili_kart
 
-        def hareket_kontrol
-          pins = Pin.new
+        puts 'Başladı'
 
-          @@arduino_mega.on :digital_read do |pin, status|
-            puts '#{pin}, #{status}'
-          end
-        end
+
 
 
       elsif komut == 'hareket_durdur'
@@ -66,6 +62,33 @@ class Arduino_Self
       $log.hata $konum, "Komutta belirtilen kart bagli degil! (Kart: #{board}))"
     end
 
+  end
+
+
+  def deneme_hareket
+
+    # 4 -> Ses Sensörü
+    # 0-1 -> Ön Hareket Sensörü
+
+    @@arduino_mega.on :digital_read do |pin, status|
+      if pin == 0 || pin == 1
+        puts "Hareket oluy #{status}, pin => #{pin}"
+      else
+        puts "gereksiz uyari #{pin}, #{status}"
+      end
+    end
+  end
+
+  def deneme_uzaklik
+    @@arduino_mega.on :analog_read do |pin, status|
+      puts "#{pin}, #{status}"
+    end
+  end
+
+
+  def deneme_servo angle
+    @@arduino_mega.servo_write 6, angle
+    @@arduino_mega.servo_write 7, angle
   end
 
 

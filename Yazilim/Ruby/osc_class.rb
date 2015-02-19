@@ -34,12 +34,30 @@ class OpenS
     OSC.using(:input_port => 8000) do
       $osc_liste.each do |a, b|
         receive(a) do |val|
-          puts "#{a} -> #{val}"
+
+
+          # LOG
+          #puts "#{a} -> #{val}"
+
+
           $osc_liste[a] = val
         end
       end
       p "OSC Hazir, Port: #{input_ports.join(', ')}"
       wait_for_input
+    end
+  end
+
+
+  def get_liste
+    return $osc_liste
+  end
+
+  def get_item isim
+    $osc_liste.each do |a, b|
+      if a == isim
+        puts 'Tamam'
+      end
     end
   end
 

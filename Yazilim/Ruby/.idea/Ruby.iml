@@ -13,6 +13,7 @@
     <orderEntry type="library" scope="PROVIDED" name="minitest (v5.5.0, ruby-2.0.0-p481) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="osc-access (v0.0.15, ruby-2.0.0-p481) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="osc-ruby (v1.1.1, ruby-2.0.0-p481) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rubygems-update (v2.4.5, ruby-2.0.0-p481) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="serialport (v1.3.1, ruby-2.0.0-p481) [gem]" level="application" />
   </component>
 </module>

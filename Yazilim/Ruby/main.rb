@@ -7,6 +7,7 @@ $LOAD_PATH << '.'
 require 'arduino'
 require 'osc_class'
 require 'pin'
+require 'motor'
 
 
 # SEÇİMLER VE ARDUINO BAĞLANMA #
@@ -94,11 +95,14 @@ thr = Thread.new do
 end
 
 
-$board.f 'hareket_basla', nil, 'mega'
+#$board.f 'hareket_basla', nil, 'mega'
+$board.deneme_uzaklik
 
 
 loop do
-
+  angle = rand 180
+  $board.deneme_servo angle
+  sleep 1
 end
 
 

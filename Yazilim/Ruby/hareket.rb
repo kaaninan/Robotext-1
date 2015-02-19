@@ -21,7 +21,7 @@ class Hareket
     pins = Pin.new
 
     @board.on :digital_read do |pin, status|
-      if pin == pins.hareket_on_sag
+      if pin == pins.pin_ara('hareket_on_sol')
         puts status
       end
     end

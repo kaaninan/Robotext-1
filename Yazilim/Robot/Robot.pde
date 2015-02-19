@@ -1,6 +1,11 @@
 void setup(){
+  
   Pin pin = new Pin();
-  pin.pinAyarla();
-  pin.pinBul("sa");
+  
+  arduino_connect();
+  arduino_pinmode();
+
 }
+
+
 void draw(){}

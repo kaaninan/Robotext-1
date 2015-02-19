@@ -4,6 +4,8 @@ import processing.event.*;
 import processing.opengl.*; 
 
 import java.util.Map; 
+import processing.serial.*; 
+import cc.arduino.*; 
 
 import java.util.HashMap; 
 import java.util.ArrayList; 
@@ -17,89 +19,134 @@ import java.io.IOException;
 public class Robot extends PApplet {
 
 public void setup(){
+  
   Pin pin = new Pin();
-  pin.pinAyarla();
-  pin.pinBul("sa");
+  
+  arduino_connect();
+  arduino_pinmode();
+
 }
 public void draw(){}
+Arduino arduino_mega;
 
-class Pin {
-  
-  HashMap<HashMap<String, Integer>,Integer> mega_pin = new HashMap<HashMap<String, Integer>,Integer>();
-  HashMap<String, Integer> value = new HashMap<String, Integer>();
-  
-  //Pin(){}
-  
-  // 0 -> ANALOG
-  // 1 -> INPUT
-  // 2 -> OUTPUT
-  // 3 -> SERVO
-  
-  public void pinAyarla(){
+public void arduino_connect(){
     
-    // PWM
-    value.put("motor_sol_on",2); mega_pin.put(value, 2);
-    value.put("motor_sol_arka",3); mega_pin.put(value, 2);
-    value.put("motor_sag_on",4); mega_pin.put(value, 2);
-    value.put("motor_sag_arka",5); mega_pin.put(value, 2);
-    value.put("servo_x",6); mega_pin.put(value, 3);
-    value.put("servo_y",7); mega_pin.put(value, 3);
-    
-    // DIGITAL
-    value.put("motor_sol_on_yon",22); mega_pin.put(value, 2);
-    value.put("motor_sol_arka_yon",23); mega_pin.put(value, 2);
-    value.put("motor_sag_on_yon",24); mega_pin.put(value, 2);
-    value.put("motor_sag_arka_yon",25); mega_pin.put(value, 2);
-    value.put("buzzer_1",26); mega_pin.put(value, 2);
-    value.put("buzzer_2",27); mega_pin.put(value, 2);
-    value.put("ekran_sag_isik",28); mega_pin.put(value, 2);
-    value.put("ekran_sol_isik",29); mega_pin.put(value, 2);
-    value.put("hareket_on_sag",30); mega_pin.put(value, 1);
-    value.put("hareket_on_sol",31); mega_pin.put(value, 1);
-    value.put("hareket_arka_sag",32); mega_pin.put(value, 1);
-    value.put("hareket_arka_sol",33); mega_pin.put(value, 1);
-    value.put("ses_sensoru",34); mega_pin.put(value, 1);
-    value.put("uzaklik_on_alt_1",35); mega_pin.put(value, 1);
-    value.put("uzaklik_on_alt_2",36); mega_pin.put(value, 1);
-    value.put("uzaklik_on_ust_1",37); mega_pin.put(value, 1);
-    value.put("uzaklik_on_ust_2",38); mega_pin.put(value, 1);
-    value.put("uzaklik_arka_1",39); mega_pin.put(value, 1);
-    value.put("uzaklik_arka_2",40); mega_pin.put(value, 1);
-    
-    // ANALOG
-    value.put("motor_sol_on_hiz",0); mega_pin.put(value, 0);
-    value.put("motor_sol_arka_hiz",1); mega_pin.put(value, 0);
-    value.put("motor_sag_on_hiz",2); mega_pin.put(value, 0);
-    value.put("motor_sag_arka_hiz",3); mega_pin.put(value, 0);
-    value.put("uzaklik_sag_on",4); mega_pin.put(value, 0);
-    value.put("uzaklik_sag_arka",5); mega_pin.put(value, 0);
-    value.put("uzaklik_sol_on",6); mega_pin.put(value, 0);
-    value.put("uzaklik_sol_arka",7); mega_pin.put(value, 0);
-    value.put("sicaklik",8); mega_pin.put(value, 0);
-    value.put("gaz",9); mega_pin.put(value, 0);
-    value.put("ldr_on_sag",10); mega_pin.put(value, 0);
-    value.put("ldr_on_sol",11); mega_pin.put(value, 0);
-    value.put("ldr_arka",12); mega_pin.put(value, 0);
+	println();
+	println(Arduino.list());
+	println();
 
-/*
-    for (Map.Entry me :mega_pin.entrySet()) {
-      print(me.getKey() + " is ");
-      println(me.getValue());
-    }
-*/
-  }
+	if(arduino_mega_bagli){
+		arduino_mega = new Arduino(this, s_arduino_mega, 57600);
+		log("Arduino -> arduino_connect", "Arduino Mega -> Baglanildi");
+	}else{
+		log("Arduino -> arduino_connect", "Arduino Mega -> Bagli Degil");
+	}
 
-  public void pinBul(String isim){
-    try{
-      int val = value.get(isim);
-      println(isim+ " pin no: " + val);
-    }catch (Exception c){
-      println("Bulunamad\u0131");
-    }
-    
-  }
+	
+  
+}
+
+public void arduino_pinmode(){
+	Pin pin = new Pin();
+
+	if (arduino_mega_bagli) {
+		pin.pinMode(arduino_mega);
+	}
+}
+
+
+
+
+public void log(String nerde, String mesaj){
+
+	println(nerde + "  =>  " + mesaj);
 
 }
+class Pin {
+
+  public void pinMode(Arduino self_arduino_mega){
+
+    // PWM
+    self_arduino_mega.pinMode(a_motor_sol_on, Arduino.OUTPUT);
+    self_arduino_mega.pinMode(a_motor_sol_arka, Arduino.OUTPUT);
+    self_arduino_mega.pinMode(a_motor_sag_on, Arduino.OUTPUT);
+    self_arduino_mega.pinMode(a_motor_sag_arka, Arduino.OUTPUT);
+    self_arduino_mega.pinMode(a_servo_x, Arduino.SERVO);
+    self_arduino_mega.pinMode(a_servo_y, Arduino.SERVO);
+
+    // DIGITAL
+    self_arduino_mega.pinMode(a_motor_sol_on_yon, Arduino.OUTPUT);
+    self_arduino_mega.pinMode(a_motor_sol_arka_yon, Arduino.OUTPUT);
+    self_arduino_mega.pinMode(a_motor_sag_on_yon, Arduino.OUTPUT);
+    self_arduino_mega.pinMode(a_motor_sag_arka_yon, Arduino.OUTPUT);
+    self_arduino_mega.pinMode(a_buzzer_1, Arduino.OUTPUT);
+    self_arduino_mega.pinMode(a_buzzer_2, Arduino.OUTPUT);
+    self_arduino_mega.pinMode(a_ekran_sag_isik, Arduino.OUTPUT);
+    self_arduino_mega.pinMode(a_ekran_sol_isik, Arduino.OUTPUT);
+    self_arduino_mega.pinMode(a_hareket_on_sag, Arduino.INPUT);
+    self_arduino_mega.pinMode(a_hareket_on_sol, Arduino.INPUT);
+    self_arduino_mega.pinMode(a_hareket_arka_sag, Arduino.INPUT);
+    self_arduino_mega.pinMode(a_hareket_arka_sol, Arduino.INPUT);
+    self_arduino_mega.pinMode(a_ses_sensoru, Arduino.INPUT);
+    self_arduino_mega.pinMode(a_uzaklik_on_alt_1, Arduino.INPUT);
+    self_arduino_mega.pinMode(a_uzaklik_on_alt_2, Arduino.INPUT);
+    self_arduino_mega.pinMode(a_uzaklik_on_ust_1, Arduino.INPUT);
+    self_arduino_mega.pinMode(a_uzaklik_on_ust_2, Arduino.INPUT);
+    self_arduino_mega.pinMode(a_uzaklik_arka_1, Arduino.INPUT);
+    self_arduino_mega.pinMode(a_uzaklik_arka_2, Arduino.INPUT);
+
+    log("Pin -> pinMode","Arduino Mega -> Pin Mode -> OK");
+
+  }
+ 
+  // PWM
+  int a_motor_sol_on = 2;
+  int a_motor_sol_arka = 3;
+  int a_motor_sag_on = 4;
+  int a_motor_sag_arka = 5;
+  int a_servo_x = 6;
+  int a_servo_y = 7;
+  
+  // DIGITAL
+  int a_motor_sol_on_yon = 22;
+  int a_motor_sol_arka_yon = 23;
+  int a_motor_sag_on_yon = 24;
+  int a_motor_sag_arka_yon = 25;
+  int a_buzzer_1 = 26;
+  int a_buzzer_2 = 27;
+  int a_ekran_sag_isik = 28;
+  int a_ekran_sol_isik = 29;
+  int a_hareket_on_sag = 30;
+  int a_hareket_on_sol = 31;
+  int a_hareket_arka_sag = 32;
+  int a_hareket_arka_sol = 33;
+  int a_ses_sensoru = 34;
+  int a_uzaklik_on_alt_1 = 35;
+  int a_uzaklik_on_alt_2 = 36;
+  int a_uzaklik_on_ust_1 = 37;
+  int a_uzaklik_on_ust_2 = 38;
+  int a_uzaklik_arka_1 = 39;
+  int a_uzaklik_arka_2 = 40;
+  
+  // ANALOG
+  int a_motor_sol_on_hiz = 0;
+  int a_motor_sol_arka_hiz = 1;
+  int a_motor_sag_on_hiz = 2;
+  int a_motor_sag_arka_hiz = 3;
+  int a_uzaklik_sag_on = 4;
+  int a_uzaklik_sag_arka = 5;
+  int a_uzaklik_sol_on = 6;
+  int a_uzaklik_sol_arka = 7;
+  int a_sicaklik = 8;
+  int a_gaz = 9;
+  int a_ldr_on_sag = 10;
+  int a_ldr_on_sol = 11;
+  int a_ldr_arka = 12;
+
+}
+String s_arduino_mega = "/dev/tty.usbserial-A603JL3X";
+
+boolean arduino_mega_bagli = true;
   static public void main(String[] passedArgs) {
     String[] appletArgs = new String[] { "Robot" };
     if (passedArgs != null) {

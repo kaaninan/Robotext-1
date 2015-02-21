@@ -17,30 +17,35 @@ void setup() {
   // ARDUINO MEGA PIN MODE
   if (arduino_mega_bagli) {
     
-    arduino_mega.pinMode(a_motor_sol_on, Arduino.OUTPUT);
-    arduino_mega.pinMode(a_motor_sol_arka, Arduino.OUTPUT);
-    arduino_mega.pinMode(a_motor_sag_on, Arduino.OUTPUT);
-    arduino_mega.pinMode(a_motor_sag_arka, Arduino.OUTPUT);
+  // PWM
+  arduino_mega.pinMode(a_motor_sol_on, Arduino.OUTPUT);
+  arduino_mega.pinMode(a_motor_sol_arka, Arduino.OUTPUT);
+  arduino_mega.pinMode(a_motor_sag_on, Arduino.OUTPUT);
+  arduino_mega.pinMode(a_motor_sag_arka, Arduino.OUTPUT);
+  arduino_mega.pinMode(a_servo_x, Arduino.SERVO);
+  arduino_mega.pinMode(a_servo_y, Arduino.SERVO);
 
-    arduino_mega.pinMode(a_motor_sol_on_d, Arduino.OUTPUT);
-    arduino_mega.pinMode(a_motor_sol_arka_d, Arduino.OUTPUT);
-    arduino_mega.pinMode(a_motor_sag_on_d, Arduino.OUTPUT);
-    arduino_mega.pinMode(a_motor_sag_arka_d, Arduino.OUTPUT);
+  // DIGITAL
+  arduino_mega.pinMode(a_motor_sol_on_yon, Arduino.OUTPUT);
+  arduino_mega.pinMode(a_motor_sol_arka_yon, Arduino.OUTPUT);
+  arduino_mega.pinMode(a_motor_sag_on_yon, Arduino.OUTPUT);
+  arduino_mega.pinMode(a_motor_sag_arka_yon, Arduino.OUTPUT);
+  arduino_mega.pinMode(a_buzzer_1, Arduino.OUTPUT);
+  arduino_mega.pinMode(a_buzzer_2, Arduino.OUTPUT);
+  arduino_mega.pinMode(a_ekran_sag_isik, Arduino.OUTPUT);
+  arduino_mega.pinMode(a_ekran_sol_isik, Arduino.OUTPUT);
+  arduino_mega.pinMode(a_hareket_on_sag, Arduino.INPUT);
+  arduino_mega.pinMode(a_hareket_on_sol, Arduino.INPUT);
+  arduino_mega.pinMode(a_hareket_arka_sag, Arduino.INPUT);
+  arduino_mega.pinMode(a_hareket_arka_sol, Arduino.INPUT);
+  arduino_mega.pinMode(a_ses_sensoru, Arduino.INPUT);
+  arduino_mega.pinMode(a_uzaklik_on_alt_1, Arduino.INPUT);
+  arduino_mega.pinMode(a_uzaklik_on_alt_2, Arduino.INPUT);
+  arduino_mega.pinMode(a_uzaklik_on_ust_1, Arduino.INPUT);
+  arduino_mega.pinMode(a_uzaklik_on_ust_2, Arduino.INPUT);
+  arduino_mega.pinMode(a_uzaklik_arka_1, Arduino.INPUT);
+  arduino_mega.pinMode(a_uzaklik_arka_2, Arduino.INPUT);
 
-    arduino_mega.pinMode(a_led_k_1, Arduino.OUTPUT);
-    arduino_mega.pinMode(a_led_k_2, Arduino.OUTPUT);
-    arduino_mega.pinMode(a_led_y_1, Arduino.OUTPUT);
-    arduino_mega.pinMode(a_led_y_2, Arduino.OUTPUT);
-    
-    arduino_mega.pinMode(a_ses, Arduino.INPUT);
-    arduino_mega.pinMode(a_hareket_1, Arduino.INPUT);
-    arduino_mega.pinMode(a_hareket_2, Arduino.INPUT);
-
-    arduino_mega.pinMode(a_hoparlor, Arduino.OUTPUT);
-    arduino_mega.pinMode(a_buzzer, Arduino.OUTPUT);
-
-    arduino_mega.pinMode(a_servo_1, Arduino.SERVO);
-    arduino_mega.pinMode(a_servo_2, Arduino.SERVO);
 
     gonder_motor_sifirla(true);
     gonder_uzaklik_sifirla();
@@ -51,9 +56,6 @@ void setup() {
     
   }
   
-  if(arduino_mega_bagli)
-    arduino_mega.servoWrite(a_servo_1, 90);
-    arduino_mega.servoWrite(a_servo_2, 90);
     
   if(osc_gonder)
     gonder_durum("Mail Atiliyor");
@@ -68,19 +70,7 @@ void setup() {
     gonder_durum("Setup Finished");
     
     
-  size(640, 480);
-  video = new Capture(this, 640/2, 480/2);
-  opencv = new OpenCV(this, 640/2, 480/2);
-  opencv.loadCascade(OpenCV.CASCADE_FRONTALFACE);  
-
-  video.start();
 }
-
-
-void captureEvent(Capture c) {
-  c.read();
-}
-
 
 
 
@@ -88,30 +78,6 @@ void captureEvent(Capture c) {
 
 
 void draw() {
-  
-  
-  scale(2);
-  opencv.loadImage(video);
-
-  image(video, 0, 0 );
-
-  noFill();
-  stroke(0, 255, 0);
-  strokeWeight(3);
-  Rectangle[] faces = opencv.detect();
-  //println(faces.length);
-
-  for (int i = 0; i < faces.length; i++) {
-    //println(faces[i].x + "," + faces[i].y);
-    
-    arduino_mega.servoWrite(a_servo_2, faces[i].x);
-    arduino_mega.servoWrite(a_servo_1, faces[i].y);
-    
-    //arduino_mega.servoWrite(a_servo_1, 90);
-    //arduino_mega.servoWrite(a_servo_2, 90);
-    
-    rect(faces[i].x, faces[i].y, faces[i].width, faces[i].height);
-  }
   
   
   //println(arduino_mega.analogRead(a_uzaklik_sag_1)+","+arduino_mega.analogRead(a_uzaklik_sag_2)+","+arduino_mega.analogRead(a_uzaklik_sol_1)+","+arduino_mega.analogRead(a_uzaklik_sol_2));

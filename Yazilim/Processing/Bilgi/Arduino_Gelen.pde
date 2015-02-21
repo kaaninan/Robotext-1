@@ -7,7 +7,7 @@ int basla2 = 0;
 int[] oku_uzaklik() {
   int[] degerler = new int[3];
   
-  degerler[0] = arduino_mega.digitalRead(a_uzaklik_sag_1);
+  /*degerler[0] = arduino_mega.digitalRead(a_uzaklik_sag_1);
   degerler[1] = arduino_mega.digitalRead(a_uzaklik_sag_2);
   
   degerler[2] = arduino_mega.digitalRead(a_uzaklik_sol_1);
@@ -16,6 +16,8 @@ int[] oku_uzaklik() {
   if(osc_gonder){
     gonder_uzaklik(degerler[0], degerler[1], degerler[2], degerler[3]);
   }
+  
+  */
   
   return degerler;
 }

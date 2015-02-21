@@ -1,6 +1,6 @@
 void log (String nerde, String mesaj){
 
-	println(nerde + "  =>  " + mesaj);
-	println();
+  println(nerde + "  =>  " + mesaj);
+  println();
 
 }

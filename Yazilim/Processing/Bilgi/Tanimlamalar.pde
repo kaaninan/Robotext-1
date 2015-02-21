@@ -7,47 +7,49 @@ Arduino arduino_mega; // Arduino Mega 1280
 Arduino arduino_mega_2; // Arduino Mega 2560
 
 // ### ARDUINO PIN ### //
+// PWM
+int a_motor_sol_on = 2;
+int a_motor_sol_arka = 3;
+int a_motor_sag_on = 4;
+int a_motor_sag_arka = 5;
+int a_servo_x = 6;
+int a_servo_y = 7;
 
-  // ## MEGA 1 ## //
-  
-  // PWM
-  int a_motor_sol_on = 2;
-  int a_motor_sol_arka = 3;
-  int a_motor_sag_on = 4;
-  int a_motor_sag_arka = 5;
-  
-  int a_servo_1 = 6;
-  int a_servo_2 = 7;
-  
-  // DIGITAL
-  int a_motor_sol_on_d = 22;
-  int a_motor_sol_arka_d = 23;
-  int a_motor_sag_on_d = 24;
-  int a_motor_sag_arka_d = 25;
-  
-  int a_led_k_1 = 40;
-  int a_led_k_2 = 41;
-  
-  int a_led_y_1 = 42;
-  int a_led_y_2 = 43;
-  
-  int a_hareket_1 = 26;
-  int a_hareket_2 = 27;
-  int a_ses = 30;
-  int a_hoparlor = 42;
-  int a_buzzer = 31;
-  
-  // ANALOG
-  int a_motor_sol_on_e = 0;
-  int a_motor_sol_arka_e = 1;
-  int a_motor_sag_on_e = 2;
-  int a_motor_sag_arka_e = 3;
-  
-  int a_uzaklik_sag_1 = 4;
-  int a_uzaklik_sag_2 = 5;
-  
-  int a_uzaklik_sol_1 = 6;
-  int a_uzaklik_sol_2 = 7;
+// DIGITAL
+int a_motor_sol_on_yon = 22;
+int a_motor_sol_arka_yon = 23;
+int a_motor_sag_on_yon = 24;
+int a_motor_sag_arka_yon = 25;
+int a_buzzer_1 = 26;
+int a_buzzer_2 = 27;
+int a_ekran_sag_isik = 28;
+int a_ekran_sol_isik = 29;
+int a_hareket_on_sag = 30;
+int a_hareket_on_sol = 31;
+int a_hareket_arka_sag = 32;
+int a_hareket_arka_sol = 33;
+int a_ses_sensoru = 34;
+int a_uzaklik_on_alt_1 = 35;
+int a_uzaklik_on_alt_2 = 36;
+int a_uzaklik_on_ust_1 = 37;
+int a_uzaklik_on_ust_2 = 38;
+int a_uzaklik_arka_1 = 39;
+int a_uzaklik_arka_2 = 40;
+
+// ANALOG
+int a_motor_sol_on_hiz = 0;
+int a_motor_sol_arka_hiz = 1;
+int a_motor_sag_on_hiz = 2;
+int a_motor_sag_arka_hiz = 3;
+int a_uzaklik_sag_on = 4;
+int a_uzaklik_sag_arka = 5;
+int a_uzaklik_sol_on = 6;
+int a_uzaklik_sol_arka = 7;
+int a_sicaklik = 8;
+int a_gaz = 9;
+int a_ldr_on_sag = 10;
+int a_ldr_on_sol = 11;
+int a_ldr_arka = 12;
 
 
 // ### OPEN SOUND CONTROL ### //

@@ -23,7 +23,7 @@ void dosyala() {
 }
 
 
-String tarih = hour()+":"+minute()+" "+day()+"."+month()+"."+year();
+String tarih = hour()+":"+minute()+"--"+day()+"."+month()+"."+year();
 
 
 void dir_bash() throws InterruptedException, IOException {

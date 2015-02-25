@@ -8,19 +8,19 @@ void dosyala() {
     println("ARSIVLENEMEDI");
   }
   
-  println("Arsivlenme Tamamlandı");
+  println("-> Arsivlenme Tamamlandi");
 }
+
+
+String tarih = hour()+":"+minute()+"-"+day()+"."+month()+"."+year();
+
 
 void dir_bash() throws InterruptedException, IOException {
     Runtime run = Runtime.getRuntime();
     
-    String tarih = hour()+":"+minute()+" "+day()+"."+month()+"."+year();
-    
     Process proc2 = run.exec(new String[]{"/bin/sh", "-c", "mkdir /home/pi/guvenlik/"+tarih});
+    proc2.waitFor();
     
     Process proc = run.exec(new String[]{"/bin/sh", "-c", "mv /home/pi/temp_guvenlik/* /home/pi/guvenlik/"+tarih});
     proc.waitFor();
-    BufferedReader br = new BufferedReader(new InputStreamReader(proc.getInputStream()));
-    while(br.ready())
-        println(br.readLine());
 }

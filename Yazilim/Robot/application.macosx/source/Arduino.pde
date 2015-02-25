@@ -12,7 +12,6 @@ void arduino_connect(){
   }else{
     log("Arduino -> arduino_connect", "Arduino Mega -> Bagli Degil");
   }
-  
 
 }
 

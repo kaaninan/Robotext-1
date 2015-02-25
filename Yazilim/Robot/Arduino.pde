@@ -12,10 +12,8 @@ void arduino_connect(){
   }else{
     log("Arduino -> arduino_connect", "Arduino Mega -> Bagli Degil");
   }
-  
 
 }
-
 
 
 
@@ -24,6 +22,11 @@ void arduino_pinmode(){
     pinMode();
   }
 }
+
+
+
+
+
 
 
 boolean hareket_oldu_sag = false;

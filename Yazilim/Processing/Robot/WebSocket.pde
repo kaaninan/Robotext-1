@@ -1,7 +1,7 @@
 WebSocketP5 socket;
 
 void websocketOnMessage(WebSocketConnection con, String msg){
-  //println(msg);
+  println(msg);
   json_parse(msg);
 }
 

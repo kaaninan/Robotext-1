@@ -3,7 +3,7 @@
 <head>
 	<title>Klavye</title>
 
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="jquery.js"></script>
 
 	<script type="text/javascript" charset="utf-8">
 		var ws = null;
@@ -62,7 +62,7 @@
 
 
 		$(function(){
-			var interval = setInterval(otomatik, 1);
+			var interval = setInterval(otomatik, 10);
 		});
 
 		function otomatik(){

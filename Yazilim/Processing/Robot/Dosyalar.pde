@@ -1,19 +1,15 @@
 void dosyala() {
-  
   println("Resimler Arsivleniyor..");
-  
   try{
     thread("dir_bash");
   }catch (Exception c){
     println("ARSIVLENEMEDI");
   }
-  
   println("-> Arsivlenme Tamamlandi");
 }
 
 
 String tarih = hour()+":"+minute()+"-"+day()+"."+month()+"."+year();
-
 
 void dir_bash() throws InterruptedException, IOException {
     Runtime run = Runtime.getRuntime();

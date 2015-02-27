@@ -3,22 +3,8 @@
 #include <Wire.h>
 #include <Firmata.h>
 
-
-/* TEST
- 
- Pinler
-   => 7-6-5-4-3-2  ->  Ekran
-   => 8            ->  Giriş Pini
- 
- Yapılanlar
-    => setup() -> pinMode, lcd.begin
-    => loop() > while -> lcd.print
-
-*/
-
-
-
-LiquidCrystal lcd(7, 6, 5, 4, 3, 2);
+LiquidCrystal lcd_sag(39, 40, 41, 42, 43, 44);
+LiquidCrystal lcd_sol(45, 46, 47, 48, 49, 50);
 
 // move the following defines to Firmata.h?
 #define I2C_WRITE B00000000
@@ -572,8 +558,11 @@ void systemResetCallback()
 void setup() 
 {
   
-  pinMode(8, INPUT);
-  lcd.begin(16,2);
+  pinMode(11, INPUT);
+  pinMode(12, INPUT);
+  pinMode(13, INPUT);
+  lcd_sag.begin(16,2);
+  lcd_sol.begin(16,2);
   
   
   Firmata.setFirmwareVersion(FIRMATA_MAJOR_VERSION, FIRMATA_MINOR_VERSION);
@@ -595,24 +584,46 @@ void setup()
  *============================================================================*/
 void loop() 
 {
+  int a = digitalRead(11);
+  int b = digitalRead(12);
+  int c = digitalRead(13);
+  
+  if(a == HIGH && b == HIGH && c == HIGH){
+    lcd_sag.setCursor(0,0);
+    lcd_sag.print("ROBTEXT");
+    lcd_sag.setCursor(0,1);
+    lcd_sag.print("POWERED BY AFL");
+    lcd_sol.setCursor(0,0);
+    lcd_sol.print("ROBTEXT");
+    lcd_sol.setCursor(0,1);
+    lcd_sol.print("POWERED BY AFL");
+  }else if(a == HIGH && b == HIGH && c == LOW){
+    lcd_sag.setCursor(0,0);
+    lcd_sag.print("SISTEM");
+    lcd_sag.setCursor(0,1);
+    lcd_sag.print("BASLATILDI");
+    lcd_sol.setCursor(0,0);
+    lcd_sol.print("SISTEM");
+    lcd_sol.setCursor(0,1);
+    lcd_sol.print("BASLATILDI");
+  }
+  else if(a == HIGH && b == LOW && c == HIGH){}
+  else if(a == LOW && b == HIGH && c == HIGH){}
+  else if(a == LOW && b == HIGH && c == LOW){}
+  else if(a == LOW && b == LOW && c == LOW){}
+  else if(a == LOW && b == LOW && c == HIGH){}
+  else if(a == HIGH && b == LOW && c == LOW){}
+
+
+
+
+
   byte pin, analogPin;
+  
+  checkDigitalInputs();
 
-  /* DIGITALREAD - as fast as possible, check for changes and output them to the
-   * FTDI buffer using Serial.print()  */
-  checkDigitalInputs();  
-
-  /* SERIALREAD - processing incoming messagse as soon as possible, while still
-   * checking digital inputs.  */
   while(Firmata.available()){
     Firmata.processInput();
-    
-    if(digitalRead(8) == HIGH){
-      lcd.setCursor(0,0);
-      lcd.print("PIN ON   ");
-    }else{
-      lcd.setCursor(0,0);
-      lcd.print("PIN OFF  ");
-    }
   }
 
   /* SEND FTDI WRITE BUFFER - make sure that the FTDI buffer doesn't go over

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Klavye</title>
+
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+
+	<script type="text/javascript" charset="utf-8">
+		var ws = null;
+		var host = "localhost"
+		var port = 8080
+		var socket = ""
+
+		var k_ileri = "dur";
+		var k_geri = "dur";
+		var k_sol = "dur";
+		var k_sag = "dur";
+
+		$(function(){
+			$(document).keydown(function(e){
+				if(e.keyCode == 38){
+					$('.a').html('ileri');
+					k_ileri = "ok";
+
+				}else if(e.keyCode == 37){
+					$('.s').html('sol');
+					k_sol = "ok";
+
+				}else if(e.keyCode == 40){
+					$('.d').html('geri');
+					k_geri = "ok";
+
+				}else if(e.keyCode == 39){
+					$('.f').html('sag');
+					k_sag = "ok";
+
+				}
+			});
+		});
+
+		$(function(){
+			$(document).keyup(function(e){
+				if(e.keyCode == 38){
+					$('.a').html('');
+					k_ileri = "dur";
+
+				}else if(e.keyCode == 37){
+					$('.s').html('');
+					k_sol = "dur";
+
+				}else if(e.keyCode == 40){
+					$('.d').html('');
+					k_geri = "dur";
+
+				}else if(e.keyCode == 39){
+					$('.f').html('');
+					k_sag = "dur";
+
+				}
+			});
+		});
+
+
+		$(function(){
+			var interval = setInterval(otomatik, 1);
+		});
+
+		function otomatik(){
+			ws.send(JSON.stringify({
+				ileri: k_ileri,
+				geri: k_geri,
+				sag: k_sag,
+				sol: k_sol
+			}));
+		}
+
+		function ready(){
+			console.log("trying to open a websocket")
+			var _socket = (undefined==socket)?"":"/"+socket
+			
+			_url = "ws://"+host+":"+port+_socket
+			
+			if ('MozWebSocket' in window) ws = new MozWebSocket (_url);
+    		else ws = new WebSocket (_url);
+
+			// When the connection is open, send some data to the server
+			ws.onopen = function () {
+			  console.log("opened")
+			  //ws.send('Bu birinci mesaj');
+			  ws.send('merahab');
+			};
+
+			// oh, it did close
+			ws.onerror = function (e) {
+			  console.log('WebSocket did close ',e);
+			};
+			
+			// Log errors
+			ws.onerror = function (error) {
+			  console.log('WebSocket Error ' + error);
+			};
+
+			// Log messages from the server
+			ws.onmessage = function (e) {
+			  	
+			  	var json = $.parseJSON(e.data);
+				$(json).each(function(i,val){
+				    $.each(val,function(k,v){
+				          console.log(k+" : "+ v);
+				          $('.deger').html(k+" : "+ v);
+				});
+				});
+			};
+
+		}
+					
+		document.addEventListener("DOMContentLoaded", ready, false);
+	</script>
+
+
+</head>
+<body>
+<div id="test-target">Bas Buraya</div>
+
+<div class="deger">Burada gelen degerler var</div>
+
+<div class="a"></div>
+<div class="s"></div>
+<div class="d"></div>
+<div class="f"></div>
+
+<div class="a1"></div>
+<div class="s1"></div>
+<div class="d1"></div>
+<div class="f1"></div>
+
+<div id="log"></div>
+</body>
+</html>

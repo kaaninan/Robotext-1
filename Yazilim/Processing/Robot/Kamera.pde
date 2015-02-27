@@ -1,13 +1,10 @@
 void resim_cek() {
-  
   println("Resim Çekiliyor..");
-  
   try{
     resim_bash();
   }catch (Exception c){
     println("Resim Çekilemedi");
   }
-  
   println("Resim Çekildi");
 }
 

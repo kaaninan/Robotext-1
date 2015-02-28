@@ -12,7 +12,8 @@ void arduino_connect(){
   }else{
     log("Arduino -> arduino_connect", "Arduino Mega -> Bagli Degil");
   }
-
+  
+  delay(100);
 }
 
 void arduino_pinmode(){

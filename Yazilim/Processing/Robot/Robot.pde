@@ -12,12 +12,11 @@ boolean arduino_mega_bagli = true;
 
 void setup(){
   
-  arduino_connect();
-  delay(100);
-  arduino_pinmode();
+  //arduino_connect();
+  //arduino_pinmode();
   
   // WebSocket
-  socket = new WebSocketP5( this, 8080, "" );
+  socket = new WebSocketP5( this, 7070, "" );
 
 }
 
@@ -28,7 +27,7 @@ void draw(){
   //servo();  
   //oku_hareket_sag();  
   //println(arduino_mega.analogRead(a_uzaklik_sag_on));
-  motor_web();
+  //motor_web();
 }
 
 

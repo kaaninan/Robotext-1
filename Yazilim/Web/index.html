@@ -3,12 +3,12 @@
 <head>
 	<title>Klavye</title>
 
-	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 
 	<script type="text/javascript" charset="utf-8">
 		var ws = null;
-		var host = "localhost"
-		var port = 8080
+		var host = "169.254.205.229"
+		var port = 7070
 		var socket = ""
 
 		var k_ileri = "dur";
@@ -61,21 +61,24 @@
 		});
 
 
-		$(function(){
-			var interval = setInterval(otomatik, 10);
-		});
-
+var a = 0;
 		function otomatik(){
+			$('.log').html('Çalışıyo '+a);
+			//ws.send('merahab');
+			
 			ws.send(JSON.stringify({
 				ileri: k_ileri,
 				geri: k_geri,
 				sag: k_sag,
 				sol: k_sol
 			}));
+			
+			a++;
 		}
 
-		function ready(){
-			console.log("trying to open a websocket")
+		function ready(){;
+			console.log("trying to open a websocket");
+			$('.log').html("trying to open a websocket");
 			var _socket = (undefined==socket)?"":"/"+socket
 			
 			_url = "ws://"+host+":"+port+_socket
@@ -83,11 +86,15 @@
 			if ('MozWebSocket' in window) ws = new MozWebSocket (_url);
     		else ws = new WebSocket (_url);
 
+						 
+						 
 			// When the connection is open, send some data to the server
 			ws.onopen = function () {
 			  console.log("opened")
-			  //ws.send('Bu birinci mesaj');
+				$('.log').html('opened');
 			  ws.send('merahab');
+				var interval = setInterval(otomatik, 10);
+				
 			};
 
 			// oh, it did close
@@ -97,7 +104,8 @@
 			
 			// Log errors
 			ws.onerror = function (error) {
-			  console.log('WebSocket Error ' + error);
+				console.log('WebSocket Error ' + error);
+				$('.log').html('WebSocket Error ' + error);
 			};
 
 			// Log messages from the server
@@ -120,6 +128,7 @@
 
 </head>
 <body>
+<div class="log"></div>
 <div id="test-target">Bas Buraya</div>
 
 <div class="deger">Burada gelen degerler var</div>

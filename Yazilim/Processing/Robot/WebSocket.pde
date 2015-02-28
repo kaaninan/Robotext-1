@@ -2,21 +2,23 @@ WebSocketP5 socket;
 
 void websocketOnMessage(WebSocketConnection con, String msg){
   println(msg);
-  json_parse(msg);
+  //json_parse(msg);
 }
 
 void websocketOnOpen(WebSocketConnection con){
-  println("A client joined");
+  // Kullanici geldiginde  
+  ekran(1);
+  println("Bir Kullanici Baglandi");
 }
 
 void websocketOnClosed(WebSocketConnection con){
-  println("A client left");
+  // Kullanici ayrlildigida
+  println("X-> Kullanici Ayrildi");
 }
 
 
 void mousePressed(){
   thread("json_gonder");
-  thread("test");
 }
 
 

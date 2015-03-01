@@ -17,10 +17,6 @@ void websocketOnClosed(WebSocketConnection con){
 }
 
 
-void mousePressed(){
-  thread("json_gonder");
-}
-
 
 
 
@@ -70,15 +66,18 @@ void json_parse(String gelen){
   }
 }
 
+void mousePressed(){
+  sensor_sicaklik = 1;
+}
 
 
 
 void json_gonder(){
   int a = 0;
   while(true){
-    String json = "{\"id\":\"3\",\"test\":\""+a+"\"}";
+    String json = "{\"isik\":\""+sensor_ldr+"\",\"sicaklik\":\""+sensor_sicaklik+"\"}";
     socket.broadcast(json);
-    delay(10);
+    delay(100);
     a++;
   }
 }

@@ -17,7 +17,8 @@ void setup(){
   
   // WebSocket
   socket = new WebSocketP5( this, 7070, "" );
-
+  delay(100);
+  thread("json_gonder");
 }
 
 

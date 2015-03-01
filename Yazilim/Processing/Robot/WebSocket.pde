@@ -56,7 +56,7 @@ void json_parse(String gelen){
       }else
         j_sag = 0;
     }
-    
+      
     else if(b[1].equals("sol")){
       if(e[1].equals("ok")){
         j_sol = 1;
@@ -72,11 +72,37 @@ void mousePressed(){
 
 
 
+//int[] sensor_uzaklik_on = new int[1];
+//int[] sensor_uzaklik = new int[3];
+// UZAKLIK  ==>  (Sağ Ön, Sağ Arka, Sol Ön, Sol Arka)
+
 void json_gonder(){
   int a = 0;
   while(true){
-    String json = "{\"isik\":\""+sensor_ldr+"\",\"sicaklik\":\""+sensor_sicaklik+"\"}";
-    socket.broadcast(json);
+    String gonder = "";
+    
+    String[] json = new String[11];
+    
+    json[0] = "\"isik\":\""+sensor_ldr+"\",";
+    json[1] = "\"sicaklik\":\""+sensor_sicaklik+"\",";
+    json[2] = "\"ses\":\""+sensor_ses+"\",";
+    json[3] = "\"hareket_sag\":\""+sensor_hareket[0]+"\",";    
+    json[4] = "\"hareket_sol\":\""+sensor_hareket[1]+"\",";
+    json[5] = "\"uzaklik_on_alt\":\""+sensor_uzaklik_on[0]+"\",";
+    
+    json[6] = "\"uzaklik_on_ust\":\""+sensor_uzaklik_on[1]+"\",";
+    json[7] = "\"uzaklik_sag_on\":\""+sensor_uzaklik[0]+"\",";
+    json[8] = "\"uzaklik_sag_arka\":\""+sensor_uzaklik[1]+"\",";
+    json[9] = "\"uzaklik_sol_on\":\""+sensor_uzaklik[2]+"\",";
+    json[10] = "\"uzaklik_sol_arka\":\""+sensor_uzaklik[3]+"\"";
+    
+    for(int i = 0; i < json.length; i++){
+      gonder+= json[i];
+    }
+    
+    gonder = "{"+gonder+"}";
+    
+    socket.broadcast(gonder);
     delay(100);
     a++;
   }

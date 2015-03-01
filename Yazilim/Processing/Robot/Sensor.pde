@@ -1,9 +1,9 @@
 // OKUNAN DEGERLERI KAYDETME
-int[] sensor_hareket = new int[1];
-int[] sensor_uzaklik_on = new int[1];
-int[] sensor_uzaklik = new int[3];
+int[] sensor_hareket = new int[2];
+int[] sensor_uzaklik_on = new int[2];
+int[] sensor_uzaklik = new int[4];
 int sensor_ses = 0;
-int sensor_ldr = 0;
+int sensor_ldr = 3;
 float sensor_sicaklik = 0;
 
 

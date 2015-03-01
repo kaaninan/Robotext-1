@@ -215,22 +215,6 @@
                   			</div>
 					  			<p>933 People liked your page the last 24hs. Whoohoo!</p>
 
-      <div class="log"></div>
-<div id="test-target">Bas Buraya</div>
-
-<div class="deger">Burada gelen degerler var</div>
-
-<div class="a"></div>
-<div class="s"></div>
-<div class="d"></div>
-<div class="f"></div>
-
-<div class="a1"></div>
-<div class="s1"></div>
-<div class="d1"></div>
-<div class="f1"></div>
-
-<div id="log"></div>
                   		</div>
                   		<div class="col-md-2 col-sm-2 box0">
                   			<div class="box1">
@@ -259,6 +243,15 @@
 					  			<h3>OK!</h3>
                   			</div>
 					  			<p>Your server is working perfectly. Relax & enjoy.</p>
+                  		</div>
+                  		
+                  		<div class="col-md-2 col-sm-2 col-md-offset-1 box0">
+                  			<div class="box1">
+					  			<span class="li_heart"></span>
+					  			<h3>933</h3>
+                  			</div>
+					  			<p>933 People liked your page the last 24hs. Whoohoo!</p>
+
                   		</div>
                   	
                   	</div><!-- /row mt -->	
@@ -756,11 +749,12 @@
 			  	var json = $.parseJSON(e.data);
 				$(json).each(function(i,val){
 				    $.each(val,function(k,v){
-				          console.log(k+" : "+ v);
-				          if(k == "sicaklik"){
-				          	$('.deger').html(k+" : "+ v);
-				          }
-				          
+
+					console.log(k+" : "+ v);
+
+					if(k == "isik"){
+						$('#sensor_isik').html(v);
+					}
 				});
 				});
 			};

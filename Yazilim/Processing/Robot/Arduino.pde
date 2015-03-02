@@ -1,4 +1,5 @@
 Arduino arduino_mega;
+Serial arduino_uno;
 
 void arduino_connect(){
     
@@ -6,18 +7,10 @@ void arduino_connect(){
   println(Arduino.list());
   println();
 
-  if(arduino_mega_bagli){
-    arduino_mega = new Arduino(this, s_arduino_mega, 57600);
-    log("Arduino -> arduino_connect", "Arduino Mega -> Baglanildi");
-  }else{
-    log("Arduino -> arduino_connect", "Arduino Mega -> Bagli Degil");
-  }
+  arduino_mega = new Arduino(this, s_arduino_mega, 57600);
+  arduino_uno = new Serial(this, s_arduino_uno, 115200);
+  log("Arduino -> arduino_connect", "Arduino Mega -> Baglanildi");
   
   delay(100);
-}
-
-void arduino_pinmode(){
-  if (arduino_mega_bagli) {
-    pinMode();
-  }
+  pinMode(); 
 }

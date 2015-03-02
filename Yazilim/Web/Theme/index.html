@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/zabuto_calendar.css">
     <link rel="stylesheet" type="text/css" href="assets/js/gritter/css/jquery.gritter.css" />
     <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/onoff.css">
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
     <script src="assets/js/chart-master/Chart.js"></script>
@@ -206,53 +207,81 @@
 
               <div class="row">
                   <div class="col-lg-9 main-chart">
+
+
                   
                   	<div class="row mtbox">
-                  		<div class="col-md-2 col-sm-2 col-md-offset-1 box0">
+
+                  	<div class="col-md-2 col-sm-2 box0 col-md-offset-2">
                   			<div class="box1">
-					  			<span class="li_heart"></span>
-					  			<h3>933</h3>
+					  			<span><i class="fa fa-car"></i></span>
+					  			<h3>
+					  				<center>
+					  				
+<div class="onoffswitch">
+    <input type="checkbox" name="onoffswitch3" class="onoffswitch-checkbox" id="myonoffswitch3" checked>
+    <label class="onoffswitch-label" for="myonoffswitch3">
+        <span class="onoffswitch-inner"></span>
+        <span class="onoffswitch-switch"></span>
+    </label>
+</div></center>
+					  			</h3>
                   			</div>
-					  			<p>933 People liked your page the last 24hs. Whoohoo!</p>
+					  			<p>Otomatik Moda Geçir</p>
+                  		</div>
+
+
+
+                  		<div class="col-md-2 col-sm-2 box0">
+                  			<div class="box1">
+					  			<span><i class="fa fa-cogs"></i></span>
+					  			<h3><center>
+					  				
+<div class="onoffswitch">
+    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+    <label class="onoffswitch-label" for="myonoffswitch">
+        <span class="onoffswitch-inner"></span>
+        <span class="onoffswitch-switch"></span>
+    </label>
+</div></center>
+					  			</h3>
+                  			</div>
+					  			<p>Motorları Etkinleştir</p>
 
                   		</div>
                   		<div class="col-md-2 col-sm-2 box0">
                   			<div class="box1">
-					  			<span class="li_cloud"></span>
-					  			<h3>+48</h3>
+					  			<span><i class="fa fa-lightbulb-o"></i></span>
+					  			<h3><center>
+<div class="onoffswitch">
+    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch2" checked>
+    <label class="onoffswitch-label" for="myonoffswitch2">
+        <span class="onoffswitch-inner"></span>
+        <span class="onoffswitch-switch"></span>
+    </label>
+</div></center>
+					  			</h3>
                   			</div>
-					  			<p>48 New files were added in your cloud storage.</p>
+					  			<p>Aydınlatmaları Yak</p>
                   		</div>
                   		<div class="col-md-2 col-sm-2 box0">
                   			<div class="box1">
-					  			<span class="li_stack"></span>
-					  			<h3>23</h3>
+					  			<span><i class="fa fa-bolt"></i></span>
+					  			<h3><center>
+					  				
+<div class="onoffswitch">
+    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch4" checked>
+    <label class="onoffswitch-label" for="myonoffswitch4">
+        <span class="onoffswitch-inner"></span>
+        <span class="onoffswitch-switch"></span>
+    </label>
+</div></center>
+
+					  			</h3>
                   			</div>
-					  			<p>You have 23 unread messages in your inbox.</p>
-                  		</div>
-                  		<div class="col-md-2 col-sm-2 box0">
-                  			<div class="box1">
-					  			<span class="li_news"></span>
-					  			<h3>+10</h3>
-                  			</div>
-					  			<p>More than 10 news were added in your reader.</p>
-                  		</div>
-                  		<div class="col-md-2 col-sm-2 box0">
-                  			<div class="box1">
-					  			<span class="li_data"></span>
-					  			<h3>OK!</h3>
-                  			</div>
-					  			<p>Your server is working perfectly. Relax & enjoy.</p>
+					  			<p>Gücü Aç</p>
                   		</div>
                   		
-                  		<div class="col-md-2 col-sm-2 col-md-offset-1 box0">
-                  			<div class="box1">
-					  			<span class="li_heart"></span>
-					  			<h3>933</h3>
-                  			</div>
-					  			<p>933 People liked your page the last 24hs. Whoohoo!</p>
-
-                  		</div>
                   	
                   	</div><!-- /row mt -->	
                   
@@ -262,27 +291,15 @@
                       	<div class="col-md-4 col-sm-4 mb">
                       		<div class="white-panel pn donut-chart">
                       			<div class="white-header">
-						  			<h5>SERVER LOAD</h5>
+						  			<h5>ORTAMDAKİ IŞIK</h5>
                       			</div>
 								<div class="row">
-									<div class="col-sm-6 col-xs-6 goleft">
-										<p><i class="fa fa-database"></i> 70%</p>
-									</div>
-	                      		</div>
-								<canvas id="serverstatus01" height="120" width="120"></canvas>
-								<script>
-									var doughnutData = [
-											{
-												value: 70,
-												color:"#68dff0"
-											},
-											{
-												value : 30,
-												color : "#fdfdfd"
-											}
-										];
-										var myDoughnut = new Chart(document.getElementById("serverstatus01").getContext("2d")).Doughnut(doughnutData);
-								</script>
+									
+								<i class="fa fa-sun-o fa-5x"></i>
+
+									Kağan İNAN
+
+								</div>
 	                      	</div><! --/grey-panel -->
                       	</div><!-- /col-md-4-->
                       	
@@ -388,63 +405,16 @@
 						</div><!-- /col-md-4 -->
 						
 					</div><!-- /row -->
+
+
 					
-					<div class="row mt">
-                      <!--CUSTOM CHART START -->
-                      <div class="border-head">
-                          <h3>VISITS</h3>
-                      </div>
-                      <div class="custom-bar-chart">
-                          <ul class="y-axis">
-                              <li><span>10.000</span></li>
-                              <li><span>8.000</span></li>
-                              <li><span>6.000</span></li>
-                              <li><span>4.000</span></li>
-                              <li><span>2.000</span></li>
-                              <li><span>0</span></li>
-                          </ul>
-                          <div class="bar">
-                              <div class="title">JAN</div>
-                              <div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top">85%</div>
-                          </div>
-                          <div class="bar ">
-                              <div class="title">FEB</div>
-                              <div class="value tooltips" data-original-title="5.000" data-toggle="tooltip" data-placement="top">50%</div>
-                          </div>
-                          <div class="bar ">
-                              <div class="title">MAR</div>
-                              <div class="value tooltips" data-original-title="6.000" data-toggle="tooltip" data-placement="top">60%</div>
-                          </div>
-                          <div class="bar ">
-                              <div class="title">APR</div>
-                              <div class="value tooltips" data-original-title="4.500" data-toggle="tooltip" data-placement="top">45%</div>
-                          </div>
-                          <div class="bar">
-                              <div class="title">MAY</div>
-                              <div class="value tooltips" data-original-title="3.200" data-toggle="tooltip" data-placement="top">32%</div>
-                          </div>
-                          <div class="bar ">
-                              <div class="title">JUN</div>
-                              <div class="value tooltips" data-original-title="6.200" data-toggle="tooltip" data-placement="top">62%</div>
-                          </div>
-                          <div class="bar">
-                              <div class="title">JUL</div>
-                              <div class="value tooltips" data-original-title="7.500" data-toggle="tooltip" data-placement="top">75%</div>
-                          </div>
-                      </div>
-                      <!--custom chart end-->
-					</div><!-- /row -->	
+					
 					
                   </div><!-- /col-lg-9 END SECTION MIDDLE -->
                   
-                  
-      <!-- **********************************************************************************************************************************************************
-      RIGHT SIDEBAR CONTENT
-      *********************************************************************************************************************************************************** -->                  
-                  
                   <div class="col-lg-3 ds">
                     <!--COMPLETED ACTIONS DONUTS CHART-->
-						<h3>NOTIFICATIONS</h3>
+						<h3>BİLDİRİMLER</h3>
                                         
                       <!-- First Action -->
                       <div class="desc">
@@ -560,19 +530,6 @@
                       	</div>
                       </div>
 
-                        <!-- CALENDAR-->
-                        <div id="calendar" class="mb">
-                            <div class="panel green-panel no-margin">
-                                <div class="panel-body">
-                                    <div id="date-popover" class="popover top" style="cursor: pointer; disadding: block; margin-left: 33%; margin-top: -50px; width: 175px;">
-                                        <div class="arrow"></div>
-                                        <h3 class="popover-title" style="disadding: none;"></h3>
-                                        <div id="date-popover-content" class="popover-content"></div>
-                                    </div>
-                                    <div id="my-calendar"></div>
-                                </div>
-                            </div>
-                        </div><!-- / calendar -->
                       
                   </div><!-- /col-lg-3 -->
               </div><! --/row -->

@@ -22,12 +22,6 @@ int a_ekran_sol_isik = 29;
 int a_hareket_sag = 30;
 int a_hareket_sol = 31;
 int a_ses = 32;
-int a_uzaklik_on_alt_1 = 33;
-int a_uzaklik_on_alt_2 = 34;
-int a_uzaklik_on_ust_1 = 35;
-int a_uzaklik_on_ust_2 = 36;
-int a_uzaklik_arka_1 = 37;
-int a_uzaklik_arka_2 = 38;
 
 // ANALOG
 int a_motor_sol_on_hiz = 0;
@@ -67,12 +61,6 @@ void pinMode(){
   arduino_mega.pinMode(a_hareket_sag, Arduino.INPUT);
   arduino_mega.pinMode(a_hareket_sol, Arduino.INPUT);
   arduino_mega.pinMode(a_ses, Arduino.INPUT);
-  arduino_mega.pinMode(a_uzaklik_on_alt_1, Arduino.INPUT);
-  arduino_mega.pinMode(a_uzaklik_on_alt_2, Arduino.INPUT);
-  arduino_mega.pinMode(a_uzaklik_on_ust_1, Arduino.INPUT);
-  arduino_mega.pinMode(a_uzaklik_on_ust_2, Arduino.INPUT);
-  arduino_mega.pinMode(a_uzaklik_arka_1, Arduino.INPUT);
-  arduino_mega.pinMode(a_uzaklik_arka_2, Arduino.INPUT);
 
   log("Pin -> pinMode","Arduino Mega -> Pin Mode -> OK");
 

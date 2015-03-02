@@ -1,8 +1,8 @@
 WebSocketP5 socket;
 
 void websocketOnMessage(WebSocketConnection con, String msg){
-  println(msg);
-  //json_parse(msg);
+  //println(msg);
+  json_parse(msg);
 }
 
 void websocketOnOpen(WebSocketConnection con){
@@ -88,9 +88,8 @@ void json_gonder(){
     json[2] = "\"ses\":\""+sensor_ses+"\",";
     json[3] = "\"hareket_sag\":\""+sensor_hareket[0]+"\",";    
     json[4] = "\"hareket_sol\":\""+sensor_hareket[1]+"\",";
-    json[5] = "\"uzaklik_on_alt\":\""+sensor_uzaklik_on[0]+"\",";
-    
-    json[6] = "\"uzaklik_on_ust\":\""+sensor_uzaklik_on[1]+"\",";
+    json[5] = "\"uzaklik_on_alt\":\""+sensor_uzaklik[4]+"\",";
+    json[6] = "\"uzaklik_on_ust\":\""+sensor_uzaklik[5]+"\",";
     json[7] = "\"uzaklik_sag_on\":\""+sensor_uzaklik[0]+"\",";
     json[8] = "\"uzaklik_sag_arka\":\""+sensor_uzaklik[1]+"\",";
     json[9] = "\"uzaklik_sol_on\":\""+sensor_uzaklik[2]+"\",";

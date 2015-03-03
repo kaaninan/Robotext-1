@@ -8,7 +8,7 @@ void arduino_connect(){
   println();
 
   arduino_mega = new Arduino(this, s_arduino_mega, 57600);
-  arduino_uno = new Serial(this, s_arduino_uno, 115200);
+  arduino_uno = new Serial(this, s_arduino_uno, 57600);
   log("Arduino -> arduino_connect", "Arduino Mega -> Baglanildi");
   
   delay(100);

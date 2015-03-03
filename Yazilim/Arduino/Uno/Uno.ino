@@ -24,9 +24,7 @@ void setup() {
   pinMode(trig2, OUTPUT);
   pinMode(echo2, INPUT);
   
-  Serial.begin(115200);
-  
-  establishContact();
+  Serial.begin(57600);
 
 }
 
@@ -90,12 +88,4 @@ float read_gp2d12_range(int pin){
   int tmp = analogRead(pin);
   if (tmp < 3) return -1;
   return (6787.0 /((float)tmp - 3.0)) - 4.0;
-}
-
-
-void establishContact() {
-  while (Serial.available() <= 0) {
-    Serial.println("0");
-    delay(100);
-  }
 }

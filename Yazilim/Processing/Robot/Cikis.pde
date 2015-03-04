@@ -17,7 +17,6 @@ void servo(String servo_yon){
 
 
 
-
 // EKRAN
 void ekran(int deger){
   if(deger == 1){

@@ -132,7 +132,7 @@ void motor_web(){
   }
   
   // Dur
-  else if(j_ileri == 0 && j_sag == 0 && j_sol == 0 && j_geri == 0){
+  else{
     arduino_mega.digitalWrite(a_motor_sol_on_yon, Arduino.HIGH);
     arduino_mega.digitalWrite(a_motor_sol_arka_yon, Arduino.LOW);
     arduino_mega.digitalWrite(a_motor_sag_on_yon, Arduino.HIGH);

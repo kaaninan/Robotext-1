@@ -61,9 +61,9 @@ void ekran(int deger){
 
 
 // EKRAN ISIK (Sag, Sol)
-void ekran_isik(int[] deger){
-  arduino_mega.digitalWrite(a_ekran_sag_isik, deger[0]);
-  arduino_mega.digitalWrite(a_ekran_sol_isik, deger[1]);
+void ekran_isik(int sag, int sol){
+  arduino_mega.digitalWrite(a_ekran_sag_isik, sag);
+  arduino_mega.digitalWrite(a_ekran_sol_isik, sol);
 }
 
 
@@ -135,5 +135,14 @@ void buzzer(String yon, int secim, int tekrar){
       }
     }
   }
-  
+}
+
+
+
+void ir(int ac){
+  if(ac == 1){
+    arduino_mega.digitalWrite(a_ir_cikis, Arduino.HIGH);
+  }else{
+    arduino_mega.digitalWrite(a_ir_cikis, Arduino.LOW);
+  }
 }

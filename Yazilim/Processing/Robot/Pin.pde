@@ -5,9 +5,6 @@ int a_motor_sag_on = 4;
 int a_motor_sag_arka = 5;
 int a_servo_x = 6;
 int a_servo_y = 7;
-int a_ekran_yazi_cikis_1 = 8;
-int a_ekran_yazi_cikis_2 = 9;
-int a_ekran_yazi_cikis_3 = 10;
 
 
 // DIGITAL
@@ -22,19 +19,22 @@ int a_ekran_sol_isik = 29;
 int a_hareket_sag = 30;
 int a_hareket_sol = 31;
 int a_ses = 32;
+int a_ekran_yazi_cikis_1 = 45;
+int a_ekran_yazi_cikis_2 = 46;
+int a_ekran_yazi_cikis_3 = 47;
+int a_ekran_yazi_giris_1 = 48;
+int a_ekran_yazi_giris_2 = 49;
+int a_ekran_yazi_giris_3 = 50;
+int a_ir_cikis = 51;
 
 // ANALOG
 int a_motor_sol_on_hiz = 0;
 int a_motor_sol_arka_hiz = 1;
 int a_motor_sag_on_hiz = 2;
 int a_motor_sag_arka_hiz = 3;
-int a_uzaklik_sag_on = 4;
-int a_uzaklik_sag_arka = 5;
-int a_uzaklik_sol_on = 6;
-int a_uzaklik_sol_arka = 7;
-int a_sicaklik = 8;
-int a_ldr_sag = 9;
-int a_ldr_sol = 10;
+int a_sicaklik = 4;
+int a_ldr_sag = 5;
+int a_ldr_sol = 6;
 
 void pinMode(){
   
@@ -48,6 +48,10 @@ void pinMode(){
   arduino_mega.pinMode(a_ekran_yazi_cikis_1, Arduino.OUTPUT);
   arduino_mega.pinMode(a_ekran_yazi_cikis_2, Arduino.OUTPUT);
   arduino_mega.pinMode(a_ekran_yazi_cikis_3, Arduino.OUTPUT);
+  arduino_mega.pinMode(a_ekran_yazi_giris_1, Arduino.INPUT);
+  arduino_mega.pinMode(a_ekran_yazi_giris_2, Arduino.INPUT);
+  arduino_mega.pinMode(a_ekran_yazi_giris_3, Arduino.INPUT);
+  arduino_mega.pinMode(a_ir_cikis, Arduino.OUTPUT);
 
   // DIGITAL
   arduino_mega.pinMode(a_motor_sol_on_yon, Arduino.OUTPUT);

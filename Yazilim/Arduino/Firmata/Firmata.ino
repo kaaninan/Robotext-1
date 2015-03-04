@@ -1,10 +1,11 @@
+#include <LiquidCrystal.h>
 #include <Servo.h>
 #include <Wire.h>
 #include <Firmata.h>
-#include <LiquidCrystal.h>
 
-LiquidCrystal lcd_sag(33, 34, 35, 36, 37, 38);
-LiquidCrystal lcd_sol(39, 40, 41, 42, 43, 44);
+LiquidCrystal lcd_sag(44, 43, 42, 41, 40, 39);
+LiquidCrystal lcd_sol(38, 37, 36, 35, 34, 33);
+
 
 // move the following defines to Firmata.h?
 #define I2C_WRITE B00000000
@@ -307,33 +308,6 @@ void sysexCallback(byte command, byte argc, byte *argv)
   unsigned int delayTime; 
   
   switch(command) {
-
-
-
-
-  case 0x01: // Ekran Sağ 1. Satır
-    byte blink_pin;
-    byte blink_count;
-    char* yazdir;
-    
-    for(int i = 0; i<16; i++){
-      yazdir[i] = argv[i];
-    }
-
-    // Yazdır
-    for(int a = 0; a < 16; a++){
-      lcd_sag.setCursor(0,a);
-      lcd_sag.print(yazdir[a]);
-    }
-
-    Firmata.sendSysex(command, argc, argv); // callback
-    break;
-
-
-
-
-
-
   case I2C_REQUEST:
     mode = argv[1] & I2C_READ_WRITE_MODE_MASK;
     if (argv[1] & I2C_10BIT_ADDRESS_MODE_MASK) {
@@ -383,7 +357,7 @@ void sysexCallback(byte command, byte argc, byte *argv)
       query[queryIndex].bytes = argv[4] + (argv[5] << 7);
       break;
     case I2C_STOP_READING:
-    byte queryIndexToSkip;      
+	  byte queryIndexToSkip;      
       // if read continuous mode is enabled for only 1 i2c device, disable
       // read continuous reporting for that device
       if (queryIndex <= 0) {
@@ -496,9 +470,9 @@ void sysexCallback(byte command, byte argc, byte *argv)
       Firmata.write(pin);
       if (pin < TOTAL_PINS) {
         Firmata.write((byte)pinConfig[pin]);
-  Firmata.write((byte)pinState[pin] & 0x7F);
-  if (pinState[pin] & 0xFF80) Firmata.write((byte)(pinState[pin] >> 7) & 0x7F);
-  if (pinState[pin] & 0xC000) Firmata.write((byte)(pinState[pin] >> 14) & 0x7F);
+	Firmata.write((byte)pinState[pin] & 0x7F);
+	if (pinState[pin] & 0xFF80) Firmata.write((byte)(pinState[pin] >> 7) & 0x7F);
+	if (pinState[pin] & 0xC000) Firmata.write((byte)(pinState[pin] >> 14) & 0x7F);
       }
       Firmata.write(END_SYSEX);
     }
@@ -550,11 +524,11 @@ void systemResetCallback()
   // initialize a defalt state
   // TODO: option to load config from EEPROM instead of default
   if (isI2CEnabled) {
-    disableI2CPins();
+  	disableI2CPins();
   }
   for (byte i=0; i < TOTAL_PORTS; i++) {
     reportPINs[i] = false;      // by default, reporting off
-    portConfigInputs[i] = 0;  // until activated
+    portConfigInputs[i] = 0;	// until activated
     previousPINs[i] = 0;
   }
   // pins with analog capability default to analog input
@@ -584,10 +558,11 @@ void systemResetCallback()
 
 void setup() 
 {
-
-  lcd_sag.begin(16, 2);
-  lcd_sol.begin(16, 2);
-
+  
+  lcd_sag.begin(16,2);
+  lcd_sol.begin(16,2);
+  
+  
   Firmata.setFirmwareVersion(FIRMATA_MAJOR_VERSION, FIRMATA_MINOR_VERSION);
 
   Firmata.attach(ANALOG_MESSAGE, analogWriteCallback);
@@ -607,18 +582,45 @@ void setup()
  *============================================================================*/
 void loop() 
 {
+  int a = digitalRead(48);
+  int b = digitalRead(49);
+  int c = digitalRead(50);
+  
+  if(a == HIGH && b == HIGH && c == HIGH){
+    lcd_sag.setCursor(0,0);
+    lcd_sag.print("ROBTEXT");
+    lcd_sag.setCursor(0,1);
+    lcd_sag.print("POWERED BY AFL");
+    lcd_sol.setCursor(0,0);
+    lcd_sol.print("ROBTEXT");
+    lcd_sol.setCursor(0,1);
+    lcd_sol.print("POWERED BY AFL");
+  }else if(a == HIGH && b == HIGH && c == LOW){
+    lcd_sag.setCursor(0,0);
+    lcd_sag.print("SISTEM");
+    lcd_sag.setCursor(0,1);
+    lcd_sag.print("BASLATILDI");
+    lcd_sol.setCursor(0,0);
+    lcd_sol.print("SISTEM");
+    lcd_sol.setCursor(0,1);
+    lcd_sol.print("BASLATILDI");
+  }
+  else if(a == HIGH && b == LOW && c == HIGH){}
+  else if(a == LOW && b == HIGH && c == HIGH){}
+  else if(a == LOW && b == HIGH && c == LOW){}
+  else if(a == LOW && b == LOW && c == LOW){}
+  else if(a == LOW && b == LOW && c == HIGH){}
+  else if(a == HIGH && b == LOW && c == LOW){}
+    
   byte pin, analogPin;
+  
+  checkDigitalInputs();
 
-  /* DIGITALREAD - as fast as possible, check for changes and output them to the
-   * FTDI buffer using Serial.print()  */
-  checkDigitalInputs();  
-
-  /* SERIALREAD - processing incoming messagse as soon as possible, while still
-   * checking digital inputs.  */
-  while(Firmata.available())
+  while(Firmata.available()){
     Firmata.processInput();
+  }
 
-  /* SEND FTDI WRITE BUFFER - make sure that the FTDI buffer doesn't go over
+//  /* SEND FTDI WR2QW3456Ğ-P*sITE BUFFER - make sure that the FTDI buffer doesn't go over
    * 60 bytes. use a timer to sending an event character every 4 ms to
    * trigger the buffer to dump. */
 

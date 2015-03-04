@@ -1,9 +1,13 @@
 #include <Servo.h>
 #include <IRremote.h>
 
+int kirmizi = 3;
+int yesil = 4;
 
-int RECV_PIN = 7;
-IRrecv irrecv(RECV_PIN);
+Servo servo;
+int ir_alici = 7;
+
+IRrecv irrecv(ir_alici);
 decode_results results;
 
 #define CH1 0xFFA25D 
@@ -28,10 +32,10 @@ decode_results results;
 #define BUTON8 0xFF4AB5 
 #define BUTON9 0xFF52AD
 
-Servo servo;
 
 void setup() {
-  Serial.begin(9600);
+  pinMode(kirmizi, OUTPUT);
+  pinMode(yesil, OUTPUT);
   irrecv.enableIRIn();
   servo.attach(2);
 }
@@ -40,77 +44,38 @@ void loop() {
 
   if (irrecv.decode(&results)) {
     
-    Serial.println(results.value);
-    
     if (results.value == CH1) {
-      Serial.println("CH-");
       servo.write(180);
+      digitalWrite(kirmizi, HIGH);
+      digitalWrite(yesil, LOW);
     }
-    if (results.value == CH){ 
-      Serial.println("CH");
+    if (results.value == CH){
       servo.write(0);
+      digitalWrite(kirmizi, LOW);
+      digitalWrite(yesil, HIGH);
     }
-    if (results.value == CH2){ 
-      Serial.println("CH+");
-    }
-    if (results.value == PREV){ 
-      Serial.println("PREV");
-    }
-    if (results.value == NEXT){ 
-      Serial.println("NEXT");
-    }
-    if (results.value == PLAYPAUSE){ 
-      Serial.println("PLAY/PAUSE");
-    }
-    if (results.value == VOL1){ 
-      Serial.println("VOL-");
-    }
-    if (results.value == VOL2){
-      Serial.println("VOL+"); 
-    }
-    if (results.value == EQ) {
-      Serial.println("EQ"); 
-    }
-    if (results.value == BUTON0) {
-      Serial.println("BUTON0");
-    }
-    if (results.value == BUTON100) {
-      Serial.println("BUTON100+"); 
-    }
-    if (results.value == BUTON200) {
-      Serial.println("BUTON200+");
-    }
-    if (results.value == BUTON1) {
-      Serial.println("BUTON1"); 
-    }
-    if (results.value == BUTON2) {
-      Serial.println("BUTON2");
-    }
-    if (results.value == BUTON3){ 
-      Serial.println("BUTON3");
-    }
-    if (results.value == BUTON4){ 
-      Serial.println("BUTON4");
-    }
-    if (results.value == BUTON5){ 
-      Serial.println("BUTON5");
-    }
-    if (results.value == BUTON6){ 
-      Serial.println("BUTON6");
-    }
-    if (results.value == BUTON7){ 
-      Serial.println("BUTON7");
-    }
-    if (results.value == BUTON8){ 
-      Serial.println("BUTON8");
-    }
-    if (results.value == BUTON9){ 
-      Serial.println("BUTON9");
-    }
+    if (results.value == CH2){}
+    if (results.value == PREV){}
+    if (results.value == NEXT){}
+    if (results.value == PLAYPAUSE){}
+    if (results.value == VOL1){}
+    if (results.value == VOL2){}
+    if (results.value == EQ){}
+    if (results.value == BUTON0){}
+    if (results.value == BUTON100){}
+    if (results.value == BUTON200){}
+    if (results.value == BUTON1){}
+    if (results.value == BUTON2){}
+    if (results.value == BUTON3){}
+    if (results.value == BUTON4){}
+    if (results.value == BUTON5){}
+    if (results.value == BUTON6){}
+    if (results.value == BUTON7){}
+    if (results.value == BUTON8){}
+    if (results.value == BUTON9){}
 
     irrecv.resume();
   }
-  
   
 }
 

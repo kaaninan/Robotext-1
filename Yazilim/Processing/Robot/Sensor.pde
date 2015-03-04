@@ -55,34 +55,6 @@ void oku_isik(){
 
 
 
-// UZAKLIK  ==>  (Sağ Ön, Sağ Arka, Sol Ön, Sol Arka, On Alt, On Ust)
-void oku_uzaklik(){
-  while(true){
-    while(arduino_uno.available() > 0){
-      
-      String gelen = arduino_uno.readStringUntil('\n');
-      gelen = trim(gelen);
-      
-      println(gelen);
-      /*
-      String[] parcala = split(gelen, ",");
-      
-      sensor_uzaklik[0] = int(parcala[0]);
-      sensor_uzaklik[1] = int(parcala[1]);
-      sensor_uzaklik[2] = int(parcala[2]);
-      sensor_uzaklik[3] = int(parcala[3]);
-      sensor_uzaklik[4] = int(parcala[4]);
-      sensor_uzaklik[5] = int(parcala[5]);
-      
-      */
-      
-      delay(bekle);
-    }
-  }
-}
-
-
-
 // SICAKLIK
 void oku_sicaklik(){
   while(true){

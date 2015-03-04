@@ -66,11 +66,6 @@ void json_parse(String gelen){
   }
 }
 
-void mousePressed(){
-  sensor_sicaklik = 1;
-}
-
-
 
 //int[] sensor_uzaklik_on = new int[1];
 //int[] sensor_uzaklik = new int[3];

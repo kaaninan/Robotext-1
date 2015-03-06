@@ -5,7 +5,7 @@ int a_motor_sag_on = 4;
 int a_motor_sag_arka = 5;
 int a_servo_x = 6;
 int a_servo_y = 7;
-
+int a_servo_guc = 8;
 
 // DIGITAL
 int a_motor_sol_on_yon = 22;
@@ -45,6 +45,7 @@ void pinMode(){
   arduino_mega.pinMode(a_motor_sag_arka, Arduino.OUTPUT);
   arduino_mega.pinMode(a_servo_x, Arduino.SERVO);
   arduino_mega.pinMode(a_servo_y, Arduino.SERVO);
+  arduino_mega.pinMode(a_servo_guc, Arduino.OUTPUT);
   arduino_mega.pinMode(a_ekran_yazi_cikis_1, Arduino.OUTPUT);
   arduino_mega.pinMode(a_ekran_yazi_cikis_2, Arduino.OUTPUT);
   arduino_mega.pinMode(a_ekran_yazi_cikis_3, Arduino.OUTPUT);
@@ -52,6 +53,8 @@ void pinMode(){
   arduino_mega.pinMode(a_ekran_yazi_giris_2, Arduino.INPUT);
   arduino_mega.pinMode(a_ekran_yazi_giris_3, Arduino.INPUT);
   arduino_mega.pinMode(a_ir_cikis, Arduino.OUTPUT);
+  
+  delay(100);
 
   // DIGITAL
   arduino_mega.pinMode(a_motor_sol_on_yon, Arduino.OUTPUT);
@@ -65,6 +68,8 @@ void pinMode(){
   arduino_mega.pinMode(a_hareket_sag, Arduino.INPUT);
   arduino_mega.pinMode(a_hareket_sol, Arduino.INPUT);
   arduino_mega.pinMode(a_ses, Arduino.INPUT);
+  
+  delay(100);
 
   log("Pin -> pinMode","Arduino Mega -> Pin Mode -> OK");
 

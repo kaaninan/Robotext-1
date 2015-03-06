@@ -3,15 +3,30 @@ void servo(String servo_yon){
   
   arduino_mega.servoWrite(a_servo_y, 50); //normal
   
+  /*
   if(servo_yon == "sag"){
-    arduino_mega.servoWrite(a_servo_x, 10);
+    arduino_mega.servoWrite(a_servo_x, 20);
   }else{
     arduino_mega.servoWrite(a_servo_x, 160);
   }
+  */
+  
+  int pos = 0;
   
   //arduino_mega.servoWrite(a_servo_y, 00); //yüksek
   //arduino_mega.servoWrite(a_servo_y, 50); //normal
   //arduino_mega.servoWrite(a_servo_y, 120); //yer
+  
+  for(pos = 0; pos <= 180; pos += 1) // goes from 0 degrees to 180 degrees 
+  {                                  // in steps of 1 degree 
+    arduino_mega.servoWrite(a_servo_x, pos);              // tell servo to go to position in variable 'pos' 
+    delay(15);                       // waits 15ms for the servo to reach the position 
+  } 
+  for(pos = 180; pos>=0; pos-=1)     // goes from 180 degrees to 0 degrees 
+  {                                
+    arduino_mega.servoWrite(a_servo_x, pos); 
+    delay(15);                       // waits 15ms for the servo to reach the position 
+  } 
   
 }
 

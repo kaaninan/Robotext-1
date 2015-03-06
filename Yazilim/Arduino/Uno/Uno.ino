@@ -51,7 +51,6 @@ void loop(){
       irsend.sendNEC(0xFFA25D, 32);
       delay(100);
   }else{
-      
       irsend.sendNEC(0xFF629D, 32);
       irsend.sendNEC(0xFF629D, 32);
       irsend.sendNEC(0xFF629D, 32);
@@ -86,5 +85,12 @@ void loop(){
     Serial.print(dis_sol_arka);
     Serial.print(",");
     Serial.println(cm);
+  }
+}
+
+void establishContact() {
+  while (Serial.available() <= 0) {
+    Serial.println("0,0,0,0,0");   // send an initial string
+    delay(300);
   }
 }

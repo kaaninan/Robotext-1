@@ -21,32 +21,58 @@ import java.util.Properties;
 import java.util.*;
 
 String s_arduino_mega = "/dev/tty.usbserial-A603JL3X";
-String s_arduino_uno = "/dev/tty.usbmodem14231";
+String s_arduino_uno = "/dev/tty.usbmodem14131";
 
 //String s_arduino_mega = "/dev/ttyUSB0";
 //String s_arduino_uno = "/dev/ttyACM0";
 
 void setup(){
   
-  //arduino_connect();
+  arduino_connect();
   
   // WebSocket
   socket = new WebSocketP5( this, 7070, "" );
   delay(100);
   //thread("json_gonder");
   
-  //sensor_dinle();
+  sensor_dinle();
   
+  delay(1000);
+  
+  //thread("resim_bul");
+  //thread("sendMailBirinci");
+  //thread("sendMailIkinci");
+
+  //thread("servo_test");
+  //servo_test();
+  /*
+  
+  arduino_mega.pinMode(2, Arduino.OUTPUT);
+  arduino_mega.pinMode(3, Arduino.OUTPUT);
+  arduino_mega.pinMode(4, Arduino.OUTPUT);
+  arduino_mega.pinMode(5, Arduino.OUTPUT);
+  
+  arduino_mega.pinMode(22, Arduino.OUTPUT);
+  arduino_mega.pinMode(23, Arduino.OUTPUT);
+  arduino_mega.pinMode(24, Arduino.OUTPUT);
+  arduino_mega.pinMode(25, Arduino.OUTPUT);
+  
+  */
 }
 
 
 void draw(){
   
+  
+  
   // ### TEST BASLANGICI ### //
   
+  //motor_manual(255,255,0,0);
+  
+  //motor_test(255,255);
+  
   // MOTORLAR
-    //motor_web();
-    //motor_manual(255,255,1,1);
+    motor_web();
     
   // UZAKLIK
     //println(sensor_uzaklik);
@@ -55,25 +81,11 @@ void draw(){
     //println(sensor_ldr);
     
   /* BUZZER
-    buzzer("sag", 1, null);
+   buzzer("sag", 1, 1);
     delay(100);
-    buzzer("sag", 0, null);
-    delay(100);
+    buzzer("sag", 0, 1);
+    delay(10000);
     
-    buzzer("sol", 1, null);
-    delay(100);
-    buzzer("sol", 0, null);
-    delay(100);
-    
-    buzzer("hepsi", 1, null);
-    delay(100);
-    buzzer("hepsi", 0, null);
-    delay(100);
-  
-    buzzer("sol", 3, 10);
-    delay(100);
-    buzzer("sag", 3, 10);
-    delay(100);
   */
   
   // SICAKLIK
@@ -92,33 +104,23 @@ void draw(){
     delay(500);
     ekran_isik(0,0);
     delay(500);
-  */
+  */     
   
   // EKRAN
-    //ekran(1);
+    ekran_isik(1,1);
     //ekran(2);
     
   // HAREKET
-    //println(sensor_hareket);
+    println(sensor_hareket);
     
-  /* SERVO
-    servo("sag");
-    delay(1000);
-    servo("sol");
-    delay(1000);
-  */
+  // SERVO
+  //
   
   // SES
     //println(sensor_ses);
-    
-  /* KIZILOTESI
-    ir(1);
-    delay(2000);
-    ir(0);
-    delay(2000);
-  */
   
   // ### TEST SONU ### //
+  
   
 }
 
@@ -132,6 +134,23 @@ void keyPressed(){
   ir(1);
 }
 
+void servo_test(){
+  while(true){
+    /*
+    arduino_mega.servoWrite(6, 10);
+    arduino_mega.servoWrite(7, 10);
+    delay(3000);
+    arduino_mega.servoWrite(6, 170);
+    arduino_mega.servoWrite(7, 170);
+    delay(3000);
+    */
+    servo("sag");
+    delay(3000);
+    servo("sol");
+    delay(3000);
+  }
+}
+
 
 
 void serialEvent(Serial myPort){
@@ -142,7 +161,7 @@ void serialEvent(Serial myPort){
 
   for (int sensorNum = 0; sensorNum < sensors.length; sensorNum++) {
     // KALDIR
-    //print("Sensor " + sensorNum + ": " +  + "\t");
+    //print("Sensor " + sensorNum + ": " + sensors[sensorNum] + "\t");
     sensor_uzaklik[sensorNum] = int(sensors[sensorNum]);
   }
   // KALDIR
@@ -150,11 +169,12 @@ void serialEvent(Serial myPort){
   
   
   // KALDIR
-  //myPort.write('A');
+  myPort.write('A');
 }
 
 
 
 void stop(){
   socket.stop();
+  arduino_uno.stop();
 }

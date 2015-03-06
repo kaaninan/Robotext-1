@@ -13,11 +13,7 @@ void arduino_connect(){
   log("Arduino -> arduino_connect", "Arduino Mega -> Baglanildi");
   log("Arduino -> arduino_connect", "Arduino Uno -> Baglanildi");
 
-  /* KALDIR
-  arduino_mega.pinMode(48, Arduino.INPUT);
-  arduino_mega.pinMode(49, Arduino.INPUT);
-  arduino_mega.pinMode(50, Arduino.INPUT);
-  */
+  delay(500);
   
   arduino_uno.bufferUntil('\n');
   

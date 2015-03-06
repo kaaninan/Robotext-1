@@ -1,3 +1,22 @@
+void motor_test(int sag, int sol){
+  arduino_mega.analogWrite(a_motor_sol_on, sol);
+  arduino_mega.analogWrite(a_motor_sol_arka, sol);
+  arduino_mega.analogWrite(a_motor_sag_on, sag);
+  arduino_mega.analogWrite(a_motor_sag_arka, sag);
+  
+  /*
+  arduino_mega.digitalWrite(a_motor_sol_on_yon, 0);
+  arduino_mega.digitalWrite(a_motor_sol_arka_yon, 1);
+  arduino_mega.digitalWrite(a_motor_sag_on_yon, 0);
+  arduino_mega.digitalWrite(a_motor_sag_arka_yon, 1);
+  */
+  
+  arduino_mega.digitalWrite(a_motor_sol_on_yon, 1);
+  arduino_mega.digitalWrite(a_motor_sol_arka_yon, 0);
+  arduino_mega.digitalWrite(a_motor_sag_on_yon, 1);
+  arduino_mega.digitalWrite(a_motor_sag_arka_yon, 0);
+}
+
 // MANUAL
 void motor_manual(int motor_sol, int motor_sag, int motor_sol_ters, int motor_sag_ters){
   arduino_mega.analogWrite(a_motor_sol_on, motor_sol);

@@ -5,35 +5,23 @@ boolean olcmeye_basla = false;
 
 void hareket(String yon){
 
+  /*
   if(running == false){
-    
-    // İlk Hareket Algılandığında Grafik Verilerini Başlat
-    if(the_first)
-      olcmeye_basla = true;
-    
     running = true;
-    
     println("Hareket Başladı");
+    ses("hareket");
     
-    /*ses("hareket");
-    
-    if(yon == "sag"){
-      servo_dondur("sag");
-    }else{
-      servo_dondur("sol");
-    }
+    if(yon == "sag"){ servo_dondur("sag"); }
+    else{ servo_dondur("sol"); }
     
     resim_cek();
-    resim_no++;
+    // Bittiginde running false
+    
     
     if(first == true){
       println("Birinci Mail Gönderiliyor..");
       thread("sendMailBirinci");
     }
-    
-    */
-    
-    running = false;
   
   }else{
     
@@ -41,4 +29,6 @@ void hareket(String yon){
     println("test; cakisma");
     
   }
+  
+  */
 }

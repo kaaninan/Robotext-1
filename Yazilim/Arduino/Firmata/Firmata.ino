@@ -620,10 +620,6 @@ void loop()
     Firmata.processInput();
   }
 
-//  /* SEND FTDI WR2QW3456Ğ-P*sITE BUFFER - make sure that the FTDI buffer doesn't go over
-   * 60 bytes. use a timer to sending an event character every 4 ms to
-   * trigger the buffer to dump. */
-
   currentMillis = millis();
   if (currentMillis - previousMillis > samplingInterval) {
     previousMillis += samplingInterval;

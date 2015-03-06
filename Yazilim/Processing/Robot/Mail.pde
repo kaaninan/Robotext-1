@@ -13,7 +13,6 @@ void sendMailBirinci() {
     props.put("mail.smtp.auth", "true");
     props.put("mail.smtp.port", "465");
 
-    // Create authentication object
     Auth auth = new Auth();
 
     Session session = Session.getDefaultInstance(props, auth);
@@ -36,17 +35,17 @@ void sendMailBirinci() {
       multipart.addBodyPart(messageBodyPart);
 
       // EK 2
-      
-      int toplam = resim_no - resim_baslangic; // resim no bir fazla
-      
-      for(int i = resim_baslangic; i < (toplam+resim_baslangic) ; i++){
-        messageBodyPart = new MimeBodyPart();
-        String filename = "/home/pi/resimler/guvenlik-"+i+".jpg";
-        DataSource source = new FileDataSource(filename);
-        messageBodyPart.setDataHandler(new DataHandler(source));
-        messageBodyPart.setFileName(filename);
-        messageBodyPart.setHeader("Content-ID","resim"+i);
-        multipart.addBodyPart(messageBodyPart);
+      // Ilk cekilen iki resmi koy
+      for(int i = 0; i < 2 ; i++){
+        if(resimler[i] != null){
+          messageBodyPart = new MimeBodyPart();
+          String filename = resimler[i];
+          DataSource source = new FileDataSource(filename);
+          messageBodyPart.setDataHandler(new DataHandler(source));
+          messageBodyPart.setFileName(filename);
+          messageBodyPart.setHeader("Content-ID","resim"+i);
+          multipart.addBodyPart(messageBodyPart);
+        }
       };
 
       // Herşeyi Koy
@@ -105,19 +104,18 @@ void sendMailIkinci() {
       multipart.addBodyPart(messageBodyPart);
 
       // EK 2
-      
-      int toplam = resim_no - resim_baslangic; // resim no bir fazla
-      
-      for(int i = resim_baslangic; i < (toplam+resim_baslangic) ; i++){
-        messageBodyPart = new MimeBodyPart();
-        String filename = "/home/pi/resimler/guvenlik-"+i+".jpg";
-        DataSource source = new FileDataSource(filename);
-        messageBodyPart.setDataHandler(new DataHandler(source));
-        messageBodyPart.setFileName(filename);
-        messageBodyPart.setHeader("Content-ID","resim"+i);
-        multipart.addBodyPart(messageBodyPart);
+      for(int i = 0; i < resimler.length ; i++){
+        if(resimler[i] != null){
+          messageBodyPart = new MimeBodyPart();
+          String filename = resimler[i];
+          DataSource source = new FileDataSource(filename);
+          messageBodyPart.setDataHandler(new DataHandler(source));
+          messageBodyPart.setFileName(filename);
+          messageBodyPart.setHeader("Content-ID","resim"+i);
+          multipart.addBodyPart(messageBodyPart);
+        }
       };
-
+      
       // Herşeyi Koy
       message.setContent(multipart);
       

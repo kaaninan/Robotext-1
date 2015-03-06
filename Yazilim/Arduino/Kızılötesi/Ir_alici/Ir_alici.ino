@@ -34,6 +34,8 @@ decode_results results;
 
 
 void setup() {
+  pinMode(0, INPUT);
+  pinMode(1, INPUT);
   pinMode(kirmizi, OUTPUT);
   pinMode(yesil, OUTPUT);
   irrecv.enableIRIn();
@@ -76,6 +78,17 @@ void loop() {
 
     irrecv.resume();
   }
+  
+  if(digitalRead(0) == HIGH){
+    servo.write(180);
+    digitalWrite(kirmizi, HIGH);
+    digitalWrite(yesil, LOW);
+  }
+  if(digitalRead(1) == HIGH){
+    servo.write(0);
+    digitalWrite(kirmizi, LOW);
+    digitalWrite(yesil, HIGH);
+}
   
 }
 

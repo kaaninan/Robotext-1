@@ -21,7 +21,7 @@ import java.util.Properties;
 import java.util.*;
 
 String s_arduino_mega = "/dev/tty.usbserial-A603JL3X";
-String s_arduino_uno = "/dev/tty.usbmodem14131";
+String s_arduino_uno = "/dev/tty.usbmodem14221";
 
 //String s_arduino_mega = "/dev/ttyUSB0";
 //String s_arduino_uno = "/dev/ttyACM0";
@@ -45,34 +45,21 @@ void setup(){
 
   //thread("servo_test");
   //servo_test();
-  /*
   
-  arduino_mega.pinMode(2, Arduino.OUTPUT);
-  arduino_mega.pinMode(3, Arduino.OUTPUT);
-  arduino_mega.pinMode(4, Arduino.OUTPUT);
-  arduino_mega.pinMode(5, Arduino.OUTPUT);
-  
-  arduino_mega.pinMode(22, Arduino.OUTPUT);
-  arduino_mega.pinMode(23, Arduino.OUTPUT);
-  arduino_mega.pinMode(24, Arduino.OUTPUT);
-  arduino_mega.pinMode(25, Arduino.OUTPUT);
-  
-  */
+  thread("gez");
 }
 
 
 void draw(){
   
-  
-  
   // ### TEST BASLANGICI ### //
   
-  //motor_manual(255,255,0,0);
+  //motor_manual(255,255,0,0); 
   
   //motor_test(255,255);
   
   // MOTORLAR
-    motor_web();
+    //motor_web();
     
   // UZAKLIK
     //println(sensor_uzaklik);
@@ -107,14 +94,15 @@ void draw(){
   */     
   
   // EKRAN
-    ekran_isik(1,1);
+    //ekran_isik(1,1);
     //ekran(2);
     
   // HAREKET
-    println(sensor_hareket);
+    //println(sensor_hareket);
     
   // SERVO
   //
+  
   
   // SES
     //println(sensor_ses);
@@ -136,14 +124,6 @@ void keyPressed(){
 
 void servo_test(){
   while(true){
-    /*
-    arduino_mega.servoWrite(6, 10);
-    arduino_mega.servoWrite(7, 10);
-    delay(3000);
-    arduino_mega.servoWrite(6, 170);
-    arduino_mega.servoWrite(7, 170);
-    delay(3000);
-    */
     servo("sag");
     delay(3000);
     servo("sol");

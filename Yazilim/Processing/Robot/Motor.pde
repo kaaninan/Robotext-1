@@ -175,10 +175,10 @@ void motor_web(){
 
 void motor_auto_ileri(String secim){
   
-  arduino_mega.digitalWrite(a_motor_sol_on_yon, Arduino.LOW);
-  arduino_mega.digitalWrite(a_motor_sol_arka_yon, Arduino.HIGH);
-  arduino_mega.digitalWrite(a_motor_sag_on_yon, Arduino.LOW);
-  arduino_mega.digitalWrite(a_motor_sag_arka_yon, Arduino.HIGH);
+  arduino_mega.digitalWrite(a_motor_sol_on_yon, Arduino.HIGH);
+  arduino_mega.digitalWrite(a_motor_sol_arka_yon, Arduino.LOW);
+  arduino_mega.digitalWrite(a_motor_sag_on_yon, Arduino.HIGH);
+  arduino_mega.digitalWrite(a_motor_sag_arka_yon, Arduino.LOW);
   
   if(secim == "hizli"){
     arduino_mega.analogWrite(a_motor_sol_on, 255);
@@ -196,10 +196,10 @@ void motor_auto_ileri(String secim){
 
 void motor_auto_geri(String secim){
   
-  arduino_mega.digitalWrite(a_motor_sol_on_yon, Arduino.HIGH);
-  arduino_mega.digitalWrite(a_motor_sol_arka_yon, Arduino.LOW);
-  arduino_mega.digitalWrite(a_motor_sag_on_yon, Arduino.HIGH);
-  arduino_mega.digitalWrite(a_motor_sag_arka_yon, Arduino.LOW);
+  arduino_mega.digitalWrite(a_motor_sol_on_yon, Arduino.LOW);
+  arduino_mega.digitalWrite(a_motor_sol_arka_yon, Arduino.HIGH);
+  arduino_mega.digitalWrite(a_motor_sag_on_yon, Arduino.LOW);
+  arduino_mega.digitalWrite(a_motor_sag_arka_yon, Arduino.HIGH);
   
   if(secim == "hizli"){
     arduino_mega.analogWrite(a_motor_sol_on, 255);
@@ -208,10 +208,10 @@ void motor_auto_geri(String secim){
     arduino_mega.analogWrite(a_motor_sag_arka, 255);
   }
   else if(secim == "yavas"){
-    arduino_mega.analogWrite(a_motor_sol_on, 150);
-    arduino_mega.analogWrite(a_motor_sol_arka, 150);
-    arduino_mega.analogWrite(a_motor_sag_on, 150);
-    arduino_mega.analogWrite(a_motor_sag_arka, 150);
+    arduino_mega.analogWrite(a_motor_sol_on, 200);
+    arduino_mega.analogWrite(a_motor_sol_arka, 200);
+    arduino_mega.analogWrite(a_motor_sag_on, 200);
+    arduino_mega.analogWrite(a_motor_sag_arka, 200);
   }
 }
 

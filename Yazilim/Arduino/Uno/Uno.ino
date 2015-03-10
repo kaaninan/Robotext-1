@@ -7,6 +7,11 @@ int echo = 5;
 long deger;
 long cm;
 
+int trig2 = 6;
+int echo2 = 7;
+long deger2;
+long cm2;
+
 int ir_komut = 13;
 
 IRsend irsend;
@@ -30,12 +35,14 @@ void setup(){
   
   pinMode(trig, OUTPUT);
   pinMode(echo, INPUT);
+  pinMode(trig2, OUTPUT);
+  pinMode(echo2, INPUT);
   
   pinMode(ir_komut, INPUT);
 
   // KALDIR
 //  pinMode(3, OUTPUT);  
-//  establishContact();
+  establishContact();
   // KALDIR
 
 }
@@ -49,16 +56,16 @@ void loop(){
       irsend.sendNEC(0xFFA25D, 32);
       irsend.sendNEC(0xFFA25D, 32);
       irsend.sendNEC(0xFFA25D, 32);
-      delay(100);
+      delay(10);
   }else{
       irsend.sendNEC(0xFF629D, 32);
       irsend.sendNEC(0xFF629D, 32);
       irsend.sendNEC(0xFF629D, 32);
-      delay(100);
+      delay(10);
   }
   
   if (Serial.available() > 0) {
-    delay(200);
+    delay(100);
     
     digitalWrite(trig, LOW);
     digitalWrite(trig, HIGH);
@@ -67,7 +74,16 @@ void loop(){
     deger = pulseIn(echo, HIGH, 15000);
     cm = deger/29/2;
     
-    delay(100);
+    delay(50);
+    
+    digitalWrite(trig2, LOW);
+    digitalWrite(trig2, HIGH);
+    digitalWrite(trig2, LOW);
+    
+    deger2 = pulseIn(echo2, HIGH, 15000);
+    cm2 = deger2/29/2;
+    
+    delay(50);
     
   
     unsigned long pepe1 = millis();
@@ -84,7 +100,9 @@ void loop(){
     Serial.print(",");
     Serial.print(dis_sol_arka);
     Serial.print(",");
-    Serial.println(cm);
+    Serial.print(cm);
+    Serial.print(",");
+    Serial.println(cm2);
   }
 }
 

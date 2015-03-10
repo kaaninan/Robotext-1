@@ -19,5 +19,5 @@ void arduino_connect(){
   
   delay(1000);
   pinMode();
-  delay(1000); 
+  delay(1000);
 }

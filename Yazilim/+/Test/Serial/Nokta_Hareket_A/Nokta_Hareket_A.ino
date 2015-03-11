@@ -6,6 +6,8 @@ int inByte = 0;
 int trig = 22;
 int echo = 23;
 
+int led = 13;
+
 String command;
 
 int deger;
@@ -19,9 +21,7 @@ void setup(){
   pinMode(trig, OUTPUT);
   pinMode(echo, INPUT);
   
-  pinMode(13, OUTPUT);
-  pinMode(2, OUTPUT);
-  pinMode(52, OUTPUT);
+  pinMode(led, OUTPUT);
   
   establishContact();
 }
@@ -45,26 +45,22 @@ void serialEvent() {
     
     int serialRead = Serial.read();
     
-    /*
     if(serialRead == '\n'){
       parseCommand(command);
       command = "";
-      digitalWrite(13, HIGH);
     }else{
       command+= serialRead;
     }
-    */
     
-    firstSensor = analogRead(A0);
-    secondSensor = analogRead(A1);
+    int firstSensor = analogRead(A0);
+    int secondSensor = analogRead(A1);
+
+    int deger1 = map(firstSensor, 0, 1023, 0, 255);
+    int deger2 = map(secondSensor, 0, 1023, 0, 255);
     
     Serial.print(firstSensor);
-    int deger = map(firstSensor, 0, 1023, 0, 255);
-    analogWrite(2, deger);
     Serial.print(",");
-    Serial.print(secondSensor);
-    Serial.print(",");
-    Serial.println(cm);
+    Serial.println(secondSensor);
     
     if(serialRead == '1'){
       devam = true;
@@ -84,19 +80,14 @@ void parseCommand(String com){
     digitalWrite(pin, HIGH);
   }
   else if(part1.equalsIgnoreCase("pinoff")){
-    int pin = part2.toInt();    
+    int pin = part2.toInt();
     digitalWrite(pin, LOW);
-  }else{
-    Serial.println("d");
   }
 }
 
 void establishContact() {
   while (Serial.available() <= 0) {
-    Serial.println("0,0,0");   // send an initial string
+    Serial.println("0,0,0");
     delay(300);
   }
 }
-
-
-

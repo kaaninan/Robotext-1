@@ -44,7 +44,7 @@ void serialEvent(Serial myPort) {
   if(sensors[1] < 250){
     myPort.write("on 13");
   }else{
-    myPort.write("on 52");
+    myPort.write("off 13");
   } 
 }
 

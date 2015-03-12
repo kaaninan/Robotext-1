@@ -3,7 +3,7 @@
 SoftwareSerial mySerial(10, 11);
 
 void setup(){
-  mySerial.begin(115200);
+  mySerial.begin(9600);
   pinMode(13, OUTPUT);
   delay(500);
   mySerial.println();

@@ -13,9 +13,7 @@ String command = "";
 
 void loop(){
   if (mySerial.available()) {
-    
     char gelen = mySerial.read();
-    
     if(gelen == '\n'){
       parseCommand(command);
       command = "";
@@ -28,8 +26,6 @@ void loop(){
 
 
 void parseCommand(String com){
-  
-  //mySerial.println();
   
   String part1;
   String part2;

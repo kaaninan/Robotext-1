@@ -3,14 +3,16 @@
 SoftwareSerial mySerial(10, 11);
 
 void setup(){
-  mySerial.begin(9600);
+  mySerial.begin(115200);
   pinMode(13, OUTPUT);
+  delay(500);
+  mySerial.println();
 }
 
 String command = "";
 
 void loop(){
-  while (mySerial.available()) {
+  if (mySerial.available()) {
     
     char gelen = mySerial.read();
     
@@ -26,6 +28,9 @@ void loop(){
 
 
 void parseCommand(String com){
+  
+  //mySerial.println();
+  
   String part1;
   String part2;
   
@@ -39,8 +44,10 @@ void parseCommand(String com){
   else if(part1.equalsIgnoreCase("off")){
     int pin = part2.toInt();
     digitalWrite(pin, LOW);
-    
-    mySerial.println();
-    mySerial.println("pinon 13");
+  }
+  else if(part1.equalsIgnoreCase("test")){
+    int pin = part2.toInt();
+    mySerial.print("deger ");
+    mySerial.println(analogRead(0));
   }
 }

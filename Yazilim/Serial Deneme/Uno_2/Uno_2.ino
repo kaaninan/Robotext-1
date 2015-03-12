@@ -11,11 +11,7 @@ void setup(){
   
   pinMode(13, OUTPUT);
   
-  int bekle = 150;
-  //Serial.println("Starting..");
-
   mySerial.begin(9600);
-  
   delay(500);
   mySerial.println();
   

@@ -50,18 +50,16 @@ const int uzaklik_on_sag_t = 22;
 const int uzaklik_on_sag_e = 23;
 const int uzaklik_on_sol_t = 24;
 const int uzaklik_on_sol_e = 25;
-const int buzzer_1 = 26;
-const int buzzer_2 = 27;
-const int ekran_isik_sag = 28;
-const int ekran_isik_sol = 29;
-const int hareket_sag = 30;
-const int hareket_sol = 31;
-const int ses = 32;
-const int transistor_1 = 33;
-const int transistor_2 = 34;
-const int transistor_3 = 35;
-LiquidCrystal lcd_sag(36, 37, 38, 39, 40, 41);
-LiquidCrystal lcd_sol(42, 43, 44, 45, 46, 47);
+const int ses = 26;
+const int hareket_sag = 28;
+const int hareket_sol = 29;
+const int buzzer_1 = 30;
+const int buzzer_2 = 31;
+const int ekran_isik_sag = 38;
+const int ekran_isik_sol = 39;
+
+LiquidCrystal lcd_sag(32,33, 34, 35, 36, 37);
+LiquidCrystal lcd_sol(39, 40, 41, 42, 43, 44);
 
 
 // ANALOG
@@ -95,9 +93,6 @@ void setup() {
   pinMode(hareket_sag, INPUT);
   pinMode(hareket_sol, INPUT);
   pinMode(ses, INPUT);
-  pinMode(transistor_1, OUTPUT);
-  pinMode(transistor_2, OUTPUT);
-  pinMode(transistor_3, OUTPUT);
   
   // PWM
   servo_x.attach(servo_x_pin);
@@ -281,13 +276,6 @@ void cikis_ekran_isik(int sag, int sol){
   digitalWrite(ekran_isik_sol, sol);
 }
 
-
-
-void cikis_transistor(int a, int b, int c){
-  digitalWrite(transistor_1, a);
-  digitalWrite(transistor_2, b);
-  digitalWrite(transistor_3, c);
-}
 
 
 void cikis_ekran(int sag, int sol){

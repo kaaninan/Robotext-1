@@ -64,9 +64,11 @@ void setup(){
   pinMode(transistor_1, OUTPUT);
   pinMode(transistor_2, OUTPUT);
   
+  /*
   mySerial.begin(hiz);
   delay(500);
   mySerial.println();
+  */
   
   Serial.begin(115200);
   establishContact();

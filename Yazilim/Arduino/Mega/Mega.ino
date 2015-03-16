@@ -5,17 +5,18 @@
 
 
 // VALUES
-int hiz = 9600; // mySerial
+//int hiz = 28400; // Serial
 String command = "";
+boolean oku = false;
 
 
 // LOG
-int log_uzaklik_sonic = 0;
-int log_uzaklik_ir = 0;
-int log_hareket = 0;
-int log_ses = 0;
-int log_isik = 0;
-int log_yakinlik = 0;
+int log_uzaklik_sonic = 1;
+int log_uzaklik_ir = 1;
+int log_hareket = 1;
+int log_ses = 1;
+int log_isik = 1;
+int log_yakinlik = 1;
 
 
 
@@ -46,7 +47,7 @@ Servo servo_x;
 Servo servo_y;
 int led_1 = 8;
 int led_2 = 9;
-SoftwareSerial mySerial(10, 11);
+//SoftwareSerial Serial(10, 11);
 
 
 // DIGITAL
@@ -80,11 +81,11 @@ const int yakinlik_sol = 7;
 
 void setup() {
 
-  //Serial.begin(115200);
+  Serial.begin(115200);
 
-  mySerial.begin(hiz);
-  delay(500);
-  mySerial.println();
+  //Serial.begin(hiz);
+  //delay(500);
+  //Serial.println();
 
   // DIGITAL
   pinMode(uzaklik_on_sag_t, OUTPUT);
@@ -119,6 +120,7 @@ void setup() {
   lcd_sol.setCursor(0, 1);
   lcd_sol.print("BEKLENIYOR");
   
+  establishContact();
 }
 
 
@@ -127,12 +129,21 @@ void loop() {
   
   // Sensoleri oku ve baglanti varsa iletişim kur
   
-  oku_sensor();
+  if(oku){
+    oku_sensor();
+  }
   
-  if (mySerial.available()) {
-    char gelen = mySerial.read();
+}
+
+
+void serialEvent(){
+  while(Serial.available()) {
+    char gelen = Serial.read();
     if (gelen == '\n') {
       parseCommand(command);
+      if(command == "A"){
+        oku = true;
+      }
       command = "";
     } else {
       command += gelen;
@@ -145,11 +156,12 @@ void loop() {
 
 
 
+
 // ### SENSOR OKUMA ###
 
 
 void oku_sensor() {
-  oku_uzaklik_ultrasonic();
+  //oku_uzaklik_ultrasonic();
   oku_uzaklik_kizilotesi();
   oku_hareket();
   oku_ses();
@@ -164,7 +176,7 @@ void oku_uzaklik_ultrasonic() {
   digitalWrite(uzaklik_on_sag_t, HIGH);
   digitalWrite(uzaklik_on_sag_t, LOW);
 
-  int deger = pulseIn(uzaklik_on_sag_e, HIGH, 10000);
+  int deger = pulseIn(uzaklik_on_sag_e, HIGH, 100);
   deger_uzaklik_on_sag = deger / 29 / 2;
 
   //delay(50);
@@ -173,7 +185,7 @@ void oku_uzaklik_ultrasonic() {
   digitalWrite(uzaklik_on_sol_t, HIGH);
   digitalWrite(uzaklik_on_sol_t, LOW);
 
-  int deger2 = pulseIn(uzaklik_on_sol_e, HIGH, 10000);
+  int deger2 = pulseIn(uzaklik_on_sol_e, HIGH, 100);
   deger_uzaklik_on_sol = deger2 / 29 / 2;
 
   if (log_uzaklik_sonic == 1) {
@@ -326,7 +338,7 @@ void cikis_led_2(int a){
 
 
 
-// ### Serial ###
+// ### Serial ###
 
 void parseCommand(String com) {
 
@@ -341,69 +353,69 @@ void parseCommand(String com) {
 
   // UZAKLIK
   if (part1.equalsIgnoreCase("-11")) {
-    mySerial.print("-111 ");
-    mySerial.println(deger_uzaklik_on_sag);
+    Serial.print("-111 ");
+    Serial.println(deger_uzaklik_on_sag);
   }
   else if (part1.equalsIgnoreCase("-12")) {
-    mySerial.print("-121 ");
-    mySerial.println(deger_uzaklik_on_sol);
+    Serial.print("-121 ");
+    Serial.println(deger_uzaklik_on_sol);
   }
   else if (part1.equalsIgnoreCase("-13")) {
-    mySerial.print("-131 ");
-    mySerial.println(deger_uzaklik_sag_on);
+    Serial.print("-131 ");
+    Serial.println(deger_uzaklik_sag_on);
   }
   else if (part1.equalsIgnoreCase("-14")) {
-    mySerial.print("-141 ");
-    mySerial.println(deger_uzaklik_sag_arka);
+    Serial.print("-141 ");
+    Serial.println(deger_uzaklik_sag_arka);
   }
   else if (part1.equalsIgnoreCase("-15")) {
-    mySerial.print("-151 ");
-    mySerial.println(deger_uzaklik_sol_on);
+    Serial.print("-151 ");
+    Serial.println(deger_uzaklik_sol_on);
   }
   else if (part1.equalsIgnoreCase("-16")) {
-    mySerial.print("-161 ");
-    mySerial.println(deger_uzaklik_sol_arka);
+    Serial.print("-161 ");
+    Serial.println(deger_uzaklik_sol_arka);
   }
   
   
   
   // HAREKET
   else if (part1.equalsIgnoreCase("-21")) {
-    mySerial.print("-211 ");
-    mySerial.println(deger_hareket_sag);
+    Serial.print("-211 ");
+    Serial.println(deger_hareket_sag);
   }
   else if (part1.equalsIgnoreCase("-22")) {
-    mySerial.print("-221 ");
-    mySerial.println(deger_hareket_sol);
+    Serial.print("-221 ");
+    Serial.println(deger_hareket_sol);
   }
   
   
   
   // SES
   else if (part1.equalsIgnoreCase("-3")) {
-    mySerial.print("-31 ");
-    mySerial.println(deger_ses);
+    Serial.print("-31 ");
+    Serial.println(deger_ses);
   }
   
   // ISIK
   else if (part1.equalsIgnoreCase("-4")) {
-    mySerial.print("-41 ");
-    mySerial.println(deger_isik);
+    Serial.print("-41 ");
+    Serial.println(deger_isik);
   }
   
   // YAKINLIK
   else if (part1.equalsIgnoreCase("-51")) {
-    mySerial.print("-511 ");
-    mySerial.println(deger_yakinlik_sag);
+    Serial.print("-511 ");
+    Serial.println(deger_yakinlik_sag);
   }
   else if (part1.equalsIgnoreCase("-52")) {
-    mySerial.print("-521 ");
-    mySerial.println(deger_yakinlik_sol);
+    Serial.print("-521 ");
+    Serial.println(deger_yakinlik_sol);
   }
   
   
   
-  // ### GELEN ###
+  // ### GELEN ###
   
   
   // BUZZER
@@ -454,5 +466,12 @@ void parseCommand(String com) {
   else if (part1.equalsIgnoreCase("+7")) {
     int pin = part2.toInt();
     cikis_led_2(pin);
+  }
+}
+
+void establishContact() {
+  while (Serial.available() <= 0) {
+    Serial.println("Loading..");
+    delay(300);
   }
 }

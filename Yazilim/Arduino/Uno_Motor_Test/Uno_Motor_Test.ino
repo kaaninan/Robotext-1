@@ -13,12 +13,10 @@ void loop() {
   
   hiz();
   
-  a1();
-  //a2();
-  //a3();
-  //a4();
-  //a5();
-  //a6();
+  //a1(); // GERİ
+  a2(); // İLERİ
+  //a3(); // SAG
+  //a4(); // SOL
   
 }
 
@@ -50,21 +48,6 @@ void a4(){
   digitalWrite(7, LOW);
   digitalWrite(8, HIGH);
 }
-
-void a5(){
-  digitalWrite(2, HIGH);
-  digitalWrite(4, HIGH);
-  digitalWrite(7, HIGH);
-  digitalWrite(8, HIGH);
-}
-
-void a6(){
-  digitalWrite(2, LOW);
-  digitalWrite(4, LOW);
-  digitalWrite(7, LOW);
-  digitalWrite(8, LOW);
-}
-
 
 
 

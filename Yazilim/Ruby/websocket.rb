@@ -2,7 +2,7 @@ require 'websocket-eventmachine-server'
 
 EM.run do
 
-  WebSocket::EventMachine::Server.start(:host => "localhost", :port => 7070) do |ws|
+  WebSocket::EventMachine::Server.start(:host => "192.168.1.25", :port => 80) do |ws|
     ws.onopen do
       puts "Client connected"
     end

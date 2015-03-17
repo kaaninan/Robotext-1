@@ -5,7 +5,6 @@
 
 
 // VALUES
-//int hiz = 28400; // Serial
 String command = "";
 boolean oku = false;
 
@@ -30,7 +29,6 @@ int deger_uzaklik_sol_arka = 0;
 int deger_hareket_sag = 0;
 int deger_hareket_sol = 0;
 int deger_ses = 0;
-int deger_sicaklik = 0;
 int deger_isik = 0;
 int deger_yakinlik_sag = 0;
 int deger_yakinlik_sol = 0;
@@ -41,13 +39,12 @@ int deger_yakinlik_sol = 0;
 
 
 // PWM
-int servo_x_pin = 6;
-int servo_y_pin = 7;
+int servo_x_pin = 2;
+int servo_y_pin = 3;
 Servo servo_x;
 Servo servo_y;
-int led_1 = 8;
-int led_2 = 9;
-//SoftwareSerial Serial(10, 11);
+int led_1 = 4;
+int led_2 = 5;
 
 
 // DIGITAL
@@ -55,16 +52,13 @@ const int uzaklik_on_sag_t = 22;
 const int uzaklik_on_sag_e = 23;
 const int uzaklik_on_sol_t = 24;
 const int uzaklik_on_sol_e = 25;
-const int ses = 26;
-const int hareket_sag = 28;
-const int hareket_sol = 29;
-const int buzzer_1 = 30;
-const int buzzer_2 = 31;
-const int ekran_isik_sag = 38;
-const int ekran_isik_sol = 39;
-
-LiquidCrystal lcd_sag(32, 33, 34, 35, 36, 37);
-LiquidCrystal lcd_sol(40, 41, 42, 43, 44, 45);
+const int hareket_sag = 26;
+const int hareket_sol = 27;
+const int buzzer_1 = 28;
+const int buzzer_2 = 29;
+const int ses = 30;
+const int ekran_isik = 31;
+LiquidCrystal lcd(32, 33, 34, 35, 36, 37);
 
 
 // ANALOG
@@ -83,10 +77,6 @@ void setup() {
 
   Serial.begin(115200);
 
-  //Serial.begin(hiz);
-  //delay(500);
-  //Serial.println();
-
   // DIGITAL
   pinMode(uzaklik_on_sag_t, OUTPUT);
   pinMode(uzaklik_on_sag_e, INPUT);
@@ -94,8 +84,7 @@ void setup() {
   pinMode(uzaklik_on_sol_e, INPUT);
   pinMode(buzzer_1, OUTPUT);
   pinMode(buzzer_2, OUTPUT);
-  pinMode(ekran_isik_sag, OUTPUT);
-  pinMode(ekran_isik_sol, OUTPUT);
+  pinMode(ekran_isik, OUTPUT);
   pinMode(hareket_sag, INPUT);
   pinMode(hareket_sol, INPUT);
   pinMode(ses, INPUT);
@@ -107,18 +96,12 @@ void setup() {
   pinMode(led_2, OUTPUT);
 
   // Ekran
-  lcd_sag.begin(16, 2);
-  lcd_sol.begin(16, 2);
+  lcd.begin(16, 2);
 
-  lcd_sag.setCursor(0, 0);
-  lcd_sag.print("SERI BAGLANTI");
-  lcd_sag.setCursor(0, 1);
-  lcd_sag.print("BEKLENIYOR");
-
-  lcd_sol.setCursor(0, 0);
-  lcd_sol.print("SERI BAGLANTI");
-  lcd_sol.setCursor(0, 1);
-  lcd_sol.print("BEKLENIYOR");
+  lcd.setCursor(0, 0);
+  lcd.print("SERI BAGLANTI");
+  lcd.setCursor(0, 1);
+  lcd.print("BEKLENIYOR");
   
   establishContact();
 }
@@ -161,7 +144,7 @@ void serialEvent(){
 
 
 void oku_sensor() {
-  //oku_uzaklik_ultrasonic();
+  oku_uzaklik_ultrasonic();
   oku_uzaklik_kizilotesi();
   oku_hareket();
   oku_ses();
@@ -293,27 +276,19 @@ void cikis_buzzer(int cal) {
 }
 
 
-void cikis_ekran_isik(int sag, int sol) {
-  digitalWrite(ekran_isik_sag, sag);
-  digitalWrite(ekran_isik_sol, sol);
+void cikis_ekran_isik(int deger) {
+  digitalWrite(ekran_isik, deger);
 }
 
 
 
-void cikis_ekran(int sag, int sol) {
+void cikis_ekran(int deger) {
 
-  if (sag == 0) {
-    lcd_sag.setCursor(0, 0);
-    lcd_sag.print("ROBOTEXT");
-    lcd_sag.setCursor(0, 1);
-    lcd_sag.print("POWERED BY AFL");
-  }
-
-  if (sol == 0) {
-    lcd_sol.setCursor(0, 0);
-    lcd_sol.print("ROBOTEXT");
-    lcd_sol.setCursor(0, 1);
-    lcd_sol.print("POWERED BY AFL");
+  if (deger == 0) {
+    lcd.setCursor(0, 0);
+    lcd.print("ROBOTEXT");
+    lcd.setCursor(0, 1);
+    lcd.print("POWERED BY AFL");
   }
 }
 
@@ -428,20 +403,16 @@ void parseCommand(String com) {
   else if (part1.equalsIgnoreCase("+2")) {
     int pin = part2.toInt();
     if(pin == 0)
-      cikis_ekran_isik(0,0);
+      cikis_ekran_isik(0);
     else if(pin == 1)
-      cikis_ekran_isik(1,0);
-    else if(pin == 2)
-      cikis_ekran_isik(0,1);
-    else if(pin == 3)
-      cikis_ekran_isik(1,1);  
+      cikis_ekran_isik(1);
   }
   
   
   // EKRAN
   else if (part1.equalsIgnoreCase("+3")) {
     int pin = part2.toInt();
-    cikis_ekran(pin,pin);
+    cikis_ekran(pin);
   }
   
   // SERVO X

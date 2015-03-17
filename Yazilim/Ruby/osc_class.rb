@@ -1,5 +1,5 @@
-require 'osc'
-require 'pp'
+$LOAD_PATH << '.'
+require 'include'
 
 class OpenS
 

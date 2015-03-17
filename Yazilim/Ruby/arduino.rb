@@ -1,137 +1,42 @@
-require 'arduino_firmata'
 $LOAD_PATH << '.'
-require 'hareket'
-require 'log'
+require 'include'
 
 class Arduino_Self
 
   #LOG
   $konum = 'Arduino_Self'
 
-  @@arduino_mega = nil
-  @@arduino_mega2= nil
+  @bagli_uno = false
+  @bagli_mega = false
 
-  @@bagli_mega = false
-  @@bagli_mega2 = false
-
-  def initialize mega_etkin, mega2_etkin
-
+  def initialize
+    $sensor = Sensor.new
     $log = LOG.new
-
-    @mega_etkin = mega_etkin
-    @mega2_etkin = mega2_etkin
-
     baglan
-  end
+    sleep 5
 
+    @pins = Pin.new
+    pinMode @pins.getPins
+    sleep 1
 
+    # Transistor Aç
+    uno_transistor true
 
-
-  def f komut, deger, board
-
-    ## Kart Tanimlama
-    if board == 'mega'
-      secili = @@bagli_mega
-      secili_kart = @@arduino_mega
-    elsif board == 'mega2'
-      secili = @@bagli_mega2
-      secili_kart = @@arduino_mega2
-    else
-      secili = nil
-      secili_kart = nil
-      $log.hata $konum, "Komutta (f) secilen kart taninmadi! (Kart: #{board})"
+    # Mega Serial Oku
+    Thread.new do
+      mega_serial_gelen
     end
 
-
-    # Secilen kart bagliysa
-    if secili == true
-
-      if komut == 'hareket_basla'
-        #@hareket = Hareket.new secili_kart
-
-        puts 'Başladı'
-
-
-
-
-      elsif komut == 'hareket_durdur'
-        @hareket.stop
-      end
-
-    else
-      $log.hata $konum, "Komutta belirtilen kart bagli degil! (Kart: #{board}))"
-    end
-
-  end
-
-
-  def deneme_hareket
-
-    # 4 -> Ses Sensörü
-    # 0-1 -> Ön Hareket Sensörü
-
-    @@arduino_mega.on :digital_read do |pin, status|
-      if pin == 0 || pin == 1
-        puts "Hareket oluy #{status}, pin => #{pin}"
-      else
-        puts "gereksiz uyari #{pin}, #{status}"
+    # Uno Sensor Oku
+    Thread.new do
+      loop do
+        uno_sensor_oku
       end
     end
-  end
-
-  def deneme_uzaklik
-    @@arduino_mega.on :analog_read do |pin, status|
-      puts "#{pin}, #{status}"
-    end
-  end
-
-
-  def deneme_servo angle
-    @@arduino_mega.servo_write 6, angle
-    @@arduino_mega.servo_write 7, angle
-  end
-
-
-
-
-  def pinMode array, choose_board
-
-    @@tip = nil
-    @@pin = nil
-    @@aciklama = nil
-
-    if @mega_etkin and @boards['mega'] and choose_board == 'mega'
-
-      array.each do |a, b|
-
-        a.each do |x,y|
-          @@pin = x
-          @@aciklama = y
-        end
-
-        if b == 1
-          @@tip = ArduinoFirmata::OUTPUT
-        elsif b == 2
-          @@tip = ArduinoFirmata::INPUT
-        elsif b == 3
-          @@tip = ArduinoFirmata::SERVO
-        end
-
-        @@arduino_mega.pin_mode @@pin, @@tip
-
-        #LOG
-        $log.durum $konum, "pinMode -> Arduino Mega 1280 -> Pin=#{@@pin} -> Type=#{@@tip} OK"
-
-      end
-
-    else
-      $log.hata $konum, '(PinMode:Error) PinMode Yapilamadi, Arduino Mega Bagli Degil'
-    end
 
   end
 
 
-  private
 
   def baglan
     print '==> Bagli Arduino(lar) -> '
@@ -140,37 +45,25 @@ class Arduino_Self
     pp @arduino_serial.length
     puts
 
-    if @mega_etkin == false && @mega2_etkin == false
-      puts '-> '
-      $log.durum $konum, 'Hicbir Arduino Secilmedi'
+    choose_board (@arduino_serial)
 
-    else
+    if @boards['uno']
+      $log.islem_basladi $konum, "Arduino Uno'ya Baglaniliyor"
+      @arduino_uno = ArduinoFirmata.connect @boards['uno'], :nonblock_io => true
+      $log.islem_bitti $konum, "Arduino Uno'ya Baglanildi"
+      @bagli_uno = true
+    elsif !@boards['uno']
+      $log.hata $konum, 'Baglanilmak istenen kart bulunamadi! (Kart: Arduino Uno)'
+    end
 
-      if @arduino_serial.length > 0
 
-        choose_board (@arduino_serial)
-
-        if @mega_etkin and @boards['mega']
-          $log.islem_basladi $konum, "Arduino Mega'ya Baglaniliyor"
-          @@arduino_mega = ArduinoFirmata.connect @boards['mega'], :nonblock_io => true
-          $log.islem_bitti $konum, "Arduino Mega'ya Baglanildi"
-          @@bagli_mega = true
-        elsif @mega_etkin and !@boards['mega']
-          puts 'HATA: Baglanilmak istenen kart bulunamadi! (Kart: Arduino Mega) (ErrorCode: 2)'
-        end
-
-        if @mega2_etkin and @boards['mega2']
-          $log.islem_basladi $konum, "Arduino Mega 2'ye Baglaniliyor"
-          @@arduino_mega2 = ArduinoFirmata.connect @boards['mega2'], :nonblock_io => true
-          $log.islem_bitti $konum, "Arduino Mega 2'ye Baglanildi"
-          @@bagli_mega2 = true
-        elsif @mega2_etkin and !@boards['mega2']
-          $log.hata $konum, 'Baglanilmak istenen kart bulunamadi! (Kart: Arduino Mega 2)'
-        end
-
-      else
-        $log.hata $konum, 'Arduino Bulunamadi'
-      end
+    if @boards['mega']
+      $log.islem_basladi $konum, "Arduino Mega'ya Baglaniliyor"
+      @arduino_mega = SerialPort.new(@boards['mega'], 115200, 8, 1, SerialPort::NONE)
+      $log.islem_bitti $konum, "Arduino Mega'ya Baglanildi"
+      @bagli_mega = true
+    elsif !@boards['mega']
+      $log.hata $konum, 'Baglanilmak istenen kart bulunamadi! (Kart: Arduino Mega)'
     end
   end
 
@@ -179,58 +72,253 @@ class Arduino_Self
 
     array.each do |i|
 
-      if i.match('USB0')
+      if i.match('ACM')
+        print 'Uno (Linux) -> '
+        puts i
+        @boards = {'uno' => i}
+
+      elsif i.match('USB')
         print 'Mega (Linux) -> '
         puts i
-        if @mega_etkin
-          @boards = {'mega' => i}
-        end
-      end
+        @boards = {'mega' => i}
 
-      if i.match('ACM')
-        print 'Mega 2 (Linux) -> '
+      elsif i.match('usbmodem')
+        print 'Uno (Mac) -> '
         puts i
-        if @mega2_etkin
-          @boards = {'mega2' => i}
-        end
-      end
+        @boards = {'uno' => i}
 
-      if i.match('usbserial-A603JL3X')
+      elsif i.match('usbserial')
         print 'Mega (Mac) -> '
         puts i
-        if @mega_etkin
-          @boards = {'mega' => i}
-        end
-      end
-
-      if i.match('usbmodem')
-        print 'Mega 2 (Mac) -> '
-        puts i
-        if @mega2_etkin
-          @boards = {'mega2' => i}
-        end
+        @boards = {'mega' => i}
       end
     end
     puts
   end
 
-  public
-  def bagli_mi board
-    if board == 'mega'
-      @@bagli_mega
-    elsif board == 'mega2'
-      @@bagli_mega2
+
+
+
+
+  def pinMode choose_board
+
+    $log.islem_basladi $konum, 'PinMode'
+
+    @tip = nil
+    @pin = nil
+    @aciklama = nil
+
+    if @boards['uno'] and choose_board == 'uno'
+
+      pin = Pin.new
+      array = pin.getPins
+
+      array.each do |a, b|
+
+        a.each do |x,y|
+          @pin = x
+          @aciklama = y
+        end
+
+        if b == 1
+          @tip = ArduinoFirmata::OUTPUT
+        elsif b == 2
+          @tip = ArduinoFirmata::INPUT
+        elsif b == 3
+          @tip = ArduinoFirmata::SERVO
+        end
+
+        @arduino_uno.pin_mode @pin, @tip
+
+      end
+
     else
-      $log.hata $konum, 'Bagli olup olmadigi sorulan kartin adi taninmadi!'
+      $log.hata $konum, 'PinMode Yapilamadi, Arduino Uno Bagli Degil'
+    end
+
+    $log.islem_bitti $konum, 'PinMode'
+
+  end
+
+
+
+
+  def mega_serial_gonder komut, deger
+
+    if komut == 'buzzer'
+      @arduino_mega.write "+1 #{deger}"
+
+    elsif komut == 'ekran_isik'
+      @arduino_mega.write "+2 #{deger}"
+
+    elsif komut == 'ekran'
+      @arduino_mega.write "+3 #{deger}"
+
+    elsif komut == 'servo_x'
+      @arduino_mega.write "+4 #{deger}"
+
+    elsif komut == 'servo_y'
+      @arduino_mega.write "+5 #{deger}"
+
+    elsif komut == 'led_1'
+      @arduino_mega.write "+6 #{deger}"
+
+    elsif komut == 'led_2'
+      @arduino_mega.write "+7 #{deger}"
+
+
+
+    elsif komut == 'uzaklik'
+      @arduino_mega.write '-11 0'
+      @arduino_mega.write '-12 0'
+      @arduino_mega.write '-13 0'
+      @arduino_mega.write '-14 0'
+      @arduino_mega.write '-15 0'
+      @arduino_mega.write '-16 0'
+
+    elsif komut == 'hareket'
+      @arduino_mega.write '-21 0'
+      @arduino_mega.write '-22 0'
+
+    elsif komut == 'ses'
+      @arduino_mega.write '-3 0'
+
+    elsif komut == 'isik'
+      @arduino_mega.write '-4 0'
+
+    elsif komut == 'yakinlik'
+      @arduino_mega.write '-51 0'
+      @arduino_mega.write '-52 0'
+
+
+    elsif komut == 'sensorler'
+      @arduino_mega.write '-11 0'
+      @arduino_mega.write '-12 0'
+      @arduino_mega.write '-13 0'
+      @arduino_mega.write '-14 0'
+      @arduino_mega.write '-15 0'
+      @arduino_mega.write '-16 0'
+      @arduino_mega.write '-21 0'
+      @arduino_mega.write '-22 0'
+      @arduino_mega.write '-3 0'
+      @arduino_mega.write '-4 0'
+      @arduino_mega.write '-51 0'
+      @arduino_mega.write '-52 0'
+    end
+
+  end
+
+
+
+
+  def mega_serial_gelen
+
+    loop do
+      while (i = sp.gets.chomp) do
+
+        puts "Mega'dan Gelen:  #{i}"
+
+        gelen = i.split ' ', 2
+
+        komut = gelen[0]
+        deger = gelen[1]
+
+        if komut == '-111'
+          $sensor.uzaklik_on_sag = deger
+        elsif komut == '-121'
+          $sensor.uzaklik_on_sol = deger
+        elsif komut == '-131'
+          $sensor.uzaklik_sag_on = deger
+        elsif komut == '-141'
+          $sensor.uzaklik_sag_arka = deger
+        elsif komut == '-151'
+          $sensor.uzaklik_sol_on = deger
+        elsif komut == '-161'
+          $sensor.uzaklik_sol_arka = deger
+
+
+        elsif komut == '-211'
+          $sensor.hareket_sag = deger
+        elsif komut == '-221'
+          $sensor.hareket_sol = deger
+
+
+        elsif komut == '-31'
+          $sensor.ses = deger
+
+
+        elsif komut == '-41'
+          $sensor.isik = deger
+
+        elsif komut == '-511'
+          $sensor.yakinlik_on_sag = deger
+        elsif komut == '-521'
+          $sensor.yakinlik_on_sol = deger
+
+        end
+
+      end
+    end
+
+  end
+
+
+
+
+  def uno_sensor_oku
+    yakinlik_yer = @pins.pin_ara 'yakinlik_yer'
+    sicaklik = @pins.pin_ara 'sicaklik'
+    motor_sag_on = @pins.pin_ara 'motor_sag_on_enkoder'
+    motor_sag_arka = @pins.pin_ara 'motor_sag_arka_enkoder'
+    motor_sol_on = @pins.pin_ara 'motor_sol_on_enkoder'
+    motor_sol_arka = @pins.pin_ara 'motor_sol_arka_enkoder'
+
+    $sensor.yakinlik_yer = @arduino_uno.analog_read yakinlik_yer
+    $sensor.sicaklik = @arduino_uno.analog_read sicaklik
+    $sensor.motor_sag_on_enkoder = @arduino_uno.analog_read motor_sag_on
+    $sensor.motor_sag_arka_enkoder = @arduino_uno.analog_read motor_sag_arka
+    $sensor.motor_sol_on_enkoder = @arduino_uno.analog_read motor_sol_on
+    $sensor.motor_sol_arka_enkoder = @arduino_uno.analog_read motor_sol_arka
+
+  end
+
+
+
+  def uno_transistor gelen
+    if gelen == true
+      tr1 = @pins.pin_ara 'transistor_1'
+      tr2 = @pins.pin_ara 'transistor_2'
+
+      @arduino_uno.digital_write tr1, 1
+      @arduino_uno.digital_write tr2, 1
+
+    else
+      tr1 = @pins.pin_ara 'transistor_1'
+      tr2 = @pins.pin_ara 'transistor_2'
+
+      @arduino_uno.digital_write tr1, 0
+      @arduino_uno.digital_write tr2, 0
     end
   end
 
+
+  def getSensor
+    return $sensor
+  end
+
+
+  def getUno
+    return @arduino_uno
+  end
+
+  def getMega
+    return @arduino_mega
+  end
+
+
   def close
-    if @@bagli_mega
-      @@arduino_mega.close
-    elsif @@bagli_mega2
-      @@arduino_mega2.close
-    end
+    @arduino_uno.close
+    @arduino_mega.stop
   end
 
 end

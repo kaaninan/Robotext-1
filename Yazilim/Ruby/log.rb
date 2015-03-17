@@ -1,11 +1,7 @@
+$LOAD_PATH << '.'
+require 'include'
+
 class LOG
-
-  def initialize
-    puts '=> LOG SISTEMI AKTIFLESTIRILDI <=='
-    puts
-    puts
-  end
-
 
   def bildirim konum, mesaj
 
@@ -15,12 +11,10 @@ class LOG
   def islem_basladi konum, mesaj
     puts "=> STARTING - #{konum}, #{mesaj}"
     puts
-    puts
   end
 
   def islem_bitti konum, mesaj
     puts "=> FINISHED - #{konum}, #{mesaj}"
-    puts
     puts
   end
 
@@ -28,13 +22,11 @@ class LOG
   def durum konum, mesaj
     puts "=> #{konum}, #{mesaj}"
     puts
-    puts
   end
 
 
   def hata konum, mesaj
     puts "ERROR => #{konum}, #{mesaj}"
-    puts
     puts
   end
 

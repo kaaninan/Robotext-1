@@ -1,4 +1,5 @@
-require 'websocket-eventmachine-server'
+$LOAD_PATH << '.'
+require 'include'
 
 EM.run do
 

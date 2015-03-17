@@ -1,111 +1,63 @@
-require 'rubygems'
-require 'arduino_firmata'
-require 'pp'
-require 'osc'
-
 $LOAD_PATH << '.'
-require 'arduino'
-require 'osc_class'
-require 'pin'
-require 'motor'
+require 'include'
 
 
-# SEÇİMLER VE ARDUINO BAĞLANMA #
-puts
+$konum = 'main.rb'
 
-
-
-## Bağlı Kartlar
-print 'Bagli Kartlari Gormek Ister Misiniz? > '
-show = gets
-
-if show.match('e')
-  print ArduinoFirmata.list
-end
-puts
-puts
-
-
-
-## Kullanılan Kartlar
-print 'Kullanacaginiz Kartlari Secin (Mega, Mega 2) > '
-gelen_bagli = gets
-if gelen_bagli.length > 2
-
-  t_mega_bagli = gelen_bagli.slice(0)
-  if t_mega_bagli.match('e')
-    @mega_etkin = true
-  else
-    @mega_etkin = false
-  end
-
-  t_mega2_bagli = gelen_bagli.slice(1)
-  if t_mega2_bagli.match('e')
-    @mega2_etkin = true
-  else
-    @mega2_etkin = false
-  end
-else
-  puts 'HATA: Eksik Giris Yapildi (ErrorCode: 5)'
-  exit 1
-end
-puts
-puts
-
-## Bağlı Kartlar
-print 'OSC Etkinlestirilsin Mi? > '
-show = gets
-
-if show.match('e')
-  @osc_etkin = true
-end
-puts
-puts
-
-
-
-## Arduino Connect
-
-$board = Arduino_Self.new @mega_etkin, @mega2_etkin
-puts
-
-
-# MAIN #
-
-
-## SETUP
 
 def setup
-  ## LOG
-  puts '=> Running: Main -> Setup -> PinMode'
-  pins = Pin.new
-  $board.pinMode pins.megaPin, 'mega'
-  puts '=> Finished: Main -> Setup -> PinMode'
-  puts
+
+  # Arduino'ya Bağlan
+  $board = Arduino_Self.new
+
 end
 
+puts
 setup
 
 
-thr = Thread.new do
-  if @osc_etkin
-    $osc = OpenS.new
-    $osc.start
-  end
+
+
+
+
+
+## MOTOR
+def motor
+  @motor = Motor.new $board.getUno
+  @motor.motor_auto_start
 end
 
 
-#$board.f 'hareket_basla', nil, 'mega'
-$board.deneme_uzaklik
+
+## SERIAL
+def mega_gonder
+  $board.mega_serial_gonder 'sensorler', nil
+end
+
+
+
+## SENSOR
+def sensor
+  $board.getSensor.print_sensor
+  #$board.getSensor.print_uzaklik
+  #$board.getSensor.print_yakinlik
+  #$board.getSensor.print_uno
+end
+
+
+
 
 
 loop do
-  angle = rand 180
-  $board.deneme_servo angle
-  sleep 1
+  sleep 0.1
 end
 
 
+
+
+
+
 END{
+  $board.close
   puts
 }

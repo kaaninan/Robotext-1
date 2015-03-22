@@ -1,5 +1,5 @@
 $LOAD_PATH << '.'
-require 'include'
+require 'pin'
 
 class Hareket
 

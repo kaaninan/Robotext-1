@@ -1,6 +1,3 @@
-$LOAD_PATH << '.'
-require 'include'
-
 class Sensor
 
   # MEGA
@@ -18,6 +15,10 @@ class Sensor
     puts "Sağ Ön #{uzaklik_sag_on}   Sağ Arka #{uzaklik_sag_arka}   Sol Ön #{uzaklik_sol_on}   Sol Arka #{uzaklik_sol_arka}"
   end
 
+  def print_uzaklik2
+    puts "Ön Sağ #{uzaklik_on_sag} Ön Sol #{uzaklik_on_sol}"
+  end
+
   def print_yakinlik
     puts "Ön Sağ #{yakinlik_on_sag}   Ön Sol #{yakinlik_on_sol}"
   end
@@ -27,7 +28,11 @@ class Sensor
   end
 
   def print_uno
-    puts "Sıcaklık #{sicaklik}   Yer #{yakinlik_yer}"
+    puts "Yer #{yakinlik_yer}"
+  end
+
+  def print_enkoder
+    puts "#{motor_sag_on_enkoder} - #{motor_sag_arka_enkoder} - #{motor_sol_on_enkoder} - #{motor_sol_arka_enkoder}"
   end
 
 end

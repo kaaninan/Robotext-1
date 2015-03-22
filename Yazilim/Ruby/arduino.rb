@@ -1,5 +1,12 @@
+require 'rubygems'
+require 'arduino_firmata'
+require 'serialport'
+require 'pp'
 $LOAD_PATH << '.'
-require 'include'
+require 'log'
+require 'sensor'
+require 'pin'
+
 
 class Arduino_Self
 
@@ -16,11 +23,12 @@ class Arduino_Self
     sleep 5
 
     @pins = Pin.new
-    pinMode @pins.getPins
+    pinMode 'uno'
     sleep 1
 
     # Transistor Aç
     uno_transistor true
+
 
     # Mega Serial Oku
     Thread.new do
@@ -47,50 +55,51 @@ class Arduino_Self
 
     choose_board (@arduino_serial)
 
-    if @boards['uno']
+    if @boards_uno
       $log.islem_basladi $konum, "Arduino Uno'ya Baglaniliyor"
-      @arduino_uno = ArduinoFirmata.connect @boards['uno'], :nonblock_io => true
+      @arduino_uno = ArduinoFirmata.connect @boards_uno, :nonblock_io => true
       $log.islem_bitti $konum, "Arduino Uno'ya Baglanildi"
       @bagli_uno = true
-    elsif !@boards['uno']
+    elsif !@boards_uno
       $log.hata $konum, 'Baglanilmak istenen kart bulunamadi! (Kart: Arduino Uno)'
     end
 
 
-    if @boards['mega']
+    if @boards_mega
       $log.islem_basladi $konum, "Arduino Mega'ya Baglaniliyor"
-      @arduino_mega = SerialPort.new(@boards['mega'], 115200, 8, 1, SerialPort::NONE)
+      @arduino_mega = SerialPort.new(@boards_mega, 57600, 8, 1, SerialPort::NONE)
       $log.islem_bitti $konum, "Arduino Mega'ya Baglanildi"
       @bagli_mega = true
-    elsif !@boards['mega']
+    elsif !@boards_mega
       $log.hata $konum, 'Baglanilmak istenen kart bulunamadi! (Kart: Arduino Mega)'
     end
   end
 
   def choose_board array
-    @boards = Hash.new
+    @boards_uno
+    @boards_mega
 
     array.each do |i|
 
       if i.match('ACM')
         print 'Uno (Linux) -> '
         puts i
-        @boards = {'uno' => i}
+        @boards_uno = i
 
       elsif i.match('USB')
         print 'Mega (Linux) -> '
         puts i
-        @boards = {'mega' => i}
+        @boards_mega = i
 
       elsif i.match('usbmodem')
         print 'Uno (Mac) -> '
         puts i
-        @boards = {'uno' => i}
+        @boards_uno = i
 
       elsif i.match('usbserial')
         print 'Mega (Mac) -> '
         puts i
-        @boards = {'mega' => i}
+        @boards_mega = i
       end
     end
     puts
@@ -108,7 +117,7 @@ class Arduino_Self
     @pin = nil
     @aciklama = nil
 
-    if @boards['uno'] and choose_board == 'uno'
+    if @boards_uno and choose_board == 'uno'
 
       pin = Pin.new
       array = pin.getPins
@@ -146,64 +155,65 @@ class Arduino_Self
   def mega_serial_gonder komut, deger
 
     if komut == 'buzzer'
-      @arduino_mega.write "+1 #{deger}"
+      @arduino_mega.write "+1 #{deger}&"
 
     elsif komut == 'ekran_isik'
-      @arduino_mega.write "+2 #{deger}"
+      @arduino_mega.write "+2 #{deger}&"
 
     elsif komut == 'ekran'
-      @arduino_mega.write "+3 #{deger}"
+      @arduino_mega.write "+3 #{deger}&"
 
     elsif komut == 'servo_x'
-      @arduino_mega.write "+4 #{deger}"
+      @arduino_mega.write "+4 #{deger}&"
 
     elsif komut == 'servo_y'
-      @arduino_mega.write "+5 #{deger}"
+      @arduino_mega.write "+5 #{deger}&"
 
     elsif komut == 'led_1'
-      @arduino_mega.write "+6 #{deger}"
+      @arduino_mega.write "+6 #{deger}&"
 
     elsif komut == 'led_2'
-      @arduino_mega.write "+7 #{deger}"
+      @arduino_mega.write "+7 #{deger}&"
+
 
 
 
     elsif komut == 'uzaklik'
-      @arduino_mega.write '-11 0'
-      @arduino_mega.write '-12 0'
-      @arduino_mega.write '-13 0'
-      @arduino_mega.write '-14 0'
-      @arduino_mega.write '-15 0'
-      @arduino_mega.write '-16 0'
+      @arduino_mega.write '-11 &'
+      @arduino_mega.write '-12 &'
+      @arduino_mega.write '-13 &'
+      @arduino_mega.write '-14 &'
+      @arduino_mega.write '-15 &'
+      @arduino_mega.write '-16 &'
 
     elsif komut == 'hareket'
-      @arduino_mega.write '-21 0'
-      @arduino_mega.write '-22 0'
+      @arduino_mega.write '-21&'
+      @arduino_mega.write '-22&'
 
     elsif komut == 'ses'
-      @arduino_mega.write '-3 0'
+      @arduino_mega.write '-3&'
 
     elsif komut == 'isik'
-      @arduino_mega.write '-4 0'
+      @arduino_mega.write '-4&'
 
     elsif komut == 'yakinlik'
-      @arduino_mega.write '-51 0'
-      @arduino_mega.write '-52 0'
+      @arduino_mega.write '-51&'
+      @arduino_mega.write '-52&'
 
 
     elsif komut == 'sensorler'
-      @arduino_mega.write '-11 0'
-      @arduino_mega.write '-12 0'
-      @arduino_mega.write '-13 0'
-      @arduino_mega.write '-14 0'
-      @arduino_mega.write '-15 0'
-      @arduino_mega.write '-16 0'
-      @arduino_mega.write '-21 0'
-      @arduino_mega.write '-22 0'
-      @arduino_mega.write '-3 0'
-      @arduino_mega.write '-4 0'
-      @arduino_mega.write '-51 0'
-      @arduino_mega.write '-52 0'
+      @arduino_mega.write '-11&'
+      @arduino_mega.write '-12&'
+      @arduino_mega.write '-13&'
+      @arduino_mega.write '-14&'
+      @arduino_mega.write '-15&'
+      @arduino_mega.write '-16&'
+      @arduino_mega.write '-21&'
+      @arduino_mega.write '-22&'
+      @arduino_mega.write '-3&'
+      @arduino_mega.write '-4&'
+      @arduino_mega.write '-51&'
+      @arduino_mega.write '-52&'
     end
 
   end
@@ -211,12 +221,14 @@ class Arduino_Self
 
 
 
+
+
   def mega_serial_gelen
 
     loop do
-      while (i = sp.gets.chomp) do
+      while (i = @arduino_mega.gets.chomp) do
 
-        puts "Mega'dan Gelen:  #{i}"
+        #puts "Mega'dan Gelen:  #{i}"
 
         gelen = i.split ' ', 2
 
@@ -267,19 +279,18 @@ class Arduino_Self
 
   def uno_sensor_oku
     yakinlik_yer = @pins.pin_ara 'yakinlik_yer'
-    sicaklik = @pins.pin_ara 'sicaklik'
     motor_sag_on = @pins.pin_ara 'motor_sag_on_enkoder'
     motor_sag_arka = @pins.pin_ara 'motor_sag_arka_enkoder'
     motor_sol_on = @pins.pin_ara 'motor_sol_on_enkoder'
     motor_sol_arka = @pins.pin_ara 'motor_sol_arka_enkoder'
 
     $sensor.yakinlik_yer = @arduino_uno.analog_read yakinlik_yer
-    $sensor.sicaklik = @arduino_uno.analog_read sicaklik
     $sensor.motor_sag_on_enkoder = @arduino_uno.analog_read motor_sag_on
     $sensor.motor_sag_arka_enkoder = @arduino_uno.analog_read motor_sag_arka
     $sensor.motor_sol_on_enkoder = @arduino_uno.analog_read motor_sol_on
     $sensor.motor_sol_arka_enkoder = @arduino_uno.analog_read motor_sol_arka
 
+    sleep 0.1 # Stabilite için
   end
 
 

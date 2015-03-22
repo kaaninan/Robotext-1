@@ -1,12 +1,14 @@
 $LOAD_PATH << '.'
-require 'include'
+require 'pin'
 
 class Motor
 
 
   def initialize board
 
+    @arduino_uno = board.getUno
     @board = board
+
     puts '==> Motorlar Etkinlestirildi <=='
 
     pin = Pin.new
@@ -437,7 +439,5 @@ class Motor
     @arduino_uno.analog_write @h_sol_on, 0
     @arduino_uno.analog_write @h_sol_arka, 0
   end
-
-
 
 end

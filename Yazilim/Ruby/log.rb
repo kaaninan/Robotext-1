@@ -1,6 +1,3 @@
-$LOAD_PATH << '.'
-require 'include'
-
 class LOG
 
   def bildirim konum, mesaj

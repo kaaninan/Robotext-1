@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  
+  	<link rel='stylesheet' href='style.css' />
+  	<link rel="stylesheet" href='morris.css' />
+  	<link href="assets/favicon.ico" rel="shortcut icon" />
+  	<link href="assets/apple-touch-icon.png" rel="apple-touch-icon" />
+
+	<link href='http://fonts.googleapis.com/css?family=Oswald:300,400,700|Open+Sans:400,700,300' rel='stylesheet' type='text/css' />
+  
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	@javascript html5shiv respond.min
+	<![endif]-->
+
+	<title>Robotext</title>
+
+</head>
+<body>
+
+
+<!-- INDEX -->
+<div class="all-wrapper" id="scr_index">
+	<div class="row">
+		<div class="col-md-3">
+			<div class="text-center">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span>
+			    	<span class="icon-bar"></span>
+			    	<span class="icon-bar"></span>
+			    	<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="side-bar-wrapper collapse navbar-collapse navbar-ex1-collapse">
+				<a href="#" class="logo hidden-sm hidden-xs">
+					<i class="icon-gears"></i>
+					<span>Robotext</span>
+				</a>
+
+				<div class="search-box">
+					<input type="text" placeholder="ARA" class="form-control" />
+				</div>
+				
+				<ul class="side-menu side-menu-notifications">
+					<li>
+						<a href="notifications.html">
+							<span class="badge pull-right alert-animated">5</span>
+							<i class="icon-flag"></i> Bildirimler
+						</a>
+	    			</li>
+	  			</ul>
+	  
+  				<div class="relative-w">
+	    			<ul class="side-menu">
+	      				<li class='current'>
+	        				<a class='current' href="index.html">
+	          					<span class="badge pull-right">17</span>
+	          					<i class="icon-dashboard"></i> KONTROL PANELİ
+	        				</a>
+	      				</li>
+	      				
+	      				<li>
+	        				<a href="charts.html">
+	          					<span class="badge pull-right"></span>
+	          					<i class="icon-bar-chart"></i> TABLOLAR
+	        				</a>
+	      				</li>
+	      				
+	      				<li>
+	        				<a href="forms.html">
+	          					<span class="badge pull-right">12</span>
+	          					<i class="icon-terminal"></i> FORMLAR
+	        				</a>
+	      				</li>
+	      	
+	      				<li>
+	        				<a href="elements.html">
+	          					<span class="badge pull-right"></span>
+	          					<i class="icon-code-fork"></i> UI Elements
+	        				</a>
+	        			
+	        				<ul>
+	          					<li>
+	            					<a href="datatable.html">
+	              						<i class="icon-beaker"></i> Elements
+	            					</a>
+	          					</li>
+	          					
+          						<li>
+	            					<a href="icons.html">
+	              						<i class="icon-picture"></i> Ikonlar
+	            					</a>
+	          					</li>
+	        				</ul>
+	      				</li>
+	      				
+	      				<li>
+	        				<a href="datatable.html">
+	          					<span class="badge pull-right">24</span>
+	          					<i class="icon-th"></i> Tables
+	        				</a>
+	        				
+	        				<ul>
+	          					<li>
+	            					<a href="datatable.html">
+	              						<i class="icon-list-alt"></i> Veri Tabloları
+	            					</a>
+	          					</li>
+	          					
+	          					<li>
+	            					<a href="table.html">
+	              						<i class="icon-table"></i> Düzenli Tablolar
+	            					</a>
+	          					</li>
+	        				</ul>
+	      				</li>
+	      				
+	      				<li>
+	        				<a href="calendar.html">
+	          					<span class="badge pull-right">11</span>
+	          					<i class="icon-calendar"></i> Takvim
+	        				</a>
+	      				</li>
+	      				
+	      				<li>
+	        				<a href="login.html">
+	          					<span class="badge pull-right"></span>
+	          					<i class="icon-signin"></i> GİRİS SAYFASI
+	        				</a>
+	      				</li>
+	    			</ul>
+	  			</div>
+			</div>
+	    </div>
+	    
+	    <div class="col-md-9">
+			<div class="content-wrapper wood-wrapper">
+	        	<div class="content-inner">
+					<div class="page-header">
+						<div class="header-links hidden-xs">
+							<a href="notifications.html"><i class="icon-comments"></i> Kullanıcı Uyarıları</a>
+	    					<a href="#"><i class="icon-cog"></i> Ayarlar</a>
+	    					<a href="#" id="logout"><i class="icon-signout"></i> Çıkış</a>
+	  					</div>
+	  					
+	  					<h1><i class="icon-bar-chart"></i> KONTROL PANELİ</h1>
+					</div>
+          			
+          			<div class="main-content">
+	            		<div class="widget">
+
+	            		<!-- BİLDİRİMLER -->
+
+
+	            		<!-- Bağlandı -->
+	              			<div class="alert alert-success alert-dismissable" id="notification_baglandi" style="display:none">
+		                  		<i class="icon-check-sign"></i> <strong>Evet!</strong> Başarıyla Robotext'e bağlandınız.
+		                  		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	                		</div>
+
+                		<!-- Bağlanıyor -->
+	                		<div class="alert alert-info alert-dismissable" id="notification_baglaniyor" style="display:none">
+                  				<i class="icon-lightbulb"></i> <strong>Bağlanılıyor!</strong> Lütfen sayfayı açık tutun. 
+                  				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                			</div>
+
+            			<!-- Hata -->
+	              			<div class="alert alert-danger alert-dismissable" id="notification_hata" style="display:none">
+			                	<i class="icon-remove-sign"></i> <strong>Hata!</strong> Robotext'e bağlanılamadı. Lütfen Robotext'in açık olduğuna emin olun.
+			                  	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			                </div>
+
+		                <!-- Hata 2 -->
+			                <div class="alert alert-danger alert-dismissable" id="notification_hata_websocket" style="display:none">
+			                	<i class="icon-remove-sign"></i> <strong>Hata!</strong> Robotext'e bağlanılamadı. Lütfen sayfayı yenileyin ve Robotext'i açın.
+			                  	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			                </div>
+
+	            		</div>
+	            		
+	            		<div class="widget">
+	              			<div class="widget-controls pull-right">
+	                			<a href="#" class="widget-link-remove"><i class="icon-minus-sign"></i></a>
+	                			<a href="#" class="widget-link-remove"><i class="icon-remove-sign"></i></a>
+	              			</div>
+	              			
+	              			<h3 class="section-title first-title"><i class="icon-tasks"></i> ISTATISTIKLER</h3>
+              				
+
+              				<div class="row">
+
+              					<!-- Güvenlik -->
+              					<div class="col-lg-3 col-md-4 col-sm-6 text-center">
+	                  				<div class="widget-content-blue-wrapper animated flipInY changed-up">
+	                    				<div class="widget-content-blue-inner padded">
+	                      					<div class="pre-value-block">Güvenlik</div>
+                      						<div class="value-block">
+	                        					<div class="value-self">
+                        						 	<div id="guvenlik_icon" style="font-size:100px"><i class="icon-shield"></i></div>
+	                        					</div>
+	                        					<div class="value-sub">
+	                        						<div style="display:none" id="guvenlik_kapali_text">Açık</div>
+	                        						<div id="guvenlik_acik_text">Kapalı</div>
+	                        					</div>
+	                      					</div>
+	                      					<span class="dynamicsparkline" style="font-size:50px"><button id="guvenlik_ac_button" type="button" class="btn btn-success btn-round">Aç</button></span>
+
+	                      					<span style="display:none" class="dynamicsparkline" style="font-size:50px"><button id="guvenlik_kapat_button" type="button" class="btn btn-danger btn-round">Kapat</button></span>
+
+	                    				</div>
+	                  				</div>
+                				</div>
+
+                				<!-- Yönetim -->
+                				<div class="col-lg-3 col-md-4 col-sm-6 text-center">
+	                  				<div class="widget-content-blue-wrapper animated flipInY changed-up">
+	                    				<div class="widget-content-blue-inner padded">
+	                      					<div class="pre-value-block">Yönetim</div>
+                      						<div class="value-block">
+	                        					<div class="value-self">
+                        						 	<div id="guvenlik_icon" style="font-size:100px"><i class="icon-compass"></i></div>
+	                        					</div>
+	                        					<div class="value-sub">
+	                        						<div style="display:none" id="motor_manual_text">Manuel</div>
+	                        						<div id="motor_auto_text">Otomatik</div>
+	                        					</div>
+	                      					</div>
+	                      					<span style="font-size:50px">
+	                      						<button style="display:none" id="motor_auto_button" type="button" class="btn btn-success btn-round">Otomatik</button>
+												<button id="motor_manual_button" type="button" class="btn btn-success btn-round">Manuel</button></span>
+
+	                    				</div>
+	                  				</div>
+                				</div>
+
+                				<!-- Işık -->
+	                			<div class="col-lg-3 col-md-4 col-sm-6 text-center">
+	                  				<div class="widget-content-blue-wrapper animated flipInY changed-up">
+	                    				<div class="widget-content-blue-inner padded">
+	                      					<div class="pre-value-block">Işık Durumu</div>
+                  							<div class="value-block">
+                        						<div class="value-self">
+                        							<div style="font-size:100px"><i class="icon-lightbulb"></i></div>
+                        						</div>
+                        						<div class="value-sub">Anlık</div>
+	                      					</div>
+	                      					<span class="dynamicsparkline"><div id="sensor_isik" style="font-size:50px">-- </div></span>
+	                    				</div>
+	                  				</div>
+	                			</div>
+	                			
+	                			<!-- Sıcaklık -->
+	                			<div class="col-lg-3 col-md-4 col-sm-6 text-center">
+	                  				<div class="widget-content-blue-wrapper animated flipInY changed-up">
+	                    				<div class="widget-content-blue-inner padded">
+	                      					<div class="pre-value-block">Sıcaklık</div>
+	                      					<div class="value-block">
+	                        					<div class="value-self">
+	                        						<div style="font-size:100px"><i class="icon-sun"></i></div>
+	                        					</div>
+	                        					<div class="value-sub">Anlık</div>
+	                      					</div>
+	                      					<span class="dynamicsparkline"><div id="sensor_sicaklik" style="font-size:50px">32<span style="font-size:20px;"> °C</span></div></span>
+	                    				</div>
+	                  				</div>
+	                			</div>
+	                			
+	                			<!-- Gaz -->
+	                			<div class="col-lg-3 col-md-4 col-sm-6 text-center hidden-md">
+	                  				<div class="widget-content-blue-wrapper animated flipInY changed-up">
+	                    				<div class="widget-content-blue-inner padded">
+	                      					<div class="pre-value-block">Gaz</div>
+	                      					<div class="value-block">
+	                        					<div class="value-self">
+	                        						<div id="gaz_ok" style="display:block; font-size:100px"><i class="icon-ok"></i></div>
+	                        						<div id="gaz_error" style="display:none; font-size:100px"><i class="icon-warning-sign"></i></div>
+	                        					</div>
+	                        					<div class="value-sub">Anlık</div>
+	                      					</div>
+	                      					<span class="dynamicsparkline"><div id="sensor_gaz" style="font-size:50px">32</div></span>
+	                    				</div>
+	                  				</div>
+	                			</div>
+
+                				<!-- Hareket -->
+	                			<div class="col-lg-3 col-md-4 col-sm-6 text-center hidden-md">
+	                  				<div class="widget-content-blue-wrapper animated flipInY changed-up">
+	                    				<div class="widget-content-blue-inner padded">
+	                      					<div class="pre-value-block"> Hareket</div>
+	                      					<div class="value-block">
+	                        					<div class="value-self">
+	                        						<div id="hareket_var" style="display:none" style="font-size:100px"><i class="icon-eye-close"></i></div>
+	                        						<div id="hareket_yok" style="display:block; font-size:100px;"><i class="icon-eye-open"></i></div>
+	                        					</div>
+	                        					<div class="value-sub">Anlık</div>
+	                      					</div>
+	                      					<span class="dynamicsparkline"><div id="sensor_hareket" style="font-size:50px">Var</div></span>
+	                    				</div>
+	                  				</div>
+	                			</div>
+
+	                			<!-- Ses -->
+	                			<div class="col-lg-3 col-md-4 col-sm-6 text-center hidden-md">
+	                  				<div class="widget-content-blue-wrapper animated flipInY changed-up">
+	                    				<div class="widget-content-blue-inner padded">
+	                      					<div class="pre-value-block">Ses</div>
+	                      					<div class="value-block">
+	                        					<div class="value-self">
+	                        						<div id="gaz_ok" style="font-size:100px"><i class="icon-microphone"></i></div>
+	                        						<div id="gaz_error" style="display:none; font-size:100px;"><i class="icon-microphone-off"></i></div>
+	                        					</div>
+	                        					<div class="value-sub">Anlık</div>
+	                      					</div>
+	                      					<span class="dynamicsparkline"><div id="sensor_gaz" style="font-size:50px">Var</div></span>
+	                    				</div>
+	                  				</div>
+	                			</div>
+
+	                			<!-- Alarm -->
+	                			<div class="col-lg-3 col-md-4 col-sm-6 text-center hidden-md">
+	                  				<div class="widget-content-blue-wrapper animated flipInY changed-up">
+	                    				<div class="widget-content-blue-inner padded">
+	                      					<div class="pre-value-block">Alarm</div>
+	                      					<div class="value-block">
+	                        					<div class="value-self">
+	                        						<div id="gaz_ok" style="font-size:100px"><i class="icon-bullhorn"></i></div>
+	                        						<div id="gaz_error" style="display:none; font-size:100px;"><i class="icon-warning-sign"></i></div>
+	                        					</div>
+	                        					<div class="value-sub">Anlık</div>
+	                      					</div>
+	                      					
+	                      					<span class="dynamicsparkline" style="font-size:50px"><button id="guvenlik_ac_button" type="button" class="btn btn-success btn-round">Aç</button></span>
+
+	                      					<span style="display:none" class="dynamicsparkline" style="font-size:50px"><button id="guvenlik_kapat_button" type="button" class="btn btn-danger btn-round">Kapat</button></span>
+
+	                    				</div>
+	                  				</div>
+	                			</div>
+	                			
+	              			</div>
+	            		</div>
+
+
+	            		<div class="widget">
+	              			<div class="widget-controls pull-right">
+	                			<a href="#" class="widget-link-remove"><i class="icon-minus-sign"></i></a>
+	                			<a href="#" class="widget-link-remove"><i class="icon-remove-sign"></i></a>
+	              			</div>
+	              			
+	              			<h3 class="section-title"><i class="icon-bar-chart"></i> Profit Chart</h3>
+              				
+              				<ul class="nav nav-pills">
+	                			<li class="active"><a href="#">Hour</a></li>
+	                			<li><a href="#">Day</a></li>
+	                			<li><a href="#">Month</a></li>
+	                			<li class="hidden-xs"><a href="#">Year</a></li>
+	              			</ul>
+	              
+	              			<div class="widget-content-white">
+	                			<div class="shadowed-bottom bottom-margin">
+	                  				<div class="row">
+	                    				<div class="col-lg-4 col-md-5 col-sm-6 bordered">
+	                      					<div class="value-block value-bigger changed-up">
+	                        					<div class="value-self"> $5,450
+	                          						<span class="changed-icon"><i class="icon-caret-up"></i></span>
+	                          						<span class="changed-value">+5.00%</span>
+	                        					</div>
+	                        					<div class="value-sub">Average of $450.35 Per Day</div>
+	                      					</div>
+	                    				</div>
+	                    				
+	                    				<div class="col-lg-2 col-md-3 visible-md visible-lg bordered">
+	                      					<div class="value-block text-center">
+	                        					<div class="value-self">520</div>
+	                        					<div class="value-sub">Total Sales</div>
+	                      					</div>
+	                    				</div>
+	                    
+	                    				<div class="col-lg-2 bordered visible-lg">
+	                      					<div class="value-block text-center">
+	                        					<div class="value-self">1,120</div>
+	                        					<div class="value-sub">Total Visitors</div>
+	                      					</div>
+	                    				</div>
+	                    				
+	                    				<div class="col-lg-4 col-md-4 col-sm-6">
+	                      					<form class="form-inline form-period-selector" />
+	                        					<label class="control-label">Time Period:</label><br />
+	                        					<input type="text" placeholder="01/12/2011" class="form-control input-sm" />
+                								<input type="text" placeholder="01/12/2011" class="form-control input-sm" />
+	                      					</form>
+	                    				</div>
+	                  				</div>
+	                			</div>
+                				
+                				<div class="padded">
+	                  				<div id="areachart" style="height: 250px;"></div>
+                				</div>
+	              			</div>
+	            		</div>
+	            		
+	            		<div class="widget">
+	              			<div class="widget-controls pull-right">
+	                			<a href="#" class="widget-link-remove"><i class="icon-minus-sign"></i></a>
+	                			<a href="#" class="widget-link-remove"><i class="icon-remove-sign"></i></a>
+	              			</div>
+	              			
+	              			<h3 class="section-title bottom-margin"><i class="icon-bullseye"></i> Circular Charts</h3>
+	              			<div class="row bottom-margin">
+                				<div class="col-lg-3 col-md-4 col-sm-6 text-center">
+	                  				<input type="text" value="75" class="knob" data-fgcolor="#df6064" data-linecap="round" data-width="150" />
+	                			</div>
+	                			
+	                			<div class="col-lg-3 hidden-md col-sm-6 text-center">
+                  					<input type="text" value="65" class="knob" data-fgcolor="#8963ac" data-linecap="round" data-width="150" />
+	                			</div>
+                				
+                				<div class="col-lg-3 col-md-4 col-sm-6 text-center">
+	                  				<input type="text" value="85" class="knob" data-fgcolor="#61a9dc" data-linecap="round" data-width="150" />
+	                			</div>
+	                			
+	                			<div class="col-lg-3 col-md-4 col-sm-6 text-center">
+	                  				<input type="text" value="68" class="knob" data-fgcolor="#71c280" data-linecap="round" data-width="150" />
+	                			</div>
+	              			</div>
+	            		</div>
+	            		
+	            		<div class="row">
+	              			<div class="col-md-8">
+	                			<ul class="nav nav-tabs">
+	                  				<li class="active"><a href="#tab_pie_chart" data-toggle="tab"><i class="icon-bullseye"></i> Pie Chart</a></li>
+	                  				<li><a href="#tab_bar_chart" data-toggle="tab"><i class="icon-bar-chart"></i> Bar Chart</a></li>
+	                  				<li class="hidden-md hidden-xs"><a href="#tab_table" data-toggle="tab"><i class="icon-table"></i> Table</a></li>
+	                			</ul>
+	                			
+	                			<div class="tab-content bottom-margin">
+	                  				<div class="tab-pane active" id="tab_pie_chart">
+	                    				<div class="shadowed-bottom">
+	                      					<div class="row">
+	                        					<div class="col-lg-3 col-md-4 col-sm-3 bordered">
+	                          						<div class="value-block padded-left text-center">
+	                            						<div class="value-self">520</div>
+	                            						<div class="value-sub">Total Sales</div>
+	                          						</div>
+	                        					</div>
+	                        					<div class="col-lg-3 col-sm-3 bordered hidden-md">
+	                          						<div class="value-block text-center">
+	                            						<div class="value-self">1,120</div>
+	                            						<div class="value-sub">Total Visitors</div>
+	                          						</div>
+	                        					</div>
+	                        					<div class="col-lg-6 col-md-8 col-sm-6">
+	                          						<form class="form-inline form-period-selector" />
+	                            						<label class="control-label">Time Period:</label><br />
+	                            						<input type="text" placeholder="01/12/2011" class="form-control input-sm" />
+                            							<input type="text" placeholder="01/12/2011" class="form-control input-sm" />
+	                          						</form>
+	                        					</div>
+	                      					</div>
+	                    				</div>
+	                    				<div class="padded">
+	                      					<div id="piechart" style=""></div>
+	                    				</div>
+                  					</div>
+                  					<div class="tab-pane" id="tab_bar_chart">
+	                    				<div class="shadowed-bottom">
+	                      					<div class="row">
+	                        					<div class="col-md-3 bordered">
+	                          						<div class="value-block padded-left text-center">
+	                            						<div class="value-self">256</div>
+                            							<div class="value-sub">Total Sales</div>
+	                          						</div>
+	                        					</div>
+	                        					<div class="col-lg-3 bordered hidden-md">
+	                          						<div class="value-block text-center">
+	                            						<div class="value-self">3,420</div>
+                            							<div class="value-sub">Total Visitors</div>
+	                          						</div>
+	                        					</div>
+	                        					<div class="col-lg-6 col-md-9">
+	                          						<form class="form-inline form-period-selector" />
+		                            					<label class="control-label">Time Period:</label><br />
+	                            						<input type="text" placeholder="01/12/2011" class="form-control input-sm" />
+	                            						<input type="text" placeholder="01/12/2011" class="form-control input-sm" />
+		                          					</form>
+		                        				</div>
+		                      				</div>
+		                    			</div>
+		                    			<div class="padded">
+		                      				<div id="barchart" style=""></div>
+		                    			</div>
+		                  			</div>
+		                  			
+		                  			<div class="tab-pane" id="tab_table">
+		                    			<div class="shadowed-bottom">
+		                      				<div class="row">
+		                        				<div class="col-md-3 bordered">
+		                          					<div class="value-block padded-left text-center">
+		                            					<div class="value-self">112</div>
+		                            					<div class="value-sub">Total Sales</div>
+		                          					</div>
+		                        				</div>
+		                        				<div class="col-lg-3 bordered hidden-md">
+		                          					<div class="value-block text-center">
+		                            					<div class="value-self">2,340</div>
+		                            					<div class="value-sub">Total Visitors</div>
+		                          					</div>
+		                        				</div>
+		                        			
+			                        			<div class="col-lg-6 col-md-9">
+			                          				<form class="form-inline form-period-selector" />
+			                            				<label class="control-label">Time Period:</label><br />
+			                            				<input type="text" placeholder="01/12/2011" class="form-control input-sm" />
+			                            				<input type="text" placeholder="01/12/2011" class="form-control input-sm" />
+			                          				</form>
+			                        			</div>
+			                      			</div>
+			                    		</div>
+		                    			<div class="padded">
+			                    			<table class="table">
+			                      				<thead>
+			                        				<tr>
+			                          					<th>Product</th>
+			                          					<th>Qty</th>
+			                        				</tr>
+			                      				</thead>
+			                      				<tbody>
+			                        				<tr>
+			                          					<td>Floor Lamp</td>
+			                          					<td>2</td>
+			                        				</tr>
+			                        				<tr>
+			                          					<td>Coffee Mug</td>
+			                          					<td>4</td>
+			                        				</tr>
+			                        				<tr>
+			                          					<td>Television</td>
+		                          						<td>1</td>
+			                        				</tr>
+			                        				<tr>
+			                          					<td>Red Carpet</td>
+			                          					<td>6</td>
+			                        				</tr>
+			                        				<tr>
+			                          					<td>Laptop</td>
+			                          					<td>3</td>
+			                        				</tr>
+			                      				</tbody>
+			                    			</table>
+			                    		</div>
+			                  		</div>
+		                		</div>
+			              	</div>
+			              	
+			              	<div class="col-md-4">
+			                	<div class="widget">
+									<div class="widget-controls pull-right hidden-md">
+			                    		<a href="#" class="widget-link-remove"><i class="icon-minus-sign"></i></a>
+		                    			<a href="#" class="widget-link-remove"><i class="icon-remove-sign"></i></a>
+			                  		</div>
+			                  		<h3 class="section-title first-title"><i class="icon-table"></i> Top Sellers</h3>
+		                  			<div class="widget-content-white padded glossed">
+			                    		<div id="topsellers_barchart"></div>
+		                    			<table class="table">
+			                      			<thead>
+						                        <tr>
+						                          	<th>Product</th>
+					                          		<th>Qty</th>
+						                        </tr>
+			                      			</thead>
+		                      				<tbody>
+				                        		<tr>
+					                     			<td>Floor Lamp</td>
+													<td>2</td>
+						                        </tr>
+				                        		<tr>
+				                          			<td>Coffee Mug</td>
+				                          			<td>4</td>
+			                        			</tr>
+			                        			<tr>
+			                          				<td>Television</td>
+			                          				<td>1</td>
+				                        		</tr>
+				                        		<tr>
+				                          			<td>Red Carpet</td>
+				                          			<td>6</td>
+				                        		</tr>
+				                        		<tr>
+			                          				<td>Laptop</td>
+				                          			<td>3</td>
+				                        		</tr>
+				                      		</tbody>
+			                    		</table>
+				                    	
+				                    	<a href="#" class="btn btn-sm btn-default">view more</a>
+				                  	</div>
+			                	</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<script src='5a055ffc9e30406f49ae6d8ac010e4eb.js'></script>
+<script src="https://www.google.com/jsapi"></script>
+<script src='312bcdcfd6625dba9566d8c358abb5c0.js'></script>
+<script src='04470f88ea2f96cdef67dabf99a655b4.js'></script>
+
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<script type="text/javascript" src="websocket.js"></script>
+<script type="text/javascript" src="index.js"></script>
+
+
+</body>
+
+</html>

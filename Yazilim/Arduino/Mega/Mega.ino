@@ -6,16 +6,16 @@
 
 // VALUES
 String command = "";
-boolean oku = false;
+boolean oku = true;
 
 
 // LOG
-int log_uzaklik_sonic = 1;
-int log_uzaklik_ir = 1;
-int log_hareket = 1;
-int log_ses = 1;
-int log_isik = 1;
-int log_yakinlik = 1;
+int log_uzaklik_sonic = 0;
+int log_uzaklik_ir = 0;
+int log_hareket = 0;
+int log_ses = 0;
+int log_isik = 0;
+int log_yakinlik = 0;
 
 
 
@@ -33,7 +33,7 @@ int deger_isik = 0;
 int deger_yakinlik_sag = 0;
 int deger_yakinlik_sol = 0;
 
-
+ 
 
 // ### IO ###
 
@@ -66,8 +66,7 @@ SharpIR uzaklik_sag_on(A0, 25, 93, 1080);
 SharpIR uzaklik_sag_arka(A1, 25, 93, 1080);
 SharpIR uzaklik_sol_on(A2, 25, 93, 1080);
 SharpIR uzaklik_sol_arka(A3, 25, 93, 1080);
-const int ldr_1 = 4;
-const int ldr_2 = 5;
+const int ldr_1 = 5;
 const int yakinlik_sag = 6;
 const int yakinlik_sol = 7;
 
@@ -75,7 +74,7 @@ const int yakinlik_sol = 7;
 
 void setup() {
 
-  Serial.begin(115200);
+  Serial.begin(57600);
 
   // DIGITAL
   pinMode(uzaklik_on_sag_t, OUTPUT);
@@ -122,7 +121,7 @@ void loop() {
 void serialEvent(){
   while(Serial.available()) {
     char gelen = Serial.read();
-    if (gelen == '\n') {
+    if (gelen == '&') {
       parseCommand(command);
       if(command == "A"){
         oku = true;
@@ -159,7 +158,7 @@ void oku_uzaklik_ultrasonic() {
   digitalWrite(uzaklik_on_sag_t, HIGH);
   digitalWrite(uzaklik_on_sag_t, LOW);
 
-  int deger = pulseIn(uzaklik_on_sag_e, HIGH, 100);
+  int deger = pulseIn(uzaklik_on_sag_e, HIGH, 10000);
   deger_uzaklik_on_sag = deger / 29 / 2;
 
   //delay(50);
@@ -168,7 +167,7 @@ void oku_uzaklik_ultrasonic() {
   digitalWrite(uzaklik_on_sol_t, HIGH);
   digitalWrite(uzaklik_on_sol_t, LOW);
 
-  int deger2 = pulseIn(uzaklik_on_sol_e, HIGH, 100);
+  int deger2 = pulseIn(uzaklik_on_sol_e, HIGH, 10000);
   deger_uzaklik_on_sol = deger2 / 29 / 2;
 
   if (log_uzaklik_sonic == 1) {
@@ -186,19 +185,19 @@ void oku_uzaklik_ultrasonic() {
 
 
 void oku_uzaklik_kizilotesi() {
-  int deger_uzaklik_sag_on = uzaklik_sag_on.distance();
-  int deger_uzaklik_sag_arka = uzaklik_sag_arka.distance();
-  int deger_uzaklik_sol_on = uzaklik_sol_on.distance();
-  int deger_uzaklik_sol_arka = uzaklik_sol_arka.distance();
+  deger_uzaklik_sag_on = uzaklik_sag_on.distance();
+  deger_uzaklik_sag_arka = uzaklik_sag_arka.distance();
+  deger_uzaklik_sol_on = uzaklik_sol_on.distance();
+  deger_uzaklik_sol_arka = uzaklik_sol_arka.distance();
 
   if (log_uzaklik_ir == 1) {
-    Serial.print("Kızılötesi Uzaklık: Sağ Ön: ");
+    Serial.print("Sag On: ");
     Serial.print(deger_uzaklik_sag_on);
-    Serial.print(" - Sağ Arka");
+    Serial.print(" - Sag Arka: ");
     Serial.print(deger_uzaklik_sag_arka);
-    Serial.print(" - Sol Ön");
+    Serial.print(" - Sol On: ");
     Serial.print(deger_uzaklik_sol_on);
-    Serial.print(" - Sol Arka");
+    Serial.print(" - Sol Arka: ");
     Serial.println(deger_uzaklik_sol_arka);
   }
 }
@@ -214,8 +213,8 @@ void oku_hareket() {
   if (log_hareket == 1) {
     Serial.print("Sag: ");
     Serial.print(deger_hareket_sag);
-    Serial.print("Sol: ");
-    Serial.print(deger_hareket_sol);
+    Serial.print("  Sol: ");
+    Serial.println(deger_hareket_sol);
   }
 }
 
@@ -234,7 +233,7 @@ void oku_ses() {
 
 
 void oku_isik() {
-  deger_isik = (analogRead(ldr_1) + analogRead(ldr_2)) / 2;
+  deger_isik = analogRead(ldr_1);
 
   if (log_isik == 1) {
     Serial.print("Işık: ");
@@ -247,10 +246,10 @@ void oku_yakinlik() {
   deger_yakinlik_sol = analogRead(yakinlik_sol);
 
   if (log_yakinlik == 1) {
-    Serial.print("Yakinlik-> Sağ Ön: ");
+    Serial.print("Yakinlik-> Sag On: ");
     Serial.print(deger_yakinlik_sag);
-    Serial.print("  Sol Ön: ");
-    Serial.print(deger_yakinlik_sol);
+    Serial.print("  Sol On: ");
+    Serial.println(deger_yakinlik_sol);
   }
 }
 
@@ -286,9 +285,9 @@ void cikis_ekran(int deger) {
 
   if (deger == 0) {
     lcd.setCursor(0, 0);
-    lcd.print("ROBOTEXT");
+    lcd.print("    ROBOTEXT    ");
     lcd.setCursor(0, 1);
-    lcd.print("POWERED BY AFL");
+    lcd.print(" POWERED BY AFL ");
   }
 }
 

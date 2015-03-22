@@ -1,6 +1,3 @@
-$LOAD_PATH << '.'
-require 'include'
-
 class OpenS
 
   # OSC Input IDs

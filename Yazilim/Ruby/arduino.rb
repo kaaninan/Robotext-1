@@ -6,6 +6,7 @@ $LOAD_PATH << '.'
 require 'log'
 require 'sensor'
 require 'pin'
+require 'gonder'
 
 
 class Arduino_Self
@@ -16,13 +17,15 @@ class Arduino_Self
   @bagli_uno = false
   @bagli_mega = false
 
+
   def initialize
     $sensor = Sensor.new
     $log = LOG.new
-    baglan
-    sleep 2
-
     @pins = Pin.new
+
+    baglan
+    sleep 1
+
     pinMode 'uno'
     sleep 0.1
 
@@ -31,20 +34,22 @@ class Arduino_Self
 
 
     # Mega Serial Oku
-    Thread.new do
-      mega_serial_gelen
-    end
+    mega_serial_gelen
 
-    # Uno Sensor Oku
-    Thread.new do
-      loop do
-        uno_sensor_oku
-      end
-    end
+    uno_sensor_oku        
 
+    # Mega Veri Iste
+    @gonder.gonder_mega
+  end
+
+  def setGonder gonder
+    # Daha sonradan set edilecek
+    @gonder = gonder
   end
 
 
+
+  private
 
   def baglan
     print '==> Bagli Arduino(lar) -> '
@@ -67,7 +72,7 @@ class Arduino_Self
 
     if @boards_mega
       $log.islem_basladi $konum, "Arduino Mega'ya Baglaniliyor"
-      @arduino_mega = SerialPort.new(@boards_mega, 57600, 8, 1, SerialPort::NONE)
+      @arduino_mega = SerialPort.new(@boards_mega, 115200, 8, 1, SerialPort::NONE)
       $log.islem_bitti $konum, "Arduino Mega'ya Baglanildi"
       @bagli_mega = true
     elsif !@boards_mega
@@ -104,10 +109,6 @@ class Arduino_Self
     end
     puts
   end
-
-
-
-
 
   def pinMode choose_board
 
@@ -146,12 +147,14 @@ class Arduino_Self
     end
 
     $log.islem_bitti $konum, 'PinMode'
-
   end
 
 
 
 
+  public
+
+  # NO LOOP
   def mega_serial_gonder komut, deger
 
     if komut == 'buzzer'
@@ -220,20 +223,15 @@ class Arduino_Self
       @arduino_mega.write '-52&'
       @arduino_mega.write '-6&'
     end
-
   end
 
 
-
-
-
-
+  # THREAD WHILE
   def mega_serial_gelen
-
-    loop do
+    Thread.new do
       while (i = @arduino_mega.gets.chomp) do
 
-        #puts "Mega'dan Gelen:  #{i}"
+        # puts "Mega'dan Gelen:  #{i}"
 
         gelen = i.split ' ', 2
 
@@ -276,33 +274,34 @@ class Arduino_Self
           $sensor.sicaklik = deger
 
         end
-
       end
     end
-
   end
 
 
-
-
+  # THREAD
   def uno_sensor_oku
-    yakinlik_yer = @pins.pin_ara 'yakinlik_yer'
-    motor_sag_on = @pins.pin_ara 'motor_sag_on_enkoder'
-    motor_sag_arka = @pins.pin_ara 'motor_sag_arka_enkoder'
-    motor_sol_on = @pins.pin_ara 'motor_sol_on_enkoder'
-    motor_sol_arka = @pins.pin_ara 'motor_sol_arka_enkoder'
+    Thread.new do
+      loop do
+        yakinlik_yer = @pins.pin_ara 'yakinlik_yer'
+        motor_sag_on = @pins.pin_ara 'motor_sag_on_enkoder'
+        motor_sag_arka = @pins.pin_ara 'motor_sag_arka_enkoder'
+        motor_sol_on = @pins.pin_ara 'motor_sol_on_enkoder'
+        motor_sol_arka = @pins.pin_ara 'motor_sol_arka_enkoder'
 
-    $sensor.yakinlik_yer = @arduino_uno.analog_read yakinlik_yer
-    $sensor.motor_sag_on_enkoder = @arduino_uno.analog_read motor_sag_on
-    $sensor.motor_sag_arka_enkoder = @arduino_uno.analog_read motor_sag_arka
-    $sensor.motor_sol_on_enkoder = @arduino_uno.analog_read motor_sol_on
-    $sensor.motor_sol_arka_enkoder = @arduino_uno.analog_read motor_sol_arka
+        $sensor.yakinlik_yer = @arduino_uno.analog_read yakinlik_yer
+        $sensor.motor_sag_on_enkoder = @arduino_uno.analog_read motor_sag_on
+        $sensor.motor_sag_arka_enkoder = @arduino_uno.analog_read motor_sag_arka
+        $sensor.motor_sol_on_enkoder = @arduino_uno.analog_read motor_sol_on
+        $sensor.motor_sol_arka_enkoder = @arduino_uno.analog_read motor_sol_arka
 
-    sleep 0.1 # Stabilite için
+        sleep 0.01
+      end
+    end
   end
 
 
-
+  # SEND ARDUINO
   def uno_transistor gelen
     if gelen == true
       tr1 = @pins.pin_ara 'transistor_1'
@@ -321,10 +320,11 @@ class Arduino_Self
   end
 
 
+
+  # GETTER
   def getSensor
     return $sensor
   end
-
 
   def getUno
     return @arduino_uno

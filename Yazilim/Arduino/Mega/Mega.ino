@@ -76,7 +76,7 @@ const int yakinlik_sol = 7;
 
 void setup() {
 
-  Serial.begin(57600);
+  Serial.begin(115200);
 
   // DIGITAL
   pinMode(uzaklik_on_sag_t, OUTPUT);
@@ -122,6 +122,7 @@ void loop() {
 
 void serialEvent(){
   while(Serial.available()) {
+    
     char gelen = Serial.read();
     if (gelen == '&') {
       parseCommand(command);

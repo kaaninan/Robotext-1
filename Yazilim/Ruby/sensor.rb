@@ -11,20 +11,37 @@ class Sensor
   attr_accessor :yakinlik_yer, :sicaklik
 
 
+  def get_hareket_sag
+    return hareket_sag.to_i
+  end
+
+  def get_hareket_sol
+    return hareket_sol.to_i
+  end
+
+  def get_yakinlik_yer
+    return yakinlik_yer.to_i
+  end
+
+  def get_ses
+    return ses.to_i
+  end
+
+
   def print_uzaklik
-    puts "Sağ Ön #{uzaklik_sag_on}   Sağ Arka #{uzaklik_sag_arka}   Sol Ön #{uzaklik_sol_on}   Sol Arka #{uzaklik_sol_arka}"
+    puts "Sag On #{uzaklik_sag_on}   Sag Arka #{uzaklik_sag_arka}   Sol On #{uzaklik_sol_on}   Sol Arka #{uzaklik_sol_arka}"
   end
 
   def print_uzaklik2
-    puts "Ön Sağ #{uzaklik_on_sag} Ön Sol #{uzaklik_on_sol}"
+    puts "On Sag #{uzaklik_on_sag} On Sol #{uzaklik_on_sol}"
   end
 
   def print_yakinlik
-    puts "Ön Sağ #{yakinlik_on_sag}   Ön Sol #{yakinlik_on_sol}"
+    puts "On Sag #{yakinlik_on_sag}   On Sol #{yakinlik_on_sol}"
   end
 
   def print_sensor
-    puts "Işık #{isik}   Hareket #{hareket_sag} #{hareket_sol}   Ses #{ses}  Sıcaklık #{sicaklik}"
+    puts "Isik #{isik}   Hareket #{hareket_sag} #{hareket_sol}   Ses #{ses}  Sicaklik #{sicaklik}"
   end
 
   def print_uno

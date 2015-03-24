@@ -4,6 +4,7 @@
     <list default="true" id="8cec11da-d23a-4707-ac63-b1669183b995" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Arduino/Mega/Mega.ino" afterPath="$PROJECT_DIR$/../Arduino/Mega/Mega.ino" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/arduino.rb" afterPath="$PROJECT_DIR$/arduino.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hareket.rb" afterPath="$PROJECT_DIR$/hareket.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.rb" afterPath="$PROJECT_DIR$/main.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/motor.rb" afterPath="$PROJECT_DIR$/motor.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sensor.rb" afterPath="$PROJECT_DIR$/sensor.rb" />
@@ -32,12 +33,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="main.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7953615" vertical-offset="962" max-vertical-offset="1980">
-              <caret line="103" column="15" selection-start-line="103" selection-start-column="15" selection-end-line="103" selection-end-column="15" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="525" max-vertical-offset="1275">
+              <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="motor.rb" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/motor.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3930" max-vertical-offset="6075">
+              <caret line="262" column="10" selection-start-line="262" selection-start-column="10" selection-end-line="262" selection-end-column="10" />
+              <folding>
+                <element signature="e#7273#7637#0" expanded="false" />
+                <element signature="e#7672#8058#0" expanded="false" />
+                <element signature="e#8062#8447#0" expanded="false" />
+                <element signature="e#8451#8835#0" expanded="false" />
+                <element signature="e#8839#9223#0" expanded="false" />
+                <element signature="e#9227#9613#0" expanded="false" />
+                <element signature="e#9617#10003#0" expanded="false" />
+                <element signature="e#10007#10383#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -45,36 +65,18 @@
       <file leaf-file-name="arduino.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/arduino.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="5205">
-              <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sensor.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sensor.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="645">
-              <caret line="18" column="44" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="motor.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/motor.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3683" max-vertical-offset="5970">
-              <caret line="264" column="0" selection-start-line="264" selection-start-column="0" selection-end-line="264" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="870" max-vertical-offset="5205">
+              <caret line="82" column="24" selection-start-line="82" selection-start-column="24" selection-end-line="82" selection-end-column="24" />
               <folding>
-                <element signature="e#6649#7035#0" expanded="false" />
-                <element signature="e#7039#7424#0" expanded="false" />
-                <element signature="e#7428#7812#0" expanded="false" />
-                <element signature="e#7816#8200#0" expanded="false" />
-                <element signature="e#8204#8590#0" expanded="false" />
-                <element signature="e#8594#8980#0" expanded="false" />
-                <element signature="e#8984#9360#0" expanded="false" />
+                <marker date="1427215393000" expanded="true" signature="533:660" placeholder="do ... end" />
+                <marker date="1427215393000" expanded="true" signature="604:656" placeholder="do ... end" />
+                <marker date="1427215393000" expanded="true" signature="1247:1526" placeholder="if ... end" />
+                <marker date="1427215393000" expanded="true" signature="1692:2110" placeholder="do ... end" />
+                <marker date="1427215393000" expanded="true" signature="1706:2087" placeholder="if ... end" />
+                <marker date="1427215393000" expanded="true" signature="2262:2719" placeholder="if ... end" />
+                <marker date="1427215393000" expanded="true" signature="2368:2700" placeholder="do ... end" />
+                <marker date="1427215393000" expanded="true" signature="4541:5612" placeholder="while ... end" />
+                <marker date="1427215393000" expanded="true" signature="6486:6860" placeholder="if ... end" />
               </folding>
             </state>
           </provider>
@@ -99,9 +101,9 @@
         <option value="$PROJECT_DIR$/websocket.rb" />
         <option value="$PROJECT_DIR$/serial.rb" />
         <option value="$PROJECT_DIR$/sensor.rb" />
+        <option value="$PROJECT_DIR$/main.rb" />
         <option value="$PROJECT_DIR$/arduino.rb" />
         <option value="$PROJECT_DIR$/motor.rb" />
-        <option value="$PROJECT_DIR$/main.rb" />
       </list>
     </option>
   </component>
@@ -359,27 +361,27 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="825" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32983682" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36925098" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36890647" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17525035" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19027181" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -400,31 +402,24 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="3" />
+      <option name="time" value="5" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/arduino.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2871" max-vertical-offset="4935">
-          <caret line="193" column="30" selection-start-line="193" selection-start-column="30" selection-end-line="193" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/motor.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6720">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#6649#7035#0" expanded="false" />
-            <element signature="e#7039#7424#0" expanded="false" />
-            <element signature="e#7428#7812#0" expanded="false" />
-            <element signature="e#7816#8200#0" expanded="false" />
-            <element signature="e#8204#8590#0" expanded="false" />
-            <element signature="e#8594#8980#0" expanded="false" />
-            <element signature="e#8984#9360#0" expanded="false" />
+            <element signature="e#7273#7637#0" expanded="false" />
+            <element signature="e#7672#8058#0" expanded="false" />
+            <element signature="e#8062#8447#0" expanded="false" />
+            <element signature="e#8451#8835#0" expanded="false" />
+            <element signature="e#8839#9223#0" expanded="false" />
+            <element signature="e#9227#9613#0" expanded="false" />
+            <element signature="e#9617#10003#0" expanded="false" />
+            <element signature="e#10007#10383#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -448,7 +443,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1461" max-vertical-offset="2055">
           <caret line="119" column="0" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1427215393000" expanded="true" signature="533:660" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="604:656" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="1247:1526" placeholder="if ... end" />
+            <marker date="1427215393000" expanded="true" signature="1692:2110" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="1706:2087" placeholder="if ... end" />
+            <marker date="1427215393000" expanded="true" signature="2262:2719" placeholder="if ... end" />
+            <marker date="1427215393000" expanded="true" signature="2368:2700" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="4541:5612" placeholder="while ... end" />
+            <marker date="1427215393000" expanded="true" signature="6486:6860" placeholder="if ... end" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -457,13 +462,14 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="336" max-vertical-offset="2280">
           <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
           <folding>
-            <element signature="e#6649#7035#0" expanded="false" />
-            <element signature="e#7039#7424#0" expanded="false" />
-            <element signature="e#7428#7812#0" expanded="false" />
-            <element signature="e#7816#8200#0" expanded="false" />
-            <element signature="e#8204#8590#0" expanded="false" />
-            <element signature="e#8594#8980#0" expanded="false" />
-            <element signature="e#8984#9360#0" expanded="false" />
+            <element signature="e#7273#7637#0" expanded="false" />
+            <element signature="e#7672#8058#0" expanded="false" />
+            <element signature="e#8062#8447#0" expanded="false" />
+            <element signature="e#8451#8835#0" expanded="false" />
+            <element signature="e#8839#9223#0" expanded="false" />
+            <element signature="e#9227#9613#0" expanded="false" />
+            <element signature="e#9617#10003#0" expanded="false" />
+            <element signature="e#10007#10383#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -494,7 +500,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1461" max-vertical-offset="2055">
           <caret line="119" column="0" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1427215393000" expanded="true" signature="533:660" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="604:656" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="1247:1526" placeholder="if ... end" />
+            <marker date="1427215393000" expanded="true" signature="1692:2110" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="1706:2087" placeholder="if ... end" />
+            <marker date="1427215393000" expanded="true" signature="2262:2719" placeholder="if ... end" />
+            <marker date="1427215393000" expanded="true" signature="2368:2700" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="4541:5612" placeholder="while ... end" />
+            <marker date="1427215393000" expanded="true" signature="6486:6860" placeholder="if ... end" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -503,13 +519,14 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1050">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#6649#7035#0" expanded="false" />
-            <element signature="e#7039#7424#0" expanded="false" />
-            <element signature="e#7428#7812#0" expanded="false" />
-            <element signature="e#7816#8200#0" expanded="false" />
-            <element signature="e#8204#8590#0" expanded="false" />
-            <element signature="e#8594#8980#0" expanded="false" />
-            <element signature="e#8984#9360#0" expanded="false" />
+            <element signature="e#7273#7637#0" expanded="false" />
+            <element signature="e#7672#8058#0" expanded="false" />
+            <element signature="e#8062#8447#0" expanded="false" />
+            <element signature="e#8451#8835#0" expanded="false" />
+            <element signature="e#8839#9223#0" expanded="false" />
+            <element signature="e#9227#9613#0" expanded="false" />
+            <element signature="e#9617#10003#0" expanded="false" />
+            <element signature="e#10007#10383#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -540,7 +557,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2220">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1427215393000" expanded="true" signature="533:660" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="604:656" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="1247:1526" placeholder="if ... end" />
+            <marker date="1427215393000" expanded="true" signature="1692:2110" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="1706:2087" placeholder="if ... end" />
+            <marker date="1427215393000" expanded="true" signature="2262:2719" placeholder="if ... end" />
+            <marker date="1427215393000" expanded="true" signature="2368:2700" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="4541:5612" placeholder="while ... end" />
+            <marker date="1427215393000" expanded="true" signature="6486:6860" placeholder="if ... end" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -570,7 +597,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2220">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1427215393000" expanded="true" signature="533:660" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="604:656" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="1247:1526" placeholder="if ... end" />
+            <marker date="1427215393000" expanded="true" signature="1692:2110" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="1706:2087" placeholder="if ... end" />
+            <marker date="1427215393000" expanded="true" signature="2262:2719" placeholder="if ... end" />
+            <marker date="1427215393000" expanded="true" signature="2368:2700" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="4541:5612" placeholder="while ... end" />
+            <marker date="1427215393000" expanded="true" signature="6486:6860" placeholder="if ... end" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -600,7 +637,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="2220">
           <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
-          <folding />
+          <folding>
+            <marker date="1427215393000" expanded="true" signature="533:660" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="604:656" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="1247:1526" placeholder="if ... end" />
+            <marker date="1427215393000" expanded="true" signature="1692:2110" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="1706:2087" placeholder="if ... end" />
+            <marker date="1427215393000" expanded="true" signature="2262:2719" placeholder="if ... end" />
+            <marker date="1427215393000" expanded="true" signature="2368:2700" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="4541:5612" placeholder="while ... end" />
+            <marker date="1427215393000" expanded="true" signature="6486:6860" placeholder="if ... end" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -630,7 +677,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="2220">
           <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
-          <folding />
+          <folding>
+            <marker date="1427215393000" expanded="true" signature="533:660" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="604:656" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="1247:1526" placeholder="if ... end" />
+            <marker date="1427215393000" expanded="true" signature="1692:2110" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="1706:2087" placeholder="if ... end" />
+            <marker date="1427215393000" expanded="true" signature="2262:2719" placeholder="if ... end" />
+            <marker date="1427215393000" expanded="true" signature="2368:2700" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="4541:5612" placeholder="while ... end" />
+            <marker date="1427215393000" expanded="true" signature="6486:6860" placeholder="if ... end" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -660,7 +717,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3045">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1427215393000" expanded="true" signature="533:660" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="604:656" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="1247:1526" placeholder="if ... end" />
+            <marker date="1427215393000" expanded="true" signature="1692:2110" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="1706:2087" placeholder="if ... end" />
+            <marker date="1427215393000" expanded="true" signature="2262:2719" placeholder="if ... end" />
+            <marker date="1427215393000" expanded="true" signature="2368:2700" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="4541:5612" placeholder="while ... end" />
+            <marker date="1427215393000" expanded="true" signature="6486:6860" placeholder="if ... end" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -683,7 +750,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3615">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1427215393000" expanded="true" signature="533:660" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="604:656" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="1247:1526" placeholder="if ... end" />
+            <marker date="1427215393000" expanded="true" signature="1692:2110" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="1706:2087" placeholder="if ... end" />
+            <marker date="1427215393000" expanded="true" signature="2262:2719" placeholder="if ... end" />
+            <marker date="1427215393000" expanded="true" signature="2368:2700" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="4541:5612" placeholder="while ... end" />
+            <marker date="1427215393000" expanded="true" signature="6486:6860" placeholder="if ... end" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -780,41 +857,59 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sensor.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="118" max-vertical-offset="645">
+        <state vertical-scroll-proportion="0.36834925" vertical-offset="0" max-vertical-offset="733">
           <caret line="18" column="44" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="525" max-vertical-offset="1275">
+          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/arduino.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5205">
-          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="870" max-vertical-offset="5205">
+          <caret line="82" column="24" selection-start-line="82" selection-start-column="24" selection-end-line="82" selection-end-column="24" />
+          <folding>
+            <marker date="1427215393000" expanded="true" signature="533:660" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="604:656" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="1247:1526" placeholder="if ... end" />
+            <marker date="1427215393000" expanded="true" signature="1692:2110" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="1706:2087" placeholder="if ... end" />
+            <marker date="1427215393000" expanded="true" signature="2262:2719" placeholder="if ... end" />
+            <marker date="1427215393000" expanded="true" signature="2368:2700" placeholder="do ... end" />
+            <marker date="1427215393000" expanded="true" signature="4541:5612" placeholder="while ... end" />
+            <marker date="1427215393000" expanded="true" signature="6486:6860" placeholder="if ... end" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gonder.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26603" vertical-offset="0" max-vertical-offset="1845">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/motor.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3683" max-vertical-offset="5970">
-          <caret line="264" column="0" selection-start-line="264" selection-start-column="0" selection-end-line="264" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="3930" max-vertical-offset="6075">
+          <caret line="262" column="10" selection-start-line="262" selection-start-column="10" selection-end-line="262" selection-end-column="10" />
           <folding>
-            <element signature="e#6649#7035#0" expanded="false" />
-            <element signature="e#7039#7424#0" expanded="false" />
-            <element signature="e#7428#7812#0" expanded="false" />
-            <element signature="e#7816#8200#0" expanded="false" />
-            <element signature="e#8204#8590#0" expanded="false" />
-            <element signature="e#8594#8980#0" expanded="false" />
-            <element signature="e#8984#9360#0" expanded="false" />
+            <element signature="e#7273#7637#0" expanded="false" />
+            <element signature="e#7672#8058#0" expanded="false" />
+            <element signature="e#8062#8447#0" expanded="false" />
+            <element signature="e#8451#8835#0" expanded="false" />
+            <element signature="e#8839#9223#0" expanded="false" />
+            <element signature="e#9227#9613#0" expanded="false" />
+            <element signature="e#9617#10003#0" expanded="false" />
+            <element signature="e#10007#10383#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7953615" vertical-offset="962" max-vertical-offset="1980">
-          <caret line="103" column="15" selection-start-line="103" selection-start-column="15" selection-end-line="103" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>

@@ -13,6 +13,7 @@ require 'hareket'
 require 'log'
 require 'sensor'
 require 'websocket'
+require 'gonder'
 
 
 $konum = 'main.rb'
@@ -22,60 +23,51 @@ def setup
 
   # Arduino'ya Bağlan
   $board = Arduino_Self.new
+  @gonder = Gonder.new $board
+  $board.setGonder @gonder
   @motor = Motor.new $board
   @sensor = $board.getSensor
+  @hareket = Hareket.new $board
 
 end
+
 
 puts
 
 
 
-
-
-
-
-## SERIAL
-def mega_gonder
-  $board.mega_serial_gonder 'sensorler', nil
-end
-
-
-## SENSOR
-def sensor_yaz
-  #$board.getSensor.print_sensor
-  $board.getSensor.print_uzaklik
-  $board.getSensor.print_uzaklik2
-  $board.getSensor.print_yakinlik
-  #$board.getSensor.print_uno
-  #$board.getSensor.print_enkoder
-end
-
-
-
-## WEBSOCKET
 def websocket
   @websocket = WebSoket.new $board
   @websocket.start
 end
 
+def baslangic_animasyonu
+  @gonder.servo_selam
+  @gonder.ekran_isik 'kirp'
+  @gonder.ekran '0'
+  @gonder.buzzer 'acilis'
+end
 
 
-setup # Arduino Bağlantısı
-#websocket
+
+setup
+sleep 0.5
+baslangic_animasyonu
+
+websocket
 sleep 0.1
 
 
 
 # @motor.motor_auto_start # Otomatik Motor
-# @motor.motor_klavye_tus # Klavye Motor
+# @motor.motor_auto_stop #
 
-
+# @hareket.start
+# @hareket.stop
+  
 
 loop do
-  mega_gonder # Mega'ya veri gönderme
-  @sensor_yaz # Sensorlerin verilerini print serial
-  sleep 0.1
+  sleep 1
 end
 
 

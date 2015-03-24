@@ -28,6 +28,7 @@ def setup
   @motor = Motor.new $board
   @sensor = $board.getSensor
   @hareket = Hareket.new $board
+  @osc = OpenS.new $board, @gonder
 
 end
 
@@ -64,7 +65,13 @@ sleep 0.1
 
 # @hareket.start
 # @hareket.stop
-  
+
+# @osc.motor_start
+# @osc.motor_stop
+
+# @osc.servo_start
+# @osc.servo_stop
+
 
 loop do
   sleep 1

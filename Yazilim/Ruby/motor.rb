@@ -486,4 +486,37 @@ class Motor
     @arduino_uno.analog_write @h_sol_arka, 0
   end
 
+
+
+
+  def motor_osc sag_hiz, sol_hiz, sag_ters, sol_ters
+
+    if sag_ters == 1
+      yon_sag1 = 0
+      yon_sag2 = 1
+    else
+      yon_sag1 = 1
+      yon_sag2 = 0
+    end
+
+    if sol_ters == 1
+      yon_sol1 = 0
+      yon_sol2 = 1
+    else
+      yon_sol1 = 1
+      yon_sol2 = 0
+    end
+
+    @arduino_uno.digital_write @h_sag_on, sag_hiz
+    @arduino_uno.digital_write @h_sag_arka, sag_hiz
+    @arduino_uno.digital_write @h_sol_on, sol_hiz
+    @arduino_uno.digital_write @h_sol_arka, sol_hiz
+
+    @arduino_uno.analog_write @y_sag_on, yon_sag1
+    @arduino_uno.analog_write @y_sag_arka, yon_sag2
+    @arduino_uno.analog_write @y_sol_on, yon_sol1
+    @arduino_uno.analog_write @y_sol_arka, yon_sol2
+
+  end
+
 end

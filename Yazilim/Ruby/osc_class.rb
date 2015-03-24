@@ -1,3 +1,5 @@
+require 'micro-osc'
+
 class OpenS
 
   # OSC Input IDs
@@ -17,7 +19,10 @@ class OpenS
 
   $osc_liste = Hash.new
 
-  def initialize
+  def initialize board, gonder
+
+    @board = board
+    @gonder = gonder
 
     # OSC ID Listesi Oluşturma
     $eski_liste.each do |i|
@@ -32,12 +37,10 @@ class OpenS
       $osc_liste.each do |a, b|
         receive(a) do |val|
 
-
           # LOG
-          #puts "#{a} -> #{val}"
+          # puts "#{a} -> #{val.to_i}"
 
-
-          $osc_liste[a] = val
+          $osc_liste[a] = val.to_i
         end
       end
       p "OSC Hazir, Port: #{input_ports.join(', ')}"
@@ -46,16 +49,47 @@ class OpenS
   end
 
 
-  def get_liste
-    return $osc_liste
-  end
 
-  def get_item isim
-    $osc_liste.each do |a, b|
-      if a == isim
-        puts 'Tamam'
+
+  def motor_start
+    @thr = Thread.new do
+      loop do
+        @board.motor_osc $osc_liste['/Motor/sag'], $osc_liste['/Motor/sol'], $osc_liste['/Motor/sag_ters'], $osc_liste['/Motor/sol_ters']
+
+        if $osc_liste['buzzer'] == 1
+          @board.buzzer 'cal'
+        else
+          @board.buzzer 'sus'
+        end
+
+        sleep 0.1
       end
     end
+  end
+
+  def motor_stop
+    @thr.exit
+    @board.motor_dur
+  end
+
+
+
+  def servo_start
+    @thr2 = Thread.new do
+      loop do
+        @gonder.servo_osc $osc_liste['/Main/servo_1'], $osc_liste['/Main/servo_2']
+        sleep 0.1
+      end
+    end
+  end
+
+  def servo_stop
+    @thr2.exit
+    @gonder.servo_yon 'orta'
+  end
+
+  def get_liste
+    return $osc_liste
   end
 
 end

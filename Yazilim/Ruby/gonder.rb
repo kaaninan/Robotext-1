@@ -32,6 +32,11 @@ class Gonder
 	end
 
 
+  def servo_osc x,y
+    @board.mega_serial_gonder 'servo_y', y
+    @board.mega_serial_gonder 'servo_x', x
+  end
+
 	def buzzer deger
 
 		if deger == 'cal'

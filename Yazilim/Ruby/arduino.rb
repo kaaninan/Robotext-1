@@ -20,11 +20,11 @@ class Arduino_Self
     $sensor = Sensor.new
     $log = LOG.new
     baglan
-    sleep 5
+    sleep 2
 
     @pins = Pin.new
     pinMode 'uno'
-    sleep 1
+    sleep 0.1
 
     # Transistor Aç
     uno_transistor true
@@ -201,6 +201,10 @@ class Arduino_Self
       @arduino_mega.write '-52&'
 
 
+    elsif komut == 'sicaklik'
+      @arduino_mega.write '-6&'
+
+
     elsif komut == 'sensorler'
       @arduino_mega.write '-11&'
       @arduino_mega.write '-12&'
@@ -214,6 +218,7 @@ class Arduino_Self
       @arduino_mega.write '-4&'
       @arduino_mega.write '-51&'
       @arduino_mega.write '-52&'
+      @arduino_mega.write '-6&'
     end
 
   end
@@ -266,6 +271,9 @@ class Arduino_Self
           $sensor.yakinlik_on_sag = deger
         elsif komut == '-521'
           $sensor.yakinlik_on_sol = deger
+
+        elsif komut == '-61'
+          $sensor.sicaklik = deger
 
         end
 
@@ -329,7 +337,6 @@ class Arduino_Self
 
   def close
     @arduino_uno.close
-    @arduino_mega.stop
   end
 
 end

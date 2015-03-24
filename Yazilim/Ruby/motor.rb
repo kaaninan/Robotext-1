@@ -8,6 +8,7 @@ class Motor
 
     @arduino_uno = board.getUno
     @board = board
+    @sensor = board.getSensor
 
     puts '==> Motorlar Etkinlestirildi <=='
 
@@ -28,10 +29,37 @@ class Motor
     @e_sol_on = pin.pin_ara 'motor_sol_on_enkoder'
     @e_sol_arka = pin.pin_ara 'motor_sol_arka_enkoder'
 
+    @on_dikey = false
+    @on_sag_dikey = false
+    @on_sol_dikey = false
+
+    @on_sag_capraz = false
+    @on_sol_capraz = false
+
+    @sag_dikey = false
+    @sag_capraz = false
+
+    @sol_dikey = false
+    @sol_capraz = false
+
+    @sag_ort_uygun = false
+    @sol_ort_uygun = false
+
+    @sinir = 10 # Ultrasonik
+    @yakinlik_sinir = 100 # TCRT 5000
+    @yan_sinir = 10 # Sharp
+    @ortalama_sinir = 10 # Sharp Yan Ortalama Sınır
+
   end
 
 
-
+  def motor_klavye_tus
+    Thread.new do
+      loop do
+        motor_kontrol_tus
+      end
+    end
+  end
 
   def motor_auto_start
     @motor_auto_thread = Thread.new do
@@ -47,8 +75,6 @@ class Motor
     end
   end
 
-
-
   def motor_auto_stop
     @motor_auto_thread.exit
     @uzaklik_thread.exit
@@ -57,7 +83,7 @@ class Motor
 
 
 
-
+# OTOMATİK MOD KONTROL (NO LOOP)
 
   private
 
@@ -77,15 +103,13 @@ class Motor
 
           # SOL TARAFTA ENGEL VAR
           # SAGA DOĞRU GİT
-          motor_sag
-          #motor_ileri_sag
+          motor_ileri_sag
 
         elsif @sag_dikey == false && @sol_dikey == true
 
           # SAĞ TARAFTA ENGEL VAR
           # SOLA DOĞRU GİT
-          motor_sol
-          #motor_ileri_sol
+          motor_ileri_sol
         end
 
 
@@ -94,6 +118,8 @@ class Motor
         ## SAG CAPRAZDA ENGEL VAR
         ## SOLA DOĞRU DÖN
 
+        motor_geri
+        sleep 1
         motor_sol
 
 
@@ -102,6 +128,8 @@ class Motor
         ## SOL ÇAPRAZDA ENGEL VAR
         ## SAĞA DOĞRU DÖN
 
+        motor_geri
+        sleep 1
         motor_sag
 
       else
@@ -110,6 +138,7 @@ class Motor
         ## GERİ DÖN
 
         motor_geri
+        sleep 1
 
         # TODO rastgele dönme ekle
 
@@ -117,196 +146,201 @@ class Motor
 
 
     else
-
       ## ON TARAFTA ENGEL VAR
-
       # Sağ Tarafa Bak
 
-      if @sag_dikey == true && @sol_dikey == false
+      
+      if @on_sag_dikey == true && @on_sol_dikey == false
 
-        if @sag_capraz == true
+        if @sag_dikey == true
 
-          # SAGA DON
-          motor_sag
+          if @on_sag_capraz == true && @on_sol_capraz == true
+            motor_sag
+          
+          else
+            motor_geri
+            sleep 1
+          end
+
+        elsif @sol_dikey == true
+
+          if @on_sag_capraz == true && @on_sol_capraz == true
+            motor_sol
+          
+          else
+            motor_geri
+            sleep 1
+          end
 
         else
-
-          ## ÇAPRAZDA ENGEL VAR
           motor_geri
+          sleep 1
 
-        end
+      elsif @on_sag_dikey == false && @on_sol_dikey == true
 
+        if @sol_dikey == true
 
-      elsif @sol_dikey == true && @sag_dikey == false
+          if @on_sag_capraz == true && @on_sol_capraz == true
+            motor_sol
+          
+          else
+            motor_geri
+            sleep 1
+          end
 
-        if @sol_capraz == true
+        elsif @sag_dikey == true
 
-          # SOLA DÖN
-          motor_sol
+          if @on_sag_capraz == true && @on_sol_capraz == true
+            motor_sag
+          
+          else
+            motor_geri
+            sleep 1
+          end
 
         else
-
-          # ÇAPRAZDA ENGEL VAR
           motor_geri
-
-        end
-
-      elsif @sol_dikey == false && @sag_dikey == false
-
-        ## İKİ TARAFTADA ENGEL VAR
-        motor_geri
+          sleep 1
 
 
-      else
+      elsif @on_sag_dikey == false && @on_sol_dikey == false
 
-        ## SAĞ VE SOL TARAF BOŞ
+    
+        if @sag_dikey == true && @sol_dikey == false
 
-        # RASTEGELE OLARAK BİR TARAFA DON
+          if @sag_capraz == true
 
-        a = rand 2
+            # SAGA DON
+            motor_sag
 
-        if a == 1
-          motor_sag
+          else
+
+            ## ÇAPRAZDA ENGEL VAR
+            motor_geri
+            sleep 1
+
+          end
+
+
+        elsif @sol_dikey == true && @sag_dikey == false
+
+          if @sol_capraz == true
+
+            # SOLA DÖN
+            motor_sol
+
+          else
+
+            # ÇAPRAZDA ENGEL VAR
+            motor_geri
+            sleep 1
+
+          end
+
+        elsif @sol_dikey == false && @sag_dikey == false
+
+          ## İKİ TARAFTADA ENGEL VAR
+          motor_geri
+          sleep 1
+
+
+
         else
-          motor_sol
-        end
 
+          ## SAĞ VE SOL TARAF BOŞ
+
+          # RASTEGELE OLARAK BİR TARAFA DON
+            a = rand 2
+
+          if a == 1
+            motor_sag
+          else
+            motor_sol
+          end
+
+        end
       end
-
     end
   end
 
-
-
   def uzaklik_kontrol
-    sensor = @board.getSensor
 
-    @sinir = 20
-    @yakinlik_sinir = 300
-    @yan_sinir = 10
-    @ortalama_sinir = 20 #DEĞİŞ
-
-    # true olduklarında müsait
-    # false iken yol açık değil
-
-    @on_dikey = false
-    @on_sag_capraz = false
-    @on_sol_capraz = false
-
-    @sag_dikey = false
-    @sag_capraz = false
-
-    @sol_dikey = false
-    @sol_capraz = false
-
-    @sag_ort_uygun = false
-    @sol_ort_uygun = false
+    # print @on_dikey
+    # print ' '
+    # print @on_sag_capraz
+    # print ' '
+    # print @on_sol_capraz
+    # print ' '
+    # print @sag_dikey
+    # print ' '
+    # print @sag_capraz
+    # print ' '
+    # print @sol_dikey
+    # print ' '
+    # print @sol_capraz
+    # print ' '
+    # print @sag_ort_uygun
+    # print ' '
+    # puts @sol_ort_uygun
 
 
-    ### ON TARAF ###
+    ## ON TARAF ### ULTRASONIC
 
-
-    if sensor.uzaklik_on_sag > @sinir && uzaklik_on_sol > @sinir
-
-      if sensor.yakinlik_on_sag > @yakinlik_sinir && sensor.yakinlik_on_sol > @yakinlik_sinir
-
-        # YOL BOŞ
-        @on_sag_capraz = true
-        @on_sol_capraz = true
-        @on_dikey = true
-
-      else
-
-        # ÇAPRAZDA ENGEL VAR
-        @on_dikey = true
-
-        if sensor.yakinlik_on_sag < @yakinlik_sinir
-          @on_sag_capraz = false
-        else
-          @on_sag_capraz = true
-        end
-
-        if sensor.yakinlik_on_sol < @yakinlik_sinir
-          @on_sol_capraz = false
-        else
-          @on_sol_capraz = true
-        end
-
-      end
-
+    if @sensor.uzaklik_on_sag.to_i > @sinir && @sensor.uzaklik_on_sol.to_i > @sinir
+      @on_dikey = true
     else
-
       @on_dikey = false
+    end
 
+    if @sensor.uzaklik_on_sag.to_i > @sinir
+      @on_sag_dikey = true
+    else
+      @on_sag_dikey = false
+    end
+
+    if @sensor.uzaklik_on_sol.to_i > @sinir
+      @on_sol_dikey = true
+    else
+      @on_sol_dikey = false
+    end
+
+
+    ## ON CAPRAZ ### TCRT 5000
+
+    if @sensor.yakinlik_on_sag.to_i < @yakinlik_sinir
+      @on_sag_capraz = false
+    else
+      @on_sag_capraz = true
+    end
+
+    if @sensor.yakinlik_on_sol.to_i < @yakinlik_sinir
+      @on_sol_capraz = false
+    else
+      @on_sol_capraz = true
     end
 
 
 
-    ### YAN TARAF ###
-
-    # -> Eğer sağ veya solda hiç engele rastlanmamışsa if'ler
-    # -> Engel varsa ortalamalarını alarak uygun yolu bul
-
+    ### YAN TARAF ### SHARP
 
     # SAĞA BAK
-
-    if sensor.uzaklik_sag_on > @yan_sinir && sensor.uzaklik_sag_arka > @yan_sinir
-
+    if @sensor.uzaklik_sag_on.to_i > @yan_sinir && @sensor.uzaklik_sag_arka.to_i > @yan_sinir
       # DİKEY OLARAK BOŞ
       @sag_dikey = true
-
-      if sensor.yakinlik_on_sag > @yakinlik_sinir
-
-        # SAĞ TARAF BOŞ
-        @sag_capraz = true
-
-      else
-
-        # SAĞ ÇAPRAZDA ENGEL VAR
-        @sag_capraz = false
-
-      end
-
     else
-
-      # SAĞ TARAFTA ENGEL VAR
+      # DİKEY ENGEL VAR
       @sag_dikey = false
-
     end
-
-
-
 
 
     # SOLA BAK
-
-    if sensor.uzaklik_sol_on > @yan_sinir && sensor.uzaklik_sol_arka > @yan_sinir
-
+    if @sensor.uzaklik_sol_on.to_i > @yan_sinir && @sensor.uzaklik_sol_arka.to_i > @yan_sinir
       # DİKEY OLARAK BOŞ
       @sol_dikey = true
-
-      if sensor.yakinlik_on_sol > @yakinlik_sinir
-
-        # SOL TARAF BOŞ
-        @sol_capraz = true
-
-      else
-
-        # SOL ÇAPRAZDA ENGEL VAR
-        @sol_capraz = false
-
-      end
-
     else
-
-      # SOL TARAFTA ENGEL VAR
+      # DİKEY ENGEL VAR
       @sol_dikey = false
-
     end
-
-
-
-
 
 
 
@@ -315,9 +349,8 @@ class Motor
     if @sag_dikey == false && @sol_dikey == false
 
       ## ORTALAMALARINI AL
-
-      sag_ort = (sensor.uzaklik_sag_on + sensor.uzaklik_sag_arka) / 2
-      sol_ort = (sensor.uzaklik_sol_on + sensor.uzaklik_sol_arka) / 2
+      sag_ort = (@sensor.uzaklik_sag_on.to_i + @sensor.uzaklik_sag_arka.to_i) / 2
+      sol_ort = (@sensor.uzaklik_sol_on.to_i + @sensor.uzaklik_sol_arka.to_i) / 2
 
       # EĞER ORTALAMALAR SINIRIN ALTINDA DEĞİLSE UYGUN YÖNÜ SEÇ
       if sag_ort > @ortalama_sinir && sol_ort > @ortalama_sinir
@@ -341,20 +374,35 @@ class Motor
         @sol_ort_uygun = false
 
       end
-
     end
+  end
 
+  def motor_kontrol_tus
+  
+    a = gets.chomp
+
+    if a == 'w'
+      @motor.motor_ileri
+    elsif a == 's'
+      @motor.motor_geri
+    elsif a == 'a'
+      @motor.motor_sol
+    elsif a == 'd'
+      @motor.motor_sag
+    elsif a == 'q'
+      @motor.motor_ileri_sol
+    elsif a == 'e'
+      @motor.motor_ileri_sag
+    elsif a == 'z'
+      @motor.motor_dur
+    end
   end
 
 
 
-
-
-
+# MANUEL KOMUTLAR
 
   public
-
-  # MANUEL KOMUTLAR
 
   def motor_ileri
     @arduino_uno.digital_write @y_sag_on, 0

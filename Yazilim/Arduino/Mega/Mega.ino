@@ -16,6 +16,7 @@ int log_hareket = 0;
 int log_ses = 0;
 int log_isik = 0;
 int log_yakinlik = 0;
+int log_sicaklik = 0;
 
 
 
@@ -32,7 +33,7 @@ int deger_ses = 0;
 int deger_isik = 0;
 int deger_yakinlik_sag = 0;
 int deger_yakinlik_sol = 0;
-
+int deger_sicaklik = 0;
  
 
 // ### IO ###
@@ -66,6 +67,7 @@ SharpIR uzaklik_sag_on(A0, 25, 93, 1080);
 SharpIR uzaklik_sag_arka(A1, 25, 93, 1080);
 SharpIR uzaklik_sol_on(A2, 25, 93, 1080);
 SharpIR uzaklik_sol_arka(A3, 25, 93, 1080);
+const int sicaklik = 4;
 const int ldr_1 = 5;
 const int yakinlik_sag = 6;
 const int yakinlik_sol = 7;
@@ -149,6 +151,7 @@ void oku_sensor() {
   oku_ses();
   oku_isik();
   oku_yakinlik();
+  oku_sicaklik();
 }
 
 
@@ -254,6 +257,14 @@ void oku_yakinlik() {
 }
 
 
+void oku_sicaklik(){
+  deger_sicaklik = (5.0 * analogRead(sicaklik) * 100.0) / 1024;
+  
+  if(log_sicaklik == 1){
+    Serial.print("Sicaklik: ");
+    Serial.println(deger_sicaklik);
+  }
+}
 
 
 
@@ -387,6 +398,11 @@ void parseCommand(String com) {
     Serial.println(deger_yakinlik_sol);
   }
   
+  // SICAKLIK
+  else if (part1.equalsIgnoreCase("-6")) {
+    Serial.print("-61 ");
+    Serial.println(deger_sicaklik);
+  }
   
   
   // ### GELEN ###

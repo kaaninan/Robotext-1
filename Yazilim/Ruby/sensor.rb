@@ -24,7 +24,7 @@ class Sensor
   end
 
   def print_sensor
-    puts "Işık #{isik}   Hareket #{hareket_sag} #{hareket_sol}   Ses #{ses}"
+    puts "Işık #{isik}   Hareket #{hareket_sag} #{hareket_sol}   Ses #{ses}  Sıcaklık #{sicaklik}"
   end
 
   def print_uno

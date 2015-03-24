@@ -22,6 +22,8 @@ def setup
 
   # Arduino'ya Bağlan
   $board = Arduino_Self.new
+  @motor = Motor.new $board
+  @sensor = $board.getSensor
 
 end
 
@@ -33,37 +35,6 @@ puts
 
 
 
-@motor = Motor.new $board
-
-## MOTOR
-def motor_auto
-  @motor.motor_auto_start
-end
-
-
-def motor_kontrol
-  loop do
-    a = gets.chomp
-
-    if a == 'w'
-      @motor.motor_ileri
-    elsif a == 's'
-      @motor.motor_geri
-    elsif a == 'a'
-      @motor.motor_sol
-    elsif a == 'd'
-      @motor.motor_sag
-    elsif a == 'q'
-      @motor.motor_ileri_sol
-    elsif a == 'e'
-      @motor.motor_ileri_sag
-    elsif a == 'z'
-      @motor.motor_dur
-    end
-  end
-end
-
-
 ## SERIAL
 def mega_gonder
   $board.mega_serial_gonder 'sensorler', nil
@@ -72,10 +43,10 @@ end
 
 ## SENSOR
 def sensor_yaz
-  $board.getSensor.print_sensor
-  #$board.getSensor.print_uzaklik
-  #$board.getSensor.print_uzaklik2
-  #$board.getSensor.print_yakinlik
+  #$board.getSensor.print_sensor
+  $board.getSensor.print_uzaklik
+  $board.getSensor.print_uzaklik2
+  $board.getSensor.print_yakinlik
   #$board.getSensor.print_uno
   #$board.getSensor.print_enkoder
 end
@@ -90,19 +61,22 @@ end
 
 
 
-#setup # Arduino Bağlantısı
+setup # Arduino Bağlantısı
 #websocket
-#motor_auto
-#motor_kontrol # Klavyeden motor kontrolü
+sleep 0.1
+
+
+
+# @motor.motor_auto_start # Otomatik Motor
+# @motor.motor_klavye_tus # Klavye Motor
+
+
 
 loop do
   mega_gonder # Mega'ya veri gönderme
-  sensor_yaz # Sensorlerin verilerini yazdırma
+  @sensor_yaz # Sensorlerin verilerini print serial
   sleep 0.1
 end
-
-
-
 
 
 

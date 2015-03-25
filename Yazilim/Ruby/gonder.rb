@@ -6,29 +6,46 @@ class Gonder
 
 	def initialize board
 		@board = board
-		@sensor = boad.getSensor
+		@sensor = board.getSensor
+
+    @servo_x = 80
+    @servo_y = 10
 	end
 
 
+
+  # THREAD
+
+  def servo_thread
+    Thread.new do
+      loop do
+        @board.mega_serial_gonder 'servo_x', @servo_x
+        @board.mega_serial_gonder 'servo_y', @servo_y
+        sleep 0.1
+      end
+    end
+  end
+
 	def servo yon
 
-  		@board.mega_serial_gonder 'servo_y', 10
+  	@servo_y = 10
 
 		if yon == 'sag'
-			@board.mega_serial_gonder 'servo_x', 20
+			@servo_x = 20
 		elsif yon == 'sol'
-			@board.mega_serial_gonder 'servo_x', 160
+      @servo_x = 160
 		else
-			@board.mega_serial_gonder 'servo_x', 80
+      @servo_x = 80
 		end
 	end
 
 	def servo_selam
-		@board.mega_serial_gonder 'servo_y', 10
+    sleep 0.5
+		@servo_y = 10
 		sleep 1.5
-		@board.mega_serial_gonder 'servo_y', 120
-		sleep 1.5
-		@board.mega_serial_gonder 'servo_y', 10
+    @servo_y = 120
+		sleep 0.5
+    @servo_y = 10
 	end
 
 

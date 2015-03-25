@@ -38,13 +38,14 @@ class Arduino_Self
 
     uno_sensor_oku        
 
-    # Mega Veri Iste
-    @gonder.gonder_mega
   end
 
   def setGonder gonder
     # Daha sonradan set edilecek
     @gonder = gonder
+    
+    # Mega Veri Iste
+    @gonder.gonder_mega
   end
 
 

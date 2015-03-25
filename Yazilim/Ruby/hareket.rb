@@ -6,7 +6,7 @@ class Hareket
 
   def initialize board
     @board = board
-    @sensor = boad.getSensor
+    @sensor = board.getSensor
   end
 
 

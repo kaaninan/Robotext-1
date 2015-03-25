@@ -30,6 +30,9 @@ def setup
   @hareket = Hareket.new $board
   @osc = OpenS.new $board, @gonder
 
+  # SERVO THREAD
+  @gonder.servo_thread
+
 end
 
 
@@ -42,21 +45,30 @@ def websocket
   @websocket.start
 end
 
+
 def baslangic_animasyonu
-  @gonder.servo_selam
-  @gonder.ekran_isik 'kirp'
-  @gonder.ekran '0'
-  @gonder.buzzer 'acilis'
+  Thread.new do
+    @gonder.servo_selam
+  end
+  Thread.new do
+    @gonder.ekran_isik 'kirp'
+  end
+  Thread.new do
+    @gonder.ekran '0'
+  end
+  Thread.new do
+    @gonder.buzzer 'acilis'
+  end
 end
 
 
 
 setup
-sleep 0.5
+sleep 2
 baslangic_animasyonu
+sleep 2
 
 websocket
-sleep 0.1
 
 
 
@@ -73,12 +85,28 @@ sleep 0.1
 # @osc.servo_stop
 
 
+# loop do
+#   @sensor.print_uzaklik
+#   @sensor.print_uzaklik2
+#   @sensor.print_yakinlik
+#   sleep 0.1
+# end
+
+
 loop do
-  sleep 1
+  a = gets.chomp
+
+  if a == 'a'
+    @motor.motor_auto_start # Otomatik Motor
+  elsif b == 'b'
+    @motor.motor_auto_stop #
+  end
+
+  @gonder.servo 'orta'
+
+  sleep 0.1
+
 end
-
-
-
 
 END{
   $board.close

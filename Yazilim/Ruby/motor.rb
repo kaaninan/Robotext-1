@@ -43,9 +43,14 @@ class Motor
     @sol_ort_uygun = false
 
     @sinir = 15 # Ultrasonik
-    @yakinlik_sinir = 400 # TCRT 5000
+    @yakinlik_sinir = 300 # TCRT 5000
     @yan_sinir = 10 # Sharp
     @ortalama_sinir = 10 # Sharp Yan Ortalama Sınır
+
+
+    # LOOP'LARIN CALISMASI ICIN
+    @thread_motor = true
+    @thread_uzaklik = true
   end
 
 
@@ -56,14 +61,14 @@ class Motor
     puts '==> OTOMATIK MOD ETKIN <=='
     @motor_auto_thread = Thread.new do
       sleep 1
-      while true
+      while @thread_motor
         motor_auto_komut
         sleep 0.01
       end
     end
 
     @uzaklik_thread = Thread.new do
-      while true
+      while @thread_uzaklik
         uzaklik_kontrol
         sleep 0.01
       end
@@ -72,8 +77,9 @@ class Motor
 
   def motor_auto_stop
     puts '==> OTOMATIK MOD KAPALI <=='
-    @motor_auto_thread.exit
-    @uzaklik_thread.exit
+    @thread_motor = false
+    @thread_uzaklik = false
+    motor_dur
   end
 
   ## FOR TEST
@@ -488,7 +494,7 @@ class Motor
 
 
 
-
+  # TEST
   def motor_osc sag_hiz, sol_hiz, sag_ters, sol_ters
 
     if sag_ters == 1

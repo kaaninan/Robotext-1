@@ -12,6 +12,9 @@ var k_sol = "dur";
 var k_sag = "dur";
 
 
+var etkin_guvenlik = "kapali";
+
+
 // Bildirimler
 
 var not_baglaniyor = $('#notification_baglaniyor');
@@ -26,34 +29,83 @@ var not_hata_websocket = $('#notification_hata_websocket');
 var guvenlik_kapali_text = $('#guvenlik_kapali_text');
 var guvenlik_acik_text = $('#guvenlik_acik_text');
 
+var motor_auto_text = $('#motor_auto_text');
+var motor_manual_text = $('#motor_manual_text');
+
+
+var sensor_isik = $('#sensor_isik');
+var sensor_sicaklik = $('span#sicaklik_deger');
+var sensor_gaz = $('#sensor_gaz');
+var sensor_hareket = $('#sensor_hareket');
+var sensor_ses = $('#sensor_ses');
+
+
+
+var hareket_var_icon = $('#hareket_var');
+var hareket_yok_icon = $('#hareket_yok');
+
+var ses_var_icon = $('#ses_var');
+var ses_yok_icon = $('#ses_yok');
+
+
+
+var alarm_ac_button = $('#alarm_ac_button');
+var alarm_kapat_button = $('#alarm_kapat_button');
+
+var motor_manual_button = $('#motor_manual_button');
+var motor_auto_button = $('#motor_auto_button');
+
 var guvenlik_ac_button = $('#guvenlik_ac_button');
 var guvenlik_kapat_button = $('#guvenlik_kapat_button');
 
 
 
-var motor_auto_text = $('#motor_auto_text');
-var motor_manual_text = $('#motor_manual_text');
+// BUTTON
+$(function(){
+    guvenlik_ac_button.click(function(){
+        guvenlik_ac_button.css('display','none');
+        guvenlik_kapat_button.css('display','inline');
 
-var motor_manual_button = $('#motor_manual_button');
-var motor_auto_button = $('#motor_auto_button');
+        guvenlik_kapali_text.css('display','none');
+        guvenlik_acik_text.css('display','inline');
 
+        etkin_guvenlik = "acik";
 
+        gonder_hareket();
+    });
 
-var sensor_isik = $('#sensor_isik');
-var sensor_sicaklik = $('#sensor_sicaklik');
-var sensor_gaz = $('#sensor_gaz');
+    guvenlik_kapat_button.click(function(){
+        guvenlik_ac_button.css('display','inline');
+        guvenlik_kapat_button.css('display','none');
 
-var hareket_var_icon = $('#hareket_var');
-var hareket_yok_icon = $('#hareket_yok');
+        guvenlik_kapali_text.css('display','inline');
+        guvenlik_acik_text.css('display','none');
+
+        etkin_guvenlik = "kapali";
+
+        gonder_hareket();
+    });
+
+});
+
 
 
 var a = 0;
 function otomatik(){
+    /*
     ws.send(JSON.stringify({
             ileri: k_ileri,
             geri: k_geri,
             sag: k_sag,
             sol: k_sol
+    }));
+*/
+}
+
+
+function gonder_hareket(){
+    ws.send(JSON.stringify({
+            etkin_guvenlik: etkin_guvenlik
     }));
 }
 

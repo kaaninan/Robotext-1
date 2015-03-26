@@ -189,7 +189,7 @@
 	                			<a href="#" class="widget-link-remove"><i class="icon-remove-sign"></i></a>
 	              			</div>
 	              			
-	              			<h3 class="section-title first-title"><i class="icon-tasks"></i> ISTATISTIKLER</h3>
+	              			<h3 class="section-title first-title"><i class="icon-tasks"></i> PANEL</h3>
               				
 
               				<div class="row">
@@ -204,13 +204,15 @@
                         						 	<div id="guvenlik_icon" style="font-size:100px"><i class="icon-shield"></i></div>
 	                        					</div>
 	                        					<div class="value-sub">
-	                        						<div style="display:none" id="guvenlik_kapali_text">Açık</div>
-	                        						<div id="guvenlik_acik_text">Kapalı</div>
-	                        					</div>
+	                        						<div style="display:none" id="guvenlik_acik_text">Açık</div>
+	                        						<div style="display:inline" id="guvenlik_kapali_text">Kapalı</div>
+	                        					</div>	
 	                      					</div>
-	                      					<span class="dynamicsparkline" style="font-size:50px"><button id="guvenlik_ac_button" type="button" class="btn btn-success btn-round">Aç</button></span>
 
-	                      					<span style="display:none" class="dynamicsparkline" style="font-size:50px"><button id="guvenlik_kapat_button" type="button" class="btn btn-danger btn-round">Kapat</button></span>
+											        					
+	                      					<span class="dynamicsparkline" style="font-size:50px"><button id="guvenlik_ac_button" style="display:inline" type="button" class="btn btn-success btn-round">Aç</button></span>
+
+	                      					<span class="dynamicsparkline" style="font-size:50px"><button id="guvenlik_kapat_button" style="display:none" type="button" class="btn btn-danger btn-round">Kapat</button></span>
 
 	                    				</div>
 	                  				</div>
@@ -265,7 +267,7 @@
 	                        					</div>
 	                        					<div class="value-sub">Anlık</div>
 	                      					</div>
-	                      					<span class="dynamicsparkline"><div id="sensor_sicaklik" style="font-size:50px">32<span style="font-size:20px;"> °C</span></div></span>
+	                      					<span class="dynamicsparkline"><div id="sensor_sicaklik" style="font-size:50px"><span class="sicaklik_deger">--</span><span style="font-size:20px;"> °C</span></div></span>
 	                    				</div>
 	                  				</div>
 	                			</div>
@@ -282,7 +284,7 @@
 	                        					</div>
 	                        					<div class="value-sub">Anlık</div>
 	                      					</div>
-	                      					<span class="dynamicsparkline"><div id="sensor_gaz" style="font-size:50px">32</div></span>
+	                      					<span class="dynamicsparkline"><div id="sensor_gaz" style="font-size:50px">--</div></span>
 	                    				</div>
 	                  				</div>
 	                			</div>
@@ -294,12 +296,14 @@
 	                      					<div class="pre-value-block"> Hareket</div>
 	                      					<div class="value-block">
 	                        					<div class="value-self">
-	                        						<div id="hareket_var" style="display:none" style="font-size:100px"><i class="icon-eye-close"></i></div>
-	                        						<div id="hareket_yok" style="display:block; font-size:100px;"><i class="icon-eye-open"></i></div>
+	                        						<div id="hareket_var" style="font-size:100px"><i class="icon-eye-close"></i></div>
+	                        						<div id="hareket_yok" style="display:none; font-size:100px;"><i class="icon-eye-open"></i></div>
 	                        					</div>
 	                        					<div class="value-sub">Anlık</div>
 	                      					</div>
-	                      					<span class="dynamicsparkline"><div id="sensor_hareket" style="font-size:50px">Var</div></span>
+	                      					<span class="dynamicsparkline">
+	                      						<div id="sensor_hareket" style="font-size:50px">Yok</div>
+                      						</span>
 	                    				</div>
 	                  				</div>
 	                			</div>
@@ -311,12 +315,14 @@
 	                      					<div class="pre-value-block">Ses</div>
 	                      					<div class="value-block">
 	                        					<div class="value-self">
-	                        						<div id="gaz_ok" style="font-size:100px"><i class="icon-microphone"></i></div>
-	                        						<div id="gaz_error" style="display:none; font-size:100px;"><i class="icon-microphone-off"></i></div>
+	                        						<div id="ses_var" style="display:none;" style="font-size:100px"><i class="icon-microphone"></i></div>
+	                        						<div id="ses_yok" style="font-size:100px;"><i class="icon-microphone-off"></i></div>
 	                        					</div>
 	                        					<div class="value-sub">Anlık</div>
 	                      					</div>
-	                      					<span class="dynamicsparkline"><div id="sensor_gaz" style="font-size:50px">Var</div></span>
+	                      					<span class="dynamicsparkline">
+	                      						<div id="sensor_gaz" style="font-size:50px">Yok</div>
+	                      					</span>
 	                    				</div>
 	                  				</div>
 	                			</div>
@@ -328,15 +334,14 @@
 	                      					<div class="pre-value-block">Alarm</div>
 	                      					<div class="value-block">
 	                        					<div class="value-self">
-	                        						<div id="gaz_ok" style="font-size:100px"><i class="icon-bullhorn"></i></div>
-	                        						<div id="gaz_error" style="display:none; font-size:100px;"><i class="icon-warning-sign"></i></div>
+	                        						<div id="alarm_var" style="font-size:100px"><i class="icon-bullhorn"></i></div>
 	                        					</div>
 	                        					<div class="value-sub">Anlık</div>
 	                      					</div>
 	                      					
-	                      					<span class="dynamicsparkline" style="font-size:50px"><button id="guvenlik_ac_button" type="button" class="btn btn-success btn-round">Aç</button></span>
+	                      					<span class="dynamicsparkline" style="font-size:50px"><button id="alarm_ac_button" type="button" class="btn btn-success btn-round">Aç</button></span>
 
-	                      					<span style="display:none" class="dynamicsparkline" style="font-size:50px"><button id="guvenlik_kapat_button" type="button" class="btn btn-danger btn-round">Kapat</button></span>
+	                      					<span style="display:none" class="dynamicsparkline" style="font-size:50px"><button id="alarm_kapat_button" type="button" class="btn btn-danger btn-round">Kapat</button></span>
 
 	                    				</div>
 	                  				</div>
@@ -404,31 +409,6 @@
 	              			</div>
 	            		</div>
 	            		
-	            		<div class="widget">
-	              			<div class="widget-controls pull-right">
-	                			<a href="#" class="widget-link-remove"><i class="icon-minus-sign"></i></a>
-	                			<a href="#" class="widget-link-remove"><i class="icon-remove-sign"></i></a>
-	              			</div>
-	              			
-	              			<h3 class="section-title bottom-margin"><i class="icon-bullseye"></i> Circular Charts</h3>
-	              			<div class="row bottom-margin">
-                				<div class="col-lg-3 col-md-4 col-sm-6 text-center">
-	                  				<input type="text" value="75" class="knob" data-fgcolor="#df6064" data-linecap="round" data-width="150" />
-	                			</div>
-	                			
-	                			<div class="col-lg-3 hidden-md col-sm-6 text-center">
-                  					<input type="text" value="65" class="knob" data-fgcolor="#8963ac" data-linecap="round" data-width="150" />
-	                			</div>
-                				
-                				<div class="col-lg-3 col-md-4 col-sm-6 text-center">
-	                  				<input type="text" value="85" class="knob" data-fgcolor="#61a9dc" data-linecap="round" data-width="150" />
-	                			</div>
-	                			
-	                			<div class="col-lg-3 col-md-4 col-sm-6 text-center">
-	                  				<input type="text" value="68" class="knob" data-fgcolor="#71c280" data-linecap="round" data-width="150" />
-	                			</div>
-	              			</div>
-	            		</div>
 	            		
 	            		<div class="row">
 	              			<div class="col-md-8">

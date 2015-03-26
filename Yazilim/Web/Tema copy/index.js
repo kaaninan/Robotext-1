@@ -12,10 +12,7 @@ $(function(){
 	}else{
 		$('#scr_index').css('display','none');
 		window.location.href="login.html";
-	}
-
-
-	
+	}	
 
 });
 
@@ -26,4 +23,13 @@ $('a#logout').click(function(e){
     $.cookie("user", null);
     $.cookie("pass", null);
     window.location.href="login.html";
+});
+
+
+// BUTTON ISLEMLERI
+
+$(function(){
+
+	
+
 });

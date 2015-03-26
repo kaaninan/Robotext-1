@@ -19,10 +19,11 @@ class OpenS
 
   $osc_liste = Hash.new
 
-  def initialize board, gonder
+  def initialize board, gonder, motor
 
     @board = board
     @gonder = gonder
+    @motor = motor
 
     # OSC ID Listesi Oluşturma
     $eski_liste.each do |i|
@@ -54,7 +55,7 @@ class OpenS
   def motor_start
     @thr = Thread.new do
       loop do
-        @board.motor_osc $osc_liste['/Motor/sag'], $osc_liste['/Motor/sol'], $osc_liste['/Motor/sag_ters'], $osc_liste['/Motor/sol_ters']
+        @motor.motor_osc $osc_liste['/Motor/sag'], $osc_liste['/Motor/sol'], $osc_liste['/Motor/sag_ters'], $osc_liste['/Motor/sol_ters']
 
         if $osc_liste['buzzer'] == 1
           @board.buzzer 'cal'
@@ -69,7 +70,6 @@ class OpenS
 
   def motor_stop
     @thr.exit
-    @board.motor_dur
   end
 
 

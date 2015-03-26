@@ -1,21 +1,26 @@
 $LOAD_PATH << '.'
 require 'pin'
+require 'bashself'
 
 class Hareket
 
 
-  def initialize board
+  def initialize board, gonder
     @board = board
     @sensor = board.getSensor
+    @gonder = gonder
+    @bashself = BashSelf.new
   end
 
 
   def start
     puts '==> Hareket Algilama Baslatildi <=='
+    @bashself.ses 'hareket_baslatildi'
     @thread = Thread.new do
       loop do
+        puts 'loop'
         hareket_kontrol
-        sleep 0.01
+        sleep 0.1
       end
     end
   end
@@ -23,6 +28,7 @@ class Hareket
   def stop
     puts '==> Hareket Algilama Sonlandirildi <=='
     @thread.exit
+    @gonder.servo_thread_exit
   end
 
 
@@ -34,15 +40,19 @@ class Hareket
     @sol = @sensor.get_hareket_sol
 
     if @sag == 1 && @sol == 0
-      servo 'sag'
+      @bashself.ses 'hareket_algilandi'
+      @bashself.kamera 'resim_cek'
+      @gonder.servo 'sag'
       sleep 1
 
     elsif @sag == 0 && @sol == 1
-      servo 'sol'
+      @bashself.ses 'hareket_algilandi'
+      @bashself.kamera 'resim_cek'
+      @gonder.servo 'sol'
       sleep 1
 
     else
-      servo nil
+      @gonder.servo nil
     end
   end
 

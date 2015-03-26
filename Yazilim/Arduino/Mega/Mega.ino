@@ -1,5 +1,4 @@
 #include <LiquidCrystal.h>
-#include <SoftwareSerial.h>
 #include <Servo.h>
 #include <SharpIR.h>
 
@@ -10,29 +9,23 @@ boolean oku = true;
 
 
 // LOG
-int log_uzaklik_sonic = 0;
-int log_uzaklik_ir = 0;
+int log_uzaklik = 0;
 int log_hareket = 0;
 int log_ses = 0;
 int log_isik = 0;
-int log_yakinlik = 0;
 int log_sicaklik = 0;
 
 
 
 // SENSOR VALUES
-int deger_uzaklik_on_sag = 0;
-int deger_uzaklik_on_sol = 0;
-int deger_uzaklik_sag_on = 0;
-int deger_uzaklik_sag_arka = 0;
-int deger_uzaklik_sol_on = 0;
-int deger_uzaklik_sol_arka = 0;
+int deger_uzaklik_on = 0;
+int deger_uzaklik_arka = 0;
+int deger_uzaklik_sag = 0;
+int deger_uzaklik_sol = 0;
 int deger_hareket_sag = 0;
 int deger_hareket_sol = 0;
 int deger_ses = 0;
 int deger_isik = 0;
-int deger_yakinlik_sag = 0;
-int deger_yakinlik_sol = 0;
 int deger_sicaklik = 0;
  
 
@@ -49,28 +42,22 @@ int led_2 = 5;
 
 
 // DIGITAL
-const int uzaklik_on_sag_t = 22;
-const int uzaklik_on_sag_e = 23;
-const int uzaklik_on_sol_t = 24;
-const int uzaklik_on_sol_e = 25;
-const int hareket_sag = 26;
-const int hareket_sol = 27;
-const int buzzer_1 = 28;
-const int buzzer_2 = 29;
-const int ses = 30;
-const int ekran_isik = 31;
-LiquidCrystal lcd(32, 33, 34, 35, 36, 37);
+const int hareket_sag = 22;
+const int hareket_sol = 23;
+const int buzzer_1 = 24;
+const int buzzer_2 = 25;
+const int ses = 26;
+const int ekran_isik = 27;
+LiquidCrystal lcd(28, 29, 30, 31, 32, 33);
 
 
 // ANALOG
-SharpIR uzaklik_sag_on(A0, 25, 93, 1080);
-SharpIR uzaklik_sag_arka(A1, 25, 93, 1080);
-SharpIR uzaklik_sol_on(A2, 25, 93, 1080);
-SharpIR uzaklik_sol_arka(A3, 25, 93, 1080);
+SharpIR uzaklik_on(A0, 25, 93, 1080);
+SharpIR uzaklik_arka(A1, 25, 93, 1080);
+SharpIR uzaklik_sag(A2, 25, 93, 1080);
+SharpIR uzaklik_sol(A3, 25, 93, 1080);
 const int sicaklik = 4;
-const int ldr_1 = 5;
-const int yakinlik_sag = 6;
-const int yakinlik_sol = 7;
+const int ldr = 5;
 
 
 
@@ -79,10 +66,6 @@ void setup() {
   Serial.begin(115200);
 
   // DIGITAL
-  pinMode(uzaklik_on_sag_t, OUTPUT);
-  pinMode(uzaklik_on_sag_e, INPUT);
-  pinMode(uzaklik_on_sol_t, OUTPUT);
-  pinMode(uzaklik_on_sol_e, INPUT);
   pinMode(buzzer_1, OUTPUT);
   pinMode(buzzer_2, OUTPUT);
   pinMode(ekran_isik, OUTPUT);
@@ -126,9 +109,6 @@ void serialEvent(){
     char gelen = Serial.read();
     if (gelen == '&') {
       parseCommand(command);
-      if(command == "A"){
-        oku = true;
-      }
       command = "";
     } else {
       command += gelen;
@@ -146,67 +126,32 @@ void serialEvent(){
 
 
 void oku_sensor() {
-  oku_uzaklik_ultrasonic();
-  oku_uzaklik_kizilotesi();
+  oku_uzaklik();
   oku_hareket();
   oku_ses();
   oku_isik();
-  oku_yakinlik();
   oku_sicaklik();
 }
 
 
-void oku_uzaklik_ultrasonic() {
 
-  digitalWrite(uzaklik_on_sag_t, LOW);
-  digitalWrite(uzaklik_on_sag_t, HIGH);
-  digitalWrite(uzaklik_on_sag_t, LOW);
+void oku_uzaklik() {
+  deger_uzaklik_on = uzaklik_on.distance();
+  deger_uzaklik_arka = uzaklik_arka.distance();
+  deger_uzaklik_sag = uzaklik_sag.distance();
+  deger_uzaklik_sol = uzaklik_sol.distance();
 
-  int deger = pulseIn(uzaklik_on_sag_e, HIGH, 10000);
-  deger_uzaklik_on_sag = deger / 29 / 2;
-
-  //delay(50);
-
-  digitalWrite(uzaklik_on_sol_t, LOW);
-  digitalWrite(uzaklik_on_sol_t, HIGH);
-  digitalWrite(uzaklik_on_sol_t, LOW);
-
-  int deger2 = pulseIn(uzaklik_on_sol_e, HIGH, 10000);
-  deger_uzaklik_on_sol = deger2 / 29 / 2;
-
-  if (log_uzaklik_sonic == 1) {
-    Serial.print("Sensor 1 - ");
-    Serial.print(deger_uzaklik_on_sag);
-    Serial.print("    ");
-    Serial.print("Sensor 2 - ");
-    Serial.println(deger_uzaklik_on_sol);
-  }
-
-  //delay(50);
-}
-
-
-
-
-void oku_uzaklik_kizilotesi() {
-  deger_uzaklik_sag_on = uzaklik_sag_on.distance();
-  deger_uzaklik_sag_arka = uzaklik_sag_arka.distance();
-  deger_uzaklik_sol_on = uzaklik_sol_on.distance();
-  deger_uzaklik_sol_arka = uzaklik_sol_arka.distance();
-
-  if (log_uzaklik_ir == 1) {
-    Serial.print("Sag On: ");
-    Serial.print(deger_uzaklik_sag_on);
-    Serial.print(" - Sag Arka: ");
-    Serial.print(deger_uzaklik_sag_arka);
-    Serial.print(" - Sol On: ");
-    Serial.print(deger_uzaklik_sol_on);
-    Serial.print(" - Sol Arka: ");
-    Serial.println(deger_uzaklik_sol_arka);
+  if (log_uzaklik == 1) {
+    Serial.print("On: ");
+    Serial.print(deger_uzaklik_on);
+    Serial.print(" - Arka: ");
+    Serial.print(deger_uzaklik_arka);
+    Serial.print(" - Sag: ");
+    Serial.print(deger_uzaklik_sag);
+    Serial.print(" - Sol: ");
+    Serial.println(deger_uzaklik_sol);
   }
 }
-
-
 
 
 
@@ -223,8 +168,6 @@ void oku_hareket() {
 }
 
 
-
-
 void oku_ses() {
   deger_ses = digitalRead(ses);
 
@@ -237,7 +180,7 @@ void oku_ses() {
 
 
 void oku_isik() {
-  deger_isik = analogRead(ldr_1);
+  deger_isik = analogRead(ldr);
 
   if (log_isik == 1) {
     Serial.print("Işık: ");
@@ -245,17 +188,6 @@ void oku_isik() {
   }
 }
 
-void oku_yakinlik() {
-  deger_yakinlik_sag = analogRead(yakinlik_sag);
-  deger_yakinlik_sol = analogRead(yakinlik_sol);
-
-  if (log_yakinlik == 1) {
-    Serial.print("Yakinlik-> Sag On: ");
-    Serial.print(deger_yakinlik_sag);
-    Serial.print("  Sol On: ");
-    Serial.println(deger_yakinlik_sol);
-  }
-}
 
 
 void oku_sicaklik(){
@@ -301,6 +233,41 @@ void cikis_ekran(int deger) {
     lcd.setCursor(0, 1);
     lcd.print(" POWERED BY AFL ");
   }
+  
+  else if (deger == 1) {
+    lcd.setCursor(0, 0);
+    lcd.print("     HAREKET    ");
+    lcd.setCursor(0, 1);
+    lcd.print("   ALGILANDI    ");
+  }
+  
+  else if (deger == 3) {
+    lcd.setCursor(0, 0);
+    lcd.print("  OTOMATIK MOD  ");
+    lcd.setCursor(0, 1);
+    lcd.print("GUVENLIK: KAPALI");
+  }
+  
+  else if (deger == 4) {
+    lcd.setCursor(0, 0);
+    lcd.print("  OTOMATIK MOD  ");
+    lcd.setCursor(0, 1);
+    lcd.print("GUVENLIK: ACIK  ");
+  }
+  
+  else if (deger == 4) {
+    lcd.setCursor(0, 0);
+    lcd.print("   MANUEL MOD   ");
+    lcd.setCursor(0, 1);
+    lcd.print("GUVENLIK: ACIK  ");
+  }
+  
+  else if (deger == 5) {
+    lcd.setCursor(0, 0);
+    lcd.print("   MANUEL MOD   ");
+    lcd.setCursor(0, 1);
+    lcd.print("GUVENLIK: KAPALI");
+  }
 }
 
 
@@ -340,29 +307,20 @@ void parseCommand(String com) {
   // UZAKLIK
   if (part1.equalsIgnoreCase("-11")) {
     Serial.print("-111 ");
-    Serial.println(deger_uzaklik_on_sag);
+    Serial.println(deger_uzaklik_on);
   }
   else if (part1.equalsIgnoreCase("-12")) {
     Serial.print("-121 ");
-    Serial.println(deger_uzaklik_on_sol);
+    Serial.println(deger_uzaklik_arka);
   }
   else if (part1.equalsIgnoreCase("-13")) {
     Serial.print("-131 ");
-    Serial.println(deger_uzaklik_sag_on);
+    Serial.println(deger_uzaklik_sag);
   }
   else if (part1.equalsIgnoreCase("-14")) {
     Serial.print("-141 ");
-    Serial.println(deger_uzaklik_sag_arka);
+    Serial.println(deger_uzaklik_sol);
   }
-  else if (part1.equalsIgnoreCase("-15")) {
-    Serial.print("-151 ");
-    Serial.println(deger_uzaklik_sol_on);
-  }
-  else if (part1.equalsIgnoreCase("-16")) {
-    Serial.print("-161 ");
-    Serial.println(deger_uzaklik_sol_arka);
-  }
-  
   
   
   // HAREKET
@@ -389,19 +347,10 @@ void parseCommand(String com) {
     Serial.println(deger_isik);
   }
   
-  // YAKINLIK
-  else if (part1.equalsIgnoreCase("-51")) {
-    Serial.print("-511 ");
-    Serial.println(deger_yakinlik_sag);
-  }
-  else if (part1.equalsIgnoreCase("-52")) {
-    Serial.print("-521 ");
-    Serial.println(deger_yakinlik_sol);
-  }
   
   // SICAKLIK
-  else if (part1.equalsIgnoreCase("-6")) {
-    Serial.print("-61 ");
+  else if (part1.equalsIgnoreCase("-5")) {
+    Serial.print("-51 ");
     Serial.println(deger_sicaklik);
   }
   

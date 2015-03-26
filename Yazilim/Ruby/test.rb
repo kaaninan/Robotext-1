@@ -1,21 +1,62 @@
-require 'net/smtp'
-require 'pony'
+require 'websocket-eventmachine-server'
 
-Pony.mail({
-    :to => 'kaaninan@outlook.com',
-    :subject => 'Hi',
-    :html_body => '<b>KAAN</b>INAN',
-    :attachments => {"merhaba.jpg" => File.read("test.jpg"), "merhaba2.jpg" => File.read("test2.jpg")},
-    :sender => 'Robotext',
-    :via => :smtp,
-    :via_options => {
-        :address        => 'smtp.gmail.com',
-        :port           => '25',
-        :user_name      => 'robotext.afl',
-        :password       => 'raspberry_12',
-        :authentication => :login, # :plain, :login, :cram_md5, no auth by default
-        :domain         => "Robotext" # the HELO domain provided by the client to the server
-    }
-})
 
-Pony.mail(:to => 'you@example.com', :from => 'me@example.com', :subject => 'hi', :body => 'Hello there.')
+def parse komut
+
+  yeni = komut.to_s.split '"', 10
+
+  if yeni[1].chomp == 'etkin_guvenlik'
+    if yeni[3].chomp == 'acik'
+      puts 'Guvenlik Acildi'
+    else
+      puts 'Guvenlik Kapatildi'
+    end
+  end
+
+end
+
+def socket
+  EM.run do
+
+    WebSocket::EventMachine::Server.start(:host => 'localhost', :port => 7070) do |ws|
+      ws.onopen do
+        puts 'acik'
+      end
+
+      ws.onmessage do |msg, type|
+        parse msg
+      end
+
+      ws.onclose do
+        puts 'ayrildi'
+      end
+    end
+
+  end
+end
+
+def gonder
+
+  Thread.new do
+    loop do
+      degerler = Array.new
+      son = ''
+      degerler[0] = "\"isik\":\"60\","
+      degerler[1] = "\"sicaklik\":\"25\""
+
+      degerler.each do |i|
+        son += i
+      end
+
+      ws.send "{#{son}}"
+      sleep 0.1
+    end
+  end
+
+end
+
+Thread.new do
+  gonder
+end
+socket
+gets

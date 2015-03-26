@@ -42,7 +42,7 @@ class Motor
     @sag_ort_uygun = false
     @sol_ort_uygun = false
 
-    @sinir = 15 # Ultrasonik
+    @sinir = 10 # Ultrasonik
     @yakinlik_sinir = 300 # TCRT 5000
     @yan_sinir = 10 # Sharp
     @ortalama_sinir = 10 # Sharp Yan Ortalama Sınır
@@ -82,16 +82,6 @@ class Motor
     motor_dur
   end
 
-  ## FOR TEST
-  def motor_klavye_tus
-    Thread.new do
-      loop do
-        motor_kontrol_tus
-      end
-    end
-  end
-
-
 
 # OTOMATİK MOD KONTROL (NO LOOP)
 
@@ -114,14 +104,16 @@ class Motor
   
           # SOL TARAFTA ENGEL VAR
           # SAGA DOĞRU GİT
-          motor_ileri_sol
+          # motor_ileri_sol
+          motor_sol
           sleep 2
   
         elsif @sag_dikey == false && @sol_dikey == true
   
           # SAĞ TARAFTA ENGEL VAR
           # SOLA DOĞRU GİT
-          motor_ileri_sag
+          # motor_ileri_sag
+          motor_sag
           sleep 2
         end
   
@@ -380,27 +372,6 @@ class Motor
     end
   end
 
-
-  def motor_kontrol_tus
-  
-    a = gets.chomp
-
-    if a == 'w'
-      @motor.motor_ileri
-    elsif a == 's'
-      @motor.motor_geri
-    elsif a == 'a'
-      @motor.motor_sol
-    elsif a == 'd'
-      @motor.motor_sag
-    elsif a == 'q'
-      @motor.motor_ileri_sol
-    elsif a == 'e'
-      @motor.motor_ileri_sag
-    elsif a == 'z'
-      @motor.motor_dur
-    end
-  end
 
 
 

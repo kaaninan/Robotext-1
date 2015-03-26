@@ -8,8 +8,10 @@ class Gonder
 		@board = board
 		@sensor = board.getSensor
 
-    @servo_x = 80
-    @servo_y = 10
+    # @servo_x = 80
+    @servo_x = 0
+    # @servo_y = 10
+    @servo_y = 180
 	end
 
 
@@ -17,13 +19,18 @@ class Gonder
   # THREAD
 
   def servo_thread
-    Thread.new do
+    @thr_servo = Thread.new do
       loop do
         @board.mega_serial_gonder 'servo_x', @servo_x
         @board.mega_serial_gonder 'servo_y', @servo_y
-        sleep 0.1
+        sleep 1
       end
     end
+  end
+
+
+  def servo_thread_stop
+    @thr_servo.exit
   end
 
 	def servo yon
@@ -49,10 +56,6 @@ class Gonder
 	end
 
 
-  def servo_osc x,y
-    @board.mega_serial_gonder 'servo_y', y
-    @board.mega_serial_gonder 'servo_x', x
-  end
 
 	def buzzer deger
 

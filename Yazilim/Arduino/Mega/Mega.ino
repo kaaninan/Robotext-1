@@ -244,29 +244,25 @@ void cikis_ekran(int deger) {
   else if (deger == 3) {
     lcd.setCursor(0, 0);
     lcd.print("  OTOMATIK MOD  ");
-    lcd.setCursor(0, 1);
-    lcd.print("GUVENLIK: KAPALI");
-  }
-  
-  else if (deger == 4) {
-    lcd.setCursor(0, 0);
-    lcd.print("  OTOMATIK MOD  ");
-    lcd.setCursor(0, 1);
-    lcd.print("GUVENLIK: ACIK  ");
   }
   
   else if (deger == 4) {
     lcd.setCursor(0, 0);
     lcd.print("   MANUEL MOD   ");
+  }
+  
+  else if (deger == 4) {
     lcd.setCursor(0, 1);
     lcd.print("GUVENLIK: ACIK  ");
   }
   
   else if (deger == 5) {
-    lcd.setCursor(0, 0);
-    lcd.print("   MANUEL MOD   ");
     lcd.setCursor(0, 1);
     lcd.print("GUVENLIK: KAPALI");
+  }
+  
+  else if (deger == 6) {
+    lcd.clear();
   }
 }
 

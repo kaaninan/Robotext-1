@@ -2,7 +2,6 @@ require 'rubygems'
 require 'arduino_firmata'
 require 'serialport'
 require 'pp'
-require 'osc'
 
 $LOAD_PATH << '.'
 require 'arduino'
@@ -24,8 +23,7 @@ def setup
   # Arduino'ya Bağlan
   $board = Arduino_Self.new
   @gonder = Gonder.new $board
-  $board.setGonder @gonder
-  @motor = Motor.new $board
+  @motor = Motor.new $board, @gonder
   @sensor = $board.getSensor
   @hareket = Hareket.new $board, @gonder
   @osc = OpenS.new $board, @gonder, @motor

@@ -1,2 +1,0 @@
-!function(){$(function(){return $(".widget-link-remove").on("click",function(){return $(this).closest(".widget").addClass("animated fadeOutDown"),$(this).closest(".widget").on("webkitAnimationEnd",function(){return $(this).slideUp("fast")}),$(this).closest(".widget").on("animationend",function(){return $(this).slideUp("fast")}),$(this).closest(".widget").on("oanimationend",function(){return $(this).slideUp("fast")}),!1})})}.call(this);
-;

@@ -1,1 +1,1 @@
-sudo python -m SimpleHTTPServer 30
+sudo python -m SimpleHTTPServer 80

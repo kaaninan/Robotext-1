@@ -13,12 +13,42 @@ def parse komut
     end
   end
 
+  if yeni[1].chomp == 'etkin_otomatik'
+    if yeni[3].chomp == 'acik'
+      puts 'Otomatik Mod'
+    else
+      puts 'Manual Mod'
+    end
+  end
+
+  if yeni[1].chomp == 'etkin_alarm'
+    if yeni[3].chomp == 'acik'
+      puts 'Alarm Acik'
+    else
+      puts 'Alarm Kapali'
+    end
+  end
+
+  if yeni[1].chomp == 'etkin_motor'
+    if yeni[3].chomp == 'ileri'
+      puts 'Motor Ileri'
+    elsif yeni[3].chomp == 'geri'
+      puts 'Motor Geri'
+    elsif yeni[3].chomp == 'sag'
+      puts 'Motor Sag'
+    elsif yeni[3].chomp == 'sol'
+      puts 'Motor Sol'
+    elsif yeni[3].chomp == 'dur'
+      puts 'Motor Dur'
+    end
+  end
+
 end
 
 def socket
   EM.run do
 
-    WebSocket::EventMachine::Server.start(:host => 'localhost', :port => 7070) do |ws|
+    WebSocket::EventMachine::Server.start(:host => '192.168.1.26', :port => 7070) do |ws|
       ws.onopen do
         puts 'acik'
       end

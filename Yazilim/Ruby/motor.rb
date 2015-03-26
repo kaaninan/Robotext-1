@@ -1,17 +1,27 @@
 $LOAD_PATH << '.'
 require 'pin'
+require 'gonder'
 
 class Motor
 
 
-  def initialize board
+  def initialize board, gonder
+    @gonder = gonder
 
     @arduino_uno = board.getUno
-    @board = board
     @sensor = board.getSensor
+    @board = board
+
 
     puts '==> Motorlar Etkinlestirildi <=='
 
+    # EKRANA MANUEL MOD YAZ
+    @gonder.ekran = 6
+    sleep 0.4
+    @gonder.ekran = 4
+
+
+    ## ARDUINO UNO PINLERI BELIRLE
     pin = Pin.new
 
     @h_sag_on = pin.pin_ara 'motor_sag_on_hiz'
@@ -29,26 +39,20 @@ class Motor
     @e_sol_on = pin.pin_ara 'motor_sol_on_enkoder'
     @e_sol_arka = pin.pin_ara 'motor_sol_arka_enkoder'
 
-    @on_dikey = false
-    @on_sag_dikey = false
-    @on_sol_dikey = false
 
-    @on_sag_capraz = false
-    @on_sol_capraz = false
+    ## OTOMATIK MOD DEGISKENLERI
+    @durum_on = false
+    @durum_arka = false
+    @durum_sag = false
+    @durum_sol = false
 
-    @sag_dikey = false
-    @sol_dikey = false
-
-    @sag_ort_uygun = false
-    @sol_ort_uygun = false
-
-    @sinir = 10 # Ultrasonik
-    @yakinlik_sinir = 300 # TCRT 5000
-    @yan_sinir = 10 # Sharp
-    @ortalama_sinir = 10 # Sharp Yan Ortalama Sınır
+    @sinir_on = 10
+    @sinir_arka = 10
+    @sinir_sag = 10
+    @sinir_sol = 10
 
 
-    # LOOP'LARIN CALISMASI ICIN
+    # OTOMATIK MOD THREAD'LARIN KONTROLU
     @thread_motor = true
     @thread_uzaklik = true
   end
@@ -63,17 +67,18 @@ class Motor
       sleep 1
       while @thread_motor
         motor_auto_komut
-        sleep 0.01
+        sleep 0.1
       end
     end
 
     @uzaklik_thread = Thread.new do
       while @thread_uzaklik
         uzaklik_kontrol
-        sleep 0.01
+        sleep 0.1
       end
     end
   end
+
 
   def motor_auto_stop
     puts '==> OTOMATIK MOD KAPALI <=='
@@ -87,289 +92,76 @@ class Motor
 
   private
 
-
   def motor_auto_komut
-  
-    if @on_dikey == true # ON TARAF BOŞSA
-  
-      if @on_sag_capraz == true && @on_sol_capraz == true # ÇAPRAZINDA ENGEL YOK
-  
-        if @sag_dikey == true && @sol_dikey == true
-  
-          ## YOL BOŞ
-          motor_ileri
-  
-        ## SAĞ VEYA SOL DİKEY TARAFTA ENGEL VAR
-        elsif @sag_dikey == true && @sol_dikey == false
-  
-          # SOL TARAFTA ENGEL VAR
-          # SAGA DOĞRU GİT
-          # motor_ileri_sol
-          motor_sol
-          sleep 2
-  
-        elsif @sag_dikey == false && @sol_dikey == true
-  
-          # SAĞ TARAFTA ENGEL VAR
-          # SOLA DOĞRU GİT
-          # motor_ileri_sag
-          motor_sag
-          sleep 2
-        end
-  
-  
-      elsif @on_sag_capraz == false && @on_sol_capraz == true
-  
-        ## SAG CAPRAZDA ENGEL VAR
-        ## SOLA DOĞRU DÖN
-  
-        motor_geri
-        sleep 2
-        motor_sol
-  
-  
-      elsif @on_sol_capraz == false && @on_sag_capraz == true
-  
-        ## SOL ÇAPRAZDA ENGEL VAR
-        ## SAĞA DOĞRU DÖN
-  
-        motor_geri
-        sleep 2
-        motor_sag
-  
-      else
-  
-        ## ÇAPRAZ KAPALI
-        ## GERİ DÖN
-  
-        motor_geri
-        sleep 2
-  
-        # TODO rastgele dönme ekle
-  
-      end
-  
-  
-    else
-      ## ON TARAFTA ENGEL VAR
-      # Sağ Tarafa Bak
-  
-  
-      if @on_sag_dikey == true && @on_sol_dikey == false
-  
-        if @sag_dikey == true
-  
-          if @on_sag_capraz == true && @on_sol_capraz == true
-            motor_sag
-            sleep 2
-  
-          else
-            motor_geri
-            sleep 2
-          end
-  
-        elsif @sol_dikey == true
-  
-          if @on_sag_capraz == true && @on_sol_capraz == true
-            motor_sol
-            sleep 2
-  
-          else
-            motor_geri
-            sleep 2
-          end
-  
-        else
-          motor_geri
-          sleep 2
-        end
-  
-      elsif @on_sag_dikey == false && @on_sol_dikey == true
-  
-        if @sol_dikey == true
-  
-          if @on_sag_capraz == true && @on_sol_capraz == true
-            motor_sol
-            sleep 2
-  
-          else
-            motor_geri
-            sleep 2
-          end
-  
-        elsif @sag_dikey == true
-  
-          if @on_sag_capraz == true && @on_sol_capraz == true
-            motor_sag
-            sleep 2
-  
-          else
-            motor_geri
-            sleep 2
-          end
-  
-        else
-          motor_geri
-          sleep 2
-        end
-  
-      elsif @on_sag_dikey == false && @on_sol_dikey == false
-  
-  
-        if @sag_dikey == true && @sol_dikey == false
-  
-          if @on_sag_capraz == true
-  
-            # SAGA DON
-            motor_sag
-  
-          else
-  
-            # ÇAPRAZDA ENGEL VAR
-            motor_geri
-            sleep 2
-  
-          end
-  
-  
-        elsif @sol_dikey == true && @sag_dikey == false
-  
-          if @on_sol_capraz == true
-  
-            # SOLA DÖN
-            motor_sol
-  
-          else
-  
-            # ÇAPRAZDA ENGEL VAR
-            motor_geri
-            sleep 2
-  
-          end
-  
-        elsif @sol_dikey == false && @sag_dikey == false
-  
-          ## İKİ TARAFTADA ENGEL VAR
-          motor_geri
-          sleep 2
-  
-        else
-          ## SAĞ VE SOL TARAF BOŞ
-    
-          # RASTEGELE OLARAK BİR TARAFA DON
-          motor_sol
-          sleep 2
-        end
-      end
-    end
-  end
 
+    if @durum_on == true
+
+      if @durum_sag == true && @durum_sol == true
+        motor_ileri
+
+      elsif @durum_sag == false && @durum_sol == true
+        motor_ileri_sol
+
+      elsif @durum_sag == true && @durum_sol == false
+        motor_ileri_sag
+
+      else
+        motor_ileri
+      end
+
+    else
+
+      if @durum_sag == true
+        motor_sag
+        sleep 1.5
+
+      elsif @durum_sol == true
+        motor_sol
+        sleep 1.5
+
+      else
+        motor_geri
+        sleep 2
+
+      end
+
+    end
+
+  end
 
   def uzaklik_kontrol
 
-    # print 'Dikey '
-    # print @on_dikey
-    # print ' Capraz '
-    # print @on_sag_capraz
-    # print ' '
-    # print @on_sol_capraz
-    # print ' Sag Sol  '
-    # print @sag_dikey
-    # print ' '
-    # print @sol_dikey
-    # print '  ORt '
-    # print @sag_ort_uygun
-    # print ' '
-    # puts @sol_ort_uygun
-    # puts
+    puts "Durum On: #{@durum_on}  Arka #{@durum_arka}  Sag #{@durum_sag}  Sol #{@durum_sol}"
 
+    @sensor_on = @sensor.uzaklik_on.dup
+    @sensor_arka = @sensor.uzaklik_arka.dup
+    @sensor_sag = @sensor.uzaklik_sag.dup
+    @sensor_sol = @sensor.uzaklik_sol.dup
 
-    ## ON TARAF ### ULTRASONIC
-
-    if @sensor.uzaklik_on_sag.to_i > @sinir && @sensor.uzaklik_on_sol.to_i > @sinir
-      @on_dikey = true
+    if @sensor_on > @sinir_on
+      @durum_on = true
     else
-      @on_dikey = false
+      @durum_on = false
     end
 
-    if @sensor.uzaklik_on_sag.to_i > @sinir
-      @on_sag_dikey = true
+    if @sensor_arka > @sinir_arka
+      @durum_arka = true
     else
-      @on_sag_dikey = false
+      @durum_arka = false
     end
 
-    if @sensor.uzaklik_on_sol.to_i > @sinir
-      @on_sol_dikey = true
+    if @sensor_sag > @sinir_sag
+      @durum_sag = true
     else
-      @on_sol_dikey = false
+      @durum_sag = false
     end
 
-
-    ## ON CAPRAZ ### TCRT 5000
-
-    if @sensor.yakinlik_on_sag.to_i < @yakinlik_sinir
-      @on_sag_capraz = false
+    if @sensor_sol > @sinir_sol
+      @durum_sol = true
     else
-      @on_sag_capraz = true
+      @durum_sol = false
     end
 
-    if @sensor.yakinlik_on_sol.to_i < @yakinlik_sinir
-      @on_sol_capraz = false
-    else
-      @on_sol_capraz = true
-    end
-
-
-
-    ### YAN TARAF ### SHARP
-
-    # SAĞA BAK
-    if @sensor.uzaklik_sag_on.to_i > @yan_sinir && @sensor.uzaklik_sag_arka.to_i > @yan_sinir
-      # DİKEY OLARAK BOŞ
-      @sag_dikey = true
-    else
-      # DİKEY ENGEL VAR
-      @sag_dikey = false
-    end
-
-
-    # SOLA BAK
-    if @sensor.uzaklik_sol_on.to_i > @yan_sinir && @sensor.uzaklik_sol_arka.to_i > @yan_sinir
-      # DİKEY OLARAK BOŞ
-      @sol_dikey = true
-    else
-      # DİKEY ENGEL VAR
-      @sol_dikey = false
-    end
-
-
-
-    ## ORTALAMALARINI AL
-    sag_ort = (@sensor.uzaklik_sag_on.to_i + @sensor.uzaklik_sag_arka.to_i) / 2
-    sol_ort = (@sensor.uzaklik_sol_on.to_i + @sensor.uzaklik_sol_arka.to_i) / 2
-
-    # EĞER ORTALAMALAR SINIRIN ALTINDA DEĞİLSE UYGUN YÖNÜ SEÇ
-    if sag_ort > @ortalama_sinir && sol_ort > @ortalama_sinir
-
-      if sag_ort > sol_ort
-
-        # SAĞ TARAF SOLA GÖRE BOŞ
-        @sag_ort_uygun = true
-        @sol_ort_uygun = false
-
-      else
-
-        # SOL TARAF SAĞA GÖRE BOŞ
-        @sol_ort_uygun = true
-        @sag_ort_uygun = false
-
-      end
-
-    else
-      @sag_ort_uygun = false
-      @sol_ort_uygun = false
-
-    end
   end
 
 
@@ -466,34 +258,34 @@ class Motor
 
 
   # TEST
-  def motor_osc sag_hiz, sol_hiz, sag_ters, sol_ters
-
-    if sag_ters == 1
-      yon_sag1 = 0
-      yon_sag2 = 1
-    else
-      yon_sag1 = 1
-      yon_sag2 = 0
-    end
-
-    if sol_ters == 1
-      yon_sol1 = 0
-      yon_sol2 = 1
-    else
-      yon_sol1 = 1
-      yon_sol2 = 0
-    end
-
-    @arduino_uno.digital_write @h_sag_on, sag_hiz
-    @arduino_uno.digital_write @h_sag_arka, sag_hiz
-    @arduino_uno.digital_write @h_sol_on, sol_hiz
-    @arduino_uno.digital_write @h_sol_arka, sol_hiz
-
-    @arduino_uno.analog_write @y_sag_on, yon_sag1
-    @arduino_uno.analog_write @y_sag_arka, yon_sag2
-    @arduino_uno.analog_write @y_sol_on, yon_sol1
-    @arduino_uno.analog_write @y_sol_arka, yon_sol2
-
-  end
+  # def motor_osc sag_hiz, sol_hiz, sag_ters, sol_ters
+  #
+  #   if sag_ters == 1
+  #     yon_sag1 = 0
+  #     yon_sag2 = 1
+  #   else
+  #     yon_sag1 = 1
+  #     yon_sag2 = 0
+  #   end
+  #
+  #   if sol_ters == 1
+  #     yon_sol1 = 0
+  #     yon_sol2 = 1
+  #   else
+  #     yon_sol1 = 1
+  #     yon_sol2 = 0
+  #   end
+  #
+  #   @arduino_uno.digital_write @h_sag_on, sag_hiz
+  #   @arduino_uno.digital_write @h_sag_arka, sag_hiz
+  #   @arduino_uno.digital_write @h_sol_on, sol_hiz
+  #   @arduino_uno.digital_write @h_sol_arka, sol_hiz
+  #
+  #   @arduino_uno.analog_write @y_sag_on, yon_sag1
+  #   @arduino_uno.analog_write @y_sag_arka, yon_sag2
+  #   @arduino_uno.analog_write @y_sol_on, yon_sol1
+  #   @arduino_uno.analog_write @y_sol_arka, yon_sol2
+  #
+  # end
 
 end

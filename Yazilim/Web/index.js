@@ -24,12 +24,3 @@ $('a#logout').click(function(e){
     $.cookie("pass", null);
     window.location.href="login.html";
 });
-
-
-// BUTTON ISLEMLERI
-
-$(function(){
-
-	
-
-});

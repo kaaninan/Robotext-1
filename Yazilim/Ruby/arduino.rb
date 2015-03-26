@@ -17,37 +17,30 @@ class Arduino_Self
   @bagli_uno = false
   @bagli_mega = false
 
+  
+  # MEGA'YA GONDERILEN
+  attr_accessor :deger_buzzer, :deger_ekran_isik, :deger_ekran, :deger_servo_x, :deger_servo_y, :deger_led_1, :deger_led_2
 
+  
   def initialize
     $sensor = Sensor.new
     $log = LOG.new
-    @pins = Pin.new
+    $pins = Pin.new
 
     baglan
-    sleep 1
-
-    pinMode 'uno'
     sleep 0.1
 
-    # Transistor Aç
+    pin_mode
+    sleep 0.1
+
     uno_transistor true
-
-
-    # Mega Serial Oku
+    mega_serial
     mega_serial_gelen
+    uno_sensor_oku
 
-    uno_sensor_oku        
+    mega_sensor_default
 
   end
-
-  def setGonder gonder
-    # Daha sonradan set edilecek
-    @gonder = gonder
-    
-    # Mega Veri Iste
-    @gonder.gonder_mega
-  end
-
 
 
   private
@@ -62,7 +55,7 @@ class Arduino_Self
     choose_board (@arduino_serial)
 
     if @boards_uno
-      $log.islem_basladi $konum, "Arduino Uno'ya Baglaniliyor"
+      # $log.islem_basladi $konum, "Arduino Uno'ya Baglaniliyor"
       @arduino_uno = ArduinoFirmata.connect @boards_uno, :nonblock_io => true
       $log.islem_bitti $konum, "Arduino Uno'ya Baglanildi"
       @bagli_uno = true
@@ -72,7 +65,7 @@ class Arduino_Self
 
 
     if @boards_mega
-      $log.islem_basladi $konum, "Arduino Mega'ya Baglaniliyor"
+      # $log.islem_basladi $konum, "Arduino Mega'ya Baglaniliyor"
       @arduino_mega = SerialPort.new(@boards_mega, 115200, 8, 1, SerialPort::NONE)
       $log.islem_bitti $konum, "Arduino Mega'ya Baglanildi"
       @bagli_mega = true
@@ -111,18 +104,17 @@ class Arduino_Self
     puts
   end
 
-  def pinMode choose_board
+  def pin_mode
 
-    $log.islem_basladi $konum, 'PinMode'
+    #$log.islem_basladi $konum, 'PinMode'
 
     @tip = nil
     @pin = nil
     @aciklama = nil
 
-    if @boards_uno and choose_board == 'uno'
+    if @boards_uno
 
-      pin = Pin.new
-      array = pin.getPins
+      array = $pins.getPins
 
       array.each do |a, b|
 
@@ -155,79 +147,45 @@ class Arduino_Self
 
   public
 
-  # NO LOOP
-  def mega_serial_gonder komut, deger
 
-    if komut == 'buzzer'
-      @arduino_mega.write "+1 #{deger}&"
+  # THREAD
+  def mega_serial
 
-    elsif komut == 'ekran_isik'
-      @arduino_mega.write "+2 #{deger}&"
+    Thread.new do
 
-    elsif komut == 'ekran'
-      @arduino_mega.write "+3 #{deger}&"
+      loop do
 
-    elsif komut == 'servo_x'
-      @arduino_mega.write "+4 #{deger}&"
-
-    elsif komut == 'servo_y'
-      @arduino_mega.write "+5 #{deger}&"
-
-    elsif komut == 'led_1'
-      @arduino_mega.write "+6 #{deger}&"
-
-    elsif komut == 'led_2'
-      @arduino_mega.write "+7 #{deger}&"
+        ## KOMUT GONDER
+        @arduino_mega.write "+1 #{deger_buzzer}&" # Buzzer
+        @arduino_mega.write "+2 #{deger_ekran_isik}&" # Ekran Isik
+        @arduino_mega.write "+3 #{deger_ekran}&" # Ekran
+        @arduino_mega.write "+4 #{deger_servo_x}&" # Servo X
+        @arduino_mega.write "+5 #{deger_servo_y}&" # Servo Y
+        @arduino_mega.write "+6 #{deger_led_1}&" # Led 1
+        @arduino_mega.write "+7 #{deger_led_2}&" # Led 2
 
 
+        ## VERI ISTE
+        @arduino_mega.write '-11&'
+        @arduino_mega.write '-12&'
+        @arduino_mega.write '-13&'
+        @arduino_mega.write '-14&'
+        @arduino_mega.write '-21&'
+        @arduino_mega.write '-22&'
+        @arduino_mega.write '-3&'
+        @arduino_mega.write '-4&'
+        @arduino_mega.write '-5&'
+        
+        sleep 0.1 # Stabilite için
 
+      end
 
-    elsif komut == 'uzaklik'
-      @arduino_mega.write '-11 &'
-      @arduino_mega.write '-12 &'
-      @arduino_mega.write '-13 &'
-      @arduino_mega.write '-14 &'
-      @arduino_mega.write '-15 &'
-      @arduino_mega.write '-16 &'
-
-    elsif komut == 'hareket'
-      @arduino_mega.write '-21&'
-      @arduino_mega.write '-22&'
-
-    elsif komut == 'ses'
-      @arduino_mega.write '-3&'
-
-    elsif komut == 'isik'
-      @arduino_mega.write '-4&'
-
-    elsif komut == 'yakinlik'
-      @arduino_mega.write '-51&'
-      @arduino_mega.write '-52&'
-
-
-    elsif komut == 'sicaklik'
-      @arduino_mega.write '-6&'
-
-
-    elsif komut == 'sensorler'
-      @arduino_mega.write '-11&'
-      @arduino_mega.write '-12&'
-      @arduino_mega.write '-13&'
-      @arduino_mega.write '-14&'
-      @arduino_mega.write '-15&'
-      @arduino_mega.write '-16&'
-      @arduino_mega.write '-21&'
-      @arduino_mega.write '-22&'
-      @arduino_mega.write '-3&'
-      @arduino_mega.write '-4&'
-      @arduino_mega.write '-51&'
-      @arduino_mega.write '-52&'
-      @arduino_mega.write '-6&'
     end
+
   end
 
 
-  # THREAD WHILE
+  # THREAD
   def mega_serial_gelen
     Thread.new do
       while (i = @arduino_mega.gets.chomp) do
@@ -237,20 +195,16 @@ class Arduino_Self
         gelen = i.split ' ', 2
 
         komut = gelen[0]
-        deger = gelen[1]
+        deger = gelen[1].to_i
 
         if komut == '-111'
-          $sensor.uzaklik_on_sag = deger
+          $sensor.uzaklik_on = deger
         elsif komut == '-121'
-          $sensor.uzaklik_on_sol = deger
+          $sensor.uzaklik_arka = deger
         elsif komut == '-131'
-          $sensor.uzaklik_sag_on = deger
+          $sensor.uzaklik_sag = deger
         elsif komut == '-141'
-          $sensor.uzaklik_sag_arka = deger
-        elsif komut == '-151'
-          $sensor.uzaklik_sol_on = deger
-        elsif komut == '-161'
-          $sensor.uzaklik_sol_arka = deger
+          $sensor.uzaklik_sol = deger
 
 
         elsif komut == '-211'
@@ -262,16 +216,10 @@ class Arduino_Self
         elsif komut == '-31'
           $sensor.ses = deger
 
-
         elsif komut == '-41'
           $sensor.isik = deger
 
-        elsif komut == '-511'
-          $sensor.yakinlik_on_sag = deger
-        elsif komut == '-521'
-          $sensor.yakinlik_on_sol = deger
-
-        elsif komut == '-61'
+        elsif komut == '-51'
           $sensor.sicaklik = deger
 
         end
@@ -284,11 +232,11 @@ class Arduino_Self
   def uno_sensor_oku
     Thread.new do
       loop do
-        yakinlik_yer = @pins.pin_ara 'yakinlik_yer'
-        motor_sag_on = @pins.pin_ara 'motor_sag_on_enkoder'
-        motor_sag_arka = @pins.pin_ara 'motor_sag_arka_enkoder'
-        motor_sol_on = @pins.pin_ara 'motor_sol_on_enkoder'
-        motor_sol_arka = @pins.pin_ara 'motor_sol_arka_enkoder'
+        yakinlik_yer = $pins.pin_ara 'yakinlik_yer'
+        motor_sag_on = $pins.pin_ara 'motor_sag_on_enkoder'
+        motor_sag_arka = $pins.pin_ara 'motor_sag_arka_enkoder'
+        motor_sol_on = $pins.pin_ara 'motor_sol_on_enkoder'
+        motor_sol_arka = $pins.pin_ara 'motor_sol_arka_enkoder'
 
         $sensor.yakinlik_yer = @arduino_uno.analog_read yakinlik_yer
         $sensor.motor_sag_on_enkoder = @arduino_uno.analog_read motor_sag_on
@@ -296,29 +244,41 @@ class Arduino_Self
         $sensor.motor_sol_on_enkoder = @arduino_uno.analog_read motor_sol_on
         $sensor.motor_sol_arka_enkoder = @arduino_uno.analog_read motor_sol_arka
 
-        sleep 0.01
+        sleep 0.1
       end
     end
+  end
+
+
+  def mega_sensor_default
+    deger_buzzer = 0
+    deger_ekran_isik = 1
+    deger_ekran = 0
+    deger_servo_x = 80
+    deger_servo_y = 10
+    deger_led_1 = 1
+    deger_led_2 = 1
   end
 
 
   # SEND ARDUINO
   def uno_transistor gelen
     if gelen == true
-      tr1 = @pins.pin_ara 'transistor_1'
-      tr2 = @pins.pin_ara 'transistor_2'
+      tr1 = $pins.pin_ara 'transistor_1'
+      tr2 = $pins.pin_ara 'transistor_2'
 
       @arduino_uno.digital_write tr1, 1
       @arduino_uno.digital_write tr2, 1
 
     else
-      tr1 = @pins.pin_ara 'transistor_1'
-      tr2 = @pins.pin_ara 'transistor_2'
+      tr1 = $pins.pin_ara 'transistor_1'
+      tr2 = $pins.pin_ara 'transistor_2'
 
       @arduino_uno.digital_write tr1, 0
       @arduino_uno.digital_write tr2, 0
     end
   end
+
 
 
 

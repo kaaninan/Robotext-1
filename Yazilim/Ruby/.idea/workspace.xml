@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8cec11da-d23a-4707-ac63-b1669183b995" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Ruby.iml" afterPath="$PROJECT_DIR$/.idea/Ruby.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/motor.rb" afterPath="$PROJECT_DIR$/motor.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Ruby.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -43,8 +43,8 @@
       <file leaf-file-name="motor.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/motor.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.12824" vertical-offset="0" max-vertical-offset="5325">
-              <caret line="104" column="17" selection-start-line="104" selection-start-column="17" selection-end-line="104" selection-end-column="17" />
+            <state vertical-scroll-proportion="0.63437927" vertical-offset="0" max-vertical-offset="5325">
+              <caret line="31" column="46" selection-start-line="31" selection-start-column="46" selection-end-line="31" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -762,8 +762,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/motor.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.12824" vertical-offset="0" max-vertical-offset="5325">
-          <caret line="104" column="17" selection-start-line="104" selection-start-column="17" selection-end-line="104" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.63437927" vertical-offset="0" max-vertical-offset="5325">
+          <caret line="31" column="46" selection-start-line="31" selection-start-column="46" selection-end-line="31" selection-end-column="46" />
           <folding />
         </state>
       </provider>

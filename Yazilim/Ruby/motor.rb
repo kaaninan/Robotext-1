@@ -16,9 +16,9 @@ class Motor
     puts '==> Motorlar Etkinlestirildi <=='
 
     # EKRANA MANUEL MOD YAZ
-    @gonder.ekran = 6
+    @gonder.ekran 6
     sleep 0.4
-    @gonder.ekran = 4
+    @gonder.ekran 4
 
 
     ## ARDUINO UNO PINLERI BELIRLE

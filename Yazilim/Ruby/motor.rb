@@ -18,7 +18,7 @@ class Motor
     # EKRANA MANUEL MOD YAZ
     @board.deger_ekran = 6
     sleep 0.4
-    @gonder.deger_ekran = 4
+    @board.deger_ekran = 4
 
 
     ## ARDUINO UNO PINLERI BELIRLE

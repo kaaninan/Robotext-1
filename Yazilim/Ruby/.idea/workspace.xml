@@ -2,366 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8cec11da-d23a-4707-ac63-b1669183b995" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../+/Kamera.rtf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing (only Motors)/Firmata/Firmata.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/Ana.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/Arduino_Gelen.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/Arduino_Gonder.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/Arduino_Gonder.pde.save" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/Ek_Bilgi.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/Hareket.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/Import.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/Kamera.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/Klasor.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/Mail.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/Mail_Dogrulama.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/Mail_Html.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/OSC_Gelen.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/OSC_Gonder.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/Processing_Eski.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/Ses.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/Tanimlamalar.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/code/dsn.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/code/gimap.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/code/imap.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/code/mail.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/code/mailapi.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/code/pop3.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/code/smtp.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/examples/arduino_input/arduino_input.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/examples/arduino_input_mega/arduino_input_mega.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/examples/arduino_output/arduino_output.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/examples/arduino_pwm/arduino_pwm.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/examples/arduino_servo/arduino_servo.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/library.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/library/arduino.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/reference/allclasses-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/reference/allclasses-noframe.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/reference/cc/arduino/Arduino.FirmataWriter.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/reference/cc/arduino/Arduino.SerialProxy.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/reference/cc/arduino/Arduino.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/reference/cc/arduino/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/reference/cc/arduino/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/reference/cc/arduino/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/reference/constant-values.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/reference/deprecated-list.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/reference/help-doc.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/reference/index-all.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/reference/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/reference/org/firmata/Firmata.Writer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/reference/org/firmata/Firmata.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/reference/org/firmata/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/reference/org/firmata/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/reference/org/firmata/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/reference/overview-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/reference/overview-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/reference/overview-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/reference/package-list" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/reference/resources/inherit.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/reference/serialized-form.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/reference/stylesheet.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/src/Arduino.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/arduino/src/Firmata.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/examples/oscP5broadcastClient/oscP5broadcastClient.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/examples/oscP5broadcastTester/oscP5broadcastTester.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/examples/oscP5broadcaster/oscP5broadcaster.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/examples/oscP5bundle/oscP5bundle.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/examples/oscP5flush/oscP5flush.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/examples/oscP5message/oscP5message.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/examples/oscP5multicast/oscP5multicast.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/examples/oscP5oscArgument/oscP5oscArgument.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/examples/oscP5parsing/oscP5parsing.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/examples/oscP5plug/oscP5plug.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/examples/oscP5properties/oscP5properties.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/examples/oscP5sendReceive/oscP5sendReceive.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/examples/oscP5tcp/oscP5tcp.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/library.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/library/oscP5.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/allclasses-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/allclasses-noframe.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/constant-values.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/deprecated-list.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/help-doc.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/index-all.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/netP5/AbstractMulticast.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/netP5/AbstractTcpClient.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/netP5/AbstractTcpServer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/netP5/AbstractUdpClient.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/netP5/AbstractUdpServer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/netP5/Bytes.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/netP5/Logger.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/netP5/Multicast.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/netP5/NetAddress.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/netP5/NetAddressList.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/netP5/NetInfo.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/netP5/NetListener.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/netP5/NetMessage.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/netP5/NetP5.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/netP5/NetStatus.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/netP5/StringUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/netP5/TcpClient.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/netP5/TcpPacket.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/netP5/TcpPacketListener.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/netP5/TcpServer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/netP5/UdpClient.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/netP5/UdpPacketListener.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/netP5/UdpServer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/netP5/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/netP5/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/netP5/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/oscP5/OscArgument.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/oscP5/OscBundle.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/oscP5/OscEventListener.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/oscP5/OscIn.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/oscP5/OscMessage.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/oscP5/OscNetManager.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/oscP5/OscP5.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/oscP5/OscPacket.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/oscP5/OscPatcher.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/oscP5/OscPlug.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/oscP5/OscProperties.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/oscP5/OscStatus.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/oscP5/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/oscP5/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/oscP5/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/overview-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/overview-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/overview-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/package-list" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/resources/inherit.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/reference/stylesheet.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/netP5/AbstractMulticast.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/netP5/AbstractTcpClient.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/netP5/AbstractTcpServer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/netP5/AbstractUdpClient.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/netP5/AbstractUdpServer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/netP5/Bytes.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/netP5/Logger.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/netP5/Multicast.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/netP5/NetAddress.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/netP5/NetAddressList.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/netP5/NetInfo.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/netP5/NetListener.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/netP5/NetMessage.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/netP5/NetP5.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/netP5/NetPlug.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/netP5/NetStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/netP5/StringUtils.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/netP5/TcpClient.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/netP5/TcpPacket.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/netP5/TcpPacketListener.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/netP5/TcpServer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/netP5/UdpClient.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/netP5/UdpPacketListener.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/netP5/UdpServer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/oscP5/OscArgument.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/oscP5/OscBundle.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/oscP5/OscEventListener.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/oscP5/OscIn.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/oscP5/OscMessage.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/oscP5/OscNetManager.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/oscP5/OscP5.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/oscP5/OscPacket.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/oscP5/OscPatcher.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/oscP5/OscPlug.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/oscP5/OscProperties.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/libraries/oscP5/src/oscP5/OscStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Processing_Eski/sketch.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/Arduino.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/Cikis.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/Hareket.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/Kamera.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/Log.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/Mail.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/Mail_Auth.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/Mail_Html.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/Motor.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/Otonom.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/Pin.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/Robot.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/Sensor.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/Ses.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/WebSocket.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/code/dsn.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/code/gimap.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/code/imap.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/code/mail.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/code/mailapi.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/code/pop3.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/code/smtp.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/examples/arduino_input/arduino_input.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/examples/arduino_input_mega/arduino_input_mega.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/examples/arduino_output/arduino_output.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/examples/arduino_pwm/arduino_pwm.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/examples/arduino_servo/arduino_servo.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/library.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/library/arduino.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/reference/allclasses-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/reference/allclasses-noframe.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/reference/cc/arduino/Arduino.FirmataWriter.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/reference/cc/arduino/Arduino.SerialProxy.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/reference/cc/arduino/Arduino.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/reference/cc/arduino/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/reference/cc/arduino/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/reference/cc/arduino/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/reference/constant-values.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/reference/deprecated-list.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/reference/help-doc.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/reference/index-all.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/reference/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/reference/org/firmata/Firmata.Writer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/reference/org/firmata/Firmata.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/reference/org/firmata/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/reference/org/firmata/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/reference/org/firmata/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/reference/overview-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/reference/overview-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/reference/overview-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/reference/package-list" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/reference/resources/inherit.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/reference/serialized-form.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/reference/stylesheet.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/src/Arduino.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/arduino/src/Firmata.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/examples/oscP5broadcastClient/oscP5broadcastClient.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/examples/oscP5broadcastTester/oscP5broadcastTester.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/examples/oscP5broadcaster/oscP5broadcaster.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/examples/oscP5bundle/oscP5bundle.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/examples/oscP5flush/oscP5flush.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/examples/oscP5message/oscP5message.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/examples/oscP5multicast/oscP5multicast.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/examples/oscP5oscArgument/oscP5oscArgument.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/examples/oscP5parsing/oscP5parsing.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/examples/oscP5plug/oscP5plug.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/examples/oscP5properties/oscP5properties.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/examples/oscP5sendReceive/oscP5sendReceive.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/examples/oscP5tcp/oscP5tcp.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/library.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/library/oscP5.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/allclasses-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/allclasses-noframe.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/constant-values.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/deprecated-list.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/help-doc.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/index-all.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/netP5/AbstractMulticast.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/netP5/AbstractTcpClient.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/netP5/AbstractTcpServer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/netP5/AbstractUdpClient.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/netP5/AbstractUdpServer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/netP5/Bytes.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/netP5/Logger.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/netP5/Multicast.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/netP5/NetAddress.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/netP5/NetAddressList.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/netP5/NetInfo.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/netP5/NetListener.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/netP5/NetMessage.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/netP5/NetP5.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/netP5/NetStatus.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/netP5/StringUtils.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/netP5/TcpClient.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/netP5/TcpPacket.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/netP5/TcpPacketListener.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/netP5/TcpServer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/netP5/UdpClient.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/netP5/UdpPacketListener.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/netP5/UdpServer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/netP5/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/netP5/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/netP5/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/oscP5/OscArgument.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/oscP5/OscBundle.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/oscP5/OscEventListener.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/oscP5/OscIn.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/oscP5/OscMessage.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/oscP5/OscNetManager.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/oscP5/OscP5.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/oscP5/OscPacket.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/oscP5/OscPatcher.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/oscP5/OscPlug.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/oscP5/OscProperties.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/oscP5/OscStatus.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/oscP5/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/oscP5/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/oscP5/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/overview-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/overview-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/overview-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/package-list" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/resources/inherit.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/reference/stylesheet.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/netP5/AbstractMulticast.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/netP5/AbstractTcpClient.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/netP5/AbstractTcpServer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/netP5/AbstractUdpClient.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/netP5/AbstractUdpServer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/netP5/Bytes.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/netP5/Logger.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/netP5/Multicast.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/netP5/NetAddress.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/netP5/NetAddressList.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/netP5/NetInfo.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/netP5/NetListener.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/netP5/NetMessage.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/netP5/NetP5.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/netP5/NetPlug.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/netP5/NetStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/netP5/StringUtils.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/netP5/TcpClient.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/netP5/TcpPacket.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/netP5/TcpPacketListener.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/netP5/TcpServer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/netP5/UdpClient.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/netP5/UdpPacketListener.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/netP5/UdpServer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/oscP5/OscArgument.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/oscP5/OscBundle.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/oscP5/OscEventListener.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/oscP5/OscIn.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/oscP5/OscMessage.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/oscP5/OscNetManager.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/oscP5/OscP5.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/oscP5/OscPacket.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/oscP5/OscPatcher.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/oscP5/OscPlug.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/oscP5/OscProperties.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/oscP5/src/oscP5/OscStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/websocketP5/examples/SimpleWebSocketServer/SimpleWebSocketServer.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/websocketP5/examples/SimpleWebSocketServer/html/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/websocketP5/library/webbit-all-in-one.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/websocketP5/library/webbit-src.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/websocketP5/library/webbit.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/websocketP5/library/websocketP5.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/websocketP5/reference/allclasses-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/websocketP5/reference/allclasses-noframe.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/websocketP5/reference/constant-values.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/websocketP5/reference/deprecated-list.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/websocketP5/reference/help-doc.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/websocketP5/reference/index-all.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/websocketP5/reference/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/websocketP5/reference/muthesius/net/WebSocketP5.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/websocketP5/reference/muthesius/net/package-frame.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/websocketP5/reference/muthesius/net/package-summary.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/websocketP5/reference/muthesius/net/package-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/websocketP5/reference/overview-tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/websocketP5/reference/package-list" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/websocketP5/reference/resources/inherit.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/websocketP5/reference/stylesheet.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/libraries/websocketP5/src/muthesius/net/WebSocketP5.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Robot/sketch.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Serial + oscP5/arduino/arduino.ino" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Processing/Serial + oscP5/processing/processing.pde" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../../Belgeler/Sunum/Logo.png" afterPath="$PROJECT_DIR$/../../Belgeler/Sunum/logo.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../Pin Şeması.numbers" afterPath="$PROJECT_DIR$/../../Pin Şeması.numbers" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Arduino/Mega/Mega.ino" afterPath="$PROJECT_DIR$/../Arduino/Mega/Mega.ino" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/arduino.rb" afterPath="$PROJECT_DIR$/arduino.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hareket.rb" afterPath="$PROJECT_DIR$/hareket.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.rb" afterPath="$PROJECT_DIR$/main.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/motor.rb" afterPath="$PROJECT_DIR$/motor.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sensor.rb" afterPath="$PROJECT_DIR$/sensor.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Ruby.iml" afterPath="$PROJECT_DIR$/.idea/Ruby.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Ruby.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -386,12 +28,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="test.rb" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/test.rb">
+      <file leaf-file-name="main.rb" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="660" max-vertical-offset="1455">
-              <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="0.57298774" vertical-offset="0" max-vertical-offset="2070">
+              <caret line="28" column="29" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
+              <folding>
+                <marker date="1427572088000" expanded="true" signature="118:138" placeholder="=begin ... =end" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -416,7 +60,6 @@
         <option value="$PROJECT_DIR$/mail.rb" />
         <option value="$PROJECT_DIR$/osc_class.rb" />
         <option value="$PROJECT_DIR$/bash.rb" />
-        <option value="$PROJECT_DIR$/main.rb" />
         <option value="$PROJECT_DIR$/arduino.rb" />
         <option value="$PROJECT_DIR$/motor.rb" />
         <option value="$PROJECT_DIR$/gonder.rb" />
@@ -425,6 +68,7 @@
         <option value="$PROJECT_DIR$/deneme.rb" />
         <option value="$PROJECT_DIR$/hareket.rb" />
         <option value="$PROJECT_DIR$/test.rb" />
+        <option value="$PROJECT_DIR$/main.rb" />
       </list>
     </option>
   </component>
@@ -544,6 +188,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -564,7 +209,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -685,7 +329,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="825" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298292" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36662287" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -693,19 +337,19 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23247497" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2353362" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298292" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298292" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -724,9 +368,9 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2067239" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1033,21 +677,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4297408" vertical-offset="15" max-vertical-offset="2370">
-          <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/arduino.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9590723" vertical-offset="542" max-vertical-offset="1560">
-          <caret line="287" column="5" selection-start-line="287" selection-start-column="5" selection-end-line="287" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/motor.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.20463847" vertical-offset="30" max-vertical-offset="3420">
@@ -1104,11 +733,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/arduino.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34515688" vertical-offset="3602" max-vertical-offset="4680">
+          <caret line="257" column="20" selection-start-line="257" selection-start-column="20" selection-end-line="257" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="660" max-vertical-offset="1455">
-          <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.32742155" vertical-offset="660" max-vertical-offset="1455">
+          <caret line="60" column="22" selection-start-line="60" selection-start-column="22" selection-end-line="60" selection-end-column="22" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.57298774" vertical-offset="0" max-vertical-offset="2070">
+          <caret line="28" column="29" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
+          <folding>
+            <marker date="1427572088000" expanded="true" signature="118:138" placeholder="=begin ... =end" />
+          </folding>
         </state>
       </provider>
     </entry>

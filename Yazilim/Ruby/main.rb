@@ -5,7 +5,7 @@ require 'pp'
 
 $LOAD_PATH << '.'
 require 'arduino'
-require 'osc_class'
+# require 'osc_class'
 require 'pin'
 require 'motor'
 require 'hareket'

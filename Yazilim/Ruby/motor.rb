@@ -83,6 +83,7 @@ class Motor
               sleep 2
               motor_auto_start
               running = true
+            end
           end
           sleep 0.1
         end
@@ -91,26 +92,24 @@ class Motor
 
     else
       motor_auto_basla
-
     end
 
   end
 
   def motor_auto_basla
     puts '==> OTOMATIK MOD ETKIN <=='
-      @motor_auto_thread = Thread.new do
-        sleep 1
-        while @thread_motor
-          motor_auto_komut
-          sleep 0.1
-        end
+    @motor_auto_thread = Thread.new do
+      sleep 1
+      while @thread_motor
+        motor_auto_komut
+        sleep 0.1
       end
+    end
 
-      @uzaklik_thread = Thread.new do
-        while @thread_uzaklik
-          uzaklik_kontrol
-          sleep 0.1
-        end
+    @uzaklik_thread = Thread.new do
+      while @thread_uzaklik
+        uzaklik_kontrol
+        sleep 0.1
       end
     end
   end

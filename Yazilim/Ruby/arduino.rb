@@ -175,6 +175,7 @@ class Arduino_Self
         @arduino_mega.write '-3&'
         @arduino_mega.write '-4&'
         @arduino_mega.write '-5&'
+        @arduino_mega.write '-6&'
         
         sleep 0.1 # Stabilite için
 
@@ -221,6 +222,9 @@ class Arduino_Self
 
         elsif komut == '-51'
           $sensor.sicaklik = deger
+
+        elsif komut == '-61'
+          $sensor.gaz = deger
 
         end
       end

@@ -62,19 +62,55 @@ class Motor
 
   # KOMUT
   def motor_auto_start
-    puts '==> OTOMATIK MOD ETKIN <=='
-    @motor_auto_thread = Thread.new do
-      sleep 1
-      while @thread_motor
-        motor_auto_komut
-        sleep 0.1
+
+    if @hareket.getEtkin == true
+
+      Thread.new do
+        s = Stopwatch.new
+        motor_auto_basla
+        running = false
+
+        loop do
+          saat = s.elapsed_time
+          if saat%10 == 0
+            if running == true
+              motor_auto_stop
+              sleep 2
+              @hareket.start
+              running = false
+            else
+              @hareket.stop
+              sleep 2
+              motor_auto_start
+              running = true
+          end
+          sleep 0.1
+        end
+
       end
+
+    else
+      motor_auto_basla
+
     end
 
-    @uzaklik_thread = Thread.new do
-      while @thread_uzaklik
-        uzaklik_kontrol
-        sleep 0.1
+  end
+
+  def motor_auto_basla
+    puts '==> OTOMATIK MOD ETKIN <=='
+      @motor_auto_thread = Thread.new do
+        sleep 1
+        while @thread_motor
+          motor_auto_komut
+          sleep 0.1
+        end
+      end
+
+      @uzaklik_thread = Thread.new do
+        while @thread_uzaklik
+          uzaklik_kontrol
+          sleep 0.1
+        end
       end
     end
   end
@@ -257,6 +293,15 @@ class Motor
 
 
 
+  def setGuvenlik hareket
+    @hareket = hareket
+  end
+
+  def get_otomatik
+    return @thread_motor
+  end
+
+
   # TEST
   # def motor_osc sag_hiz, sol_hiz, sag_ters, sol_ters
   #
@@ -287,5 +332,20 @@ class Motor
   #   @arduino_uno.analog_write @y_sol_arka, yon_sol2
   #
   # end
+
+end
+
+
+class Stopwatch
+
+  def initialize()
+    @start = Time.now
+  end
+
+  def elapsed_time
+    now = Time.now
+    elapsed = now - @start
+    return elapsed.to_i
+  end
 
 end

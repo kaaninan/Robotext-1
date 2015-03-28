@@ -5,11 +5,14 @@ require 'bashself'
 class Hareket
 
 
-  def initialize board, gonder
+  def initialize board, gonder, motor
     @board = board
     @sensor = board.getSensor
+    @motor = motor
     @gonder = gonder
     @bashself = BashSelf.new
+
+    @thr_hareket = true
   end
 
 
@@ -17,10 +20,16 @@ class Hareket
     puts '==> Hareket Algilama Baslatildi <=='
 
     @board.ekran = 4
-    @bashself.ses 'hareket_baslatildi'
+
+
+    # Otomatik Moddaysa Ses Çıkarma
+    if @motor.get_otomatik != true
+      @bashself.ses 'hareket_baslatildi'
+    end
+    
 
     @thread = Thread.new do
-      loop do
+      while @thr_hareket
         hareket_kontrol
         sleep 0.1
       end
@@ -35,7 +44,7 @@ class Hareket
   def stop
     puts '==> Hareket Algilama Sonlandirildi <=='
     @board.ekran = 5
-    @thread.exit
+    @thr_hareket = false
   end
 
 
@@ -126,6 +135,10 @@ class Hareket
         sleep 0.5
       end
     end
+  end
+
+  def getEtkin
+    return @thr_hareket
   end
 
 

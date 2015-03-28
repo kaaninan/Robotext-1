@@ -3,7 +3,7 @@ class Sensor
   # MEGA
   attr_accessor :uzaklik_on, :uzaklik_arka, :uzaklik_sag, :uzaklik_sol
   attr_accessor :hareket_sag, :hareket_sol
-  attr_accessor :ses, :isik
+  attr_accessor :ses, :isik, :gaz
 
   # UNO
   attr_accessor :motor_sag_on_enkoder, :motor_sag_arka_enkoder, :motor_sol_on_enkoder, :motor_sol_arka_enkoder
@@ -15,7 +15,7 @@ class Sensor
   end
 
   def print_sensor
-    puts "Isik #{isik}   Hareket #{hareket_sag} #{hareket_sol}   Ses #{ses}  Sicaklik #{sicaklik}"
+    puts "Isik #{isik}   Hareket #{hareket_sag} #{hareket_sol}   Ses #{ses}  Sicaklik #{sicaklik}  Gaz #{gaz}"
   end
 
   def print_uno

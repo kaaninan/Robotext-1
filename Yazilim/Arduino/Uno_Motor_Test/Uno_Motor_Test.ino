@@ -13,7 +13,7 @@ void loop() {
   
   hiz();
   
-  //a1(); // GERİ
+//  a1(); // GERİ
   a2(); // İLERİ
   //a3(); // SAG
   //a4(); // SOL

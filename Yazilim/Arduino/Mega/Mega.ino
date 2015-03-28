@@ -14,6 +14,7 @@ int log_hareket = 0;
 int log_ses = 0;
 int log_isik = 0;
 int log_sicaklik = 0;
+int log_gaz = 0;
 
 
 
@@ -27,6 +28,7 @@ int deger_hareket_sol = 0;
 int deger_ses = 0;
 int deger_isik = 0;
 int deger_sicaklik = 0;
+int deger_gaz = 0;
  
 
 // ### IO ###
@@ -37,8 +39,6 @@ int servo_x_pin = 2;
 int servo_y_pin = 3;
 Servo servo_x;
 Servo servo_y;
-int led_1 = 4;
-int led_2 = 5;
 
 
 // DIGITAL
@@ -49,6 +49,8 @@ const int buzzer_2 = 25;
 const int ses = 26;
 const int ekran_isik = 27;
 LiquidCrystal lcd(28, 29, 30, 31, 32, 33);
+int led_1 = 34;
+int led_2 = 35;
 
 
 // ANALOG
@@ -56,8 +58,9 @@ SharpIR uzaklik_on(A0, 25, 93, 1080);
 SharpIR uzaklik_arka(A1, 25, 93, 1080);
 SharpIR uzaklik_sag(A2, 25, 93, 1080);
 SharpIR uzaklik_sol(A3, 25, 93, 1080);
-const int sicaklik = 4;
-const int ldr = 5;
+const int ldr = 4;
+const int sicaklik = 5;
+const int gaz = 6;
 
 
 
@@ -131,6 +134,7 @@ void oku_sensor() {
   oku_ses();
   oku_isik();
   oku_sicaklik();
+  oku_gaz();
 }
 
 
@@ -199,6 +203,14 @@ void oku_sicaklik(){
   }
 }
 
+void oku_gaz(){
+  deger_gaz = analogRead(gaz);
+  
+  if(log_gaz == 1){
+    Serial.print("Gaz: ");
+    Serial.println(deger_gaz);
+  }
+}
 
 
 
@@ -348,6 +360,13 @@ void parseCommand(String com) {
   else if (part1.equalsIgnoreCase("-5")) {
     Serial.print("-51 ");
     Serial.println(deger_sicaklik);
+  }
+  
+  
+  // GAZ
+  else if (part1.equalsIgnoreCase("-6")) {
+    Serial.print("-61 ");
+    Serial.println(deger_gaz);
   }
   
   

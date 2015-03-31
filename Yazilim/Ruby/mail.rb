@@ -1,10 +1,14 @@
 require 'net/smtp'
 require 'pony'
+$LOAD_PATH << '.'
+require 'bashself'
 
 class MailSelf
 
 
   def mail secenek, kime
+
+    @bash = BashSelf.new
 
     Thread.new do
 
@@ -13,15 +17,15 @@ class MailSelf
         # resim1.jpg
 
         Pony.mail({
-                      :to => kime,
+                      :to => 'kaaninan@outlook.com',
                       :subject => 'ROBOTEXT',
                       :attachments => {"resim1.jpg" => File.read('mail/logo.png'), "logo.png" => File.read("mail/logo.png")},
-                      :html_body => File.read('mail/hareket_baslatildi.htm'),
+                      :html_body => File.read('/home/pi/Robotext/Yazilim/Ruby/mail/hareket_baslatildi.htm'),
                       :sender => 'Robotext',
                       :via => :smtp,
                       :via_options => {
                           :address        => 'smtp.gmail.com',
-                          :port           => '25',
+                          :port           => '587',
                           :user_name      => 'robotext.afl',
                           :password       => 'raspberry_12',
                           :authentication => :login, # :plain, :login, :cram_md5, no auth by default
@@ -38,16 +42,25 @@ class MailSelf
         # resim1.jpg
         # resim2.jpg
 
+        @bash.kamera 'resim_bul'
+
+        @array = @bash.get_resim_listesi
+
+
+        puts 'Hareket Maili Gonderiliyor..'
+
+        @sayi = @array.length
+
         Pony.mail({
-                      :to => kime,
+                      :to => 'kaaninan@outlook.com',
                       :subject => 'ROBOTEXT',
-                      :attachments => {"resim1.jpg" => File.read("mail/logo.png"), "logo.png" => File.read("mail/logo.png")},
-                      :html_body => File.read("mail/hareket_algilandi.htm"),
+                      :attachments => {"resim1.jpg" => File.read(@array[@sayi-1]), "logo.png" => File.read("mail/logo.png")},
+                      :html_body => File.read("/home/pi/Robotext/Yazilim/Ruby/mail/hareket_algilandi.htm"),
                       :sender => 'Robotext',
                       :via => :smtp,
                       :via_options => {
                           :address        => 'smtp.gmail.com',
-                          :port           => '25',
+                          :port           => '587',
                           :user_name      => 'robotext.afl',
                           :password       => 'raspberry_12',
                           :authentication => :login, # :plain, :login, :cram_md5, no auth by default
@@ -55,20 +68,24 @@ class MailSelf
                       }
                   })
 
+        puts 'Gonderildi ..'
+
 
 
       elsif secenek == 'sistem_baslatildi'
 
+        puts 'Mail Gonderiliyor'
+
         Pony.mail({
-                      :to => kime,
+                      :to => 'kaaninan@outlook.com',
                       :subject => 'ROBOTEXT',
                       :attachments => {"logo.png" => File.read("mail/logo.png")},
-                      :html_body => File.read("mail/sistem_baslatildi.htm"),
+                      :html_body => File.read("/home/pi/Robotext/Yazilim/Ruby/mail/sistem_baslatildi.htm"),
                       :sender => 'Robotext',
                       :via => :smtp,
                       :via_options => {
                           :address        => 'smtp.gmail.com',
-                          :port           => '25',
+                          :port           => '587',
                           :user_name      => 'robotext.afl',
                           :password       => 'raspberry_12',
                           :authentication => :login, # :plain, :login, :cram_md5, no auth by default
@@ -84,13 +101,5 @@ class MailSelf
   end
 
 
+
 end
-
-
-mail = MailSelf.new
-mail.mail 'sistem_baslatildi', 'kaaninan@outlook.com'
-mail.mail 'hareket_baslatildi', 'kaaninan@outlook.com'
-mail.mail 'hareket_algilandi', 'kaaninan@outlook.com'
-
-
-gets

@@ -11,12 +11,12 @@ class Gonder
 
 
 	def servo yon
-  	@board.deger_servo_y = 10
+  	# @board.deger_servo_y = 10
 
 		if yon == 'sag'
-			@board.deger_servo_x = 20
+			@board.deger_servo_x = 150
 		elsif yon == 'sol'
-      @board.deger_servo_x = 160
+      @board.deger_servo_x = 30
 		else
       @board.deger_servo_x = 80
 		end
@@ -48,10 +48,7 @@ class Gonder
         @board.deger_buzzer = 1
 				sleep 0.3
         @board.deger_buzzer = 0
-				sleep 0.6
-        @board.deger_buzzer = 1
-				sleep 0.5
-        @board.deger_buzzer = 0
+				sleep 0.3
       end
     end
 	end

@@ -1,5 +1,5 @@
 var ws = null;
-var host = "192.168.1.26"
+var host = "192.168.2.3"
 var port = 7070
 var socket = ""
 
@@ -264,7 +264,7 @@ $(function(){
     setTimeout(function(){
         not_baglaniyor.hide();
         baglan();
-    }, 2000);
+    }, 1000);
 });
 
 

@@ -15,10 +15,10 @@ class Motor
 
     puts '==> Motorlar Etkinlestirildi <=='
 
-    # EKRANA MANUEL MOD YAZ
-    @board.deger_ekran = 6
-    sleep 0.4
-    @board.deger_ekran = 4
+    # # EKRANA MANUEL MOD YAZ
+    # @board.deger_ekran = 6
+    # sleep 0.4
+    # @board.deger_ekran = 4
 
 
     ## ARDUINO UNO PINLERI BELIRLE
@@ -46,10 +46,15 @@ class Motor
     @durum_sag = false
     @durum_sol = false
 
-    @sinir_on = 10
-    @sinir_arka = 10
-    @sinir_sag = 10
-    @sinir_sol = 10
+    @sinir_on = 20
+    @sinir_arka = 20
+    @sinir_sag = 20
+    @sinir_sol = 20
+
+
+     # YENI
+    @durum_on_yeni = false
+    @sinir_yeni = 40
 
 
     # OTOMATIK MOD THREAD'LARIN KONTROLU
@@ -97,18 +102,23 @@ class Motor
   end
 
   def motor_auto_basla
+    @thread_motor = true
+    @thread_uzaklik = true
+
+    # @board.deger_ekran = 3
+
     puts '==> OTOMATIK MOD ETKIN <=='
     @motor_auto_thread = Thread.new do
       sleep 1
       while @thread_motor
-        motor_auto_komut
+        motor_auto_komut2
         sleep 0.1
       end
     end
 
     @uzaklik_thread = Thread.new do
       while @thread_uzaklik
-        uzaklik_kontrol
+        uzaklik_kontrol2
         sleep 0.1
       end
     end
@@ -117,6 +127,7 @@ class Motor
 
   def motor_auto_stop
     puts '==> OTOMATIK MOD KAPALI <=='
+    @board.deger_ekran = 4
     @thread_motor = false
     @thread_uzaklik = false
     motor_dur
@@ -125,16 +136,12 @@ class Motor
 
 # OTOMATİK MOD KONTROL (NO LOOP)
 
-  private
 
   def motor_auto_komut
 
     if @durum_on == true
 
-      if @durum_sag == true && @durum_sol == true
-        motor_ileri
-
-      elsif @durum_sag == false && @durum_sol == true
+      if @durum_sag == false && @durum_sol == true
         motor_ileri_sol
 
       elsif @durum_sag == true && @durum_sol == false
@@ -154,9 +161,12 @@ class Motor
         motor_sol
         sleep 1.5
 
-      else
+      elsif @durum_arka == true
         motor_geri
-        sleep 2
+        sleep 1.5
+
+      else
+        motor_dur
 
       end
 
@@ -168,10 +178,10 @@ class Motor
 
     puts "Durum On: #{@durum_on}  Arka #{@durum_arka}  Sag #{@durum_sag}  Sol #{@durum_sol}"
 
-    @sensor_on = @sensor.uzaklik_on.dup
-    @sensor_arka = @sensor.uzaklik_arka.dup
-    @sensor_sag = @sensor.uzaklik_sag.dup
-    @sensor_sol = @sensor.uzaklik_sol.dup
+    @sensor_on = @sensor.uzaklik_on
+    @sensor_arka = @sensor.uzaklik_arka
+    @sensor_sag = @sensor.uzaklik_sag
+    @sensor_sol = @sensor.uzaklik_sol
 
     if @sensor_on > @sinir_on
       @durum_on = true
@@ -202,9 +212,106 @@ class Motor
 
 
 
+  def motor_auto_komut2
+
+    # ENGEL VARSA DUR
+    if @durum_on_yeni == true
+
+      motor_ileri
+
+    else
+
+      # ENGEL VAR
+      motor_dur
+      # ONCE DUR
+
+
+      a = rand 2
+
+      if a == 1
+        motor_sol
+        sleep 3
+        motor_dur
+        sleep 1
+        @sol_durum = @durum_on_yeni
+
+        if @sol_durum == true
+          motor_ileri
+
+        else
+
+          motor_sag
+          sleep 3
+          motor_dur
+          sleep 1
+          @sag_durum = @durum_on_yeni
+
+          if @sag_durum == true
+
+            motor_ileri
+
+          else
+
+            motor_geri
+            sleep 3
+
+          end
+        end
+      else
+
+        motor_sag
+        sleep 3
+        motor_dur
+        sleep 1
+        @sag_durum = @durum_on_yeni
+
+        if @sag_durum == true
+          motor_ileri
+
+        else
+
+          motor_sol
+          sleep 3
+          motor_dur
+          sleep 1
+          @sol_durum = @durum_on_yeni
+
+          if @sol_durum == true
+
+            motor_ileri
+
+          else
+
+            motor_geri
+            sleep 3
+
+          end
+
+        end
+
+      end
+
+    end
+
+  end
+
+  def uzaklik_kontrol2
+
+    @sensor_on_sag = @sensor.uzaklik_on_sag
+    @sensor_on_sol = @sensor.uzaklik_on_sol
+
+    if @sensor_on_sag < @sinir_yeni && @sensor_on_sol < @sinir_yeni
+      @durum_on_yeni = false
+    else
+      @durum_on_yeni = true
+    end
+
+  end
+
+
 # MANUEL KOMUTLAR
 
-  public
+  @@donus = 100
 
   def motor_ileri
     @arduino_uno.digital_write @y_sag_on, 0
@@ -212,10 +319,10 @@ class Motor
     @arduino_uno.digital_write @y_sol_on, 0
     @arduino_uno.digital_write @y_sol_arka, 1
 
-    @arduino_uno.analog_write @h_sag_on, 255
-    @arduino_uno.analog_write @h_sag_arka, 255
-    @arduino_uno.analog_write @h_sol_on, 255
-    @arduino_uno.analog_write @h_sol_arka, 255
+    @arduino_uno.analog_write @h_sag_on, @@donus.to_i
+    @arduino_uno.analog_write @h_sag_arka, @@donus.to_i
+    @arduino_uno.analog_write @h_sol_on, @@donus.to_i
+    @arduino_uno.analog_write @h_sol_arka, @@donus.to_i
   end
 
   def motor_geri
@@ -224,10 +331,10 @@ class Motor
     @arduino_uno.digital_write @y_sol_on, 1
     @arduino_uno.digital_write @y_sol_arka, 0
 
-    @arduino_uno.analog_write @h_sag_on, 255
-    @arduino_uno.analog_write @h_sag_arka, 255
-    @arduino_uno.analog_write @h_sol_on, 255
-    @arduino_uno.analog_write @h_sol_arka, 255
+    @arduino_uno.analog_write @h_sag_on, @@donus.to_i
+    @arduino_uno.analog_write @h_sag_arka, @@donus.to_i
+    @arduino_uno.analog_write @h_sol_on, @@donus.to_i
+    @arduino_uno.analog_write @h_sol_arka, @@donus.to_i
   end
 
   def motor_sol
@@ -236,10 +343,10 @@ class Motor
     @arduino_uno.digital_write @y_sol_on, 0
     @arduino_uno.digital_write @y_sol_arka, 1
 
-    @arduino_uno.analog_write @h_sag_on, 255
-    @arduino_uno.analog_write @h_sag_arka, 255
-    @arduino_uno.analog_write @h_sol_on, 255
-    @arduino_uno.analog_write @h_sol_arka, 255
+    @arduino_uno.analog_write @h_sag_on, @@donus.to_i
+    @arduino_uno.analog_write @h_sag_arka, @@donus.to_i
+    @arduino_uno.analog_write @h_sol_on, @@donus.to_i
+    @arduino_uno.analog_write @h_sol_arka, @@donus.to_i
   end
 
   def motor_sag
@@ -248,10 +355,10 @@ class Motor
     @arduino_uno.digital_write @y_sol_on, 1
     @arduino_uno.digital_write @y_sol_arka, 0
 
-    @arduino_uno.analog_write @h_sag_on, 255
-    @arduino_uno.analog_write @h_sag_arka, 255
-    @arduino_uno.analog_write @h_sol_on, 255
-    @arduino_uno.analog_write @h_sol_arka, 255
+    @arduino_uno.analog_write @h_sag_on, @@donus.to_i
+    @arduino_uno.analog_write @h_sag_arka, @@donus.to_i
+    @arduino_uno.analog_write @h_sol_on, @@donus.to_i
+    @arduino_uno.analog_write @h_sol_arka, @@donus.to_i
   end
 
   def motor_ileri_sag
@@ -260,10 +367,10 @@ class Motor
     @arduino_uno.digital_write @y_sol_on, 0
     @arduino_uno.digital_write @y_sol_arka, 1
 
-    @arduino_uno.analog_write @h_sag_on, 0
-    @arduino_uno.analog_write @h_sag_arka, 0
-    @arduino_uno.analog_write @h_sol_on, 255
-    @arduino_uno.analog_write @h_sol_arka, 255
+    @arduino_uno.digital_write @h_sag_on, 0
+    @arduino_uno.digital_write @h_sag_arka, 0
+    @arduino_uno.analog_write @h_sol_on, @@donus.to_i
+    @arduino_uno.analog_write @h_sol_arka, @@donus.to_i
   end
 
   def motor_ileri_sol
@@ -272,22 +379,17 @@ class Motor
     @arduino_uno.digital_write @y_sol_on, 0
     @arduino_uno.digital_write @y_sol_arka, 1
 
-    @arduino_uno.analog_write @h_sag_on, 255
-    @arduino_uno.analog_write @h_sag_arka, 255
-    @arduino_uno.analog_write @h_sol_on, 0
-    @arduino_uno.analog_write @h_sol_arka, 0
+    @arduino_uno.analog_write @h_sag_on, @@donus.to_i
+    @arduino_uno.analog_write @h_sag_arka, @@donus.to_i
+    @arduino_uno.digital_write @h_sol_on, 0
+    @arduino_uno.digital_write @h_sol_arka, 0
   end
 
   def motor_dur
-    @arduino_uno.digital_write @y_sag_on, 0
-    @arduino_uno.digital_write @y_sag_arka, 1
-    @arduino_uno.digital_write @y_sol_on, 0
-    @arduino_uno.digital_write @y_sol_arka, 1
-
-    @arduino_uno.analog_write @h_sag_on, 0
-    @arduino_uno.analog_write @h_sag_arka, 0
-    @arduino_uno.analog_write @h_sol_on, 0
-    @arduino_uno.analog_write @h_sol_arka, 0
+    @arduino_uno.digital_write @h_sag_on, 0
+    @arduino_uno.digital_write @h_sag_arka, 0
+    @arduino_uno.digital_write @h_sol_on, 0
+    @arduino_uno.digital_write @h_sol_arka, 0
   end
 
 

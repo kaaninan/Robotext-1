@@ -10,6 +10,7 @@ boolean oku = true;
 
 // LOG
 int log_uzaklik = 0;
+int log_uzaklik_sonic = 0;
 int log_hareket = 0;
 int log_ses = 0;
 int log_isik = 0;
@@ -23,6 +24,10 @@ int deger_uzaklik_on = 0;
 int deger_uzaklik_arka = 0;
 int deger_uzaklik_sag = 0;
 int deger_uzaklik_sol = 0;
+
+int deger_uzaklik_on_sag = 0;
+int deger_uzaklik_on_sol = 0;
+
 int deger_hareket_sag = 0;
 int deger_hareket_sol = 0;
 int deger_ses = 0;
@@ -51,6 +56,10 @@ const int ekran_isik = 27;
 LiquidCrystal lcd(28, 29, 30, 31, 32, 33);
 int led_1 = 34;
 int led_2 = 35;
+int trig_sag = 36;
+int echo_sag = 37;
+int trig_sol = 38;
+int echo_sol = 39;
 
 
 // ANALOG
@@ -75,6 +84,10 @@ void setup() {
   pinMode(hareket_sag, INPUT);
   pinMode(hareket_sol, INPUT);
   pinMode(ses, INPUT);
+  pinMode(trig_sag, OUTPUT);
+  pinMode(echo_sag, INPUT);
+  pinMode(trig_sol, OUTPUT);
+  pinMode(echo_sol, INPUT);
 
   // PWM
   servo_x.attach(servo_x_pin);
@@ -129,7 +142,8 @@ void serialEvent(){
 
 
 void oku_sensor() {
-  oku_uzaklik();
+  //oku_uzaklik();
+  oku_uzaklik_sonic();
   oku_hareket();
   oku_ses();
   oku_isik();
@@ -155,6 +169,33 @@ void oku_uzaklik() {
     Serial.print(" - Sol: ");
     Serial.println(deger_uzaklik_sol);
   }
+}
+
+
+
+void oku_uzaklik_sonic(){
+  
+  digitalWrite(trig_sag, LOW);
+  digitalWrite(trig_sag, HIGH);
+  digitalWrite(trig_sag, LOW);
+  
+  int deger = pulseIn(echo_sag, HIGH, 10000);
+  deger_uzaklik_on_sag = deger/29/2;
+  
+  digitalWrite(trig_sol, LOW);
+  digitalWrite(trig_sol, HIGH);
+  digitalWrite(trig_sol, LOW);
+  
+  int deger2 = pulseIn(echo_sol, HIGH, 10000);
+  deger_uzaklik_on_sol = deger2/29/2;
+  
+  if (log_uzaklik_sonic == 1) {
+    Serial.print("On Sag: ");
+    Serial.print(deger_uzaklik_on_sag);
+    Serial.print(" - On Sol: ");
+    Serial.println(deger_uzaklik_on_sol);
+  }
+
 }
 
 
@@ -263,17 +304,17 @@ void cikis_ekran(int deger) {
     lcd.print("   MANUEL MOD   ");
   }
   
-  else if (deger == 4) {
+  else if (deger == 5) {
     lcd.setCursor(0, 1);
     lcd.print("GUVENLIK: ACIK  ");
   }
   
-  else if (deger == 5) {
+  else if (deger == 6) {
     lcd.setCursor(0, 1);
     lcd.print("GUVENLIK: KAPALI");
   }
   
-  else if (deger == 6) {
+  else {
     lcd.clear();
   }
 }
@@ -367,6 +408,17 @@ void parseCommand(String com) {
   else if (part1.equalsIgnoreCase("-6")) {
     Serial.print("-61 ");
     Serial.println(deger_gaz);
+  }
+  
+  // ULTRASONIC
+  else if (part1.equalsIgnoreCase("-71")) {
+    Serial.print("-711 ");
+    Serial.println(deger_uzaklik_on_sag);
+  }
+  
+  else if (part1.equalsIgnoreCase("-72")) {
+    Serial.print("-721 ");
+    Serial.println(deger_uzaklik_on_sol);
   }
   
   

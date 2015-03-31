@@ -1,6 +1,7 @@
 $LOAD_PATH << '.'
 require 'pin'
 require 'bashself'
+require 'mail'
 
 class Hareket
 
@@ -11,6 +12,7 @@ class Hareket
     @motor = motor
     @gonder = gonder
     @bashself = BashSelf.new
+    @mail = MailSelf.new
 
     @thr_hareket = true
   end
@@ -19,12 +21,14 @@ class Hareket
   def start
     puts '==> Hareket Algilama Baslatildi <=='
 
-    @board.ekran = 4
+    @board.deger_ekran = 5
 
 
     # Otomatik Moddaysa Ses Çıkarma
     if @motor.get_otomatik != true
+      puts 'MAIL AT'
       @bashself.ses 'hareket_baslatildi'
+      @mail.mail 'hareket_baslatildi', 'kaaninan99@gmail.com'
     end
     
 
@@ -37,44 +41,88 @@ class Hareket
 
     @ses_cal = true
     @ses_running = false
+
+    # Mail Göndermek için
     @hareket_ilk = false
+
+    # Üst üste hareket algılandi fonskiyonunu çalıştırmaması için
+    @running_hareket_algilandi = false
 
   end
 
+
   def stop
     puts '==> Hareket Algilama Sonlandirildi <=='
-    @board.ekran = 5
+    @board.deger_ekran = 6
     @thr_hareket = false
   end
 
 
 
-  private
 
   def hareket_kontrol
-    @sag = @sensor.hareket_sag.dup
-    @sol = @sensor.hareket_sol.dup
-
+    @sag = @sensor.hareket_sag
+    @sol = @sensor.hareket_sol
 
     if @sag == 1 && @sol == 0
-      @bashself.ses 'hareket_algilandi' if @ses_cal == true
-      @bashself.kamera 'resim_cek'
-      @gonder.servo 'sag'
-      ses_kontrol
-      @hareket_ilk = true if @hareket_ilk == false
+      hareket_algilandi 'sag'
 
     elsif @sag == 0 && @sol == 1
-      @bashself.ses 'hareket_algilandi' if @ses_cal == true
-      @bashself.kamera 'resim_cek'
-      @gonder.servo 'sol'
-      ses_kontrol
-      @hareket_ilk = true if @hareket_ilk == false
+      hareket_algilandi 'sol'
 
     else
       @gonder.servo nil
     end
 
     sleep 0.1
+
+  end
+
+
+
+  def hareket_algilandi yon
+
+    # Eger fonksiyon calismiyorsa
+    if @running_hareket_algilandi == false
+      @running_hareket_algilandi = true
+
+      # Ekrana Yazı Yaz
+      Thread.new do
+        @board.deger_ekran = 1
+        sleep 4
+        @board.deger_ekran = 5
+      end
+
+      # Ses Çal
+      if @ses_cal == true
+        @bashself.ses 'hareket_algilandi'
+        puts 'SES CAL'
+      end
+
+      # Harekete Don
+      if yon == 'sag'
+        @gonder.servo 'sag'
+      else
+        @gonder.servo 'sol'
+      end
+
+      @board.arduino_sms 'hareket'
+
+      # Resim Cek
+      @bashself.kamera 'resim_cek'
+
+      # Sesin Sürekli Cıkmaması İçin
+      ses_kontrol
+
+      # Mail At
+      @mail.mail 'hareket_algilandi', nil
+
+      @hareket_ilk = true if @hareket_ilk == false
+
+      sleep 2
+      @running_hareket_algilandi = false
+
+    end
 
   end
 

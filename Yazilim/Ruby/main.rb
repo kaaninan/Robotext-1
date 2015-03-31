@@ -14,6 +14,7 @@ require 'sensor'
 require 'websocket'
 require 'gonder'
 require 'bashself'
+require 'mail'
 
 $konum = 'main.rb'
 
@@ -29,6 +30,7 @@ def setup
   @motor.setGuvenlik @hareket
   # @osc = OpenS.new $board, @gonder, @motor
   @bashself = BashSelf.new
+  @mail = MailSelf.new
 
 end
 
@@ -38,20 +40,23 @@ puts
 
 
 def websocket
-  @websocket = WebSoket.new $board
+  @websocket = WebSoket.new $board, @motor, @hareket
   @websocket.start
 end
 
 
 def baslangic_animasyonu
-  @gonder.servo 'sag'
-  sleep 1
-  @gonder.servo 'sol'
-  sleep 1
-  @gonder.servo nil
+  Thread.new do
+    @gonder.servo 'sag'
+    sleep 0.5
+    @gonder.servo 'sol'
+    sleep 0.5
+    @gonder.servo nil
+  end
+
   @gonder.ekran_isik 2
-  @gonder.ekran 0
-  @gonder.buzzer 2
+  $board.deger_ekran = 0
+  # @gonder.buzzer 4
 end
 
 
@@ -59,12 +64,21 @@ end
 
 
 setup
-sleep 1
-baslangic_animasyonu
-sleep 1
+# sleep 1
+# baslangic_animasyonu
+# sleep 1
 
+
+@bashself.ses 'acildi'
+
+@bashself.kamera 'dosya_olustur'
+
+@gonder.buzzer 4
 
 websocket
+@mail.mail 'sistem_baslatildi', "kaaninan@outlook.com"
+
+$board.arduino_sms 'basla'
 
 
 # @motor.motor_auto_start # Otomatik Motor
@@ -72,7 +86,6 @@ websocket
 
 
 # @hareket.stop
-
 # @osc.motor_start
 # @osc.motor_stop
 
@@ -81,45 +94,50 @@ websocket
 
 
 
-
 def motor_kontrol_tus
 
-  a = gets.chomp
+  @a = gets.chomp
 
-  if a == 'w'
+  if @a == 'w'
     @motor.motor_ileri
-  elsif a == 's'
+  elsif @a == 's'
     @motor.motor_geri
-  elsif a == 'a'
+  elsif @a == 'a'
     @motor.motor_sol
-  elsif a == 'd'
+  elsif @a == 'd'
     @motor.motor_sag
-  elsif a == 'q'
+  elsif @a == 'q'
     @motor.motor_ileri_sol
-  elsif a == 'e'
+  elsif @a == 'e'
     @motor.motor_ileri_sag
-  elsif a == 'z'
+  elsif @a == 'z'
     @motor.motor_dur
-  elsif a == 'h'
-    @gonder.servo_thread
-    @hareket.start
-  elsif a == 'j'
+
+  elsif @a == 'h'
+
+  elsif @a == 'j'
     @hareket.stop
-    @gonder.servo_thread_stop
+
+  elsif @a == 'b'
+    @motor.motor_auto_basla
+  elsif @a == 'n'
+    @motor.motor_auto_stop
+
   end
+
 
   sleep 1
 end
 
 
 loop do
-  motor_kontrol_tus
+  # motor_kontrol_tus
+  # @sensor.print_sonic
 end
 
 
 # loop do
-#   @sensor.print_uzaklik
-#   @sensor.print_yakinlik
+#
 #   sleep 0.1
 # end
 

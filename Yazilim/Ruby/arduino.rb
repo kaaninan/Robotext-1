@@ -28,10 +28,10 @@ class Arduino_Self
     $pins = Pin.new
 
     baglan
-    sleep 0.1
+    sleep 0.5
 
     pin_mode
-    sleep 0.1
+    sleep 1
 
     uno_transistor true
     mega_serial
@@ -39,6 +39,12 @@ class Arduino_Self
     uno_sensor_oku
 
     mega_sensor_default
+
+    @pin_1 = $pins.pin_ara 'led_1'
+    @pin_2 = $pins.pin_ara 'led_2'
+
+    @arduino_uno.digital_write @pin_1, 0
+    @arduino_uno.digital_write @pin_2, 0
 
   end
 
@@ -156,28 +162,36 @@ class Arduino_Self
       loop do
 
         ## KOMUT GONDER
-        @arduino_mega.write "+1 #{deger_buzzer}&" # Buzzer
-        @arduino_mega.write "+2 #{deger_ekran_isik}&" # Ekran Isik
-        @arduino_mega.write "+3 #{deger_ekran}&" # Ekran
-        @arduino_mega.write "+4 #{deger_servo_x}&" # Servo X
-        @arduino_mega.write "+5 #{deger_servo_y}&" # Servo Y
-        @arduino_mega.write "+6 #{deger_led_1}&" # Led 1
-        @arduino_mega.write "+7 #{deger_led_2}&" # Led 2
+        @arduino_mega.write "+1 #{@deger_buzzer}&" # Buzzer
+        @arduino_mega.write "+2 #{@deger_ekran_isik}&" # Ekran Isik
+        @arduino_mega.write "+3 #{@deger_ekran}&" # Ekran
+        @arduino_mega.write "+4 #{@deger_servo_x}&" # Servo X
+        @arduino_mega.write "+5 #{@deger_servo_y}&" # Servo Y
+        @arduino_mega.write "+6 #{@deger_led_1}&" # Led 1
+        @arduino_mega.write "+7 #{@deger_led_2}&" # Led 2
 
 
         ## VERI ISTE
-        @arduino_mega.write '-11&'
-        @arduino_mega.write '-12&'
-        @arduino_mega.write '-13&'
-        @arduino_mega.write '-14&'
+        # @arduino_mega.write '-11&'
+        # @arduino_mega.write '-12&'
+        # @arduino_mega.write '-13&'
+        # @arduino_mega.write '-14&'
         @arduino_mega.write '-21&'
+        sleep 0.01
         @arduino_mega.write '-22&'
+        sleep 0.01
         @arduino_mega.write '-3&'
+        sleep 0.01
         @arduino_mega.write '-4&'
+        sleep 0.01
         @arduino_mega.write '-5&'
+        sleep 0.01
         @arduino_mega.write '-6&'
-        
-        sleep 0.1 # Stabilite için
+        sleep 0.01
+        @arduino_mega.write '-71&'
+        sleep 0.01
+        @arduino_mega.write '-72&'
+        sleep 0.01
 
       end
 
@@ -201,11 +215,11 @@ class Arduino_Self
         if komut == '-111'
           $sensor.uzaklik_on = deger
         elsif komut == '-121'
-          $sensor.uzaklik_arka = deger
+          $sensor.uzaklik_sol = deger
         elsif komut == '-131'
           $sensor.uzaklik_sag = deger
         elsif komut == '-141'
-          $sensor.uzaklik_sol = deger
+          $sensor.uzaklik_arka = deger
 
 
         elsif komut == '-211'
@@ -225,6 +239,11 @@ class Arduino_Self
 
         elsif komut == '-61'
           $sensor.gaz = deger
+
+        elsif komut == '-711'
+          $sensor.uzaklik_on_sag = deger
+        elsif komut == '-721'
+          $sensor.uzaklik_on_sol = deger
 
         end
       end
@@ -254,14 +273,47 @@ class Arduino_Self
   end
 
 
+  def arduino_sms tur
+
+    if tur == 'basla'
+
+      @arduino_uno.digital_write @pin_1, 1
+      @arduino_uno.digital_write @pin_2, 0
+
+      sleep 2
+
+      @arduino_uno.digital_write @pin_1, 0
+      @arduino_uno.digital_write @pin_2, 0
+
+
+    else
+      @arduino_uno.digital_write @pin_1, 0
+      @arduino_uno.digital_write @pin_2, 1
+
+      sleep 2
+
+      @arduino_uno.digital_write @pin_1, 0
+      @arduino_uno.digital_write @pin_2, 0
+
+    end
+
+    @arduino_uno.digital_write @pin_1, 0
+    @arduino_uno.digital_write @pin_2, 0
+
+
+  end
+
+
+
+
   def mega_sensor_default
-    deger_buzzer = 0
-    deger_ekran_isik = 1
-    deger_ekran = 0
-    deger_servo_x = 80
-    deger_servo_y = 10
-    deger_led_1 = 1
-    deger_led_2 = 1
+    @deger_buzzer = 0
+    @deger_ekran_isik = 1
+    @deger_ekran = 0
+    @deger_servo_x = 80
+    @deger_servo_y = 10
+    @deger_led_1 = 1
+    @deger_led_2 = 1
   end
 
 

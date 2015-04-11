@@ -230,7 +230,7 @@ class Motor
 
       if a == 1
         motor_sol
-        sleep 3
+        sleep 4
         motor_dur
         sleep 1
         @sol_durum = @durum_on_yeni
@@ -241,7 +241,7 @@ class Motor
         else
 
           motor_sag
-          sleep 3
+          sleep 4
           motor_dur
           sleep 1
           @sag_durum = @durum_on_yeni
@@ -253,14 +253,14 @@ class Motor
           else
 
             motor_geri
-            sleep 3
+            sleep 4
 
           end
         end
       else
 
         motor_sag
-        sleep 3
+        sleep 4
         motor_dur
         sleep 1
         @sag_durum = @durum_on_yeni
@@ -271,7 +271,7 @@ class Motor
         else
 
           motor_sol
-          sleep 3
+          sleep 4
           motor_dur
           sleep 1
           @sol_durum = @durum_on_yeni
@@ -283,7 +283,7 @@ class Motor
           else
 
             motor_geri
-            sleep 3
+            sleep 4
 
           end
 

@@ -1,15 +1,17 @@
 require 'websocket-eventmachine-server'
 $LOAD_PATH << '.'
 require 'motor'
+require 'gonder'
 
 class WebSoket
 
   $yer = 'WebSocket'
 
-  def initialize board, motor, hareket
+  def initialize board, motor, hareket, gonder
     $sensor = board.getSensor
     $motor = motor
     @hareket = hareket
+    @gonder = gonder
   end
 
 
@@ -18,9 +20,9 @@ class WebSoket
     @thr = Thread.new do
       socket
     end
-    Thread.new do
-      gonder
-    end
+
+    gonder
+
   end
 
   def stop
@@ -78,8 +80,10 @@ class WebSoket
     if yeni[1].chomp == 'etkin_alarm'
       if yeni[3].chomp == 'acik'
         puts 'Alarm Acik'
+        @gonder.buzzer 1
       else
         puts 'Alarm Kapali'
+        @gonder.buzzer 0
       end
     end
 
@@ -111,8 +115,8 @@ class WebSoket
       loop do
         degerler = Array.new
         son = ''
-        degerler[0] = "\"isik\":\"60\","
-        degerler[1] = "\"sicaklik\":\"25\""
+        degerler[0] = "\"isik\":\"#{$sensor.isik}\","
+        degerler[1] = "\"sicaklik\":\"#{$sensor.sicaklik}\""
 
         degerler.each do |i|
           son += i

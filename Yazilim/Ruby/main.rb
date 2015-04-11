@@ -40,7 +40,7 @@ puts
 
 
 def websocket
-  @websocket = WebSoket.new $board, @motor, @hareket
+  @websocket = WebSoket.new $board, @motor, @hareket, @gonder
   @websocket.start
 end
 
@@ -64,9 +64,6 @@ end
 
 
 setup
-# sleep 1
-# baslangic_animasyonu
-# sleep 1
 
 
 @bashself.ses 'acildi'
@@ -132,7 +129,7 @@ end
 
 loop do
   # motor_kontrol_tus
-  # @sensor.print_sonic
+  @sensor.print_sensor
 end
 
 

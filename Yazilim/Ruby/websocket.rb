@@ -35,7 +35,7 @@ class WebSoket
   def socket
     EM.run do
 
-      WebSocket::EventMachine::Server.start(:host => '192.168.2.3', :port => 7070) do |ws|
+      WebSocket::EventMachine::Server.start(:host => '192.168.43.111', :port => 7070) do |ws|
         ws.onopen do
           puts 'acik'
         end

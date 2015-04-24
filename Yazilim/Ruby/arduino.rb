@@ -33,7 +33,6 @@ class Arduino_Self
     pin_mode
     sleep 1
 
-    uno_transistor true
     mega_serial
     mega_serial_gelen
     uno_sensor_oku
@@ -223,9 +222,9 @@ class Arduino_Self
 
 
         elsif komut == '-211'
-          $sensor.hareket_sag = deger
-        elsif komut == '-221'
           $sensor.hareket_sol = deger
+        elsif komut == '-221'
+          $sensor.hareket_sag = deger
 
 
         elsif komut == '-31'
@@ -311,28 +310,9 @@ class Arduino_Self
     @deger_ekran_isik = 1
     @deger_ekran = 0
     @deger_servo_x = 80
-    @deger_servo_y = 10
+    @deger_servo_y = 100
     @deger_led_1 = 1
     @deger_led_2 = 1
-  end
-
-
-  # SEND ARDUINO
-  def uno_transistor gelen
-    if gelen == true
-      tr1 = $pins.pin_ara 'transistor_1'
-      tr2 = $pins.pin_ara 'transistor_2'
-
-      @arduino_uno.digital_write tr1, 1
-      @arduino_uno.digital_write tr2, 1
-
-    else
-      tr1 = $pins.pin_ara 'transistor_1'
-      tr2 = $pins.pin_ara 'transistor_2'
-
-      @arduino_uno.digital_write tr1, 0
-      @arduino_uno.digital_write tr2, 0
-    end
   end
 
 

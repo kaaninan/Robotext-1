@@ -1,5 +1,5 @@
 var ws = null;
-var host = "192.168.2.3"
+var host = "192.168.43.111"
 var port = 7070
 var socket = ""
 

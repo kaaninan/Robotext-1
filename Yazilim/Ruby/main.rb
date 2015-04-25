@@ -26,10 +26,10 @@ def setup
   @sensor = $board.getSensor
   @gonder = Gonder.new $board
   @motor = Motor.new $board, @gonder
-  @hareket = Hareket.new $board, @gonder, @motor
+  @bashself = BashSelf.new
+  @hareket = Hareket.new $board, @gonder, @motor, @bashself
   @motor.setGuvenlik @hareket
   # @osc = OpenS.new $board, @gonder, @motor
-  @bashself = BashSelf.new
   @mail = MailSelf.new
 
 end
@@ -73,9 +73,11 @@ setup
 @gonder.buzzer 4
 
 websocket
-@mail.mail 'sistem_baslatildi', "kaaninan@outlook.com"
+@mail.mail 'sistem_baslatildi'
 
-$board.arduino_sms 'basla'
+@bashself.kamera 'resim_cek'
+
+$board.uno_sms 1
 
 
 # @motor.motor_auto_start # Otomatik Motor

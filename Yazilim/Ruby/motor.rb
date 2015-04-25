@@ -314,82 +314,23 @@ class Motor
   @@donus = 100
 
   def motor_ileri
-    @arduino_uno.digital_write @y_sag_on, 0
-    @arduino_uno.digital_write @y_sag_arka, 1
-    @arduino_uno.digital_write @y_sol_on, 0
-    @arduino_uno.digital_write @y_sol_arka, 1
-
-    @arduino_uno.analog_write @h_sag_on, @@donus.to_i
-    @arduino_uno.analog_write @h_sag_arka, @@donus.to_i
-    @arduino_uno.analog_write @h_sol_on, @@donus.to_i
-    @arduino_uno.analog_write @h_sol_arka, @@donus.to_i
+    @board.motor_komut = 'ileri'
   end
 
   def motor_geri
-    @arduino_uno.digital_write @y_sag_on, 1
-    @arduino_uno.digital_write @y_sag_arka, 0
-    @arduino_uno.digital_write @y_sol_on, 1
-    @arduino_uno.digital_write @y_sol_arka, 0
-
-    @arduino_uno.analog_write @h_sag_on, @@donus.to_i
-    @arduino_uno.analog_write @h_sag_arka, @@donus.to_i
-    @arduino_uno.analog_write @h_sol_on, @@donus.to_i
-    @arduino_uno.analog_write @h_sol_arka, @@donus.to_i
+    @board.motor_komut = 'geri'
   end
 
   def motor_sol
-    @arduino_uno.digital_write @y_sag_on, 1
-    @arduino_uno.digital_write @y_sag_arka, 0
-    @arduino_uno.digital_write @y_sol_on, 0
-    @arduino_uno.digital_write @y_sol_arka, 1
-
-    @arduino_uno.analog_write @h_sag_on, @@donus.to_i
-    @arduino_uno.analog_write @h_sag_arka, @@donus.to_i
-    @arduino_uno.analog_write @h_sol_on, @@donus.to_i
-    @arduino_uno.analog_write @h_sol_arka, @@donus.to_i
+    @board.motor_komut = 'sol'
   end
 
   def motor_sag
-    @arduino_uno.digital_write @y_sag_on, 0
-    @arduino_uno.digital_write @y_sag_arka, 1
-    @arduino_uno.digital_write @y_sol_on, 1
-    @arduino_uno.digital_write @y_sol_arka, 0
-
-    @arduino_uno.analog_write @h_sag_on, @@donus.to_i
-    @arduino_uno.analog_write @h_sag_arka, @@donus.to_i
-    @arduino_uno.analog_write @h_sol_on, @@donus.to_i
-    @arduino_uno.analog_write @h_sol_arka, @@donus.to_i
-  end
-
-  def motor_ileri_sag
-    @arduino_uno.digital_write @y_sag_on, 0
-    @arduino_uno.digital_write @y_sag_arka, 1
-    @arduino_uno.digital_write @y_sol_on, 0
-    @arduino_uno.digital_write @y_sol_arka, 1
-
-    @arduino_uno.digital_write @h_sag_on, 0
-    @arduino_uno.digital_write @h_sag_arka, 0
-    @arduino_uno.analog_write @h_sol_on, @@donus.to_i
-    @arduino_uno.analog_write @h_sol_arka, @@donus.to_i
-  end
-
-  def motor_ileri_sol
-    @arduino_uno.digital_write @y_sag_on, 0
-    @arduino_uno.digital_write @y_sag_arka, 1
-    @arduino_uno.digital_write @y_sol_on, 0
-    @arduino_uno.digital_write @y_sol_arka, 1
-
-    @arduino_uno.analog_write @h_sag_on, @@donus.to_i
-    @arduino_uno.analog_write @h_sag_arka, @@donus.to_i
-    @arduino_uno.digital_write @h_sol_on, 0
-    @arduino_uno.digital_write @h_sol_arka, 0
+    @board.motor_komut = 'sag'
   end
 
   def motor_dur
-    @arduino_uno.digital_write @h_sag_on, 0
-    @arduino_uno.digital_write @h_sag_arka, 0
-    @arduino_uno.digital_write @h_sol_on, 0
-    @arduino_uno.digital_write @h_sol_arka, 0
+    @board.motor_komut = 'dur'
   end
 
 

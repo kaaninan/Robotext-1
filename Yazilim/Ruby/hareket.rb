@@ -6,12 +6,12 @@ require 'mail'
 class Hareket
 
 
-  def initialize board, gonder, motor
+  def initialize board, gonder, motor, bashself
     @board = board
     @sensor = board.getSensor
     @motor = motor
     @gonder = gonder
-    @bashself = BashSelf.new
+    @bashself = bashself
     @mail = MailSelf.new
 
     @thr_hareket = true
@@ -28,8 +28,9 @@ class Hareket
     if @motor.get_otomatik != true
       puts 'MAIL AT'
       @bashself.ses 'hareket_baslatildi'
-      @mail.mail 'hareket_baslatildi', 'kaaninan99@gmail.com'
     end
+
+    @mail.mail 'hareket_baslatildi'
     
 
     @thread = Thread.new do
@@ -106,20 +107,24 @@ class Hareket
         @gonder.servo 'sol'
       end
 
-      @board.arduino_sms 'hareket'
+      @board.uno_sms 2
 
       # Resim Cek
-      @bashself.kamera 'resim_cek'
+      # @bashself.kamera 'resim_cek'
+      Thread.new do
+        sleep 2
+        `$HOME/kamera.sh`
+      end
 
       # Sesin Sürekli Cıkmaması İçin
-      ses_kontrol
+      # ses_kontrol
 
       # Mail At
-      @mail.mail 'hareket_algilandi', nil
 
       @hareket_ilk = true if @hareket_ilk == false
 
-      sleep 2
+      sleep 10
+      @mail.mail 'hareket_algilandi'
       @running_hareket_algilandi = false
 
     end

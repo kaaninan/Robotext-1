@@ -21,29 +21,21 @@ class Arduino_Self
   # MEGA'YA GONDERILEN
   attr_accessor :deger_buzzer, :deger_ekran_isik, :deger_ekran, :deger_servo_x, :deger_servo_y, :deger_led_1, :deger_led_2
 
+  attr_accessor :motor_komut
+
   
   def initialize
     $sensor = Sensor.new
     $log = LOG.new
-    $pins = Pin.new
 
     baglan
     sleep 0.5
 
-    pin_mode
-    sleep 1
-
+    uno_serial
     mega_serial
     mega_serial_gelen
-    uno_sensor_oku
 
-    mega_sensor_default
-
-    @pin_1 = $pins.pin_ara 'led_1'
-    @pin_2 = $pins.pin_ara 'led_2'
-
-    @arduino_uno.digital_write @pin_1, 0
-    @arduino_uno.digital_write @pin_2, 0
+    sensor_default
 
   end
 
@@ -61,7 +53,7 @@ class Arduino_Self
 
     if @boards_uno
       # $log.islem_basladi $konum, "Arduino Uno'ya Baglaniliyor"
-      @arduino_uno = ArduinoFirmata.connect @boards_uno, :nonblock_io => true
+      @arduino_uno = SerialPort.new(@boards_uno, 115200, 8, 1, SerialPort::NONE)
       $log.islem_bitti $konum, "Arduino Uno'ya Baglanildi"
       @bagli_uno = true
     elsif !@boards_uno
@@ -108,45 +100,6 @@ class Arduino_Self
     end
     puts
   end
-
-  def pin_mode
-
-    #$log.islem_basladi $konum, 'PinMode'
-
-    @tip = nil
-    @pin = nil
-    @aciklama = nil
-
-    if @boards_uno
-
-      array = $pins.getPins
-
-      array.each do |a, b|
-
-        a.each do |x,y|
-          @pin = x
-          @aciklama = y
-        end
-
-        if b == 1
-          @tip = ArduinoFirmata::OUTPUT
-        elsif b == 2
-          @tip = ArduinoFirmata::INPUT
-        elsif b == 3
-          @tip = ArduinoFirmata::SERVO
-        end
-
-        @arduino_uno.pin_mode @pin, @tip
-
-      end
-
-    else
-      $log.hata $konum, 'PinMode Yapilamadi, Arduino Uno Bagli Degil'
-    end
-
-    $log.islem_bitti $konum, 'PinMode'
-  end
-
 
 
 
@@ -249,63 +202,62 @@ class Arduino_Self
     end
   end
 
+  # THREAD
+  def uno_serial
 
-  # THREAD
-  def uno_sensor_oku
     Thread.new do
+
       loop do
-        yakinlik_yer = $pins.pin_ara 'yakinlik_yer'
-        motor_sag_on = $pins.pin_ara 'motor_sag_on_enkoder'
-        motor_sag_arka = $pins.pin_ara 'motor_sag_arka_enkoder'
-        motor_sol_on = $pins.pin_ara 'motor_sol_on_enkoder'
-        motor_sol_arka = $pins.pin_ara 'motor_sol_arka_enkoder'
 
-        $sensor.yakinlik_yer = @arduino_uno.analog_read yakinlik_yer
-        $sensor.motor_sag_on_enkoder = @arduino_uno.analog_read motor_sag_on
-        $sensor.motor_sag_arka_enkoder = @arduino_uno.analog_read motor_sag_arka
-        $sensor.motor_sol_on_enkoder = @arduino_uno.analog_read motor_sol_on
-        $sensor.motor_sol_arka_enkoder = @arduino_uno.analog_read motor_sol_arka
+        if motor_komut == 'ileri'
+          @arduino_uno.write "+1&"
+          @arduino_uno.write "+5&"
 
+        elsif motor_komut == 'dur'
+          @arduino_uno.write "+6&"
+
+        elsif motor_komut == 'geri'
+          @arduino_uno.write "+2&"
+          @arduino_uno.write "+5&"
+
+        elsif motor_komut == 'sag'
+          @arduino_uno.write "+3&"
+          @arduino_uno.write "+5&"
+
+        elsif motor_komut == 'sol'
+          @arduino_uno.write "+4&"
+          @arduino_uno.write "+5&"
+        end
+
+        sleep 0.01
+
+      end
+
+    end
+
+  end
+
+
+  def uno_sms secenek
+
+    Thread.new do
+
+      if secenek == 1
+        @arduino_uno.write "+7&"
+        sleep 0.1
+      else
+        @arduino_uno.write "+8&"
         sleep 0.1
       end
-    end
-  end
-
-
-  def arduino_sms tur
-
-    if tur == 'basla'
-
-      @arduino_uno.digital_write @pin_1, 1
-      @arduino_uno.digital_write @pin_2, 0
-
-      sleep 2
-
-      @arduino_uno.digital_write @pin_1, 0
-      @arduino_uno.digital_write @pin_2, 0
-
-
-    else
-      @arduino_uno.digital_write @pin_1, 0
-      @arduino_uno.digital_write @pin_2, 1
-
-      sleep 2
-
-      @arduino_uno.digital_write @pin_1, 0
-      @arduino_uno.digital_write @pin_2, 0
 
     end
-
-    @arduino_uno.digital_write @pin_1, 0
-    @arduino_uno.digital_write @pin_2, 0
-
 
   end
 
 
 
 
-  def mega_sensor_default
+  def sensor_default
     @deger_buzzer = 0
     @deger_ekran_isik = 1
     @deger_ekran = 0
@@ -313,6 +265,7 @@ class Arduino_Self
     @deger_servo_y = 100
     @deger_led_1 = 1
     @deger_led_2 = 1
+    @motor_komut = 'dur'
   end
 
 

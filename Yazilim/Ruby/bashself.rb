@@ -34,7 +34,10 @@ class BashSelf
   def kamera komut
 
       if komut == 'resim_cek'
-        bash2 = `$HOME/kamera.sh`
+        bash = `$HOME/kamera.sh`
+        bash.each_line do |i|
+          @array.push i.to_s.chomp
+        end
         puts
         puts "BASH RESIM CEK"
         puts

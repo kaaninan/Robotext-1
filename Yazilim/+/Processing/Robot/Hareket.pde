@@ -5,7 +5,6 @@ boolean olcmeye_basla = false;
 
 void hareket(String yon){
 
-  /*
   if(running == false){
     running = true;
     println("Hareket Başladı");
@@ -29,6 +28,4 @@ void hareket(String yon){
     println("test; cakisma");
     
   }
-  
-  */
 }

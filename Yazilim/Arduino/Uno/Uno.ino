@@ -2,7 +2,7 @@
 SoftwareSerial SIM900(11, 10);
 String textForSMS;
 String textForSMS2;
-
+                
 String command = "";
 boolean oku = true;
 

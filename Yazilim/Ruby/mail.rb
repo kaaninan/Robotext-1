@@ -40,7 +40,7 @@ class MailSelf
       elsif secenek == 'hareket_algilandi'
 
         sleep 2
-
+        
         # resim1.jpg
         # resim2.jpg
 

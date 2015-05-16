@@ -1,5 +1,7 @@
 void setup() {
   
+  Serial.begin(9600);
+  
   for(int i = 0; i < 10; i++)
     pinMode(i, OUTPUT);
 
@@ -7,17 +9,13 @@ void setup() {
 
 void loop() {
   
-  Serial.begin(115200);
-  
   encoder();
   
   hiz();
   
-//  a1(); // GERİ
-  a2(); // İLERİ
+  a2(); // Ileri
   //a3(); // SAG
   //a4(); // SOL
-  
 }
 
 

@@ -15,7 +15,7 @@ int log_hareket = 0;
 int log_ses = 0;
 int log_isik = 0;
 int log_sicaklik = 0;
-int log_gaz = 1;
+int log_gaz = 0;
 
 
 
@@ -146,7 +146,7 @@ void oku_sensor() {
   oku_uzaklik_sonic();
   oku_hareket();
   oku_ses();
-  //oku_isik();
+  oku_isik();
   oku_sicaklik();
   //oku_gaz();
 }

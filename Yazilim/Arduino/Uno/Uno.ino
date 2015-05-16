@@ -1,5 +1,5 @@
 #include <SoftwareSerial.h>
-SoftwareSerial SIM900(11, 10);
+SoftwareSerial SIM900(10, 11);
 String textForSMS;
 String textForSMS2;
                 
@@ -14,7 +14,7 @@ int sag_arka_hiz = 5;
 int sol_on_hiz = 6;
 int sol_on_yon = 7;
 int sol_arka_yon = 8;
-int sol_arka_hiz = 8;
+int sol_arka_hiz = 9;
 
 void setup(){
   pinMode(sag_on_yon, OUTPUT);

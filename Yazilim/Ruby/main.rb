@@ -93,52 +93,10 @@ $board.uno_sms 1
 
 
 
-def motor_kontrol_tus
-
-  @a = gets.chomp
-
-  if @a == 'w'
-    @motor.motor_ileri
-  elsif @a == 's'
-    @motor.motor_geri
-  elsif @a == 'a'
-    @motor.motor_sol
-  elsif @a == 'd'
-    @motor.motor_sag
-  elsif @a == 'q'
-    @motor.motor_ileri_sol
-  elsif @a == 'e'
-    @motor.motor_ileri_sag
-  elsif @a == 'z'
-    @motor.motor_dur
-
-  elsif @a == 'h'
-
-  elsif @a == 'j'
-    @hareket.stop
-
-  elsif @a == 'b'
-    @motor.motor_auto_basla
-  elsif @a == 'n'
-    @motor.motor_auto_stop
-
-  end
-
-
-  sleep 1
-end
-
-
 loop do
-  # motor_kontrol_tus
   @sensor.print_sensor
 end
 
-
-# loop do
-#
-#   sleep 0.1
-# end
 
 
 

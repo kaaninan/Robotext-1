@@ -112,7 +112,7 @@ class Hareket
       # Resim Cek
       # @bashself.kamera 'resim_cek'
       Thread.new do
-        sleep 2
+        sleep 4
         `$HOME/kamera.sh`
       end
 
@@ -123,7 +123,7 @@ class Hareket
 
       @hareket_ilk = true if @hareket_ilk == false
 
-      sleep 10
+      sleep 6
       @mail.mail 'hareket_algilandi'
       @running_hareket_algilandi = false
 

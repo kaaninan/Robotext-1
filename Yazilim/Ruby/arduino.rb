@@ -8,20 +8,25 @@ require 'sensor'
 require 'pin'
 require 'gonder'
 
+# Toplam 2 Kart; Arduino Uno, Arduino Mega
+# Otomatik Kart Tanımlama
+
+# - Arduino'lara bağlan
+# - Serial'den bilgi alışverişi yap
+# with Firmata
+
+
 
 class Arduino_Self
 
-  #LOG
   $konum = 'Arduino_Self'
 
   @bagli_uno = false
   @bagli_mega = false
 
-  
-  # MEGA'YA GONDERILEN
-  attr_accessor :deger_buzzer, :deger_ekran_isik, :deger_ekran, :deger_servo_x, :deger_servo_y, :deger_led_1, :deger_led_2
 
-  attr_accessor :motor_komut
+  # Gonderilecek Degerler
+  attr_accessor :deger_buzzer, :deger_ekran_isik, :deger_ekran, :deger_servo_x, :deger_servo_y, :deger_led_1, :deger_led_2, :motor_komut
 
   
   def initialize
@@ -52,7 +57,6 @@ class Arduino_Self
     choose_board (@arduino_serial)
 
     if @boards_uno
-      # $log.islem_basladi $konum, "Arduino Uno'ya Baglaniliyor"
       @arduino_uno = SerialPort.new(@boards_uno, 115200, 8, 1, SerialPort::NONE)
       $log.islem_bitti $konum, "Arduino Uno'ya Baglanildi"
       @bagli_uno = true
@@ -124,10 +128,6 @@ class Arduino_Self
 
 
         ## VERI ISTE
-        # @arduino_mega.write '-11&'
-        # @arduino_mega.write '-12&'
-        # @arduino_mega.write '-13&'
-        # @arduino_mega.write '-14&'
         @arduino_mega.write '-21&'
         sleep 0.01
         @arduino_mega.write '-22&'
@@ -146,9 +146,7 @@ class Arduino_Self
         sleep 0.01
 
       end
-
     end
-
   end
 
 
@@ -201,6 +199,7 @@ class Arduino_Self
       end
     end
   end
+
 
   # THREAD
   def uno_serial

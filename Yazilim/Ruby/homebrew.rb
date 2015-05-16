@@ -2,6 +2,9 @@ require 'rubygems'
 require 'osc'
 require 'arduino_firmata'
 
+
+
+
 def baglan
   @arduino_serial = Array(ArduinoFirmata.list)
   choose_board (@arduino_serial)

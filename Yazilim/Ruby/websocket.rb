@@ -4,6 +4,8 @@ require 'motor'
 require 'gonder'
 
 class WebSoket
+    
+  $ip = '192.168.1.25'
 
   $yer = 'WebSocket'
 
@@ -25,6 +27,7 @@ class WebSoket
 
   end
 
+  
   def stop
     $log.islem_bitti $yer, 'WebSocket Sonlandirildi'
     @thr.exit
@@ -35,7 +38,7 @@ class WebSoket
   def socket
     EM.run do
 
-      WebSocket::EventMachine::Server.start(:host => '192.168.43.111', :port => 7070) do |ws|
+    WebSocket::EventMachine::Server.start(:host => $ip, :port => 7070) do |ws|
         ws.onopen do
           puts 'acik'
         end
@@ -51,7 +54,7 @@ class WebSoket
 
     end
   end
-
+  
 
   def parse komut
 
@@ -116,7 +119,18 @@ class WebSoket
         degerler = Array.new
         son = ''
         degerler[0] = "\"isik\":\"#{$sensor.isik}\","
-        degerler[1] = "\"sicaklik\":\"#{$sensor.sicaklik}\""
+        degerler[1] = "\"sicaklik\":\"#{$sensor.sicaklik}\","
+        degerler[2] = "\"uzaklik_on_sag\":\"#{$sensor.uzaklik_on_sag}\","
+        degerler[3] = "\"uzaklik_on_sol\":\"#{$sensor.uzaklik_on_sol}\","
+        degerler[4] = "\"hareket_sag\":\"#{$sensor.hareket_sag}\","
+        degerler[5] = "\"hareket_sol\":\"#{$sensor.hareket_sol}\","
+        degerler[6] = "\"motor_sag_on_enkoder\":\"#{$sensor.motor_sag_on_enkoder}\","
+        degerler[7] = "\"motor_sag_arka_enkoder\":\"#{$sensor.motor_sag_arka_enkoder}\","
+        degerler[8] = "\"motor_sol_on_enkoder\":\"#{$sensor.motor_sol_on_enkoder}\","
+        degerler[9] = "\"motor_sol_arka_enkoder\":\"#{$sensor.motor_sol_arka_enkoder}\","
+        degerler[10] = "\"gaz\":\"#{$sensor.gaz}\","
+        degerler[11] = "\"ses\":\"#{$sensor.ses}\""
+        
 
         degerler.each do |i|
           son += i

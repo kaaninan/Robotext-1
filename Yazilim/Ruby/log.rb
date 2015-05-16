@@ -4,7 +4,6 @@ class LOG
 
   end
 
-
   def islem_basladi konum, mesaj
     puts "=> STARTING - #{konum}, #{mesaj}"
     puts

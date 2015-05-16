@@ -8,7 +8,7 @@ class Sensor
 
   # UNO
   attr_accessor :motor_sag_on_enkoder, :motor_sag_arka_enkoder, :motor_sol_on_enkoder, :motor_sol_arka_enkoder
-  attr_accessor :yakinlik_yer, :sicaklik
+  attr_accessor :sicaklik
 
 
   def print_sonic
@@ -21,10 +21,6 @@ class Sensor
 
   def print_sensor
     puts "Isik #{@isik}   Hareket #{@hareket_sag} #{@hareket_sol}   Ses #{@ses}  Sicaklik #{@sicaklik}  Gaz #{@gaz}"
-  end
-
-  def print_uno
-    puts "Yer #{@yakinlik_yer}"
   end
 
   def print_enkoder

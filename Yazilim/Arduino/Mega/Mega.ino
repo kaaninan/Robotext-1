@@ -63,12 +63,8 @@ int echo_sol = 39;
 
 
 // ANALOG
-SharpIR uzaklik_on(A0, 25, 93, 1080);
-SharpIR uzaklik_arka(A1, 25, 93, 1080);
-SharpIR uzaklik_sag(A2, 25, 93, 1080);
-SharpIR uzaklik_sol(A3, 25, 93, 1080);
+const int sicaklik = 0;
 const int ldr = 4;
-const int sicaklik = 5;
 const int gaz = 6;
 
 

@@ -1,6 +1,6 @@
 $LOAD_PATH << '.'
 require 'pin'
-require 'arduino'
+require 'connect'
 
 class Gonder
 

@@ -5,7 +5,7 @@ require 'gonder'
 
 class WebSoket
     
-  $ip = '192.168.1.25'
+  $ip = '192.168.1.24'
 
   $yer = 'WebSocket'
 
@@ -44,7 +44,9 @@ class WebSoket
         end
 
         ws.onmessage do |msg, type|
-          parse msg
+          puts msg
+          ws.send(msg);
+          # parse msg
         end
 
         ws.onclose do

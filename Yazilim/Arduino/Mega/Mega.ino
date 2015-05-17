@@ -1,6 +1,5 @@
 #include <LiquidCrystal.h>
 #include <Servo.h>
-#include <SharpIR.h>
 
 
 // VALUES
@@ -9,7 +8,6 @@ boolean oku = true;
 
 
 // LOG
-int log_uzaklik = 0;
 int log_uzaklik_sonic = 0;
 int log_hareket = 0;
 int log_ses = 0;
@@ -63,13 +61,9 @@ int echo_sol = 39;
 
 
 // ANALOG
-SharpIR uzaklik_on(A0, 25, 93, 1080);
-SharpIR uzaklik_arka(A1, 25, 93, 1080);
-SharpIR uzaklik_sag(A2, 25, 93, 1080);
-SharpIR uzaklik_sol(A3, 25, 93, 1080);
-const int ldr = 4;
-const int sicaklik = 5;
-const int gaz = 6;
+const int sicaklik = 0;
+const int ldr = 2;
+const int gaz = 3;
 
 
 
@@ -92,6 +86,8 @@ void setup() {
   // PWM
   servo_x.attach(servo_x_pin);
   servo_y.attach(servo_y_pin);
+  servo_x.write(80);
+  servo_y.write(100);
   pinMode(led_1, OUTPUT);
   pinMode(led_2, OUTPUT);
 
@@ -102,6 +98,8 @@ void setup() {
   lcd.print("SERI BAGLANTI");
   lcd.setCursor(0, 1);
   lcd.print("BEKLENIYOR");
+  
+  digitalWrite(ekran_isik, HIGH);
   
   establishContact();
 }
@@ -142,8 +140,7 @@ void serialEvent(){
 
 
 void oku_sensor() {
-  //oku_uzaklik();
-  oku_uzaklik_sonic();
+  oku_uzaklik();
   oku_hareket();
   oku_ses();
   oku_isik();
@@ -153,27 +150,7 @@ void oku_sensor() {
 
 
 
-void oku_uzaklik() {
-  deger_uzaklik_on = uzaklik_on.distance();
-  deger_uzaklik_arka = uzaklik_arka.distance();
-  deger_uzaklik_sag = uzaklik_sag.distance();
-  deger_uzaklik_sol = uzaklik_sol.distance();
-
-  if (log_uzaklik == 1) {
-    Serial.print("On: ");
-    Serial.print(deger_uzaklik_on);
-    Serial.print(" - Arka: ");
-    Serial.print(deger_uzaklik_arka);
-    Serial.print(" - Sag: ");
-    Serial.print(deger_uzaklik_sag);
-    Serial.print(" - Sol: ");
-    Serial.println(deger_uzaklik_sol);
-  }
-}
-
-
-
-void oku_uzaklik_sonic(){
+void oku_uzaklik(){
   
   digitalWrite(trig_sag, LOW);
   digitalWrite(trig_sag, HIGH);

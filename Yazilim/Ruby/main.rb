@@ -4,10 +4,9 @@ require 'serialport'
 require 'pp'
 
 $LOAD_PATH << '.'
-require 'connect'
 require 'arduino'
-
 # require 'osc_class'
+require 'pin'
 require 'motor'
 require 'hareket'
 require 'log'
@@ -22,22 +21,21 @@ $konum = 'main.rb'
 
 def setup
 
-  $connect = Arduino_Connect.new
-  $arduino = Arduino_Self.new $connect.getUno, $connect.getMega, $sensor
-  $sensor = Sensor.new
-
-  $arduino.sysex_ses = true
-  
-
-  # @gonder = Gonder.new $board
-  # @motor = Motor.new $board, @gonder
-  # @bashself = BashSelf.new
-  # @hareket = Hareket.new $board, @gonder, @motor, @bashself
-  # @motor.setGuvenlik @hareket
-  # # @osc = OpenS.new $board, @gonder, @motor
-  # @mail = MailSelf.new
+  # Arduino'ya Bağlan
+  $board = Arduino_Self.new
+  @sensor = $board.getSensor
+  @gonder = Gonder.new $board
+  @motor = Motor.new $board, @gonder
+  @bashself = BashSelf.new
+  @hareket = Hareket.new $board, @gonder, @motor, @bashself
+  @motor.setGuvenlik @hareket
+  # @osc = OpenS.new $board, @gonder, @motor
+  @mail = MailSelf.new
 
 end
+
+
+puts
 
 
 
@@ -47,20 +45,39 @@ def websocket
 end
 
 
+def baslangic_animasyonu
+  Thread.new do
+    @gonder.servo 'sag'
+    sleep 0.5
+    @gonder.servo 'sol'
+    sleep 0.5
+    @gonder.servo nil
+  end
+
+  @gonder.ekran_isik 2
+  $board.deger_ekran = 0
+  # @gonder.buzzer 4
+end
+
+
+
 
 
 setup
 
 
-# @bashself.kamera 'dosya_olustur'
+@bashself.ses 'acildi'
 
-# @gonder.buzzer 4
+@bashself.kamera 'dosya_olustur'
 
-# websocket
-# @mail.mail 'sistem_baslatildi'
+@gonder.buzzer 4
 
-# @bashself.kamera 'resim_cek'
+websocket
+@mail.mail 'sistem_baslatildi'
 
+@bashself.kamera 'resim_cek'
+
+$board.uno_sms 1
 
 
 # @motor.motor_auto_start # Otomatik Motor
@@ -77,8 +94,7 @@ setup
 
 
 loop do
-  # @sensor.print_sensor
-  sleep 1
+  @sensor.print_sensor
 end
 
 

@@ -5,8 +5,9 @@ require 'pp'
 
 $LOAD_PATH << '.'
 require 'connect'
+require 'arduino'
+
 # require 'osc_class'
-require 'pin'
 require 'motor'
 require 'hareket'
 require 'log'
@@ -21,8 +22,12 @@ $konum = 'main.rb'
 
 def setup
 
-  $board = Arduino_Connect.new
+  $connect = Arduino_Connect.new
+  $arduino = Arduino_Self.new $connect.getUno, $connect.getMega, $sensor
   $sensor = Sensor.new
+
+  $arduino.sysex_ses = true
+  
 
   # @gonder = Gonder.new $board
   # @motor = Motor.new $board, @gonder
@@ -47,14 +52,14 @@ end
 setup
 
 
-@bashself.kamera 'dosya_olustur'
+# @bashself.kamera 'dosya_olustur'
 
 # @gonder.buzzer 4
 
-websocket
+# websocket
 # @mail.mail 'sistem_baslatildi'
 
-@bashself.kamera 'resim_cek'
+# @bashself.kamera 'resim_cek'
 
 
 

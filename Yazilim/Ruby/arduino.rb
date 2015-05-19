@@ -1,10 +1,8 @@
 require 'rubygems'
-require 'arduino_firmata'
 require 'serialport'
 require 'pp'
 $LOAD_PATH << '.'
 require 'log'
-require 'sensor'
 require 'pin'
 require 'gonder'
 
@@ -13,7 +11,7 @@ require 'gonder'
 
 # - Arduino'lara bağlan
 # - Serial'den bilgi alışverişi yap
-# with Firmata
+# without Firmata
 
 
 
@@ -21,24 +19,29 @@ class Arduino_Self
 
   $konum = 'Arduino_Self'
 
-  @bagli_uno = false
-  @bagli_mega = false
-
-
   # Gonderilecek Degerler
-  attr_accessor :deger_buzzer, :deger_ekran_isik, :deger_ekran, :deger_servo_x, :deger_servo_y, :deger_led_1, :deger_led_2, :motor_komut
+  attr_accessor :motor_komut
 
   
-  def initialize
-    $sensor = Sensor.new
+  def initialize var
     $log = LOG.new
+    $var = var
 
+    $var.bagli_uno = false
+    $var.bagli_mega = false
+    
     baglan
-    sleep 0.5
 
-    uno_serial
-    mega_serial
-    mega_serial_gelen
+    $var.m_serial = true # Serial üzerinden veri yolla
+
+    if $var.bagli_uno
+      uno_serial
+    end
+
+    if $var.bagli_mega
+      mega_serial
+      mega_serial_gelen
+    end
 
     sensor_default
 
@@ -53,24 +56,22 @@ class Arduino_Self
     print "#@arduino_serial - Toplam: "
     pp @arduino_serial.length
     puts
-
     choose_board (@arduino_serial)
 
     if @boards_uno
       @arduino_uno = SerialPort.new(@boards_uno, 115200, 8, 1, SerialPort::NONE)
       $log.islem_bitti $konum, "Arduino Uno'ya Baglanildi"
-      @bagli_uno = true
+      $var.bagli_uno = true
     elsif !@boards_uno
+      $var.bagli_uno = false
       $log.hata $konum, 'Baglanilmak istenen kart bulunamadi! (Kart: Arduino Uno)'
     end
-
-
     if @boards_mega
-      # $log.islem_basladi $konum, "Arduino Mega'ya Baglaniliyor"
       @arduino_mega = SerialPort.new(@boards_mega, 115200, 8, 1, SerialPort::NONE)
       $log.islem_bitti $konum, "Arduino Mega'ya Baglanildi"
-      @bagli_mega = true
+      $var.bagli_mega = true
     elsif !@boards_mega
+      $var.bagli_mega = false
       $log.hata $konum, 'Baglanilmak istenen kart bulunamadi! (Kart: Arduino Mega)'
     end
   end
@@ -115,17 +116,19 @@ class Arduino_Self
 
     Thread.new do
 
-      loop do
+      while $var.m_serial do
 
         ## KOMUT GONDER
-        @arduino_mega.write "+1 #{@deger_buzzer}&" # Buzzer
-        @arduino_mega.write "+2 #{@deger_ekran_isik}&" # Ekran Isik
-        @arduino_mega.write "+3 #{@deger_ekran}&" # Ekran
-        @arduino_mega.write "+4 #{@deger_servo_x}&" # Servo X
-        @arduino_mega.write "+5 #{@deger_servo_y}&" # Servo Y
-        @arduino_mega.write "+6 #{@deger_led_1}&" # Led 1
-        @arduino_mega.write "+7 #{@deger_led_2}&" # Led 2
-
+        @arduino_mega.write "+1 #{$var.m_buzzer}&" # Buzzer
+        sleep 0.01
+        @arduino_mega.write "+2 #{$var.m_ekran_isik}&" # Ekran Isik
+        sleep 0.01
+        @arduino_mega.write "+3 #{$var.m_ekran}&" # Ekran
+        sleep 0.01
+        @arduino_mega.write "+4 #{$var.m_servox}&" # Servo X
+        sleep 0.01
+        @arduino_mega.write "+5 #{$var.m_servoy}&" # Servo Y
+        sleep 0.01
 
         ## VERI ISTE
         @arduino_mega.write '-21&'
@@ -162,38 +165,28 @@ class Arduino_Self
         komut = gelen[0]
         deger = gelen[1].to_i
 
-        if komut == '-111'
-          $sensor.uzaklik_on = deger
-        elsif komut == '-121'
-          $sensor.uzaklik_sol = deger
-        elsif komut == '-131'
-          $sensor.uzaklik_sag = deger
-        elsif komut == '-141'
-          $sensor.uzaklik_arka = deger
-
-
         elsif komut == '-211'
-          $sensor.hareket_sol = deger
+          $var.hareket_sol = deger
         elsif komut == '-221'
-          $sensor.hareket_sag = deger
+          $var.hareket_sag = deger
 
 
         elsif komut == '-31'
-          $sensor.ses = deger
+          $var.ses = deger
 
         elsif komut == '-41'
-          $sensor.isik = deger
+          $var.isik = deger
 
         elsif komut == '-51'
-          $sensor.sicaklik = deger
+          $var.sicaklik = deger
 
         elsif komut == '-61'
-          $sensor.gaz = deger
+          $var.gaz = deger
 
         elsif komut == '-711'
-          $sensor.uzaklik_on_sag = deger
+          $var.uzaklik_on_sag = deger
         elsif komut == '-721'
-          $sensor.uzaklik_on_sol = deger
+          $var.uzaklik_on_sol = deger
 
         end
       end
@@ -257,13 +250,11 @@ class Arduino_Self
 
 
   def sensor_default
-    @deger_buzzer = 0
-    @deger_ekran_isik = 1
-    @deger_ekran = 0
-    @deger_servo_x = 80
-    @deger_servo_y = 100
-    @deger_led_1 = 1
-    @deger_led_2 = 1
+    $var.m_buzzer = 0
+    $var.m_ekran_isik = 1
+    $var.m_ekran = 0
+    $var.m_servox = 80
+    $var.m_servoy = 100
     @motor_komut = 'dur'
   end
 

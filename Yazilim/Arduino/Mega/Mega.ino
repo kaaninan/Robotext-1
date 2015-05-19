@@ -1,14 +1,13 @@
 #include <LiquidCrystal.h>
 #include <Servo.h>
 
-
 // VALUES
 String command = "";
 boolean oku = true;
 
 
 // LOG
-int log_uzaklik_sonic = 0;
+int log_uzaklik = 0;
 int log_hareket = 0;
 int log_ses = 0;
 int log_isik = 0;
@@ -145,7 +144,7 @@ void oku_sensor() {
   oku_ses();
   oku_isik();
   oku_sicaklik();
-  //oku_gaz();
+  oku_gaz();
 }
 
 
@@ -166,7 +165,7 @@ void oku_uzaklik(){
   int deger2 = pulseIn(echo_sol, HIGH, 10000);
   deger_uzaklik_on_sol = deger2/29/2;
   
-  if (log_uzaklik_sonic == 1) {
+  if (log_uzaklik == 1) {
     Serial.print("On Sag: ");
     Serial.print(deger_uzaklik_on_sag);
     Serial.print(" - On Sol: ");
@@ -261,7 +260,7 @@ void cikis_ekran(int deger) {
     lcd.setCursor(0, 0);
     lcd.print("    ROBOTEXT    ");
     lcd.setCursor(0, 1);
-    lcd.print(" POWERED BY AFL ");
+    lcd.print("                ");
   }
   
   else if (deger == 1) {
@@ -451,7 +450,7 @@ void parseCommand(String com) {
 
 void establishContact() {
   while (Serial.available() <= 0) {
-    Serial.println("Loading..");
+    Serial.println("Bekleniyor..");
     delay(300);
   }
 }

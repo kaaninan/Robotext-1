@@ -1,9 +1,9 @@
 require 'rubygems'
-require 'arduino_firmata'
 require 'serialport'
 require 'pp'
 
 $LOAD_PATH << '.'
+require 'var'
 require 'arduino'
 # require 'osc_class'
 require 'pin'
@@ -22,7 +22,9 @@ $konum = 'main.rb'
 def setup
 
   # Arduino'ya Bağlan
-  $board = Arduino_Self.new
+  $var = Var.new
+  $board = Arduino_Self.new $var
+
   @sensor = $board.getSensor
   @gonder = Gonder.new $board
   @motor = Motor.new $board, @gonder

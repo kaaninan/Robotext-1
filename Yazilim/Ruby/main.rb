@@ -5,14 +5,12 @@ require 'pp'
 $LOAD_PATH << '.'
 require 'var'
 require 'arduino'
-# require 'osc_class'
 require 'pin'
+require 'yangin'
 require 'motor'
 require 'hareket'
 require 'log'
-require 'sensor'
 require 'websocket'
-require 'gonder'
 require 'bashself'
 require 'mail'
 
@@ -25,14 +23,14 @@ def setup
   $var = Var.new
   $board = Arduino_Self.new $var
 
-  @sensor = $board.getSensor
-  @gonder = Gonder.new $board
-  @motor = Motor.new $board, @gonder
-  @bashself = BashSelf.new
-  @hareket = Hareket.new $board, @gonder, @motor, @bashself
+  @motor = Motor.new $board, $var
+  @hareket = Hareket.new $board, @motor, $var
+  @yangin = Yangin.new $board, $var
+
   @motor.setGuvenlik @hareket
-  # @osc = OpenS.new $board, @gonder, @motor
-  @mail = MailSelf.new
+
+  @bashself = BashSelf.new
+  @mail = MailSelf.new  
 
 end
 
@@ -42,61 +40,50 @@ puts
 
 
 def websocket
-  @websocket = WebSoket.new $board, @motor, @hareket, @gonder
+  @websocket = WebSoket.new @motor, @hareket, $var, @yangin
   @websocket.start
 end
 
 
-def baslangic_animasyonu
+def mailService
   Thread.new do
-    @gonder.servo 'sag'
-    sleep 0.5
-    @gonder.servo 'sol'
-    sleep 0.5
-    @gonder.servo nil
-  end
+    loop do
 
-  @gonder.ekran_isik 2
-  $board.deger_ekran = 0
-  # @gonder.buzzer 4
+    end
+  end
 end
 
 
 
-
-
 setup
+mailService
 
-
-@bashself.ses 'acildi'
 
 @bashself.kamera 'dosya_olustur'
 
-@gonder.buzzer 4
-
 websocket
-@mail.mail 'sistem_baslatildi'
+# @mail.mail 'sistem_baslatildi'
+# @mail.mail 'hareket_algilandi'
 
-@bashself.kamera 'resim_cek'
+# @bashself.kamera 'resim_cek'
 
-$board.uno_sms 1
-
-
-# @motor.motor_auto_start # Otomatik Motor
-# @motor.motor_auto_stop #
+# Baslangic Smsi
+# $board.uno_sms 1
 
 
-# @hareket.stop
-# @osc.motor_start
-# @osc.motor_stop
 
-# @osc.servo_start
-# @osc.servo_stop
-
-
+Thread.new do
+  loop do
+    $var.print_uzaklik
+    sleep 0.1
+  end
+end
 
 loop do
-  @sensor.print_sensor
+  if $var.mailAt
+    @mail.mail 'hareket_algilandi'
+    sleep 1000
+  end
 end
 
 

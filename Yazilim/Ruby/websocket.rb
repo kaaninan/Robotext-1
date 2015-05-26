@@ -1,19 +1,18 @@
 require 'websocket-eventmachine-server'
 $LOAD_PATH << '.'
 require 'motor'
-require 'gonder'
 
 class WebSoket
     
-  $ip = '192.168.1.25'
+  $ip = '192.168.43.111'
 
   $yer = 'WebSocket'
 
-  def initialize board, motor, hareket, gonder
-    $sensor = board.getSensor
+  def initialize motor, hareket, var, yangin
     $motor = motor
     @hareket = hareket
-    @gonder = gonder
+    $var = var
+    @yangin = yangin
   end
 
 
@@ -83,10 +82,17 @@ class WebSoket
     if yeni[1].chomp == 'etkin_alarm'
       if yeni[3].chomp == 'acik'
         puts 'Alarm Acik'
-        @gonder.buzzer 1
+        $var.buzzer 1
       else
         puts 'Alarm Kapali'
-        @gonder.buzzer 0
+        $var.buzzer 0
+      end
+    end
+
+    if yeni[1].chomp == 'selamla'
+      if yeni[3].chomp == 'etkin'
+        puts 'Selamla'
+        $var.servo 'selamla'
       end
     end
 
@@ -106,6 +112,19 @@ class WebSoket
       elsif yeni[3].chomp == 'dur'
         $motor.motor_dur
         puts 'Motor Dur'
+      elsif yeni[3].chomp == 'yavas'
+        $motor.motor_yavas
+        puts 'Motor Yavas'
+      end
+    end
+
+    if yeni[1].chomp == 'etkin_yangin'
+      if yeni[3].chomp == 'acik'
+        puts 'Yangin Acildi'
+        @yangin.start
+      else
+        puts 'Yangin Kapatildi'
+        @yangin.stop
       end
     end
 

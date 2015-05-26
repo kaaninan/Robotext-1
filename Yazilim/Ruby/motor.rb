@@ -1,16 +1,13 @@
 $LOAD_PATH << '.'
 require 'pin'
-require 'gonder'
 
 class Motor
 
 
-  def initialize board, gonder
-    @gonder = gonder
-
+  def initialize board, var
     @arduino_uno = board.getUno
-    @sensor = board.getSensor
     @board = board
+    $var = var
 
 
     puts '==> Motorlar Etkinlestirildi <=='
@@ -46,7 +43,7 @@ class Motor
     @durum_sag = false
     @durum_sol = false
 
-    @sinir_on = 20
+    @sinir_on = 40
     @sinir_arka = 20
     @sinir_sag = 20
     @sinir_sol = 20
@@ -297,10 +294,10 @@ class Motor
 
   def uzaklik_kontrol2
 
-    @sensor_on_sag = @sensor.uzaklik_on_sag
-    @sensor_on_sol = @sensor.uzaklik_on_sol
+    @sensor_on_sag = $var.uzaklik_on_sag
+    @sensor_on_sol = $var.uzaklik_on_sol
 
-    if @sensor_on_sag < @sinir_yeni && @sensor_on_sol < @sinir_yeni
+    if 1 <= @sensor_on_sag < @sinir_yeni && 1 <= @sensor_on_sol < @sinir_yeni
       @durum_on_yeni = false
     else
       @durum_on_yeni = true
@@ -331,6 +328,10 @@ class Motor
 
   def motor_dur
     @board.motor_komut = 'dur'
+  end
+
+  def motor_yavas
+    @board.motor_komut = 'yavas'
   end
 
 

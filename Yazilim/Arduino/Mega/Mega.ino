@@ -31,7 +31,7 @@ int deger_ses = 0;
 int deger_isik = 0;
 int deger_sicaklik = 0;
 int deger_gaz = 0;
- 
+
 
 // ### IO ###
 
@@ -51,18 +51,20 @@ const int buzzer_2 = 25;
 const int ses = 26;
 const int ekran_isik = 27;
 LiquidCrystal lcd(28, 29, 30, 31, 32, 33);
-int led_1 = 34;
-int led_2 = 35;
-int trig_sag = 36;
-int echo_sag = 37;
-int trig_sol = 38;
-int echo_sol = 39;
+int led_1 = 50; // Yok
+int led_2 = 50; // Yok
+int trig_sag = 34;
+int echo_sag = 35;
+int trig_sol = 36;
+int echo_sol = 37;
+int hareket_arka = 38;
 
 
 // ANALOG
 const int sicaklik = 0;
-const int ldr = 2;
-const int gaz = 3;
+const int ldr = 1;
+const int gaz = 2;
+
 
 
 
@@ -97,28 +99,28 @@ void setup() {
   lcd.print("SERI BAGLANTI");
   lcd.setCursor(0, 1);
   lcd.print("BEKLENIYOR");
-  
+
   digitalWrite(ekran_isik, HIGH);
-  
+
   establishContact();
 }
 
 
 
 void loop() {
-  
+
   // Sensoleri oku ve baglanti varsa iletişim kur
-  
-  if(oku){
+
+  if (oku) {
     oku_sensor();
   }
-  
+
 }
 
 
-void serialEvent(){
-  while(Serial.available()) {
-    
+void serialEvent() {
+  while (Serial.available()) {
+
     char gelen = Serial.read();
     if (gelen == '&') {
       parseCommand(command);
@@ -149,22 +151,22 @@ void oku_sensor() {
 
 
 
-void oku_uzaklik(){
-  
+void oku_uzaklik() {
+
   digitalWrite(trig_sag, LOW);
   digitalWrite(trig_sag, HIGH);
   digitalWrite(trig_sag, LOW);
-  
+
   int deger = pulseIn(echo_sag, HIGH, 10000);
-  deger_uzaklik_on_sag = deger/29/2;
-  
+  deger_uzaklik_on_sag = deger / 29 / 2;
+
   digitalWrite(trig_sol, LOW);
   digitalWrite(trig_sol, HIGH);
   digitalWrite(trig_sol, LOW);
-  
+
   int deger2 = pulseIn(echo_sol, HIGH, 10000);
-  deger_uzaklik_on_sol = deger2/29/2;
-  
+  deger_uzaklik_on_sol = deger2 / 29 / 2;
+
   if (log_uzaklik == 1) {
     Serial.print("On Sag: ");
     Serial.print(deger_uzaklik_on_sag);
@@ -211,19 +213,19 @@ void oku_isik() {
 
 
 
-void oku_sicaklik(){
+void oku_sicaklik() {
   deger_sicaklik = (5.0 * analogRead(sicaklik) * 100.0) / 1024;
-  
-  if(log_sicaklik == 1){
+
+  if (log_sicaklik == 1) {
     Serial.print("Sicaklik: ");
     Serial.println(deger_sicaklik);
   }
 }
 
-void oku_gaz(){
+void oku_gaz() {
   deger_gaz = analogRead(gaz);
-  
-  if(log_gaz == 1){
+
+  if (log_gaz == 1) {
     Serial.print("Gaz: ");
     Serial.println(deger_gaz);
   }
@@ -262,34 +264,34 @@ void cikis_ekran(int deger) {
     lcd.setCursor(0, 1);
     lcd.print("                ");
   }
-  
+
   else if (deger == 1) {
     lcd.setCursor(0, 0);
     lcd.print("     HAREKET    ");
     lcd.setCursor(0, 1);
     lcd.print("   ALGILANDI    ");
   }
-  
+
   else if (deger == 3) {
     lcd.setCursor(0, 0);
     lcd.print("  OTOMATIK MOD  ");
   }
-  
+
   else if (deger == 4) {
     lcd.setCursor(0, 0);
     lcd.print("   MANUEL MOD   ");
   }
-  
+
   else if (deger == 5) {
     lcd.setCursor(0, 1);
     lcd.print("GUVENLIK: ACIK  ");
   }
-  
+
   else if (deger == 6) {
     lcd.setCursor(0, 1);
     lcd.print("GUVENLIK: KAPALI");
   }
-  
+
   else {
     lcd.clear();
   }
@@ -305,11 +307,11 @@ void cikis_servo_y(int x) {
 }
 
 
-void cikis_led_1(int a){
+void cikis_led_1(int a) {
   digitalWrite(led_1, a);
 }
 
-void cikis_led_2(int a){
+void cikis_led_2(int a) {
   digitalWrite(led_2, a);
 }
 
@@ -346,8 +348,8 @@ void parseCommand(String com) {
     Serial.print("-141 ");
     Serial.println(deger_uzaklik_sol);
   }
-  
-  
+
+
   // HAREKET
   else if (part1.equalsIgnoreCase("-21")) {
     Serial.print("-211 ");
@@ -357,90 +359,89 @@ void parseCommand(String com) {
     Serial.print("-221 ");
     Serial.println(deger_hareket_sol);
   }
-  
-  
-  
+
+
+
   // SES
   else if (part1.equalsIgnoreCase("-3")) {
     Serial.print("-31 ");
     Serial.println(deger_ses);
   }
-  
+
   // ISIK
   else if (part1.equalsIgnoreCase("-4")) {
     Serial.print("-41 ");
     Serial.println(deger_isik);
   }
-  
-  
+
+
   // SICAKLIK
   else if (part1.equalsIgnoreCase("-5")) {
     Serial.print("-51 ");
     Serial.println(deger_sicaklik);
   }
-  
-  
+
+
   // GAZ
   else if (part1.equalsIgnoreCase("-6")) {
     Serial.print("-61 ");
     Serial.println(deger_gaz);
   }
-  
-  // ULTRASONIC
+
+  // ULTRASONICl
   else if (part1.equalsIgnoreCase("-71")) {
     Serial.print("-711 ");
     Serial.println(deger_uzaklik_on_sag);
   }
-  
+
   else if (part1.equalsIgnoreCase("-72")) {
     Serial.print("-721 ");
     Serial.println(deger_uzaklik_on_sol);
   }
-  
-  
+
+
   // ### GELEN ###
-  
-  
+
   // BUZZER
   else if (part1.equalsIgnoreCase("+1")) {
     int pin = part2.toInt();
     cikis_buzzer(pin);
   }
-  
+
   // EKRAN ISIK
   else if (part1.equalsIgnoreCase("+2")) {
     int pin = part2.toInt();
-    if(pin == 0)
+    if (pin == 0)
       cikis_ekran_isik(0);
-    else if(pin == 1)
+    else if (pin == 1)
       cikis_ekran_isik(1);
   }
-  
-  
+
+
   // EKRAN
   else if (part1.equalsIgnoreCase("+3")) {
     int pin = part2.toInt();
     cikis_ekran(pin);
   }
-  
+
   // SERVO X
   else if (part1.equalsIgnoreCase("+4")) {
     int pin = part2.toInt();
     cikis_servo_x(pin);
   }
-  
+
   // SERVO Y
   else if (part1.equalsIgnoreCase("+5")) {
     int pin = part2.toInt();
     cikis_servo_y(pin);
   }
-  
+
   // LED 1
   else if (part1.equalsIgnoreCase("+6")) {
     int pin = part2.toInt();
     cikis_led_1(pin);
   }
-  
+
   // LED 2
   else if (part1.equalsIgnoreCase("+7")) {
     int pin = part2.toInt();

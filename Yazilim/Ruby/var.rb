@@ -6,6 +6,7 @@ class Var
   # Arduino Mega Gonderilecek Degerler
   attr_accessor :m_serial # Serial Alışverişi Aç (if == true)
   attr_accessor :m_buzzer, :m_ekran_isik, :m_ekran, :m_servox, :m_servoy
+  attr_accessor :mailAt
 
   # Sensor
 
@@ -39,6 +40,11 @@ class Var
 	  @m_servox = 150
 	elsif yon == 'sol'
       @m_servox = 30
+  	elsif 'selamla'
+  	  @m_servox = 80
+  	  @m_servoy = 10
+  	  sleep 1
+  	  @m_servoy = 100
 	else
       @m_servox = 80
 	end
@@ -64,10 +70,12 @@ class Var
       @m_buzzer = 0
   	elsif deger == 4
 	  Thread.new do
-        @m_buzzer = 1
-		sleep 0.3
-        @m_buzzer = 0
-		sleep 0.3
+        2.times do
+          @m_buzzer = 1
+		  sleep 0.3
+	      @m_buzzer = 0
+		  sleep 0.3
+		end
       end
     end
   end

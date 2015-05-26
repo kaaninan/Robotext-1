@@ -3,29 +3,26 @@ require 'pin'
 require 'bashself'
 require 'mail'
 
-class Hareket
+class Yangin
 
 
-  def initialize board, motor, var
+  def initialize board, var
     $var = var
     @board = board
-    @motor = motor
     @bashself = BashSelf.new
     @mail = MailSelf.new
-    @thr_hareket = true
+    @thr_yangin = true
   end
 
 
   def start
-    puts '==> Hareket Algilama Baslatildi <=='
-
-    $var.m_ekran = 5
-
-    # @mail.mail 'hareket_baslatildi'
+    puts '==> Yangin Algilama Baslatildi <=='
     
+    @thr_yangin = true
+
     @thread = Thread.new do
-      while @thr_hareket
-        hareket_kontrol
+      while @thr_yangin
+        yangin_kontrol
         sleep 0.1
       end
     end
@@ -34,36 +31,27 @@ class Hareket
     # @ses_running = false
 
     # Mail Göndermek için
-    @hareket_ilk = false
+    @yangin_ilk = false
 
-    # Üst üste hareket algılandi fonskiyonunu çalıştırmaması için
-    @running_hareket_algilandi = false
+    # Üst üste yangin algılandi fonskiyonunu çalıştırmaması için
+    @running_yangin_algilandi = false
 
   end
 
 
   def stop
-    puts '==> Hareket Algilama Sonlandirildi <=='
-    $var.m_ekran = 6
-    @thr_hareket = false
-    $var.servo nil
+    puts '==> Yangin Algilama Sonlandirildi <=='
+    @thr_yangin = false
   end
 
 
 
 
-  def hareket_kontrol
-    @sag = $var.hareket_sag
-    @sol = $var.hareket_sol
+  def yangin_kontrol
+    @yangin = $var.isik
 
-    if @sag == 1 && @sol == 0
-      hareket_algilandi 'sag'
-
-    elsif @sag == 0 && @sol == 1
-      hareket_algilandi 'sol'
-
-    else
-      $var.servo nil
+    if @yangin.to_i < 1000
+      yangin_algilandi
     end
 
     sleep 0.1
@@ -72,31 +60,17 @@ class Hareket
 
 
 
-  def hareket_algilandi yon
+  def yangin_algilandi
 
     # Eger fonksiyon calismiyorsa
-    if @running_hareket_algilandi == false
-      @running_hareket_algilandi = true
-
-      # Ekrana Yazı Yaz
-      Thread.new do
-        $var.m_ekran = 1
-        sleep 4
-        $var.m_ekran = 5
-      end
+    if @running_yangin_algilandi == false
+      @running_yangin_algilandi = true
 
       # Ses Çal
       $var.buzzer 4
 
-      # Harekete Don
-      if yon == 'sag'
-        $var.servo 'sag'
-      else
-        $var.servo 'sol'
-      end
-
       # Sms At
-      # @board.uno_sms 2
+      @board.uno_sms 3
 
       # Resim Cek
       Thread.new do
@@ -108,14 +82,13 @@ class Hareket
       # ses_kontrol
 
       # Mail At
-      @hareket_ilk = true if @hareket_ilk == false
+      @yangin_ilk = true if @yangin_ilk == false
 
       sleep 6
       # $var.mailAt = true
-      @mail.mail 'hareket_algilandi'
-      $var.servo nil
+      # @mail.mail 'yangin_algilandi'
       sleep 1000
-      @running_hareket_algilandi = false
+      @running_yangin_algilandi = false
 
     end
 

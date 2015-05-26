@@ -1,10 +1,10 @@
 require 'rubygems'
 require 'serialport'
 require 'pp'
+require 'arduino_firmata'
 $LOAD_PATH << '.'
 require 'log'
 require 'pin'
-require 'gonder'
 
 # Toplam 2 Kart; Arduino Uno, Arduino Mega
 # Otomatik Kart Tanımlama
@@ -32,8 +32,6 @@ class Arduino_Self
     
     baglan
 
-    $var.m_serial = true # Serial üzerinden veri yolla
-
     if $var.bagli_uno
       uno_serial
     end
@@ -46,7 +44,6 @@ class Arduino_Self
     sensor_default
 
   end
-
 
   private
 
@@ -116,37 +113,26 @@ class Arduino_Self
 
     Thread.new do
 
-      while $var.m_serial do
+      loop do
 
         ## KOMUT GONDER
         @arduino_mega.write "+1 #{$var.m_buzzer}&" # Buzzer
-        sleep 0.01
         @arduino_mega.write "+2 #{$var.m_ekran_isik}&" # Ekran Isik
-        sleep 0.01
         @arduino_mega.write "+3 #{$var.m_ekran}&" # Ekran
-        sleep 0.01
         @arduino_mega.write "+4 #{$var.m_servox}&" # Servo X
-        sleep 0.01
         @arduino_mega.write "+5 #{$var.m_servoy}&" # Servo Y
-        sleep 0.01
 
         ## VERI ISTE
         @arduino_mega.write '-21&'
-        sleep 0.01
         @arduino_mega.write '-22&'
-        sleep 0.01
         @arduino_mega.write '-3&'
-        sleep 0.01
         @arduino_mega.write '-4&'
-        sleep 0.01
         @arduino_mega.write '-5&'
-        sleep 0.01
         @arduino_mega.write '-6&'
-        sleep 0.01
         @arduino_mega.write '-71&'
-        sleep 0.01
         @arduino_mega.write '-72&'
-        sleep 0.01
+
+        sleep 0.05
 
       end
     end
@@ -165,7 +151,7 @@ class Arduino_Self
         komut = gelen[0]
         deger = gelen[1].to_i
 
-        elsif komut == '-211'
+        if komut == '-211'
           $var.hareket_sol = deger
         elsif komut == '-221'
           $var.hareket_sag = deger
@@ -203,22 +189,31 @@ class Arduino_Self
 
         if motor_komut == 'ileri'
           @arduino_uno.write "+1&"
-          @arduino_uno.write "+5&"
+          @arduino_uno.write "+5 175&"
+          @arduino_uno.write "+6 175&"
 
         elsif motor_komut == 'dur'
-          @arduino_uno.write "+6&"
+          @arduino_uno.write "+10&"
 
         elsif motor_komut == 'geri'
           @arduino_uno.write "+2&"
-          @arduino_uno.write "+5&"
+          @arduino_uno.write "+5 175&"
+          @arduino_uno.write "+6 175&"
 
         elsif motor_komut == 'sag'
           @arduino_uno.write "+3&"
-          @arduino_uno.write "+5&"
+          @arduino_uno.write "+5 175&"
+          @arduino_uno.write "+6 0&"
 
         elsif motor_komut == 'sol'
           @arduino_uno.write "+4&"
-          @arduino_uno.write "+5&"
+          @arduino_uno.write "+5 0&"
+          @arduino_uno.write "+6 175&"
+
+        elsif motor_komut == 'yavas'
+          @arduino_uno.write "+1&"
+          @arduino_uno.write "+5 90&"
+          @arduino_uno.write "+6 90&"
         end
 
         sleep 0.01
@@ -237,8 +232,11 @@ class Arduino_Self
       if secenek == 1
         @arduino_uno.write "+7&"
         sleep 0.1
-      else
+      elsif secenek == 2
         @arduino_uno.write "+8&"
+        sleep 0.1
+      elsif secenek == 3
+        @arduino_uno.write "+9&"
         sleep 0.1
       end
 
@@ -262,9 +260,6 @@ class Arduino_Self
 
 
   # GETTER
-  def getSensor
-    return $sensor
-  end
 
   def getUno
     return @arduino_uno

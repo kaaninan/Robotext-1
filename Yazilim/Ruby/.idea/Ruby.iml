@@ -16,7 +16,6 @@
     <orderEntry type="library" scope="PROVIDED" name="osc-access (v0.0.15, ruby-2.0.0-p481) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="osc-ruby (v1.1.1, ruby-2.0.0-p481) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="pony (v1.11, ruby-2.0.0-p481) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rubygems-update (v2.4.5, ruby-2.0.0-p481) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="serialport (v1.3.1, ruby-2.0.0-p481) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="websocket (v1.2.1, ruby-2.0.0-p481) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="websocket-eventmachine-base (v1.1.0, ruby-2.0.0-p481) [gem]" level="application" />

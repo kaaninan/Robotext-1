@@ -38,15 +38,13 @@ class MailSelf
 
 
       elsif secenek == 'hareket_algilandi'
-
-        sleep 2
         
         # resim1.jpg
         # resim2.jpg
 
         @bash.kamera 'resim_bul'
 
-        sleep 1
+        sleep 3
 
         @array = @bash.get_resim_listesi
 
@@ -58,7 +56,7 @@ class MailSelf
         Pony.mail({
                       :to => 'kaaninan@outlook.com',
                       :subject => 'ROBOTEXT',
-                      :attachments => {"resim1.jpg" => File.read(@array[@sayi]), "logo.png" => File.read("mail/logo.png")},
+                      :attachments => {"resim1.jpg" => File.read(@array[@sayi-1]), "logo.png" => File.read("mail/logo.png")},
                       :html_body => File.read("/home/pi/Robotext/Yazilim/Ruby/mail/hareket_algilandi.htm"),
                       :sender => 'Robotext',
                       :via => :smtp,

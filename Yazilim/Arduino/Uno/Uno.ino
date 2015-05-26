@@ -2,6 +2,7 @@
 SoftwareSerial SIM900(10, 11);
 String textForSMS;
 String textForSMS2;
+String textForSMS3;
                 
 String command = "";
 boolean oku = true;
@@ -52,6 +53,7 @@ void sendSMS(String message){
 void loop(){
   textForSMS = "ROBOTEXT Guvenlik Sistemi - Sistem Baslatildi";
   textForSMS2 = "ROBOTEXT Guvenlik Sistemi - Hareket Algilandi!";
+  textForSMS3 = "ROBOTEXT Guvenlik Sistemi - Yangin Algilandi!";
  
 }
 
@@ -124,17 +126,22 @@ void parseCommand(String com) {
     digitalWrite(8, HIGH);
   }
   
-  // Git
+  // Sag Palet Git
   else if (part1.equalsIgnoreCase("+5")) {
     int pin = part2.toInt();
-    digitalWrite(3, HIGH);
-    digitalWrite(5, HIGH);
-    digitalWrite(6, HIGH);
-    digitalWrite(9, HIGH);
+    analogWrite(3, pin);
+    analogWrite(5, pin);
+  }
+  
+  // Sol Palet Git
+  else if (part1.equalsIgnoreCase("+6")) {
+    int pin = part2.toInt();
+    analogWrite(6, pin);
+    analogWrite(9, pin);
   }
   
   // Dur
-  else if (part1.equalsIgnoreCase("+6")) {
+  else if (part1.equalsIgnoreCase("+10")) {
     int pin = part2.toInt();
     digitalWrite(3, LOW);
     digitalWrite(5, LOW);
@@ -156,11 +163,18 @@ void parseCommand(String com) {
     Serial.println("Mesaj Gonderildi");
   }
   
+  // Yangin SMS
+  else if (part1.equalsIgnoreCase("+9")) {
+    int pin = part2.toInt();
+    sendSMS(textForSMS3);
+    Serial.println("Mesaj Gonderildi");
+  }
+  
 }
 
 void establishContact() {
   while (Serial.available() <= 0) {
-    Serial.println("Loading..");
+    Serial.println("Bekleniyor..");
     delay(300);
   }
 }
